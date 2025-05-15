@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
+import '../../../../routes/app_routes.dart';
 
 class StartedScreen extends StatelessWidget {
   const StartedScreen({super.key});
@@ -77,6 +80,7 @@ class StartedScreen extends StatelessWidget {
                 CustomSubmitButton(
                   text: '${AppText.create_account}',
                   onTap: () {
+                    Get.toNamed(AppRoute.createAccountScreen);
 
                   },
                   fontSize: 15,
@@ -88,7 +92,10 @@ class StartedScreen extends StatelessWidget {
                 ),
                 CustomSubmitButton(
                   text: '${AppText.sign_in}',
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(AppRoute.createAccountScreen);
+
+                  },
                   fontSize: 15,
                   color: AppColors.textWhite,
                   borderRadius: BorderRadius.circular(50),

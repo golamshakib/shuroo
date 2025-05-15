@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(ImagePath.splashScreen_logo,height: 80,width: 80,),
+          Image.asset(ImagePath.logo,height: 80,width: 80,),
           Text("${AppText.shuroo}",style: TextStyle(
             fontSize: 36
           ),)
