@@ -21,6 +21,6 @@ class AppRoute {
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
-    GetPage(name: createAccountDefaultScreen, page:() => const CreateAccountDefaultScreen())
+    GetPage(name: createAccountDefaultScreen, page:() => CreateAccountDefaultScreen())
   ];
 }

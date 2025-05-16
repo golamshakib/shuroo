@@ -21,7 +21,13 @@ class AppText{
   static const String sign_up_google ='Sign Up with Google';
   static const String sign_up_apple ='Sign Up with Apple';
 
-
-
+//create account default screen
+  static const String enterYourName ='Enter Your Name';
+  static const String name ='Name';
+  static const String enterYourEmailIdOrPhoneNumber ='Enter Your Email Id/Phone number';
+  static const String emailIdPhoneNumber ='Email Id/Phone Number';
+  static const String createPassword ='Create Password';
+  static const String enterPassword ='Enter Password';
+  static const String password_must ='Password must contain at least 8 characters and numbers or symbols ';
 
 }

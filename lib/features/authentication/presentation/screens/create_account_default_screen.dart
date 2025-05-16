@@ -1,106 +1,83 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/core/utils/constants/icon_path.dart';
+
+import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/common/widgets/custom_textform_field.dart';
+import '../../../../core/utils/constants/app_texts.dart';
+import '../../../../core/utils/constants/image_path.dart';
+import '../../controllers/create_account_default_controller.dart';
+import '../../controllers/login_controller.dart';
 
 class CreateAccountDefaultScreen extends StatelessWidget {
-  const CreateAccountDefaultScreen({super.key});
+  CreateAccountDefaultScreen({super.key});
+  final DefaultController controller = Get.put(DefaultController());
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final buttonWidth = screenWidth * 0.85;
-
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SignUpButton(
-                icon: Icons.person_outline,
-                text: 'Sign Up with Phone or Email',
-                width: buttonWidth,
-                onTap: () {},
-              ),
-              SignUpButton(
-                icon: FontAwesomeIcons.facebook,
-                text: 'Sign Up with Facebook',
-                iconColor: Colors.blue,
-                width: buttonWidth,
-                onTap: () {},
-              ),
-              SignUpButton(
-                icon: FontAwesomeIcons.google,
-                text: 'Sign Up with Google',
-                iconColor: Colors.red,
-                width: buttonWidth,
-                onTap: () {},
-              ),
-              SignUpButton(
-                icon: FontAwesomeIcons.apple,
-                text: 'Sign Up with Apple',
-                width: buttonWidth,
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SignUpButton extends StatelessWidget {
-  final IconData icon;
-  final String text;
-  final Color? iconColor;
-  final VoidCallback onTap;
-  final double width;
-
-  const SignUpButton({
-    super.key,
-    required this.icon,
-    required this.text,
-    this.iconColor,
-    required this.onTap,
-    required this.width,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(30),
+        body: SafeArea(
             child: Container(
-              width: width,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                children: [
-                  Icon(icon, color: iconColor ?? Colors.black, size: 24),
-                  const SizedBox(width: 20),
-                  Text(
-                    text,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-            ),
-        ),
-    );
+                margin: EdgeInsets.only(left: 16, top: 12, right: 16),
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(Icons.arrow_back, size: 24)),
+                    ),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: Column(
+                        children: [
+                          Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
+                          SizedBox(height: 12),
+                          CustomText(text: AppText.create_account, fontSize: 24),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                  
+                  
+                    CustomTextFormField(
+                      controller: controller.nameController,
+                      label: AppText.name,
+                      hintText: AppText.enterYourName,
+                      icon: IconPath.prame,
+                    ),
+                    SizedBox(height: 24,),
+                  
+                    CustomTextFormField(
+                      controller: controller.emailController,
+                      label: AppText.emailIdPhoneNumber,
+                      hintText: AppText.enterYourEmailIdOrPhoneNumber,
+                      icon: null,
+                    ),
+                    SizedBox(height: 24,),
+                  
+                  
+                       CustomTextFormField(
+                      controller: controller.passController,
+                      label: AppText.createPassword,
+                      hintText: AppText.enterPassword,
+                      icon: IconPath.eye,
+                    ),
+                    SizedBox(height: 24,),
+                  
+                  
+                  
+                  
+                  
+                  ]),
+                ))));
   }
 }

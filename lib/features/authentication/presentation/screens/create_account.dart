@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 
+import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
@@ -21,7 +24,8 @@ class CreateAccountScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topLeft,
-                child: Icon(Icons.arrow_back, size: 24),
+                child: InkWell(onTap: (){
+                  Get.back();                },child: Icon(Icons.arrow_back, size: 24)),
               ),
               Container(
                 alignment: Alignment.topCenter,
@@ -39,28 +43,31 @@ class CreateAccountScreen extends StatelessWidget {
               SizedBox(
                 height: 60,
               ),
-              SignUpButton(onTap: (){},
+              WithSocialLoginButton(onTap: (){
+                Get.toNamed(AppRoute.createAccountDefaultScreen);
+
+              },
                 text: AppText.sign_up_phone_email,
                 img: IconPath.iconoir_user,
               ),
               SizedBox(
                 height: 12,
               ),
-              SignUpButton(onTap: (){},
+              WithSocialLoginButton(onTap: (){},
                 text: AppText.sign_up_facebook,
                 img: IconPath.facebook_icon,
               ),
               SizedBox(
                 height: 12,
               ),
-              SignUpButton(onTap: (){},
+              WithSocialLoginButton(onTap: (){},
                 text: AppText.sign_up_google,
                 img: IconPath.google_icon,
               ),
               SizedBox(
                 height: 12,
               ),
-              SignUpButton(onTap: (){},
+              WithSocialLoginButton(onTap: (){},
                 text: AppText.sign_up_apple,
                 img: IconPath.apple_icon,
               )

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpButton extends StatelessWidget {
+class WithSocialLoginButton extends StatelessWidget {
   final String text;
   final String img;
   final VoidCallback onTap;
 
 
-  const SignUpButton({super.key, required this.text, required this.img, required this.onTap, });
+  const WithSocialLoginButton({super.key, required this.text, required this.img, required this.onTap, });
 
   @override
   Widget build(BuildContext context) {
