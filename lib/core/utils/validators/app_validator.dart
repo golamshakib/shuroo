@@ -37,16 +37,16 @@ class AppValidator {
     }
     if (value.length < 6) {
       return "less";
-
     }
-    if (!value.contains(RegExp(r'[A-Z]'))) {
-      if(!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
+    if (value.contains(RegExp(r'[A-Z]'))) {
+
+      if(value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
         return "green";
       }
-      return 'yellow';
+      return "yellow";
     }
 
-    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    if (value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
       return 'yellow';
     }
     return "less";

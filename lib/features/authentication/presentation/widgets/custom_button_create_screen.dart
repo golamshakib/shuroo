@@ -23,7 +23,7 @@ class WithSocialLoginButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.fromLTRB(0, 25.h, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
           padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white, // background color

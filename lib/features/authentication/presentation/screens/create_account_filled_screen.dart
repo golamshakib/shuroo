@@ -102,22 +102,36 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       ),
 
                       Obx(() =>
-                      _controller.isCheck == true
+                      _controller.isCheckd.value == true
                           ? PasswordStrengthIndicatorPlus(
-                        textController: _controller.passController,
+                        textController: _controller.emailController,
                         maxLength: 12,
                         minLength: _controller.checkValue.value.contains("less")
-                            ? _controller.passController.text.length + 1:
-                       ,
+                            ? (_controller.passController.text.length+8 )
+                            : _controller.checkValue.value.contains("yellow")?
+
+                             0
+
+                            :-0,
+
+
+
                         successIcon: Icons.check_circle,
                         unSuccessIcon: Icons.cancel,
-                        successWidget: const Icon(Icons.check_circle,
-                            color: Colors.green),
+                        successWidget:_controller.checkValue.value.contains("green")?
+                        const Icon(Icons.check_circle,  color: Colors.green):
+                        _controller.checkValue.value.contains("yellow")?
+                        const Icon(Icons.check_circle,  color: Colors.yellow):
+                        const Icon(Icons.check_circle,  color: Colors.yellow)
+                        ,
                         unSuccessWidget:
                         const Icon(Icons.cancel, color: Colors.red),
                         textSize: 16,
                         hideRules: true,
                       )
+
+
+
                           : PasswordStrengthIndicatorPlus(
                         textController: _controller.passController,
                         maxLength: 12,
@@ -225,46 +239,44 @@ class CreateAccountFilledScreen extends StatelessWidget {
 //   }
 // }
 
-class PasswordPage extends StatefulWidget {
-  const PasswordPage({super.key});
+class PasswordPage extends StatelessWidget {
 
-  @override
-  _PasswordPageState createState() => _PasswordPageState();
-}
+  PasswordPage({super.key});
 
-class _PasswordPageState extends State<PasswordPage> {
   final TextEditingController _passwordController = TextEditingController();
+  final FilledScreenController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(title: const Text('Password Strength Indicator')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Enter Password',
+        child: Obx(()=>
+        Column(
+            children: [
+
+
+              PasswordStrengthIndicatorPlus(
+                textController: _controller.passController,
+                maxLength: 12,
+                minLength: 6,
+                successIcon: Icons.check_circle,
+                unSuccessIcon: Icons.cancel,
+                successWidget: _controller.checkValue.value.contains("green")?
+                const Icon(Icons.check_circle,  color: Colors.green):
+                _controller.checkValue.value.contains("yellow")?
+                const Icon(Icons.check_circle,  color: Colors.yellow):
+                const Icon(Icons.check_circle,  color: Colors.yellow)
+                ,
+                unSuccessWidget: const Icon(Icons.cancel, color:   Colors.red),
+                textSize: 16,
+                hideRules: true,
+                // Customizing the indicator colors
               ),
-            ),
-            const SizedBox(height: 20),
-            PasswordStrengthIndicatorPlus(
-              textController: _passwordController,
-              maxLength: 12,
-              minLength: 3,
-              successIcon: Icons.check_circle,
-              unSuccessIcon: Icons.cancel,
-              successWidget:
-              const Icon(Icons.check_circle, color: Colors.green),
-              unSuccessWidget: const Icon(Icons.cancel, color: Colors.red),
-              textSize: 16,
-              hideRules: true,
-              // Customizing the indicator colors
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

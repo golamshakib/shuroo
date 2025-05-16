@@ -10,14 +10,15 @@ class FilledScreenController extends GetxController {
   final TextEditingController passController = TextEditingController();
   RxBool obscureText = true.obs;
   RxBool isCheck = true.obs;
+  RxBool isCheckd = true.obs;
   RxString checkValue="".obs;
 
   void togglePasswordVisibility() {
     obscureText.value = !obscureText.value;
   }
 
-  getValidator() {
-  checkValue.value=  AppValidator.customValidatePassword(passController.text)!;
+  getValidator(String qw) {
+  checkValue.value=  AppValidator.customValidatePassword(qw)!;
 
 
   }
