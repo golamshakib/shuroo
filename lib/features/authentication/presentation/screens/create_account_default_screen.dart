@@ -87,7 +87,23 @@ class CreateAccountDefaultScreen extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 69),
-                      child: ,,
+                      child:    Text.rich(
+                        TextSpan(
+                          text: AppText.byproceeding,
+                          style: const TextStyle(color: AppColors.textSecondary,
+
+                         fontSize:  14),
+                          children: [
+                            TextSpan(
+                              text: AppText.termsConditions,
+                              style: TextStyle(
+                                color: AppColors.textPrimary,
+                                  fontSize:  14
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     )
                   ]),
                 ))));
