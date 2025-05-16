@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
 import '../../utils/constants/app_colors.dart';
 
@@ -35,11 +36,11 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
-      style: GoogleFonts.poppins(
+      style: GoogleFonts.cabin(
           decoration: decoration,
           decorationThickness: decorationthickness,
           decorationColor: decorationColor ?? const Color(0xff2972FF),
-          fontSize: fontSize ?? 14,
+          fontSize: fontSize ?? 14.sp,
           color: color ?? AppColors.textPrimary,
           fontWeight: fontWeight ?? FontWeight.w600),
       overflow: textOverflow,

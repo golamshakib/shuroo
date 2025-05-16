@@ -5,6 +5,10 @@ class AppColors {
 
   // Brand Colors
   static const Color primary = Color(0xFF1E3A5F);
+  static const Color primaryTextColor = Color(0xFF020911);
+  static const Color secondaryTextColor = Color(0xFF757575);
+
+
   static const Color secondary = Color(0xFFFEC601);
   static const Color scaffoldBackgroundColor = Color(0xFFFEC601);
   static const Color accent = Color(0xFF89A7FF);

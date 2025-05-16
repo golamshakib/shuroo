@@ -32,16 +32,14 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Text(label,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 12.sp,
             )),
         const SizedBox(height: 6),
         Container(
           height: 56,
           decoration: BoxDecoration(
-
             color: Colors.white, // Light grey background
             borderRadius: BorderRadius.circular(12),
-
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
@@ -49,18 +47,16 @@ class CustomTextFormField extends StatelessWidget {
                 blurRadius: 20,
               ),
             ],
-
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12), // Ensures children match corners
             child: TextFormField(
               obscureText: passwordController.obscureText.value,
-
               controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
                 suffixIcon: icon != null&&icon!=IconPath.eye
-                    ? Image.asset(icon!, height: 24.w, width: 24.w)
+                    ? Image.asset(icon!, height: 24.h, width: 24.w)
                     : icon==null
                     ? null
                     :IconButton(
@@ -72,8 +68,7 @@ class CustomTextFormField extends StatelessWidget {
                   ),
                   onPressed: passwordController.togglePasswordVisibility,
                 ) ,
-
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: TextStyle(color: Colors.grey,fontSize: 14.sp),
                 filled: true,
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
