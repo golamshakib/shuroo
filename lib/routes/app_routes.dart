@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../features/authentication/presentation/screens/create_account.dart';
 import '../features/authentication/presentation/screens/create_account_default_screen.dart';
+import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/started_screen.dart';
@@ -13,6 +14,7 @@ class AppRoute {
   static String startedScreen = "/signUpScreen";
   static String createAccountDefaultScreen = "/createAccountDefaultScreen";
   static String createAccountScreen = "/createAccountScreen";
+  static String createAccountFilledScreen = "/createAccountFilledScreen";
   static String init = "/";
 
 
@@ -21,6 +23,7 @@ class AppRoute {
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
-    GetPage(name: createAccountDefaultScreen, page:() => CreateAccountDefaultScreen())
+    GetPage(name: createAccountDefaultScreen, page:() => CreateAccountDefaultScreen()),
+    GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
   ];
 }

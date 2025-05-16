@@ -21,66 +21,68 @@ class CreateAccountScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.only(left: 16, top: 12, right: 26),
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: InkWell(onTap: (){
-                  Get.back();                },child: Icon(Icons.arrow_back, size: 24)),
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
-                    SizedBox(height: 12),
-                    CustomText(text: AppText.sign_up_start, fontSize: 24),
-                    CustomText(text: AppText.exploring, fontSize: 24),
-                    ///SizedBox(height: 60),
-                    Image.asset(ImagePath.group, height: 206.w, width: 217),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(onTap: (){
+                    Get.back();                },child: Icon(Icons.arrow_back, size: 24)),
                 ),
-              ),
-              // SizedBox(
-              //   height: 60,
-              // ),
-              WithSocialLoginButton(onTap: (){
-                Get.toNamed(AppRoute.createAccountDefaultScreen);
-
-              },
-                text: AppText.sign_up_phone_email,
-                img: IconPath.iconoir_user,
-                left: 35.5,
-                right: 75.5,
-              ),
-
-              WithSocialLoginButton(onTap: (){},
-                text: AppText.sign_up_facebook,
-                img: IconPath.facebook_icon,
-                left: 53,
-                right: 93.5,
-              ),
-
-
-
-
-
-              WithSocialLoginButton(onTap: (){},
-                text: AppText.sign_up_google,
-                img: IconPath.google_icon,
-                left: 60.79,
-                right: 101.21,
-              ),
-
-              WithSocialLoginButton(onTap: (){},
-                text: AppText.sign_up_apple,
-                img: IconPath.apple_icon,
-                left: 65,
-                right: 105.5,
-              ),
-
-
-            ],
+                Container(
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    children: [
+                      Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
+                      SizedBox(height: 12),
+                      CustomText(text: AppText.sign_up_start, fontSize: 24),
+                      CustomText(text: AppText.exploring, fontSize: 24),
+                      ///SizedBox(height: 60),
+                      Image.asset(ImagePath.group, height: 206.w, width: 217),
+                    ],
+                  ),
+                ),
+                // SizedBox(
+                //   height: 60,
+                // ),
+                WithSocialLoginButton(onTap: (){
+                  Get.toNamed(AppRoute.createAccountDefaultScreen);
+            
+                },
+                  text: AppText.sign_up_phone_email,
+                  img: IconPath.iconoir_user,
+                  left: 35.5,
+                  right: 75.5,
+                ),
+            
+                WithSocialLoginButton(onTap: (){},
+                  text: AppText.sign_up_facebook,
+                  img: IconPath.facebook_icon,
+                  left: 53,
+                  right: 93.5,
+                ),
+            
+            
+            
+            
+            
+                WithSocialLoginButton(onTap: (){},
+                  text: AppText.sign_up_google,
+                  img: IconPath.google_icon,
+                  left: 60.79,
+                  right: 101.21,
+                ),
+            
+                WithSocialLoginButton(onTap: (){},
+                  text: AppText.sign_up_apple,
+                  img: IconPath.apple_icon,
+                  left: 65,
+                  right: 105.5,
+                ),
+            
+            
+              ],
+            ),
           ),
         ),
       ),

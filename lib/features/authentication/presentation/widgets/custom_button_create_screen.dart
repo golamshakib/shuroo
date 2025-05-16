@@ -24,6 +24,7 @@ class WithSocialLoginButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: EdgeInsets.fromLTRB(0, 25.h, 0, 0),
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white, // background color
             borderRadius: BorderRadius.circular(50), // rounded corners

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 
@@ -83,7 +84,7 @@ class StartedScreen extends StatelessWidget {
                     Get.toNamed(AppRoute.createAccountScreen);
 
                   },
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   color: AppColors.custom_blue,
                   borderRadius: BorderRadius.circular(50),
                 ),

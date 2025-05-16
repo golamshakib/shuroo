@@ -44,6 +44,10 @@ dependencies:
   # State Management
   get: ^4.6.6
 
+#percent_indicator
+  password_strength_indicator_plus: ^0.0.1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

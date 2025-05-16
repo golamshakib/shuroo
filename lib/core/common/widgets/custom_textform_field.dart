@@ -11,78 +11,95 @@ import '../../../features/authentication/controllers/create_account_default_cont
 class CustomTextFormField extends StatelessWidget {
   final String label;
   final String hintText;
-  final String?  icon;
+  final String? fontFamily;
+  final String? icon;
+  final int? hintSize;
+  final Color? hintColor;
+
   final bool? isPassword;
   final TextEditingController? controller;
 
-   CustomTextFormField({
+  CustomTextFormField({
     Key? key,
     required this.label,
     required this.hintText,
     required this.icon,
-    this.controller, this.isPassword,
+    this.controller,
+    this.isPassword,
+    this.hintColor,
+    this.hintSize,
+    this.fontFamily,
   }) : super(key: key);
   final DefaultController passwordController = Get.put(DefaultController());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>  passwordController.isCheck.value!= false ?
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label,
-            style: TextStyle(
-              fontSize: 12.sp,
-            )),
-        const SizedBox(height: 6),
-        Container(
-          height: 56,
-          decoration: BoxDecoration(
-            color: Colors.white, // Light grey background
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 0,
-                blurRadius: 20,
+    return Obx(() => passwordController.isCheck.value != false
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 4),
+                child: Text(label,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                    )),
+              ),
+              const SizedBox(height: 6),
+              Container(
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.white, // Light grey background
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 0,
+                      blurRadius: 20,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  // Ensures children match corners
+                  child: TextFormField(
+                  onChanged: (qw){
+
+
+                  },
+                    obscureText: passwordController.obscureText.value,
+                    controller: controller,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      suffixIcon: icon != null && icon != IconPath.eye
+                          ? Image.asset(icon!, height: 24.h, width: 24.w)
+                          : icon == null
+                              ? null
+                              : IconButton(
+                                  icon: Icon(
+                                    passwordController.obscureText.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: passwordController
+                                      .togglePasswordVisibility,
+                                ),
+                      hintStyle: TextStyle(
+                          fontFamily: fontFamily ?? null,
+                          color: hintColor ?? Colors.grey,
+                          fontSize: 14.sp),
+                      filled: true,
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      fillColor: Colors.white, // Light grey background
+                    ),
+                  ),
+                ),
               ),
             ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12), // Ensures children match corners
-            child: TextFormField(
-              obscureText: passwordController.obscureText.value,
-              controller: controller,
-              decoration: InputDecoration(
-                hintText: hintText,
-                suffixIcon: icon != null&&icon!=IconPath.eye
-                    ? Image.asset(icon!, height: 24.h, width: 24.w)
-                    : icon==null
-                    ? null
-                    :IconButton(
-                  icon: Icon(
-                    passwordController.obscureText.value
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                    color: Colors.grey,
-                  ),
-                  onPressed: passwordController.togglePasswordVisibility,
-                ) ,
-                hintStyle: TextStyle(color: Colors.grey,fontSize: 14.sp),
-                filled: true,
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                fillColor: Colors.white, // Light grey background
-
-              ),
-            ),
-          ),
-        ),
-
-      ],
-    ):Row()
-
-    );
+          )
+        : Row());
   }
 }

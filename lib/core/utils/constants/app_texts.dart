@@ -27,8 +27,15 @@ class AppText {
   static const String name = 'Name';
   static const String enterYourEmailIdOrPhoneNumber =
       'Enter Your Email Id/Phone number';
+  static const String rochelle_backman =
+      'Rochelle Rackman';
   static const String emailIdPhoneNumber = 'Email Id/Phone Number';
+  static const String emailIID = 'Email Id';
+  static const String hint_rochellebackman = 'rochellebackma@gmail.com';
+
   static const String createPassword = 'Create Password';
+
+  static const String hintPassword = '........';
   static const String enterPassword = 'Enter Password';
   static const String password_must =
       'Password must contain at least 8 characters and numbers or symbols ';
@@ -36,4 +43,6 @@ class AppText {
       'By proceeding  you acknowledge that you have read, understood '
       'and agree to out';
   static const String termsConditions = ' Terms and Conditions';
+  static const String already_have_an_account
+  = 'Already have an account?';
 }

@@ -31,6 +31,27 @@ class AppValidator {
     return null;
   }
 
+  static String? customValidatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'less';
+    }
+    if (value.length < 6) {
+      return "less";
+
+    }
+    if (!value.contains(RegExp(r'[A-Z]'))) {
+      if(!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
+        return "green";
+      }
+      return 'yellow';
+    }
+
+    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return 'yellow';
+    }
+    return "less";
+  }
+
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Phone number is required.';
