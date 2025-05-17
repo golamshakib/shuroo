@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 
-import '../features/authentication/presentation/screens/create_account.dart';
+import '../features/authentication/presentation/screens/create_account_screen.dart';
 import '../features/authentication/presentation/screens/create_account_default_screen.dart';
 import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
-import '../features/authentication/presentation/screens/started_screen.dart';
+import '../features/onboarding/screens/started_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
@@ -18,6 +20,8 @@ class AppRoute {
   static String createAccountScreen = "/createAccountScreen";
   static String createAccountFilledScreen = "/createAccountFilledScreen";
   static String termsAndConditionsScreen = "/termsAndConditionsScreen";
+  static String signInAndUnlockScreen = "/signInAndUnlockScreen";
+  static String signInScreen = "/signInScreen";
   static String otpScreen = "/otpScreen";
   static String init = "/";
 
@@ -30,6 +34,8 @@ class AppRoute {
     GetPage(name: createAccountDefaultScreen, page:() => CreateAccountDefaultScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
     GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
+    GetPage(name: signInAndUnlockScreen, page:() => SignInAndUnlockScreen()),
+    GetPage(name: signInScreen, page:() => SignInScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
   ];
 }

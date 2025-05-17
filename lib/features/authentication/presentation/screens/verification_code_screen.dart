@@ -116,7 +116,7 @@ class _OtpScreenState extends State<OtpScreen> {
             Text(
               _canResend
                   ? 'Didn’t get it?'
-                  : 'Resend code in $_secondsRemaining s',
+                  : 'Resend code in $_secondsRemaining',
               style: theme.textTheme.bodySmall,
             ),
             TextButton(

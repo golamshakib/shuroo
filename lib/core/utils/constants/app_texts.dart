@@ -112,6 +112,22 @@ class AppText {
   static const String contact
   = "8. Contact";
 
+//Sign in Unlock Screen
+
+  static const String signinAndUnlock
+  = "Sign in and unlock";
+  static const String newpossibilities
+  = "New possibilities";
+  static const String sign_In_start = 'Sign In and start';
+  static const String sign_In_phone_email = 'Sign In with Phone or Email';
+  static const String sign_In_facebook = 'Sign In with Facebook';
+  static const String sign_In_google = 'Sign In with Google';
+  static const String sign_In_apple = 'Sign In with Apple';
+  static const String remember_me = "remember me";
+  static const String forgotPassword = "Forgot Password";
+  static const String signUp = "Sign up";
+  static const String WrongEmailAndPass = "Wrong email or  password";
+
 
 
 

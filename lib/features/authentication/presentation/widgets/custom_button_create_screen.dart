@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
-class WithSocialLoginButton extends StatelessWidget {
+class CustomButtonCreateScreen extends StatelessWidget {
   final String text;
   final String img;
   final double left;
   final double right;
   final VoidCallback onTap;
 
-  const WithSocialLoginButton(
+  const CustomButtonCreateScreen(
       {super.key,
       required this.text,
       required this.img,
@@ -49,30 +49,14 @@ class WithSocialLoginButton extends StatelessWidget {
                   margin: EdgeInsets.only(left: left,right: right),
                   child: Text(
                     text ?? 'Sign Up with Phone or Email',
-                    style: const TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black,fontSize:15 ),
                   ),
                 ),
               ],
             ),
 
-            // child: Stack(
-            //   alignment: Alignment.center,
-            //   children: [
-            //     Align(
-            //       alignment: Alignment.centerLeft,
-            //       child: Padding(
-            //         padding: const EdgeInsets.only(left: 20),
-            //         child: Image.asset(img,height: 25,width: 24,),
-            //       ),
-            //     ),
-            //     Center(
-            //       child: Text(
-            //         text ?? 'Sign Up with Phone or Email',
-            //         style: const TextStyle(color: Colors.black),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+
+
           ),
         ),
       ),

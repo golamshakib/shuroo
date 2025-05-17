@@ -39,7 +39,7 @@ class CustomSubmitButton extends StatelessWidget {
         borderRadius: borderRadius ?? BorderRadius.circular(16),
         child: InkWell(
             splashColor: Colors.white.withOpacity(0.5),
-            borderRadius: borderRadius ?? BorderRadius.circular(12),
+            borderRadius: borderRadius ?? BorderRadius.circular(50),
             onTap: onTap,
             child: Container(
               height: height?? 50,

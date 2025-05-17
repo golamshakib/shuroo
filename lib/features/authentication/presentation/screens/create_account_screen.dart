@@ -35,7 +35,7 @@ class CreateAccountScreen extends StatelessWidget {
                     children: [
                       Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                       SizedBox(height: 12),
-                      CustomText(text: AppText.sign_up_start, fontSize: 24),
+                      CustomText(text: AppText.sign_up_start, fontSize: 24.sp),
                       CustomText(text: AppText.exploring, fontSize: 24),
                       
                       
@@ -47,7 +47,7 @@ class CreateAccountScreen extends StatelessWidget {
                 // SizedBox(
                 //   height: 60,
                 // ),
-                WithSocialLoginButton(onTap: (){
+                CustomButtonCreateScreen(onTap: (){
                   Get.toNamed(AppRoute.createAccountDefaultScreen);
             
                 },
@@ -57,7 +57,7 @@ class CreateAccountScreen extends StatelessWidget {
                   right: 75.5,
                 ),
             
-                WithSocialLoginButton(onTap: (){},
+                CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_facebook,
                   img: IconPath.facebook_icon,
                   left: 53,
@@ -68,14 +68,14 @@ class CreateAccountScreen extends StatelessWidget {
             
             
             
-                WithSocialLoginButton(onTap: (){},
+                CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_google,
                   img: IconPath.google_icon,
                   left: 60.79,
                   right: 101.21,
                 ),
             
-                WithSocialLoginButton(onTap: (){},
+                CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_apple,
                   img: IconPath.apple_icon,
                   left: 65,

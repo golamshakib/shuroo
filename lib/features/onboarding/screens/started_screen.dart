@@ -8,8 +8,8 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 
-import '../../../../core/common/widgets/custom_submit_button.dart';
-import '../../../../routes/app_routes.dart';
+import '../../../core/common/widgets/custom_submit_button.dart';
+import '../../../routes/app_routes.dart';
 
 class StartedScreen extends StatelessWidget {
   const StartedScreen({super.key});
@@ -21,7 +21,7 @@ class StartedScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              '${ImagePath.started_screen_bg}',
+              ImagePath.started_screen_bg,
               fit: BoxFit.cover,
             ),
           ),
@@ -60,18 +60,18 @@ class StartedScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "${AppText.your_create}",
+                  AppText.your_create,
                   style: TextStyle(fontSize: 28, color: Colors.white),
                 ),
                 Text(
-                  "${AppText.your_create}",
+                  AppText.your_create,
                   style: TextStyle(fontSize: 28, color: Colors.white),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 CustomText(
                   text: AppText.create_your,
 
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.white,
                   textAlign: TextAlign.center,
                 ),
@@ -79,7 +79,7 @@ class StartedScreen extends StatelessWidget {
                 SizedBox(height: 32),
 
                 CustomSubmitButton(
-                  text: '${AppText.create_account}',
+                  text: AppText.create_account,
                   onTap: () {
                     Get.toNamed(AppRoute.createAccountScreen);
 
@@ -92,14 +92,13 @@ class StartedScreen extends StatelessWidget {
                   height: 16,
                 ),
                 CustomSubmitButton(
-                  text: '${AppText.sign_in}',
+                  text: AppText.sign_in,
                   onTap: () {
-                    Get.toNamed(AppRoute.createAccountScreen);
-
+                    Get.toNamed(AppRoute.signInAndUnlockScreen);
                   },
                   fontSize: 15,
                   color: AppColors.textWhite,
-                  borderRadius: BorderRadius.circular(50),
+
                   textColor: AppColors.textPrimary
                 ),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -81,8 +82,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     child: CustomTextFormField(
                       onChanged: (qw) {
                         _controller.getValidator(qw);
-                        print(
-                            "................${_controller.checkValue.value}");
+
                       },
                       controller: _controller.passController,
                       label: AppText.createPassword,
@@ -162,29 +162,34 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     fontSize: 15.sp,
                   ),
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.otpScreen);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
-                      child: Text.rich(
-                        TextSpan(
-                          text: AppText.already_have_an_account,
-                          style: const TextStyle(
-                              color: AppColors.textSecondary, fontSize: 16),
-                          children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
 
-                            TextSpan(
-                              text: AppText.sign_in,
-                              style: TextStyle(
-                                  color: AppColors.custom_blue, fontSize: 16),
-                            ),
-                          ],
+                    child: RichText(
+                      text: TextSpan(
+                        text: AppText.already_have_an_account,
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 14.sp,
+
                         ),
-                      ),
-                    ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: "Sign In",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppColors.custom_blue,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.none,
+                            ),
+                            recognizer:
+                            TapGestureRecognizer()
+                              ..onTap =
+                                  () =>
+                                  Get.toNamed(AppRoute.signInAndUnlockScreen),
+                          ),
+                        ],
+                      ),),
                   ),
                 ]),
               ))),
