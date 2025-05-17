@@ -9,6 +9,7 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
+import '../../../../core/common/widgets/custom_password_textform_field.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_textform_field.dart';
 import '../../../../core/utils/constants/app_texts.dart';
@@ -75,7 +76,7 @@ class CreateAccountDefaultScreen extends StatelessWidget {
 
                     Container(
                       margin: EdgeInsets.only(top: 24.h),
-                      child: CustomTextFormField(
+                      child: CustomTextFormFieldPass(
                         controller: controller.passController,
                         label: AppText.createPassword,
                         hintText: AppText.enterPassword,

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:password_strength_indicator_plus/password_strength_indicator_plus.dart';
 import 'package:shuroo/core/common/widgets/app_color.dart';
+import 'package:shuroo/core/common/widgets/custom_password_textform_field.dart';
 import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
@@ -79,7 +80,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
 
                   Container(
                     margin: EdgeInsets.only(top: 24.h, bottom: 10.w),
-                    child: CustomTextFormField(
+                    child: CustomTextFormFieldPass(
                       onChanged: (qw) {
                         _controller.getValidator(qw);
 
@@ -89,7 +90,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       hintText: AppText.hintPassword,
                       icon: IconPath.eye,
                       fontFamily: 'Inter',
-                      isPassword: false,
                       hintColor: AppColors.textPrimary,
                       hintSize: 16,
                     ),

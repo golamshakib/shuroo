@@ -10,31 +10,36 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 import '../../../features/authentication/controllers/create_account_default_controller.dart';
 import '../../../features/authentication/controllers/create_account_filled_screen_controller.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormFieldPass extends StatefulWidget {
   final String label;
   final String hintText;
   final String? fontFamily;
   final String? icon;
-
   final int? hintSize;
   final Color? hintColor;
   final ValueChanged<String>? onChanged;
 
-  final bool? isPassword;
+  final bool isPassword = true;
   final TextEditingController? controller;
 
-  CustomTextFormField({
+  CustomTextFormFieldPass({
     Key? key,
     required this.label,
     required this.hintText,
     required this.icon,
     this.controller,
-    this.isPassword,
     this.hintColor,
     this.hintSize,
     this.fontFamily,
     this.onChanged,
   }) : super(key: key);
+
+  @override
+  State<CustomTextFormFieldPass> createState() => _CustomTextFormFieldPassState();
+}
+
+class _CustomTextFormFieldPassState extends State<CustomTextFormFieldPass> {
+  bool passwordShowAndHide = true;
 
   DefaultController _controller = Get.put(DefaultController());
 
@@ -46,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(left: 4),
-                child: Text(label,
+                child: Text(widget.label,
                     style: TextStyle(
                       fontSize: 12.sp,
                     )),
@@ -69,15 +74,30 @@ class CustomTextFormField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   // Ensures children match corners
                   child: TextFormField(
-                    onChanged: onChanged ?? (sd) {},
-                    controller: controller,
+                    onChanged: widget.onChanged ?? (sd) {},
+                    obscureText: passwordShowAndHide,
+                    controller: widget.controller,
                     decoration: InputDecoration(
-                      hintText: hintText,
-                      suffixIcon:icon!=null? Image.asset(icon!, height: 24.h, width: 24.w):null,
-
+                      hintText: widget.hintText,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _controller.obscureText.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          if (passwordShowAndHide) {
+                            passwordShowAndHide = false;
+                          } else {
+                            passwordShowAndHide = true;
+                          }
+                          setState(() {});
+                        },
+                      ),
                       hintStyle: TextStyle(
-                          fontFamily: fontFamily ?? null,
-                          color: hintColor ?? Colors.grey,
+                          fontFamily: widget.fontFamily ?? null,
+                          color: widget.hintColor ?? Colors.grey,
                           fontSize: 14.sp),
                       filled: true,
                       border: InputBorder.none,

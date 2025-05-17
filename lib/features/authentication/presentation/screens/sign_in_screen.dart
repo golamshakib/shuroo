@@ -8,6 +8,7 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/authentication/controllers/sign_in_screen_controller.dart';
 
+import '../../../../core/common/widgets/custom_password_textform_field.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_textform_field.dart';
@@ -45,6 +46,8 @@ class SignInScreen extends StatelessWidget {
                         SizedBox(height: 12),
                         CustomText(text: AppText.sign_in, fontSize: 24.sp),
                         CustomTextFormField(
+                          controller: _controller.emailController,
+
                           label: AppText.emailIID,
                           hintSize: 16,
                           hintColor: AppColors.textPrimary,
@@ -56,14 +59,13 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(
                             top: 24.h,
                           ),
-                          child: CustomTextFormField(
+                          child: CustomTextFormFieldPass(
                             onChanged: (qw) {},
                             controller: _controller.passController,
                             label: AppText.createPassword,
                             hintText: AppText.hintPassword,
                             icon: IconPath.eye,
                             fontFamily: 'Inter',
-                            isPassword: false,
                             hintColor: AppColors.textPrimary,
                             hintSize: 16,
                           ),
@@ -73,21 +75,41 @@ class SignInScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Obx(() =>_controller.isCheckemailAndPassword.value==false? Checkbox(
-                                value: _controller.isChecked.value,
-                                onChanged: (value) =>
-                                    _controller.toggleCheckbox(value!),
-                              ):CustomText(text:AppText. WrongEmailAndPass)
-                              
-                              
-                              ),
+                              Obx(() => _controller
+                                          .isCheckemailAndPassword.value ==
+                                      true
+                                  ? Row(
+                                      children: [
+                                        Checkbox(
+                                          value: _controller.isChecked.value,
+                                          onChanged: (value) => _controller
+                                              .toggleCheckbox(value!),
+                                        ),
+                                        Text(
+                                          AppText.remember_me,
+                                          style: TextStyle(
+                                              fontFamily: "inter",
+                                              fontSize: 14.sp,
+                                              color: AppColors.grayText),
+                                        )
+                                      ],
+                                    )
+                                  : CustomText(
+                                      text: AppText.WrongEmailAndPass)),
 
 
-                            Text( AppText.forgotPassword,style: TextStyle(
-                              fontSize: 14.sp,
-                              fontFamily: "inter"
-                            ),)
 
+
+
+
+
+
+
+                              Text(
+                                AppText.forgotPassword,
+                                style: TextStyle(
+                                    fontSize: 14.sp, fontFamily: "inter"),
+                              )
                             ],
                           ),
                         ),
@@ -95,8 +117,11 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 269),
                           child: CustomSubmitButton(
                             text: AppText.sign_in,
-                            onTap: () {
-                              Get.toNamed(AppRoute.signUpScreen);
+                            onTap: ()async {
+                             await _controller.emailAndPasswordvalidatorCheck();
+                              if (!_controller.isCheckemailAndPassword.value) {
+
+                              }
                             },
                             color: AppColors.custom_blue,
                             borderRadius: BorderRadius.circular(50),
@@ -129,7 +154,6 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-
                       ]))
                 ])))));
   }

@@ -17,13 +17,17 @@ class SignInScreenController extends GetxController {
     isChecked.value = value;
   }
 
-  void emailAndPasswordvalidatorCheck() {
+  Future<void> emailAndPasswordvalidatorCheck() async {
     email = AppValidator.validateEmail(emailController.text);
     pass = AppValidator.validatePassword(passController.text);
+    print("................${email}");
+
     if (email == null&&pass==null){
-      isCheckemailAndPassword.value = false;
-    } else {
+      print("................${isCheckemailAndPassword}");
+
       isCheckemailAndPassword.value = true;
+    } else {
+      isCheckemailAndPassword.value = false;
     }
   }
 
