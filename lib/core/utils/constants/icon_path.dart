@@ -22,6 +22,6 @@ class IconPath{
       '$_basePath/prame.png';
 
   static const  String   email=
-      '$_basePath/email.png';
+      '$_basePath/email_icon.png';
 
 }

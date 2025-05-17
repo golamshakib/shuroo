@@ -6,6 +6,8 @@ import '../features/authentication/presentation/screens/create_account_filled_sc
 import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/started_screen.dart';
+import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
+import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
@@ -15,6 +17,8 @@ class AppRoute {
   static String createAccountDefaultScreen = "/createAccountDefaultScreen";
   static String createAccountScreen = "/createAccountScreen";
   static String createAccountFilledScreen = "/createAccountFilledScreen";
+  static String termsAndConditionsScreen = "/termsAndConditionsScreen";
+  static String otpScreen = "/otpScreen";
   static String init = "/";
 
 
@@ -25,5 +29,7 @@ class AppRoute {
     GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
     GetPage(name: createAccountDefaultScreen, page:() => CreateAccountDefaultScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
+    GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
+    GetPage(name: otpScreen, page:() => OtpScreen()),
   ];
 }

@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? icon;
   final int? hintSize;
   final Color? hintColor;
+  final ValueChanged<String>? onChanged;
 
   final bool? isPassword;
   final TextEditingController? controller;
@@ -29,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isPassword,
     this.hintColor,
     this.hintSize,
-    this.fontFamily,
+    this.fontFamily, this.onChanged,
   }) : super(key: key);
   final DefaultController _controller = Get.put(DefaultController());
   final FilledScreenController _controller1 = Get.put(FilledScreenController());
@@ -66,10 +67,7 @@ class CustomTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             // Ensures children match corners
             child: TextFormField(
-              onChanged: (qw) {
-                _controller1.getValidator(qw);
-                print("................${ _controller1.checkValue.value}");
-              },
+              onChanged: onChanged??(sd){},
               obscureText: _controller.obscureText.value,
               controller: controller,
               decoration: InputDecoration(

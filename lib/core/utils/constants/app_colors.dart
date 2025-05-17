@@ -12,7 +12,9 @@ class AppColors {
   static const Color secondary = Color(0xFFFEC601);
   static const Color scaffoldBackgroundColor = Color(0xFFFEC601);
   static const Color accent = Color(0xFF89A7FF);
+  static const Color darkBackground = Color(0xFF353A40);
   static const Color black = Colors.black;
+
   static const Color white = Colors.white;
 
   // Gradient Colors

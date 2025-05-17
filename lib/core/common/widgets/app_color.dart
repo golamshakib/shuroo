@@ -47,6 +47,7 @@ class AppColors {
   static const Color containerBorder = Color(0xFFCDCED2);
   static const Color orange = Color(0xFFF97316);
   static const Color textThird = Color(0xFF6B6B6B);
+  static const Color darkBackground = Color(0xFF353A40);
 
 
 

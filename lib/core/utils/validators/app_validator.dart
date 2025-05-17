@@ -36,6 +36,7 @@ class AppValidator {
       return 'less';
     }
     if (value.length < 6) {
+      print(".........green....");
       return "less";
     }
     if (value.contains(RegExp(r'[A-Z]'))) {
@@ -49,7 +50,8 @@ class AppValidator {
     if (value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
       return 'yellow';
     }
-    return "less";
+  return "less";
+
   }
 
   static String? validatePhoneNumber(String? value) {
