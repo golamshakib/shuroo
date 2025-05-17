@@ -24,4 +24,7 @@ class IconPath{
   static const  String   email=
       '$_basePath/email_icon.png';
 
+  static const  String   wrong=
+      '$_basePath/wrong.png';
+
 }

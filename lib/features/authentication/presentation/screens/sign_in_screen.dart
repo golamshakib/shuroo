@@ -94,8 +94,13 @@ class SignInScreen extends StatelessWidget {
                                         )
                                       ],
                                     )
-                                  : CustomText(
-                                      text: AppText.WrongEmailAndPass)),
+                                  : Row(
+                                    children: [
+                                      Image.asset(IconPath.wrong,height: 16.h,width: 16.w,),
+                                      CustomText(
+                                          text: " "+AppText.WrongEmailAndPass,color: Colors.red,fontSize: 14,),
+                                    ],
+                                  )),
 
 
 
