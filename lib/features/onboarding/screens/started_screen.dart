@@ -64,7 +64,7 @@ class StartedScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 28, color: Colors.white),
                 ),
                 Text(
-                  AppText.your_create,
+                  AppText.your_control,
                   style: TextStyle(fontSize: 28, color: Colors.white),
                 ),
                 SizedBox(height: 12.h),

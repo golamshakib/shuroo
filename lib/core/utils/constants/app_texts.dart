@@ -9,7 +9,8 @@ class AppText {
       "Create your profile, explore opportunities,\n"
       " connect with peers, and take the next step in\n"
       " your career journey.";
-  static const String your_create = 'Your Career';
+  static const String your_create = 'Your Carear';
+  static const String your_control = 'Your Control';
   static const String create_account = 'Create Account';
   static const String sign_in = 'Sign In';
 
@@ -31,6 +32,7 @@ class AppText {
       'Rochelle Rackman';
   static const String emailIdPhoneNumber = 'Email Id/Phone Number';
   static const String emailIID = 'Email Id';
+  static const String email = 'Email';
   static const String hint_rochellebackman = 'rochellebackma@gmail.com';
 
   static const String createPassword = 'Create Password';
@@ -128,7 +130,11 @@ class AppText {
   static const String signUp = "Sign up";
   static const String WrongEmailAndPass = "Wrong email or  password";
 
+// forgot password screen
 
+  static const String enterYourEmailAccount = "Enter your email account to reset password";
+  static const String enterYourEmail = "Enter your email";
+  static const String continueB = "Continue";
 
 
 

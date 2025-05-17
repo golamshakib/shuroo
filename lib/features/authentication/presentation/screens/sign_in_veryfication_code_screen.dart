@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import '../../controllers/orp_veritication_code_screen_controller.dart';
 
-class OtpScreen extends StatelessWidget {
-  OtpScreen({super.key});
+class SignInVeryficationScreen extends StatelessWidget {
+  SignInVeryficationScreen({super.key});
 
   final OtpController controller = Get.put(OtpController());
   final List<TextEditingController> textControllers =

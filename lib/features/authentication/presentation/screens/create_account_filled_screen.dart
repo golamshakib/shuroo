@@ -175,7 +175,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: "Sign In",
+                            text: AppText.sign_in,
                             style: TextStyle(
                               fontSize: 16.sp,
                               color: AppColors.custom_blue,

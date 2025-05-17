@@ -110,10 +110,15 @@ class SignInScreen extends StatelessWidget {
 
 
 
-                              Text(
-                                AppText.forgotPassword,
-                                style: TextStyle(
-                                    fontSize: 14.sp, fontFamily: "inter"),
+                              InkWell(
+                                onTap: (){
+                                  Get.toNamed(AppRoute.forgotPasswordScreen);
+                                },
+                                child: Text(
+                                  AppText.forgotPassword,
+                                  style: TextStyle(
+                                      fontSize: 14.sp, fontFamily: "inter"),
+                                ),
                               )
                             ],
                           ),
@@ -153,7 +158,9 @@ class SignInScreen extends StatelessWidget {
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => Get.toNamed(
-                                        AppRoute.signInAndUnlockScreen),
+                                         AppRoute.signUpScreen
+
+                                    ),
                                 ),
                               ],
                             ),

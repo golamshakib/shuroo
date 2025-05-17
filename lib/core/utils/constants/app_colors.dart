@@ -52,4 +52,6 @@ class AppColors {
   static const Color warning = Color(0xFFFFA726);
   static const Color error = Color(0xFFF44336);
   static const Color info = Color(0xFF29B6F6);
+  static const Color  custom_blue  = Color(0xFF01A8F9);
+
 }
