@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/authentication/presentation/screens/sign_in_veryfication_code_screen.dart';
+import 'package:shuroo/features/authentication/presentation/screens/enter_verification_code_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
@@ -77,7 +77,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                               child: CustomSubmitButton(
                                 text: AppText.continueB, onTap: () {
                                 Get.toNamed(
-                                    AppRoute.signInVeryficationCodeScreen);
+                                    AppRoute.enterVeryficationCodeScreen);
                               },),
                             )
                             // S

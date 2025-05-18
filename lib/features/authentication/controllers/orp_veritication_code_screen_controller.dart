@@ -2,12 +2,16 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class OtpController extends GetxController {
-  final int otpLength = 6;
-  final RxString otpCode = ''.obs;
+  final int totalSeconds = 90; // 1 minute 30 seconds
   final RxInt secondsRemaining = 90.obs;
   Timer? _timer;
 
-  bool get canResend => secondsRemaining.value == 0;
+  bool get isTimerRunning => secondsRemaining.value > 0;
+  String get formattedTime {
+    final min = (secondsRemaining ~/ 60).toString().padLeft(2, '0');
+    final sec = (secondsRemaining % 60).toString().padLeft(2, '0');
+    return "$min:$sec";
+  }
 
   @override
   void onInit() {
@@ -16,10 +20,10 @@ class OtpController extends GetxController {
   }
 
   void startTimer() {
-    secondsRemaining.value = 90;
+    secondsRemaining.value = totalSeconds;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (secondsRemaining.value > 0) {
+      if (secondsRemaining > 0) {
         secondsRemaining.value--;
       } else {
         timer.cancel();
@@ -27,19 +31,14 @@ class OtpController extends GetxController {
     });
   }
 
-  void updateOtp(String value) {
-    otpCode.value = value;
-  }
-
   void resendCode() {
-    // TODO: trigger your resend logic here
-    print("Resend OTP");
+    // TODO: Hook your resend API logic here
     startTimer();
   }
 
-  void verifyOtp() {
-    // TODO: verify the OTP (e.g., call your backend)
-    print("Entered OTP: ${otpCode.value}");
+  void verifyOtp(String otp) {
+    // TODO: Handle OTP verification logic here
+    print("Verifying OTP: $otp");
   }
 
   @override

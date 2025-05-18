@@ -27,16 +27,11 @@ class FilledScreenController extends GetxController {
       print("........less.........");
       indicatorController.text="gh";
     }
-
     if(checkValue.value.contains("yellow")){
-      print("........yellow.........");
-
       indicatorController.text="AAAAAAAAAAA";
 
     }if(checkValue.value.contains("green"))
     {
-      print("........green.........");
-
       indicatorController.text="@Aghu2398";
 
     }

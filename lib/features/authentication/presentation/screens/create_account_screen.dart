@@ -11,6 +11,7 @@ import 'package:shuroo/core/utils/constants/image_path.dart';
 
 import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
+import 'create_account_filled_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
@@ -48,7 +49,7 @@ class CreateAccountScreen extends StatelessWidget {
                 //   height: 60,
                 // ),
                 CustomButtonCreateScreen(onTap: (){
-                  Get.toNamed(AppRoute.createAccountDefaultScreen);
+                  Get.toNamed(AppRoute.createAccountFilledScreen);
             
                 },
                   text: AppText.sign_up_phone_email,

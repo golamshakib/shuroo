@@ -1,0 +1,163 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
+
+import '../../../../core/common/widgets/app_color.dart';
+import '../../../../core/common/widgets/custom_submit_button.dart';
+import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/utils/constants/app_texts.dart';
+import '../../../../core/utils/constants/image_path.dart';
+import '../../../../routes/app_routes.dart';
+import '../../controllers/orp_veritication_code_screen_controller.dart';
+
+class EnterVeryficationCodeScreen extends StatelessWidget {
+  EnterVeryficationCodeScreen({super.key});
+
+  final controller = Get.put(OtpController());
+  final List<TextEditingController> otpFields =
+      List.generate(6, (_) => TextEditingController());
+
+  void _handleOtpInput(int index, String value, BuildContext context) {
+    if (value.isNotEmpty && index < 5) {
+      FocusScope.of(context).nextFocus();
+    } else if (value.isEmpty && index > 0) {
+      FocusScope.of(context).previousFocus();
+    }
+  }
+
+  String get enteredOtp =>
+      otpFields.map((controller) => controller.text).join();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Obx(
+        () => SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(Icons.arrow_back, size: 24.sp)),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 5),
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      children: [
+
+
+
+                        Image.asset(
+                            ImagePath.logo, height: 62.w, width: 62.w),
+                        SizedBox(height: 12),
+
+                        CustomText(
+                            text: AppText.enterYourEmail, fontSize: 24),
+
+                        Container(
+                          margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
+
+                          child: RichText(
+                            text: TextSpan(
+                              text: AppText.already_have_an_account,
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 14.sp,
+
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: AppText.hint_rochellebackman,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.textPrimary,
+                                    decoration: TextDecoration.none,
+                                  ),
+
+                                ),
+                              ],
+                            ),),
+                        ),
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: List.generate(6, (i) {
+                            return SizedBox(
+                              width: 45,
+                              child: TextField(
+                                controller: otpFields[i],
+                                maxLength: 1,
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                onChanged: (value) =>
+                                    _handleOtpInput(i, value, context),
+                                decoration:
+                                    const InputDecoration(counterText: ''),
+                              ),
+                            );
+                          }),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 34),
+                          child: Text(
+                            " ${controller.formattedTime}",
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ),
+
+
+                        Container(
+                          margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
+
+                          child: RichText(
+                            text: TextSpan(
+                              text: AppText.didntreceiveacode,
+                              style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 14.sp,
+
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: AppText.resendCode,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.textPrimary,
+                                  ),
+
+                                ),
+                              ],
+                            ),),
+                        ),
+
+                        Container(
+                          child: CustomSubmitButton(
+                            text: AppText.verify, onTap: () {
+                            Get.toNamed(
+                                AppRoute.enterVeryficationCodeScreen);
+                          },),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

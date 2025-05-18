@@ -15,6 +15,7 @@ import '../../../../core/common/widgets/custom_textform_field.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/create_account_filled_screen_controller.dart';
+import 'enter_verification_code_screen.dart';
 
 class CreateAccountFilledScreen extends StatelessWidget {
   CreateAccountFilledScreen({super.key});
@@ -57,7 +58,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       label: AppText.rochelle_backman,
                       hintText: AppText.enterYourName,
                       fontFamily: 'Inter',
-                      hintColor: AppColors.textPrimary,
                       icon: IconPath.prame,
                       hintSize: 16,
                     ),
@@ -67,11 +67,11 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24.h),
                     child: CustomTextFormField(
+
                       controller: _controller.emailController,
                       label: AppText.hint_rochellebackman,
                       hintText: AppText.hint_rochellebackman,
                       fontFamily: 'Inter',
-                      hintColor: AppColors.textPrimary,
                       hintSize: 16,
                       icon: IconPath.email,
                     ),
@@ -90,7 +90,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       hintText: AppText.hintPassword,
                       icon: IconPath.eye,
                       fontFamily: 'Inter',
-                      hintColor: AppColors.textPrimary,
                       hintSize: 16,
                     ),
                   ),
@@ -103,6 +102,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             margin: EdgeInsets.zero,
                             child: PasswordStrengthIndicatorPlus(
+
                               textController: _controller.indicatorController,
                               maxLength: 18,
                               minLength: 6,
@@ -118,6 +118,11 @@ class CreateAccountFilledScreen extends StatelessWidget {
                           ),
                         )
                       : SizedBox()),
+
+
+
+
+
 
                   Container(
                     margin: EdgeInsets.only(top: 8),
@@ -136,8 +141,14 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
+
+
+
+
+
                   Container(
-                    margin: EdgeInsets.only(top: 68, bottom: 20),
+                    margin: EdgeInsets.only(top: 68,bottom: 20),
                     child: Text.rich(
                       TextSpan(
                         text: AppText.byproceeding,
@@ -148,15 +159,22 @@ class CreateAccountFilledScreen extends StatelessWidget {
                             text: AppText.termsConditions,
                             style: TextStyle(
                                 color: AppColors.textPrimary, fontSize: 14),
+
+
+                            recognizer:  TapGestureRecognizer()
+                              ..onTap =
+                                  () =>
+                                  Get.toNamed(AppRoute.termsAndConditionsScreen),
                           ),
                         ],
                       ),
                     ),
                   ),
                   CustomSubmitButton(
+
                     text: AppText.create_account,
                     onTap: () {
-                      Get.toNamed(AppRoute.termsAndConditionsScreen);
+                      Get.toNamed(AppRoute.enterVeryficationCodeScreen);
                     },
                     color: AppColors.custom_blue,
                     borderRadius: BorderRadius.circular(50),

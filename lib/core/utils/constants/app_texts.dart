@@ -136,7 +136,13 @@ class AppText {
   static const String enterYourEmail = "Enter your email";
   static const String continueB = "Continue";
 
+// verification code screen
 
+  static const String  enter_verification_code = " Enter Verification Code";
+  static const String  weHaveSentCode = "We have sent a code to";
+  static const String  didntreceiveacode  = "Didn’t receive a code? ";
+  static const String  resendCode  = "Resend Code";
+  static const String  verify  = "Verify";
 
 }
 
