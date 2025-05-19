@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import 'package:shuroo/routes/app_routes.dart';
 import 'core/bindings/controller_binder.dart';
 import 'core/utils/constants/app_sizer.dart';
 import 'core/utils/theme/theme.dart';
-
 
 class PlatformUtils {
   static bool get isIOS =>
@@ -25,7 +23,9 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoute.homeScreen,
+
+          initialRoute: AppRoute.nevBar,
+
           getPages: AppRoute.routes,
           initialBinding: ControllerBinder(),
           themeMode: ThemeMode.system,
