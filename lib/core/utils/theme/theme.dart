@@ -11,7 +11,7 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: GoogleFonts.smoochSans().fontFamily,
+      textTheme: GoogleFonts.cabinTextTheme(),
       brightness: Brightness.light,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: Colors.white,
@@ -22,7 +22,7 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData(
       useMaterial3: true,
-      fontFamily: GoogleFonts.smoochSans().fontFamily,
+      textTheme: GoogleFonts.cabinTextTheme(),
       brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: Colors.black,

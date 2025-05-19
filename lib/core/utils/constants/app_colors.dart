@@ -5,10 +5,16 @@ class AppColors {
 
   // Brand Colors
   static const Color primary = Color(0xFF1E3A5F);
+  static const Color primaryTextColor = Color(0xFF020911);
+  static const Color secondaryTextColor = Color(0xFF757575);
+
+
   static const Color secondary = Color(0xFFFEC601);
   static const Color scaffoldBackgroundColor = Color(0xFFFEC601);
   static const Color accent = Color(0xFF89A7FF);
+  static const Color darkBackground = Color(0xFF353A40);
   static const Color black = Colors.black;
+
   static const Color white = Colors.white;
 
   // Gradient Colors
@@ -27,6 +33,7 @@ class AppColors {
   // Text Colors
   static const Color textPrimary = Color(0xFF212121);
   static const Color textSecondary = Color(0xFF757575);
+  static const Color grayText =  Color(0xFF8F8F8F);
 
   // Background Colors
   static const Color backgroundLight = Color(0xFFF9FAFB);
@@ -45,4 +52,6 @@ class AppColors {
   static const Color warning = Color(0xFFFFA726);
   static const Color error = Color(0xFFF44336);
   static const Color info = Color(0xFF29B6F6);
+  static const Color  custom_blue  = Color(0xFF01A8F9);
+
 }

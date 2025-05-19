@@ -14,7 +14,7 @@ class AppBarThemeData {
   }) {
     return AppBarTheme(
       foregroundColor: Colors.transparent,
-      surfaceTintColor: surfaceTintColor,
+      surfaceTintColor: Colors.white,
       elevation: elevation,
       backgroundColor: backgroundColor,
       iconTheme: IconThemeData(color: iconColor),

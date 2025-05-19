@@ -1,18 +1,60 @@
-import 'package:get/get.dart';
 
+
+import 'package:get/get_navigation/src/routes/get_route.dart';
+
+import '../features/authentication/presentation/screens/account_confirm_screen.dart';
+import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
+import '../features/authentication/presentation/screens/create_account_screen.dart';
+import '../features/authentication/presentation/screens/reset_password_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_verification_code_screen.dart';
+import '../features/authentication/presentation/screens/sign_up_verification_code_screen.dart';
+import '../features/authentication/presentation/screens/forgot_password_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
+import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
+import '../features/authentication/presentation/screens/verification_code_screen.dart';
+import '../features/home/presentation/screen/home_screen.dart';
+import '../features/onboarding/screens/started_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
   static String loginScreen = "/loginScreen";
   static String signUpScreen = "/signUpScreen";
+  static String startedScreen = "/startedScreen";
+  static String createAccountDefaultScreen = "/createAccountDefaultScreen";
+  static String createAccountScreen = "/createAccountScreen";
+  static String createAccountFilledScreen = "/createAccountFilledScreen";
+  static String termsAndConditionsScreen = "/termsAndConditionsScreen";
+  static String signInAndUnlockScreen = "/signInAndUnlockScreen";
+  static String signInScreen = "/signInScreen";
+  static String otpScreen = "/otpScreen";
+  static String forgotPasswordScreen = "/forgotPasswordScreen";
+  static String signUpVeryficationCodeScreen = "/signUpVeryficationCodeScreen";
+  static String signInVeryficationCodeScreen = "/signInVeryficationCodeScreen";
+  static String resetPasswordScreen = "/resetPasswordScreen";
+  static String accountConfirmScreen = "/accountConfirmScreen";
+  static String homeScreen = "/homeScreen";
   static String init = "/";
 
 
   static List<GetPage> routes = [
     GetPage(name: loginScreen, page: () => const LoginScreen()),
-    GetPage(name: init, page: () => const SplashScreen()),
-    GetPage(name: signUpScreen, page:() => const SignUpScreen())
+    GetPage(name: init, page: () =>  SplashScreen()),
+    GetPage(name: startedScreen, page:() => const StartedScreen()),
+    GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
+    GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
+    GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
+    GetPage(name: signInAndUnlockScreen, page:() => SignInAndUnlockScreen()),
+    GetPage(name: signInScreen, page:() => SignInScreen()),
+    GetPage(name: signUpScreen, page:() => SignUpScreen()),
+    GetPage(name: forgotPasswordScreen, page:() => ForgotPasswordScreen()),
+    GetPage(name: signUpVeryficationCodeScreen, page:() => SignUpVeryficationCodeScreen()),
+    GetPage(name: accountConfirmScreen, page:() => AccountConfirmScreen()),
+    GetPage(name: resetPasswordScreen, page:() => ResetPasswordScreen()),
+    GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
+    GetPage(name: homeScreen, page:() => HomeScreen()),
+    GetPage(name: otpScreen, page:() => OtpScreen()),
   ];
 }
