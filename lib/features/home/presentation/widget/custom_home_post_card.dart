@@ -7,6 +7,7 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
+import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart' as Get;
 
 class PostCard extends StatelessWidget {
   final String organization;
@@ -114,6 +115,7 @@ class PostCard extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
+
                   showRepostPopup(context);
 
                 },

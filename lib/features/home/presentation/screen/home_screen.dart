@@ -21,12 +21,18 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrower(),
 
       appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset(IconPath.icon_pro,height:40,width: 40,),
-            SizedBox(width: 10),
-            const Text(AppText.hi_rochelle),
-          ],
+        title: InkWell(
+          onTap: (){
+
+
+          },
+          child: Row(
+            children: [
+              Image.asset(IconPath.icon_pro,height:40,width: 40,),
+              SizedBox(width: 10),
+              const Text(AppText.hi_rochelle),
+            ],
+          ),
         ),
         actions: const [
           Icon(Icons.notifications_none_outlined),

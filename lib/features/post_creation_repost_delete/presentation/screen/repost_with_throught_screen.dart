@@ -31,7 +31,9 @@ class RepostWithThroughtScreen extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Get.back();
+                  },
 
                   child: Image.asset(
                     IconPath.cancle,

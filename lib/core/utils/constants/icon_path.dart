@@ -58,6 +58,20 @@ class IconPath{
 
 
 
+  static const  String   back_arrow=
+      '$_basePath/back_arrow.png';
+
+
+  static const  String   dod=
+      '$_basePath/dod.png';
+
+
+  static const  String   man=
+      '$_basePath/man.png';
+
+
+
+
 
 
 

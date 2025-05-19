@@ -201,6 +201,7 @@ class AppText {
 //repost with throught screen
 
   static const String hiIamjams = "👋 Hi, I’m Jams Walton — a passionate UI/UX Designer focused on creating intuitive and meaningful digital experiences";
+  static const String rechelle = "Rechelle";
 
 }
 

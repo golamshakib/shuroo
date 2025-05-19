@@ -45,7 +45,8 @@ void showRepostPopup(BuildContext context) {
               subtitle:
               AppText.instantly_bring_rockfile,
               onTap: () {
-                Navigator.pop(context);
+                Get.toNamed(AppRoute.myAllPostScreen);
+
                 // Add your logic here
               },
             ),
