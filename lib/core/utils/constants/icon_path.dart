@@ -28,4 +28,14 @@ class IconPath{
   static const  String   shortListImage= '$_basePath/shortListImage.svg';
   static const  String   interViewImage= '$_basePath/interViewImage.svg';
 
+  // Home Screen
+
+  static const  String   icon_pro=
+      '$_basePath/icon_pro.png';
+
+  static const  String   icon_1=
+      '$_basePath/iconspp.png';
+
+
+
 }
