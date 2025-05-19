@@ -194,6 +194,11 @@ class AppText {
 
   //make post Screen
   static const String add_photos_video = "Add photos/video";
+  static const String repostwithyour = "'Repost with your thoughts'";
+  static const String create_a_new_post_with = "'Create a new post with Brockfile\'s post attached'";
+  static const String instantly_bring_rockfile = "Instantly bring Brockfile\'s post to others\' feeds";
+
+
   static const String hiIamjams = "👋 Hi, I’m Jams Walton — a passionate UI/UX Designer focused on creating intuitive and meaningful digital experiences";
 
 }

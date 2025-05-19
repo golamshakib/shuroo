@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const PostCard(
+          PostCard(context:context ,
             icon: IconPath.icon_1,
             organization: "Wild World Conservation ",
             timeAgo: "1w ago",
@@ -69,7 +69,8 @@ class HomeScreen extends StatelessWidget {
 
 
 
-          const PostCard(
+           PostCard(
+            context: context,
             icon: IconPath.icon_1,
 
             organization: "Brookfield University",

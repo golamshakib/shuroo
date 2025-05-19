@@ -52,6 +52,9 @@ class IconPath{
   static const  String   gallery=
       '$_basePath/gallery.svg';
 
+  static const  String   frame=
+      '$_basePath/frame.png';
+
 
 
 

@@ -6,6 +6,7 @@ import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
+import 'custom_popup.dart';
 
 class PostCard extends StatelessWidget {
   final String organization;
@@ -13,6 +14,7 @@ class PostCard extends StatelessWidget {
   final String title;
   final String content;
   final String icon;
+  final BuildContext context;
   final String hashtags;
   final String imageAsset;
 
@@ -25,12 +27,13 @@ class PostCard extends StatelessWidget {
     required this.hashtags,
     required this.imageAsset,
     required this.icon,
+    required this.context,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10,left: 10,right: 10),
+      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -57,8 +60,7 @@ class PostCard extends StatelessWidget {
                   child: Container(
                       alignment: Alignment.topCenter,
                       child: Text(timeAgo,
-                          style:
-                              const TextStyle(color: AppColors.grayText)))),
+                          style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
           const SizedBox(height: 8),
@@ -93,17 +95,13 @@ class PostCard extends StatelessWidget {
                 fontSize: 14,
                 color: AppColors.grayText,
               ),
-
-
-
-
-
-
-
-
               Row(
                 children: [
-                  Image.asset(IconPath.comments,height: 16,width: 16,),
+                  Image.asset(
+                    IconPath.comments,
+                    height: 16,
+                    width: 16,
+                  ),
                   SizedBox(
                     width: 2,
                   ),
@@ -114,26 +112,37 @@ class PostCard extends StatelessWidget {
                   ),
                 ],
               ),
+              InkWell(
+                onTap: (){
+                  showRepostPopup(context);
 
-              Row(
-                children: [
-                  Image.asset(IconPath.reposts,height: 16,width: 16,),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  const CustomText(
-                    text: AppText.repost,
-                    fontSize: 14,
-                    color: AppColors.grayText,
-                  ),
-                ],
+                },
+
+                child: Row(
+                  children: [
+                    Image.asset(
+                      IconPath.reposts,
+                      height: 16,
+                      width: 16,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    const CustomText(
+                      text: AppText.repost,
+                      fontSize: 14,
+                      color: AppColors.grayText,
+                    ),
+                  ],
+                ),
               ),
-
-
-
               Row(
                 children: [
-                  Image.asset(IconPath.send,height: 16,width: 16,),
+                  Image.asset(
+                    IconPath.send,
+                    height: 16,
+                    width: 16,
+                  ),
                   SizedBox(
                     width: 2,
                   ),
@@ -151,3 +160,4 @@ class PostCard extends StatelessWidget {
     );
   }
 }
+
