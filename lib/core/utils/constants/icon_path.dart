@@ -36,6 +36,15 @@ class IconPath{
   static const  String   icon_1=
       '$_basePath/iconspp.png';
 
+  static const  String   send=
+      '$_basePath/send.png';
+
+  static const  String   reposts=
+      '$_basePath/repost.png';
+
+  static const  String   comments=
+      '$_basePath/comments.png';
+
 
 
 }
