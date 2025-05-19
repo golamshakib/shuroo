@@ -162,6 +162,7 @@ class AppText {
 
   //home screen
   static const String hi_rochelle = "Hi, Rochelle";
+  static const String rochelle = "Rochelle";
   static const String wago = "1w ago";
   static const String campus_event = "Campus Event: Career Fair 2024";
   static const String the_annual  = "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! \uD83E\uDD1D";
@@ -189,6 +190,10 @@ class AppText {
   static const String comments = "6 comments";
   static const String repost = "Repost";
   static const String send = "Send";
+  static const String post = "Post";
+
+  //make post Screen
+  static const String add_photos_video = "Add photos/video";
 
 }
 

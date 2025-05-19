@@ -1,12 +1,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
+import '../../controller/home_controller.dart';
 
 class PostCardScrollhorizonta extends StatelessWidget {
   final String organization;
@@ -28,13 +31,7 @@ class PostCardScrollhorizonta extends StatelessWidget {
     required this.icon,
   });
 
-  final List<String> imageUrls = [
-    'https://picsum.photos/200/300?random=1',
-    'https://picsum.photos/200/300?random=2',
-    'https://picsum.photos/200/300?random=3',
-    'https://picsum.photos/200/300?random=4',
-    'https://picsum.photos/200/300?random=5',
-  ];
+  HomeController _controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,22 +83,22 @@ class PostCardScrollhorizonta extends StatelessWidget {
             const SizedBox(height: 4),
             Text(hashtags, style: const TextStyle(color: Colors.blue)),
             const SizedBox(height: 8),
-
-
             Container(
-              height: 200,
+              height: 163.h,
+
               padding: EdgeInsets.symmetric(vertical: 10),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: imageUrls.length,
+                itemCount: _controller.item.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    width: 123.w,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        imageUrls[index],
-                        width: 150,
+                      child: Image.asset(
+                        _controller.item[index],
+
                         fit: BoxFit.cover,
                       ),
                     ),

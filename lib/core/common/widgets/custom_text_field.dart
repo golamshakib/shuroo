@@ -48,6 +48,7 @@ class CustomTextField extends StatelessWidget {
         ),
         maxLines:maxLine ,
         readOnly: readOnly,
+        minLines: 3,
         keyboardType: keyboardType, // Use optional keyboard type
         obscureText: obscureText,
         controller: controller,

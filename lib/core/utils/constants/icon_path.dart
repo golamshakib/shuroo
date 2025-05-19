@@ -45,6 +45,17 @@ class IconPath{
   static const  String   comments=
       '$_basePath/comments.png';
 
+  static const  String   cancle=
+      '$_basePath/cancel.png';
+
+
+  static const  String   gallery=
+      '$_basePath/gallery.svg';
+
+
+
+
+
 
 
 }
