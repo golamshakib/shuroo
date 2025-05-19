@@ -15,10 +15,11 @@
 //   }
 //
 //   final List<Widget> screens = const [
-//     CreatorHomeScreen(),
-//     EventScreen(),
-//     SettingsScreen(),
-//     CreatorProfile()
+//     // CreatorHomeScreen(),
+//     // EventScreen(),
+//     // SettingsScreen(),
+//     // CreatorProfile()
+//
 //   ];
 //
 //   final List<String> labels = const ['Home', 'Events', 'Settings', 'Profile'];
@@ -37,3 +38,32 @@
 //     Image.asset(IconPath.profile, height: 26.h, width: 26.w, fit: BoxFit.cover),
 //   ];
 // }
+
+import 'package:get/get.dart';
+import 'package:shuroo/features/home/presentation/screen/favourite_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/home_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/job_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/messages_screen.dart';
+
+class NavBarController extends GetxController {
+  int selectedIndex = 0;
+  int get currentIndex => selectedIndex;
+
+  List screens = [
+  HomeScreen(),
+  FavouriteScreen(),
+  HomeScreen(),
+  MessagesScreen(),
+  JobScreen(),
+  ];
+  void changeIndex(int index) {
+    if (selectedIndex == index) {
+      return;
+    }
+    selectedIndex = index;
+    update();
+  }
+  void backToHome() {
+    changeIndex(0);
+  }
+}
