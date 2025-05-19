@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart';
-import 'package:shuroo/app.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/core/utils/constants/app_texts.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
-
 import '../../../features/authentication/controllers/create_account_default_controller.dart';
-import '../../../features/authentication/controllers/create_account_filled_screen_controller.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final String label;
+  final String? label;
   final String hintText;
   final String? fontFamily;
   final String? icon;
-
   final int? hintSize;
   final Color? hintColor;
   final ValueChanged<String>? onChanged;
-
+  final Widget? prefixIcon;
   final bool? isPassword;
   final TextEditingController? controller;
 
   CustomTextFormField({
     Key? key,
-    required this.label,
+    this.label,
     required this.hintText,
-    required this.icon,
+    this.icon,
     this.controller,
     this.isPassword,
     this.hintColor,
     this.hintSize,
     this.fontFamily,
     this.onChanged,
+    this.prefixIcon,
   }) : super(key: key);
 
   DefaultController _controller = Get.put(DefaultController());
@@ -46,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(left: 4),
-                child: Text(label,
+                child: Text(label!,
                     style: TextStyle(
                       fontSize: 12.sp,
                     )),
@@ -73,8 +67,8 @@ class CustomTextFormField extends StatelessWidget {
                     controller: controller,
                     decoration: InputDecoration(
                       hintText: hintText,
+                      prefixIcon: prefixIcon,
                       suffixIcon:icon!=null? Image.asset(icon!, height: 24.h, width: 24.w):null,
-
                       hintStyle: TextStyle(
                           fontFamily: fontFamily ?? null,
                           color: hintColor ?? Colors.grey,

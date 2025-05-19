@@ -1,7 +1,6 @@
-
-
 import 'package:get/get_navigation/src/routes/get_route.dart';
-
+import 'package:shuroo/features/home/presentation/screen/applied_job_screen.dart';
+import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import '../features/authentication/presentation/screens/account_confirm_screen.dart';
 import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
 import '../features/authentication/presentation/screens/create_account_screen.dart';
@@ -20,6 +19,8 @@ import '../features/onboarding/screens/started_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
+
+  // All Auth screen
   static String loginScreen = "/loginScreen";
   static String signUpScreen = "/signUpScreen";
   static String startedScreen = "/startedScreen";
@@ -38,8 +39,14 @@ class AppRoute {
   static String homeScreen = "/homeScreen";
   static String init = "/";
 
+  // Nev Bar
+  // Added by shahriar
+  static String nevBar = "/nevBar";
+  static String appliedJobScreen = "/appliedJobScreen";
 
   static List<GetPage> routes = [
+
+    // Auth
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
@@ -56,5 +63,11 @@ class AppRoute {
     GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
+
+    // Added by shahriar
+    GetPage(name: nevBar, page:() => NavBar()),
+    GetPage(name: appliedJobScreen, page:() => AppliedJobScreen()),
+
+
   ];
 }

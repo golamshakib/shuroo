@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
-
 import '../../../core/common/widgets/custom_submit_button.dart';
+import '../../../core/utils/constants/app_colors.dart';
 import '../../../routes/app_routes.dart';
 
 class StartedScreen extends StatelessWidget {
@@ -85,7 +84,7 @@ class StartedScreen extends StatelessWidget {
 
                   },
                   fontSize: 15.sp,
-                  color: AppColors.custom_blue,
+                 color: AppColors.custom_blue,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 SizedBox(
