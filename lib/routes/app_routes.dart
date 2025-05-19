@@ -1,16 +1,22 @@
-import 'package:get/get.dart';
 
-import '../features/authentication/presentation/screens/create_account_screen.dart';
+
+import 'package:get/get_navigation/src/routes/get_route.dart';
+
+import '../features/authentication/presentation/screens/account_confirm_screen.dart';
 import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
+import '../features/authentication/presentation/screens/create_account_screen.dart';
+import '../features/authentication/presentation/screens/reset_password_screen.dart';
+import '../features/authentication/presentation/screens/sign_in_verification_code_screen.dart';
+import '../features/authentication/presentation/screens/sign_up_verification_code_screen.dart';
 import '../features/authentication/presentation/screens/forgot_password_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_screen.dart';
-import '../features/authentication/presentation/screens/enter_verification_code_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
-import '../features/onboarding/screens/started_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
+import '../features/home/presentation/screen/home_screen.dart';
+import '../features/onboarding/screens/started_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
@@ -25,7 +31,11 @@ class AppRoute {
   static String signInScreen = "/signInScreen";
   static String otpScreen = "/otpScreen";
   static String forgotPasswordScreen = "/forgotPasswordScreen";
-  static String enterVeryficationCodeScreen = "/enterVeryficationCodeScreen";
+  static String signUpVeryficationCodeScreen = "/signUpVeryficationCodeScreen";
+  static String signInVeryficationCodeScreen = "/signInVeryficationCodeScreen";
+  static String resetPasswordScreen = "/resetPasswordScreen";
+  static String accountConfirmScreen = "/accountConfirmScreen";
+  static String homeScreen = "/homeScreen";
   static String init = "/";
 
 
@@ -40,7 +50,11 @@ class AppRoute {
     GetPage(name: signInScreen, page:() => SignInScreen()),
     GetPage(name: signUpScreen, page:() => SignUpScreen()),
     GetPage(name: forgotPasswordScreen, page:() => ForgotPasswordScreen()),
-    GetPage(name: enterVeryficationCodeScreen, page:() => EnterVeryficationCodeScreen()),
+    GetPage(name: signUpVeryficationCodeScreen, page:() => SignUpVeryficationCodeScreen()),
+    GetPage(name: accountConfirmScreen, page:() => AccountConfirmScreen()),
+    GetPage(name: resetPasswordScreen, page:() => ResetPasswordScreen()),
+    GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
+    GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
   ];
 }

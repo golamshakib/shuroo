@@ -126,7 +126,7 @@ class AppText {
   static const String sign_In_google = 'Sign In with Google';
   static const String sign_In_apple = 'Sign In with Apple';
   static const String remember_me = "remember me";
-  static const String forgotPassword = "Forgot Password";
+  static const String forgotPassword = "Forgot Password?";
   static const String signUp = "Sign up";
   static const String WrongEmailAndPass = "Wrong email or  password";
 
@@ -143,6 +143,49 @@ class AppText {
   static const String  didntreceiveacode  = "Didn’t receive a code? ";
   static const String  resendCode  = "Resend Code";
   static const String  verify  = "Verify";
+
+
+  // account confirm screen
+
+  static const String accountCreate = 'Account Create';
+  static const String successfully = 'Successfully';
+  static const String startExploringJobs = 'Start exploring jobs and opportunities right away.';
+  static const String exploreJobs = 'Explore Jobs';
+  static const String exploreTheAppFirst = 'Explore the app first';
+  // Password reset screen
+
+  static const String resetPassword = 'Reset Password';
+  static const String setYourNewPassword = 'Set your new password to complete the reset';
+  static const String newPassword = 'New Password';
+  static const String confirmPassword = 'Confirm Password';
+  static const String changePassword = 'Change password';
+
+  //home screen
+  static const String greeting = "Hi, Rochelle";
+
+  // Wild World Conservation Post
+  static const String wildWorld = "Wild World Conservation";
+  static const String careerEventTitle = "📅 Campus Event: Career Fair 2024";
+  static const String careerEventDescription = "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! 🤝";
+  static const String careerHashtags = "#CareerFair #Networking";
+
+  // Brookfield University Post
+  static const String brookfieldUniversity = "Brookfield University";
+  static const String debateWinTitle = "🏆 Alex Martin Wins Debate Tournament";
+  static const String debateWinDescription = "Congratulations to Alex Martin for taking home first place in the National Debate Championship! 🥇";
+  static const String debateHashtags = "#StudentSpotlight #DebateChamps";
+
+  // Bottom Nav
+  static const String navHome = "Home";
+  static const String navFavorites = "Favorites";
+  static const String navMessages = "Messages";
+  static const String navJobs = "Jobs";
+
+  // Reusable
+  static const String likes = "13 likes";
+  static const String comments = "6 comments";
+  static const String repost = "Repost";
+  static const String send = "Send";
 
 }
 

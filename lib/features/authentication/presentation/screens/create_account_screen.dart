@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
@@ -11,7 +10,6 @@ import 'package:shuroo/core/utils/constants/image_path.dart';
 
 import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
-import 'create_account_filled_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});

@@ -1,7 +1,10 @@
 import 'dart:async';
+
 import 'package:get/get.dart';
 
-class OtpController extends GetxController {
+class SignInVerificationScreenController extends GetxController{
+
+
   final int totalSeconds = 90; // 1 minute 30 seconds
   final RxInt secondsRemaining = 90.obs;
   Timer? _timer;
@@ -46,4 +49,5 @@ class OtpController extends GetxController {
     _timer?.cancel();
     super.onClose();
   }
+
 }

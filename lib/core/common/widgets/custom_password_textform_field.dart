@@ -17,6 +17,7 @@ class CustomTextFormFieldPass extends StatefulWidget {
   final String? icon;
   final int? hintSize;
   final Color? hintColor;
+  final Color? titleColor;
   final ValueChanged<String>? onChanged;
 
   final bool isPassword = true;
@@ -31,7 +32,7 @@ class CustomTextFormFieldPass extends StatefulWidget {
     this.hintColor,
     this.hintSize,
     this.fontFamily,
-    this.onChanged,
+    this.onChanged, this.titleColor,
   }) : super(key: key);
 
   @override
@@ -53,6 +54,7 @@ class _CustomTextFormFieldPassState extends State<CustomTextFormFieldPass> {
                 margin: EdgeInsets.only(left: 4),
                 child: Text(widget.label,
                     style: TextStyle(
+                      color: Colors.black,
                       fontSize: 12.sp,
                     )),
               ),

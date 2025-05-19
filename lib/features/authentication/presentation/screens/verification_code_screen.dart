@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
-import '../../controllers/orp_veritication_code_screen_controller.dart';
+import '../../controllers/signup_veritication_screen_controller.dart';
 
 class OtpScreen extends StatelessWidget {
   OtpScreen({super.key});
 
-  final controller = Get.put(OtpController());
+  final controller = Get.put(SingUpVerificationController());
   final List<TextEditingController> otpFields =
   List.generate(6, (_) => TextEditingController());
 

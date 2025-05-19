@@ -24,6 +24,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("........SignInScreen");
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -112,6 +113,9 @@ class SignInScreen extends StatelessWidget {
 
                               InkWell(
                                 onTap: (){
+
+                                  print("........forgotPasswordScreen");
+
                                   Get.toNamed(AppRoute.forgotPasswordScreen);
                                 },
                                 child: Text(

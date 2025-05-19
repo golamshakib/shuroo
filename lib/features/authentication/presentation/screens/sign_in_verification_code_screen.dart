@@ -1,22 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/authentication/presentation/screens/reset_password_screen.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/common/widgets/app_color.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
-import '../../../../routes/app_routes.dart';
-import '../../controllers/orp_veritication_code_screen_controller.dart';
+import '../../controllers/signin_verification_screen_controller.dart';
 
-class EnterVeryficationCodeScreen extends StatelessWidget {
-  EnterVeryficationCodeScreen({super.key});
+class SignInVeryficationCodeScreen extends StatelessWidget {
+   SignInVeryficationCodeScreen({Key? key}) : super(key: key);
 
-  final controller = Get.put(OtpController());
+
+
+  final controller = Get.put(SignInVerificationScreenController());
   final List<TextEditingController> otpFields =
-      List.generate(6, (_) => TextEditingController());
+  List.generate(6, (_) => TextEditingController());
 
   void _handleOtpInput(int index, String value, BuildContext context) {
     if (value.isNotEmpty && index < 5) {
@@ -33,7 +38,7 @@ class EnterVeryficationCodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => SafeArea(
+            () => SafeArea(
           child: SingleChildScrollView(
             child: Container(
               margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),
@@ -104,7 +109,7 @@ class EnterVeryficationCodeScreen extends StatelessWidget {
                                 onChanged: (value) =>
                                     _handleOtpInput(i, value, context),
                                 decoration:
-                                    const InputDecoration(counterText: ''),
+                                const InputDecoration(counterText: ''),
                               ),
                             );
                           }),
@@ -112,8 +117,9 @@ class EnterVeryficationCodeScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
-                            " ${controller.formattedTime}",
-                            style: const TextStyle(color: Colors.grey),
+                            " ${controller.formattedTime}s",
+                              style: const TextStyle(color: AppColors.textPrimary,fontFamily: "cabin")
+                              ,
                           ),
                         ),
 
@@ -145,8 +151,8 @@ class EnterVeryficationCodeScreen extends StatelessWidget {
                         Container(
                           child: CustomSubmitButton(
                             text: AppText.verify, onTap: () {
-                            Get.toNamed(
-                                AppRoute.enterVeryficationCodeScreen);
+                            Get.toNamed(AppRoute.resetPasswordScreen);
+                            print("..............code");
                           },),
                         )
                       ],
@@ -158,6 +164,6 @@ class EnterVeryficationCodeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    );;
   }
 }

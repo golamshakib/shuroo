@@ -15,7 +15,7 @@ import '../../../../core/common/widgets/custom_textform_field.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/create_account_filled_screen_controller.dart';
-import 'enter_verification_code_screen.dart';
+import 'sign_up_verification_code_screen.dart';
 
 class CreateAccountFilledScreen extends StatelessWidget {
   CreateAccountFilledScreen({super.key});
@@ -174,7 +174,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
 
                     text: AppText.create_account,
                     onTap: () {
-                      Get.toNamed(AppRoute.enterVeryficationCodeScreen);
+                      Get.toNamed(AppRoute.signUpVeryficationCodeScreen);
                     },
                     color: AppColors.custom_blue,
                     borderRadius: BorderRadius.circular(50),

@@ -1,25 +1,26 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:shuroo/core/common/widgets/app_color.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/authentication/presentation/screens/sign_up_verification_code_screen.dart';
-import 'package:shuroo/routes/app_routes.dart';
 
+import '../../../../core/common/widgets/app_color.dart';
+import '../../../../core/common/widgets/custom_password_textform_field.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_textform_field.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
-import '../../controllers/forgot_password_screen_controller.dart';
+import '../../../../routes/app_routes.dart';
+import '../../controllers/reset_password_screen_controller.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  ForgotPasswordScreen({super.key});
+class ResetPasswordScreen extends StatelessWidget {
+  ResetPasswordScreen({super.key});
 
-  final ForgotPasswordController _controller = Get.put(
-      ForgotPasswordController());
+  final ResetPasswordScreenController _controller = Get.put(
+      ResetPasswordScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -49,35 +50,52 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 ImagePath.logo, height: 62.w, width: 62.w),
                             SizedBox(height: 12),
                             CustomText(
-                                text: AppText.forgotPassword, fontSize: 24),
+                                text: AppText.resetPassword, fontSize: 24),
 
 
                             Container(
                               margin: EdgeInsets.only(top: 12),
                               child: CustomText(
-                                text: AppText.enterYourEmailAccount,
+                                text: AppText.setYourNewPassword,
                                 fontSize: 14,
                                 color: AppColors.dark75,)
                               ,
                             ),
+
                             Container(
-                              margin: EdgeInsets.only(top: 40.h),
-                              child: CustomTextFormField(
-                                controller: _controller.emailController,
-                                label: AppText.email,
-                                hintText: AppText.enterYourEmail,
+                              margin: EdgeInsets.only(top: 24),
+                              child: CustomTextFormFieldPass(
+                                onChanged: (qw) {},
+                                controller: _controller.newPassController,
+                                label: AppText.newPassword,
+                                hintText: AppText.hintPassword,
+                                icon: IconPath.eye,
                                 fontFamily: 'Inter',
-                                hintColor: AppColors.grayText,
+                                hintColor: AppColors.textPrimary,
                                 hintSize: 16,
-                                icon: IconPath.email,
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: 396),
+                              margin: EdgeInsets.only(top: 24),
+                              child: CustomTextFormFieldPass(
+                                onChanged: (qw) {},
+                                controller: _controller.confirmPassController,
+                                label: AppText.confirmPassword,
+                                hintText: AppText.hintPassword,
+                                icon: IconPath.eye,
+                                fontFamily: 'Inter',
+                                hintColor: AppColors.textPrimary,
+                                hintSize: 16,
+                              ),
+                            ),
+
+
+                            Container(
+                              margin: EdgeInsets.only(top: 293),
                               child: CustomSubmitButton(
-                                text: AppText.continueB, onTap: () {
+                                text: AppText.changePassword, onTap: () {
                                 Get.toNamed(
-                                    AppRoute.signInVeryficationCodeScreen);
+                                    AppRoute.homeScreen);
                               },),
                             )
                             // S
