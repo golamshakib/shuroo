@@ -169,9 +169,9 @@ class AppText {
 
   // Wild World Conservation Post
   static const String wildWorld = "Wild World Conservation";
-  static const String careerEventTitle = "📅 Campus Event: Career Fair 2024";
-  static const String careerEventDescription = "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! 🤝";
-  static const String careerHashtags = "#CareerFair #Networking";
+  static const String campus_Event = "📅 Campus Event: Career Fair 2024";
+  static const String the_annualCareer = "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! 🤝";
+  static const String careerFair = "#CareerFair #Networking";
 
   // Brookfield University Post
   static const String brookfieldUniversity = "Brookfield University";
@@ -198,6 +198,7 @@ class AppText {
   static const String create_a_new_post_with = "'Create a new post with Brockfile\'s post attached'";
   static const String instantly_bring_rockfile = "Instantly bring Brockfile\'s post to others\' feeds";
 
+//repost with throught screen
 
   static const String hiIamjams = "👋 Hi, I’m Jams Walton — a passionate UI/UX Designer focused on creating intuitive and meaningful digital experiences";
 

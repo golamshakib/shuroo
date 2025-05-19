@@ -16,6 +16,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.scaffoldBackgroundColor,
+
       drawer: CustomDrower(),
 
       appBar: AppBar(
@@ -36,13 +38,14 @@ class HomeScreen extends StatelessWidget {
         children: [
           PostCard(context:context ,
             icon: IconPath.icon_1,
-            organization: "Wild World Conservation ",
+            organization: AppText.wildWorld,
             timeAgo: "1w ago",
-            title: "\uD83D\uDCC5 Campus Event: Career Fair 2024",
+            title: AppText.campus_Event,
             content:
-                "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! \uD83E\uDD1D",
-            hashtags: "#CareerFair #Networking",
+               AppText.the_annualCareer,
             imageAsset: ImagePath.img_video,
+
+            hashtags: AppText.careerFair,
 
           ),
 
@@ -51,7 +54,7 @@ class HomeScreen extends StatelessWidget {
           PostCardScrollhorizonta(
             icon: IconPath.icon_1,
 
-            organization: "Brookfield University",
+            organization: AppText.brookfieldUniversity,
             timeAgo: "1w ago",
             title: "\uD83C\uDFC6 Alex Martin Wins Debate Tournament",
             content:

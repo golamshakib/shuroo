@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/core/utils/constants/app_texts.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
-
 import '../../../../core/utils/constants/app_colors.dart';
-import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
 
-class PostCard extends StatelessWidget {
+class CustomRepostScreenCard extends StatelessWidget {
   final String organization;
   final String timeAgo;
   final String title;
@@ -18,7 +13,7 @@ class PostCard extends StatelessWidget {
   final String hashtags;
   final String imageAsset;
 
-  const PostCard({
+  const CustomRepostScreenCard({
     super.key,
     required this.organization,
     required this.timeAgo,
@@ -86,75 +81,6 @@ class PostCard extends StatelessWidget {
               width: 341.w,
             ),
           ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const CustomText(
-                text: "\u2764\uFE0F 13 likes",
-                fontSize: 14,
-                color: AppColors.grayText,
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    IconPath.comments,
-                    height: 16,
-                    width: 16,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  const CustomText(
-                    text: AppText.comments,
-                    fontSize: 14,
-                    color: AppColors.grayText,
-                  ),
-                ],
-              ),
-              InkWell(
-                onTap: (){
-                  showRepostPopup(context);
-
-                },
-
-                child: Row(
-                  children: [
-                    Image.asset(
-                      IconPath.reposts,
-                      height: 16,
-                      width: 16,
-                    ),
-                    SizedBox(
-                      width: 2,
-                    ),
-                    const CustomText(
-                      text: AppText.repost,
-                      fontSize: 14,
-                      color: AppColors.grayText,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    IconPath.send,
-                    height: 16,
-                    width: 16,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  const CustomText(
-                    text: "Send",
-                    fontSize: 14,
-                    color: AppColors.grayText,
-                  ),
-                ],
-              ),
-            ],
-          )
         ],
       ),
     );

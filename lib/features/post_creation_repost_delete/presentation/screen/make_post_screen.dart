@@ -21,6 +21,8 @@ class MakePostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.scaffoldBackgroundColor,
+
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,10 +80,16 @@ class MakePostScreen extends StatelessWidget {
         ),
       ),
       bottomSheet: Container(
+
+
         margin: EdgeInsets.only(left: 15, bottom: 12),
         child: Row(
+
+
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+
+
             SvgPicture.asset(
               IconPath.gallery,
               height: 24.w,
