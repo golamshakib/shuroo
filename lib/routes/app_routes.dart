@@ -16,6 +16,7 @@ import '../features/authentication/presentation/screens/terms_and condition_scre
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
+import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
@@ -37,6 +38,7 @@ class AppRoute {
   static String resetPasswordScreen = "/resetPasswordScreen";
   static String accountConfirmScreen = "/accountConfirmScreen";
   static String homeScreen = "/homeScreen";
+  static String makePostHomeScreen = "/makePostHomeScreen";
   static String init = "/";
 
   // Nev Bar
@@ -63,6 +65,7 @@ class AppRoute {
     GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
+    GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
 
     // Added by shahriar
     GetPage(name: nevBar, page:() => NavBar()),

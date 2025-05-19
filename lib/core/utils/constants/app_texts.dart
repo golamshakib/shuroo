@@ -194,6 +194,7 @@ class AppText {
 
   //make post Screen
   static const String add_photos_video = "Add photos/video";
+  static const String hiIamjams = "👋 Hi, I’m Jams Walton — a passionate UI/UX Designer focused on creating intuitive and meaningful digital experiences";
 
 }
 

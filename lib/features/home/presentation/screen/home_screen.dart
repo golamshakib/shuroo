@@ -70,8 +70,6 @@ class HomeScreen extends StatelessWidget {
 
 
           const PostCard(
-
-
             icon: IconPath.icon_1,
 
             organization: "Brookfield University",
