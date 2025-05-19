@@ -111,11 +111,15 @@ class PostCard extends StatelessWidget {
                     children: [
                       Image.asset(icon),
                       Text(organization,
-                          style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: "Cabinet Grotesk")),
+                          style: const TextStyle(fontWeight: FontWeight.bold,
+                              fontFamily: "Cabinet Grotesk")),
                     ],
                   ),
                 ),
-                Expanded(flex: 1,child: Container(alignment:Alignment.topCenter,child: Text(timeAgo, style: const TextStyle(color: Colors.grey)))),
+                Expanded(flex: 1,
+                    child: Container(alignment: Alignment.topCenter,
+                        child: Text(timeAgo,
+                            style: const TextStyle(color: Colors.grey)))),
               ],
             ),
             const SizedBox(height: 8),
@@ -127,7 +131,8 @@ class PostCard extends StatelessWidget {
             const SizedBox(height: 8),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(imageAsset, fit: BoxFit.cover,height: 151,width: 341,),
+              child: Image.asset(
+                imageAsset, fit: BoxFit.cover, height: 151, width: 341,),
             ),
             const SizedBox(height: 8),
             Row(
@@ -145,3 +150,5 @@ class PostCard extends StatelessWidget {
     );
   }
 }
+
+//fgfffgit
