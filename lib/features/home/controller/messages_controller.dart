@@ -4,6 +4,7 @@ import '../../../core/utils/constants/will_be_deleted.dart';
 import '../data/model/messages_model.dart';
 
 class MessagesController extends GetxController{
+
   final List<MessagesModel> messageList = [
     MessagesModel(
       id: 1,

@@ -42,6 +42,7 @@
 import 'package:get/get.dart';
 import 'package:shuroo/features/home/presentation/screen/favourite_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/home_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/job_details_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/messages_screen.dart';
 
@@ -52,7 +53,7 @@ class NavBarController extends GetxController {
   List screens = [
   HomeScreen(),
   FavouriteScreen(),
-  HomeScreen(),
+  JobDetailsScreen(),
   MessagesScreen(),
   JobScreen(),
   ];

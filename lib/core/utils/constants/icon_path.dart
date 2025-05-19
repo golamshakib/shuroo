@@ -27,5 +27,9 @@ class IconPath{
   static const  String   viewImage= '$_basePath/viewImage.svg';
   static const  String   shortListImage= '$_basePath/shortListImage.svg';
   static const  String   interViewImage= '$_basePath/interViewImage.svg';
+  static const  String   jobIcon= '$_basePath/jobIcon.svg';
+  static const  String   locationIcon= '$_basePath/locationIcon.svg';
+  static const  String   personIcon= '$_basePath/personIcon.svg';
+  static const  String   walletIcon= '$_basePath/walletIcon.svg';
 
 }

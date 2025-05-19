@@ -50,7 +50,7 @@ class JobScreen extends StatelessWidget {
                           final jobs = controller.jobs[index];
                           return GestureDetector(
                             onTap: (){
-
+                              Get.to(controller.jobScreens[index]);
                             },
                             child: Container(
                               decoration: BoxDecoration(
