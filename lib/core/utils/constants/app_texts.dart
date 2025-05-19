@@ -161,7 +161,10 @@ class AppText {
   static const String changePassword = 'Change password';
 
   //home screen
-  static const String greeting = "Hi, Rochelle";
+  static const String hi_rochelle = "Hi, Rochelle";
+  static const String wago = "1w ago";
+  static const String campus_event = "Campus Event: Career Fair 2024";
+  static const String the_annual  = "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! \uD83E\uDD1D";
 
   // Wild World Conservation Post
   static const String wildWorld = "Wild World Conservation";

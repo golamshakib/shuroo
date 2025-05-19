@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/core/utils/constants/image_path.dart';
+
+import '../widget/custom_drower.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,15 +11,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrower(),
+
       appBar: AppBar(
-        leading: const Icon(Icons.menu),
-        title: const Row(
+        title: Row(
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/avatar.png'),
-            ),
+            Image.asset(IconPath.icon_pro,height:40,width: 40,),
             SizedBox(width: 10),
-            Text("Hi, Rochelle"),
+            const Text("Hi, Rochelle"),
           ],
         ),
         actions: const [
@@ -27,20 +30,28 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: const [
           PostCard(
-            organization: "Wild World Conservation",
+            icon: IconPath.icon_1,
+            organization: "Wild World Conservation ",
             timeAgo: "1w ago",
             title: "\uD83D\uDCC5 Campus Event: Career Fair 2024",
-            content: "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! \uD83E\uDD1D",
+            content:
+                "The annual Career Fair is next Wednesday at 10 AM in the student center. Meet recruiters from top companies and get ready to network! \uD83E\uDD1D",
             hashtags: "#CareerFair #Networking",
-            imageAsset: 'assets/career_fair.jpg',
+            imageAsset: ImagePath.img_video,
+
           ),
           PostCard(
+
+
+            icon: IconPath.icon_1,
+
             organization: "Brookfield University",
             timeAgo: "1w ago",
             title: "\uD83C\uDFC6 Alex Martin Wins Debate Tournament",
-            content: "Congratulations to Alex Martin for taking home first place in the National Debate Championship! \uD83C\uDFC5",
+            content:
+                "Congratulations to Alex Martin for taking home first place in the National Debate Championship! \uD83C\uDFC5",
             hashtags: "#StudentSpotlight #DebateChamps",
-            imageAsset: 'assets/debate.jpg',
+            imageAsset: ImagePath.img_video,
           ),
         ],
       ),
@@ -48,10 +59,14 @@ class HomeScreen extends StatelessWidget {
         currentIndex: 0,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Favorites'),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.message_outlined), label: 'Messages'),
-          BottomNavigationBarItem(icon: Icon(Icons.work_outline), label: 'Jobs'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border), label: 'Favorites'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle_outline), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.message_outlined), label: 'Messages'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.work_outline), label: 'Jobs'),
         ],
       ),
     );
@@ -63,6 +78,7 @@ class PostCard extends StatelessWidget {
   final String timeAgo;
   final String title;
   final String content;
+  final String icon;
   final String hashtags;
   final String imageAsset;
 
@@ -74,6 +90,7 @@ class PostCard extends StatelessWidget {
     required this.content,
     required this.hashtags,
     required this.imageAsset,
+    required this.icon,
   });
 
   @override
@@ -88,8 +105,17 @@ class PostCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(organization, style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(timeAgo, style: const TextStyle(color: Colors.grey)),
+                Expanded(
+                  flex: 5,
+                  child: Row(
+                    children: [
+                      Image.asset(icon),
+                      Text(organization,
+                          style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: "Cabinet Grotesk")),
+                    ],
+                  ),
+                ),
+                Expanded(flex: 1,child: Container(alignment:Alignment.topCenter,child: Text(timeAgo, style: const TextStyle(color: Colors.grey)))),
               ],
             ),
             const SizedBox(height: 8),
@@ -101,7 +127,7 @@ class PostCard extends StatelessWidget {
             const SizedBox(height: 8),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(imageAsset, fit: BoxFit.cover),
+              child: Image.asset(imageAsset, fit: BoxFit.cover,height: 151,width: 341,),
             ),
             const SizedBox(height: 8),
             Row(
