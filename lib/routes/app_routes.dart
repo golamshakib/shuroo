@@ -20,6 +20,7 @@ import '../features/authentication/presentation/screens/terms_and condition_scre
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/company_user _profile/presentation/screen/company_profile_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
+import '../features/home/presentation/screen/job_details_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/my_all_post_screen.dart';
@@ -49,6 +50,7 @@ class AppRoute {
   static String repostWithThroughtScreen = "/repostWithThroughtScreen";
   static String companyProfileScreen = "/companyProfileScreen";
   static String myAllPostScreen = "/myAllPostScreen";
+  static String jobDetailsScreen = "/jobDetailsScreen";
   static String init = "/";
 
   // Nev Bar
@@ -82,6 +84,7 @@ class AppRoute {
     GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
     GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
+    GetPage(name: jobDetailsScreen, page:() => JobDetailsScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
 
     // Nev Bar
