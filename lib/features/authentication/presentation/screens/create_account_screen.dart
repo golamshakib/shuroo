@@ -54,14 +54,14 @@ class CreateAccountScreen extends StatelessWidget {
                   text: AppText.sign_up_phone_email,
                   img: IconPath.iconoir_user,
                   left: 35.5,
-                  right: 75.5,
+                  right: 7.5,
                 ),
             
                 CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_facebook,
                   img: IconPath.facebook_icon,
                   left: 53,
-                  right: 93.5,
+                  right: 8.5,
                 ),
             
             
@@ -72,14 +72,14 @@ class CreateAccountScreen extends StatelessWidget {
                   text: AppText.sign_up_google,
                   img: IconPath.google_icon,
                   left: 60.79,
-                  right: 101.21,
+                  right: 10.21,
                 ),
             
                 CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_apple,
                   img: IconPath.apple_icon,
                   left: 65,
-                  right: 105.5,
+                  right: 10.5,
                 ),
             
             

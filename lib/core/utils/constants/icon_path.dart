@@ -80,6 +80,7 @@ class IconPath{
   static const  String   man2= '$_basePath/man2.png';
   static const  String   man3= '$_basePath/man3.png';
   static const  String   man_icons= '$_basePath/man_icons.png';
+  static const  String   share1= '$_basePath/share1.png';
 
 
 
