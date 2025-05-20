@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/home/controller/applied_controller.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/jobs/controller/applied_controller.dart';
+
 import '../../../../core/common/widgets/custom_back_button.dart';
 import '../../../../core/common/widgets/custom_blue_gray_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
-class InterviewScreen extends StatelessWidget {
-   InterviewScreen({super.key});
+class ProfileViewScreen extends StatelessWidget {
+   ProfileViewScreen({super.key});
 
    final AppliedController controller = Get.put(AppliedController());
 
@@ -18,7 +19,7 @@ class InterviewScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: CustomBackButton(),
-        title: CustomText(text: 'InterViews', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
+        title: CustomText(text: 'Profile View', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
       ),
       body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -63,11 +64,11 @@ class InterviewScreen extends StatelessWidget {
                                 child: Container(
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                    color: Color(0xffE7FEE6),
+                                    color: AppColors.grayBlue,
                                     borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(color: Color(0xff00981C)),
+                                    border: Border.all(color: Color(0xff009D83)),
                                   ),
-                                  child: CustomText(text: 'Short Listed', fontSize: 12.sp,color: Color(0xff00981C),fontWeight: FontWeight.w400,),
+                                  child: CustomText(text: 'Profile View', fontSize: 12.sp,color: Color(0xff009D83),fontWeight: FontWeight.w400,),
                                 ),
                               )
                             ],

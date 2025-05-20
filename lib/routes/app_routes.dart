@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/home/presentation/screen/applied_job_screen.dart';
+import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
+import 'package:shuroo/features/jobs/presentation/screen/job_details_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
@@ -57,6 +58,7 @@ class AppRoute {
   static String notificationScreen = "/notificationScreen";
   static String searchingScreen = "/searchingScreen";
   static String searchResultScreen = "/searchResultScreen";
+  static String jobDetailsScreen = "/jobDetailsScreen";
 
   static List<GetPage> routes = [
 
@@ -88,6 +90,7 @@ class AppRoute {
     GetPage(name: notificationScreen, page:() => NotificationScreen()),
     GetPage(name: searchingScreen, page:() => SearchScreen()),
     GetPage(name: searchResultScreen, page:() => SearchResultScreen()),
+    GetPage(name: jobDetailsScreen, page:() => JobDetailsScreen()),
 
 
   ];

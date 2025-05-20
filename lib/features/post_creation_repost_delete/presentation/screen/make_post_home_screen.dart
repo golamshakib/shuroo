@@ -21,7 +21,6 @@ class MakePostHomeScreen extends StatelessWidget {
 
       appBar: AppBar(
       backgroundColor: AppColors.scaffoldBackgroundColor,
-
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

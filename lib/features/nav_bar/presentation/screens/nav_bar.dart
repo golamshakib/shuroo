@@ -97,7 +97,7 @@ class NavBar extends StatelessWidget {
                     _buildNavItem(Icons.favorite_border_outlined, 'Favorites', 1, controller),
                     _buildAddButton(context,2),
                     _buildNavItem(Icons.email_outlined, 'Messages', 3, controller),
-                    _buildNavItem(Icons.email_outlined, 'Jobs', 4, controller),
+                    _buildNavItem(Icons.work_outline_outlined, 'Jobs', 4, controller),
                   ],
                 ),
               ),

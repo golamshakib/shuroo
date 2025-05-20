@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
-import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
-
+import 'package:get/get.dart';
+import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
 import '../widget/custom_home_post_card_Scroll horizontal.dart';
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
       appBar: AppBar(
         backgroundColor: AppColors.scaffoldBackgroundColor,
-        title: InkWell(
+        title: GestureDetector(
           onTap: (){
 
 
@@ -35,8 +35,11 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        actions: const [
-          Icon(Icons.notifications_none_outlined),
+        actions:  [
+          IconButton(
+              onPressed: (){
+                Get.toNamed(AppRoute.notificationScreen);
+              }, icon: Icon(Icons.notifications_none_outlined)),
           SizedBox(width: 16),
         ],
       ),
@@ -99,20 +102,20 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: 'Favorites'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle_outline), label: ''),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.message_outlined), label: 'Messages'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.work_outline), label: 'Jobs'),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: 0,
+      //   items: const [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.favorite_border), label: 'Favorites'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.add_circle_outline), label: ''),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.message_outlined), label: 'Messages'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.work_outline), label: 'Jobs'),
+      //   ],
+      // ),
     );
   }
 }
