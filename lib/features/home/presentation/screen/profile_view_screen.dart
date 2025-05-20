@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/core/common/widgets/custom_back_button.dart';
-import 'package:shuroo/core/common/widgets/custom_blue_gray_button.dart';
-import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
-import 'package:shuroo/core/common/widgets/custom_text.dart';
-import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/home/controller/applied_controller.dart';
 
-class AppliedJobScreen extends StatelessWidget {
-   AppliedJobScreen({super.key});
+import '../../../../core/common/widgets/custom_back_button.dart';
+import '../../../../core/common/widgets/custom_blue_gray_button.dart';
+import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/utils/constants/app_colors.dart';
+
+class ProfileViewScreen extends StatelessWidget {
+   ProfileViewScreen({super.key});
 
    final AppliedController controller = Get.put(AppliedController());
 
@@ -19,7 +19,7 @@ class AppliedJobScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: CustomBackButton(),
-        title: CustomText(text: 'Applied Jobs', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
+        title: CustomText(text: 'Profile View', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
       ),
       body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -66,9 +66,9 @@ class AppliedJobScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: AppColors.grayBlue,
                                     borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(color: AppColors.custom_blue),
+                                    border: Border.all(color: Color(0xff009D83)),
                                   ),
-                                  child: CustomText(text: 'Applied', fontSize: 12.sp,color: AppColors.custom_blue,fontWeight: FontWeight.w400,),
+                                  child: CustomText(text: 'Profile View', fontSize: 12.sp,color: Color(0xff009D83),fontWeight: FontWeight.w400,),
                                 ),
                               )
                             ],
@@ -102,6 +102,7 @@ class AppliedJobScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 14.h),
+
                           CustomBlueGrayButton(
                               text: 'Send Message',
                               onTap: (){

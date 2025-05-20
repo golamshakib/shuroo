@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shuroo/core/common/widgets/custom_text_field.dart';
-import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/home/controller/job_controller.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/custom_back_button.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/search_notification_chat/controller/search_result_controller.dart';
+
 import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
-import 'applied_job_screen.dart';
 
-class JobScreen extends StatelessWidget {
-  JobScreen({super.key});
+class SearchResultScreen extends StatelessWidget {
+   SearchResultScreen({super.key});
 
-  final JobController controller = Get.put(JobController());
+   final SearchResultController controller = Get.put(SearchResultController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
+        leading: CustomBackButton(),
         title: CustomText(
-            text: 'Job Board',
+            text: 'Job Result',
             fontSize: 20.sp,
             fontWeight: FontWeight.w600,
             color: AppColors.textPrimary),
@@ -29,6 +30,7 @@ class JobScreen extends StatelessWidget {
               horizontal: 16, vertical: 12),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextField(
                     controller: controller.search,
@@ -36,57 +38,42 @@ class JobScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.search),
                   ),
                   SizedBox(height: 12.h),
-                  SizedBox(
-                      height: 76.h,
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4, // number of columns
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: 1, // width / height
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 4,      // Horizontal space between items
+                      childAspectRatio: 2.7, // Width / Height ratio
+                    ),
+                    itemCount: controller.jobsSystemsModel.length,     // Total number of items
+                    itemBuilder: (context, index) {
+                      final jobsList = controller.jobsSystemsModel[index];
+                      return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          border: Border.all(color: AppColors.custom_blue,width: 1),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        itemCount: controller.jobs.length, // number of items
-                        itemBuilder: (context, index) {
-                          final jobs = controller.jobs[index];
-                          return GestureDetector(
-                            onTap: (){
-                              Get.to(controller.jobScreens[index]);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.textWhite,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 14, left: 14, right: 14),
-                                    child: SvgPicture.asset(jobs.icon!),
-                                  ),
-                                  Flexible(
-                                    child: CustomText(
-                                      text: jobs.title!,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.textPrimary,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      )
+                        child: Row(
+                          children: [
+                             CustomText(text: jobsList.title!, fontSize: 12.sp,fontWeight: FontWeight.w400,color: AppColors.custom_blue),
+                          ],
+                        )
+                      );
+                    },
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 12.h),
+                  CustomText(text: "200 results", fontSize: 14.sp,color: Color(0xff555A5F),fontWeight: FontWeight.w400),
+
                   ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: controller.jobModelList.length,
+                    itemCount: controller.searchModelList.length,
                     itemBuilder: (context, index) {
-                      final jobList = controller.jobModelList[index];
+                      final searchResultList = controller.searchModelList[index];
                       return Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
@@ -101,16 +88,16 @@ class JobScreen extends StatelessWidget {
                               ListTile(
                                 leading: CircleAvatar(
                                   backgroundImage: AssetImage(
-                                      jobList.uiImagePath!),
+                                      searchResultList.uiImagePath!),
                                 ),
                                 title: CustomText(
-                                  text: jobList.title!,
+                                  text: searchResultList.title!,
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.textPrimary,
                                 ),
                                 subtitle: CustomText(
-                                  text: jobList.subTitle!,
+                                  text: searchResultList.subTitle!,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.textGray,),
@@ -119,10 +106,10 @@ class JobScreen extends StatelessWidget {
                                   return InkWell(
                                     onTap: ()=> controller.toggleFavorite(index),
                                     child:  Icon(
-                                      controller.jobModelList[index].isFavorite.value
+                                      controller.searchModelList[index].isFavorite.value
                                           ? Icons.favorite
                                           : Icons.favorite_border,
-                                      color: controller.jobModelList[index].isFavorite.value
+                                      color: controller.searchModelList[index].isFavorite.value
                                           ? AppColors.custom_blue
                                           : AppColors.custom_blue,
                                       size: 20,
@@ -141,7 +128,7 @@ class JobScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: CustomText(
-                                        text: jobList.fullTimeText!,
+                                        text: searchResultList.fullTimeText!,
                                         fontSize: 11.sp,
                                         fontWeight: FontWeight.w400,
                                         color: AppColors.textGray,
@@ -156,7 +143,7 @@ class JobScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: CustomText(
-                                        text: jobList.remoteText!,
+                                        text: searchResultList.remoteText!,
                                         fontSize: 11.sp,
                                         fontWeight: FontWeight.w400,
                                         color: AppColors.textGray,
@@ -171,7 +158,7 @@ class JobScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: CustomText(
-                                        text: jobList.outreachText!,
+                                        text: searchResultList.outreachText!,
                                         fontSize: 11.sp,
                                         fontWeight: FontWeight.w400,
                                         color: AppColors.textGray,
@@ -194,7 +181,7 @@ class JobScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     CustomText(
-                                      text: jobList.orText!,
+                                      text: searchResultList.orText!,
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.textPrimary,),
@@ -207,7 +194,7 @@ class JobScreen extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           CustomText(
-                                            text: jobList.applyText!,
+                                            text: searchResultList.applyText!,
                                             decoration: TextDecoration
                                                 .underline,
                                             decorationthickness: 2,
