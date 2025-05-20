@@ -66,6 +66,7 @@ class AppColors {
 
 
   static const Color scaffoldBackgroundColor = Color(0xFFf5f5f5);
+  static const Color grayBlue = Color(0xFFE6F6FE);
   static const Color accent = Color(0xFF89A7FF);
 
   static const Color black = Colors.black;

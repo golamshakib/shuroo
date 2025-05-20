@@ -1,6 +1,9 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shuroo/features/home/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
+import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
+import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
+import 'package:shuroo/features/search_notification_chat/presentation/screen/search_screen.dart';
 import '../features/authentication/presentation/screens/account_confirm_screen.dart';
 import '../features/authentication/presentation/screens/create_account_filled_screen.dart';
 import '../features/authentication/presentation/screens/create_account_screen.dart';
@@ -16,6 +19,9 @@ import '../features/authentication/presentation/screens/terms_and condition_scre
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
+import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
+import '../features/post_creation_repost_delete/presentation/screen/my_all_post_screen.dart';
+import '../features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
 
 class AppRoute {
@@ -37,12 +43,18 @@ class AppRoute {
   static String resetPasswordScreen = "/resetPasswordScreen";
   static String accountConfirmScreen = "/accountConfirmScreen";
   static String homeScreen = "/homeScreen";
+  static String makePostHomeScreen = "/makePostHomeScreen";
+  static String repostWithThroughtScreen = "/repostWithThroughtScreen";
+  static String myAllPostScreen = "/myAllPostScreen";
   static String init = "/";
 
   // Nev Bar
-  // Added by shahriar
   static String nevBar = "/nevBar";
+
   static String appliedJobScreen = "/appliedJobScreen";
+  static String notificationScreen = "/notificationScreen";
+  static String searchingScreen = "/searchingScreen";
+  static String searchResultScreen = "/searchResultScreen";
 
   static List<GetPage> routes = [
 
@@ -63,10 +75,16 @@ class AppRoute {
     GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
+    GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
+    GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
+    GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
 
-    // Added by shahriar
+    // Nev Bar
     GetPage(name: nevBar, page:() => NavBar()),
     GetPage(name: appliedJobScreen, page:() => AppliedJobScreen()),
+    GetPage(name: notificationScreen, page:() => NotificationScreen()),
+    GetPage(name: searchingScreen, page:() => SearchScreen()),
+    GetPage(name: searchResultScreen, page:() => SearchResultScreen()),
 
 
   ];

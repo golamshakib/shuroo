@@ -1,14 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/features/home/presentation/screen/profile_view_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/short_listed_screen.dart';
 
 import '../../../core/utils/constants/will_be_deleted.dart';
 import '../data/model/job_Model.dart';
+import '../presentation/screen/applied_job_screen.dart';
+import '../presentation/screen/interview_screen.dart';
 
 class JobController extends GetxController{
 
   final isFavorite = false.obs;
   final search = TextEditingController();
+
+  final List<Widget> jobScreens = [
+    AppliedJobScreen(),
+    ProfileViewScreen(),
+    ShortListedScreen(),
+    InterviewScreen()
+
+  ];
+
 
   final List<Jobs> jobs = [
     Jobs(
