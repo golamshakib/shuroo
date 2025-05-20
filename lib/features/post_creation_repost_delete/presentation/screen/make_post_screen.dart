@@ -24,15 +24,22 @@ class MakePostScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
 
       appBar: AppBar(
+        backgroundColor: AppColors.scaffoldBackgroundColor,
+
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Image.asset(
-                  IconPath.cancle,
-                  height: 40,
-                  width: 40,
+                InkWell(onTap: (){
+
+                  Get.back();
+                },
+                  child: Image.asset(
+                    IconPath.cancle,
+                    height: 40,
+                    width: 40,
+                  ),
                 ),
                 Image.asset(
                   IconPath.icon_pro,

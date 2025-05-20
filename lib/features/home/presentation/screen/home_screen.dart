@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrower(),
 
       appBar: AppBar(
+        backgroundColor: AppColors.scaffoldBackgroundColor,
         title: InkWell(
           onTap: (){
 
@@ -42,6 +43,9 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+
+
+
           PostCard(context:context ,
             icon: IconPath.icon_1,
             organization: AppText.wildWorld,

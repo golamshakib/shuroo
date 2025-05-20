@@ -73,6 +73,10 @@ class IconPath{
   static const  String   man=
       '$_basePath/man.png';
 
+  static const  String   share= '$_basePath/share.png';
+  static const  String   edit= '$_basePath/edit.png';
+  static const  String   delete= '$_basePath/delete.png';
+
 
 
 
