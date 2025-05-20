@@ -1,53 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/features/home/presentation/screen/profile_view_screen.dart';
-import 'package:shuroo/features/home/presentation/screen/short_listed_screen.dart';
+import 'package:shuroo/features/search_notification_chat/data/model/search_result_model.dart';
 
 import '../../../core/utils/constants/will_be_deleted.dart';
-import '../data/model/job_Model.dart';
-import '../presentation/screen/applied_job_screen.dart';
-import '../presentation/screen/interview_screen.dart';
 
-class JobController extends GetxController{
+class SearchResultController extends GetxController{
 
   final isFavorite = false.obs;
+
   final search = TextEditingController();
 
-  final List<Widget> jobScreens = [
-    AppliedJobScreen(),
-    ProfileViewScreen(),
-    ShortListedScreen(),
-    InterviewScreen()
-
-  ];
-
-
-  final List<Jobs> jobs = [
+  final List<Jobs> jobsSystemsModel = [
     Jobs(
       id: 1,
-      title: "Applied",
-      icon: IconPath.applyImage,
+      title: "💼  All Jobs",
     ),
     Jobs(
       id: 2,
-      title: "Viewed",
-      icon: IconPath.viewImage,
+      title: "🛠️  Full-time",
     ),
     Jobs(
       id: 3,
-      title: "Shortlisted",
-      icon: IconPath.shortListImage,
+      title: "🕐  Part-time",
     ),
     Jobs(
       id: 4,
-      title: "Interviews",
-      icon: IconPath.interViewImage,
+      title: "🏠 Hybrid",
     ),
   ];
 
-  final List<JobModel> jobModelList = [
-    JobModel(
+  final List<SearchResultModel> searchModelList = [
+    SearchResultModel(
       id: 1,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -58,7 +41,7 @@ class JobController extends GetxController{
       applyText: "Apply Now",
       uiImagePath: WillBeDeleted.uiLogo,
     ),
-    JobModel(
+    SearchResultModel(
       id: 2,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -69,7 +52,7 @@ class JobController extends GetxController{
       applyText: "Apply Now",
       uiImagePath: WillBeDeleted.ecoLogo,
     ),
-    JobModel(
+    SearchResultModel(
       id: 3,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -80,7 +63,7 @@ class JobController extends GetxController{
       applyText: "Apply Now",
       uiImagePath: WillBeDeleted.uiLogo,
     ),
-    JobModel(
+    SearchResultModel(
       id: 4,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -91,7 +74,7 @@ class JobController extends GetxController{
       applyText: "Apply Now",
       uiImagePath: WillBeDeleted.uiLogo,
     ),
-    JobModel(
+    SearchResultModel(
       id: 5,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -102,7 +85,7 @@ class JobController extends GetxController{
       applyText: "Apply Now",
       uiImagePath: WillBeDeleted.ecoLogo,
     ),
-    JobModel(
+    SearchResultModel(
       id: 6,
       title: "UI/UX Designer",
       subTitle: "Wild World Conservation",
@@ -116,7 +99,8 @@ class JobController extends GetxController{
   ];
 
   void toggleFavorite(int index) {
-    jobModelList[index].isFavorite.toggle();
+    searchModelList[index].isFavorite.toggle();
   }
+
 
 }
