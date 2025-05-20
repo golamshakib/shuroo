@@ -51,11 +51,11 @@ class NavBarController extends GetxController {
   int get currentIndex => selectedIndex;
 
   List screens = [
-  HomeScreen(),
-  FavouriteScreen(),
-  JobDetailsScreen(),
-  MessagesScreen(),
-  JobScreen(),
+    HomeScreen(),
+    FavouriteScreen(),
+    JobDetailsScreen(),
+    MessagesScreen(),
+    JobScreen(),
   ];
   void changeIndex(int index) {
     if (selectedIndex == index) {

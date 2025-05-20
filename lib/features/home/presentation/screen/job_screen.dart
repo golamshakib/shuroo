@@ -31,9 +31,9 @@ class JobScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CustomTextField(
-                      controller: controller.search,
-                      hintText: 'Search job title or keyword ',
-                      prefixIcon: Icon(Icons.search),
+                    controller: controller.search,
+                    hintText: 'Search job title or keyword ',
+                    prefixIcon: Icon(Icons.search),
                   ),
                   SizedBox(height: 12.h),
                   SizedBox(
@@ -117,16 +117,16 @@ class JobScreen extends StatelessWidget {
 
                                 trailing: Obx(() {
                                   return InkWell(
-                                      onTap: ()=> controller.toggleFavorite(index),
-                                      child:  Icon(
-                                        controller.jobModelList[index].isFavorite.value
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: controller.jobModelList[index].isFavorite.value
-                                            ? AppColors.custom_blue
-                                            : AppColors.custom_blue,
-                                        size: 20,
-                                      ),);
+                                    onTap: ()=> controller.toggleFavorite(index),
+                                    child:  Icon(
+                                      controller.jobModelList[index].isFavorite.value
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: controller.jobModelList[index].isFavorite.value
+                                          ? AppColors.custom_blue
+                                          : AppColors.custom_blue,
+                                      size: 20,
+                                    ),);
                                 }),
                               ),
                               Padding(

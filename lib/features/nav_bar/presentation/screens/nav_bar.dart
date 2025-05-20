@@ -143,13 +143,13 @@ class NavBar extends StatelessWidget {
       width: 45,
       height: 45,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-            colors: [
-              Color(0xff0199E3),
-              Color(0xff34B9FA),
-              Color(0xff8AD7FC),
-            ])
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+              colors: [
+                Color(0xff0199E3),
+                Color(0xff34B9FA),
+                Color(0xff8AD7FC),
+              ])
       ),
       child: Center(
         child: IconButton(

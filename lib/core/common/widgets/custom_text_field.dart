@@ -14,9 +14,13 @@ class CustomTextField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.validator,
     this.keyboardType = TextInputType.text,
-    this.readOnly = false, this.prefixIcon,
-    this.fillColor, this.maxLine =1,this.radius = 12,
-    this.padding, // Default to TextInputType.text
+    this.readOnly = false,
+    this.prefixIcon,
+    this.fillColor,
+    this.maxLine = 1,
+    this.minLine,
+    this.radius = 12,
+    this.padding,
   });
 
   final TextEditingController controller;
@@ -31,6 +35,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final double fontSize;
   final int maxLine;
+  final int? minLine;
   final double radius;
   final EdgeInsets? padding;
 
@@ -45,9 +50,10 @@ class CustomTextField extends StatelessWidget {
           fontSize: fontSize.sp,
           height: 30 / 14,
         ),
-        maxLines:maxLine ,
+        maxLines: maxLine,
+        minLines: minLine,
         readOnly: readOnly,
-        keyboardType: keyboardType, // Use optional keyboard type
+        keyboardType: keyboardType,
         obscureText: obscureText,
         controller: controller,
         textAlign: textAlign,
@@ -61,23 +67,24 @@ class CustomTextField extends StatelessWidget {
             fontSize: fontSize.sp,
             height: 20 / 14,
           ),
-          fillColor:fillColor ?? Colors.white, // Make background transparent
+          fillColor: fillColor ?? Colors.white,
           filled: true,
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color:Color(0xffF1F1F1), width: 1),
-              borderRadius: BorderRadius.circular(radius)
-          ),
+              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
+              borderRadius: BorderRadius.circular(radius)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color:Color(0xffF1F1F1), width: 1),
-              borderRadius: BorderRadius.circular(radius)
-          ),
-          contentPadding: EdgeInsets.only(left: 12.w,right: 10.w,top: 12.h,bottom: 12.h),
+              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
+              borderRadius: BorderRadius.circular(radius)),
+          contentPadding: padding ??
+              EdgeInsets.only(
+                  left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
         ),
         validator: validator,
-        onTapOutside: (c){
+        onTapOutside: (c) {
           FocusScope.of(context).unfocus();
         },
       ),
     );
   }
 }
+
