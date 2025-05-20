@@ -65,7 +65,6 @@ class MakePostScreen extends StatelessWidget {
            child: Container(
                   width: 72.0.w,
                   height: 40.0.h,
-                  padding: EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
                   decoration: BoxDecoration(
                     color: Color(0xFFE6E6E7),
                     borderRadius: BorderRadius.circular(50.0),

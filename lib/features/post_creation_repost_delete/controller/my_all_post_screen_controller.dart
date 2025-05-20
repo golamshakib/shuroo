@@ -1,3 +1,13 @@
 import 'package:get/get.dart';
 
-class MyAllPostScreenController extends GetxController {}
+import '../../../core/utils/constants/icon_path.dart';
+
+class MyAllPostScreenController extends GetxController {
+  final people_icons = [IconPath.man_icons,IconPath.man2,IconPath.man3,IconPath.man_icons,IconPath.man2,IconPath.man3,IconPath.man_icons,IconPath.man2,IconPath.man3];
+  final people_name = ['Alice khan','Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace','Grace'];
+
+
+
+
+
+}

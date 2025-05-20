@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shuroo/core/common/widgets/custom_text.dart';
+import 'package:shuroo/core/utils/constants/icon_path.dart';
+
+import '../../controller/my_all_post_screen_controller.dart';
 
 void showPeopleBottomSheet(BuildContext context) {
-  final people = ['Alice','Alice','Alice','Alice','Alice','Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace'];
 
+  MyAllPostScreenController _controller = Get.put(MyAllPostScreenController());
   showModalBottomSheet(
-
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
     ),
     builder: (context) {
       return Container(
-padding: EdgeInsets.only(top: 15,left: 15),
+        padding: EdgeInsets.only(top: 15, left: 15),
         decoration: BoxDecoration(
           color: Colors.white,
-            borderRadius: BorderRadius.circular(20), // Rounded corners
+          borderRadius: BorderRadius.circular(20), // Rounded corners
         ),
         height: 150,
         child: Column(
@@ -28,19 +33,20 @@ padding: EdgeInsets.only(top: 15,left: 15),
             Expanded(
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: people.length,
+                itemCount: _controller.people_name.length,
                 separatorBuilder: (_, __) => SizedBox(width: 20),
                 itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.person, size: 24),
-                      SizedBox(height: 6),
-                      Text(
-                        people[index],
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+                  return Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(_controller.people_icons[index], height: 32,width: 32,),
+                        SizedBox(height: 6),
+                        Container(
+                          alignment: Alignment.center,
+                             child: CustomText(text: _controller.people_name[index])),
+                      ],
+                    ),
                   );
                 },
               ),

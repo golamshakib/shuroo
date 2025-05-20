@@ -46,6 +46,8 @@ import 'package:shuroo/features/home/presentation/screen/job_details_screen.dart
 import 'package:shuroo/features/home/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/messages_screen.dart';
 
+import '../../post_creation_repost_delete/presentation/screen/make_post_screen.dart';
+
 class NavBarController extends GetxController {
   int selectedIndex = 0;
   int get currentIndex => selectedIndex;
@@ -53,7 +55,7 @@ class NavBarController extends GetxController {
   List screens = [
     HomeScreen(),
     FavouriteScreen(),
-    JobDetailsScreen(),
+    MakePostScreen(),
     MessagesScreen(),
     JobScreen(),
   ];
