@@ -34,7 +34,6 @@ class CustomTextField extends StatelessWidget {
   final double radius;
   final EdgeInsets? padding;
 
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
