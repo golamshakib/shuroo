@@ -17,7 +17,7 @@ class IconPath{
   static const  String   email= '$_basePath/email_icon.png';
   static const  String   home= '$_basePath/icon_home.png';
   static const  String   favorites= '$_basePath/favorites.png';
-  static const  String   messages= '$_basePath/messages.png';
+  static const  String   messages1 = '$_basePath/messages1.png';
   static const  String   jobs= '$_basePath/icons_jobs.png';
   static const  String   add= '$_basePath/add.png';
   static const  String   wrong= '$_basePath/wrong.png';

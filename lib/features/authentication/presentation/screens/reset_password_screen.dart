@@ -94,7 +94,7 @@ class ResetPasswordScreen extends StatelessWidget {
                               child: CustomSubmitButton(
                                 text: AppText.changePassword, onTap: () {
                                 Get.toNamed(
-                                    AppRoute.homeScreen);
+                                    AppRoute.signInScreen);
                               },),
                             )
                             // S
