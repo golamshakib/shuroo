@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/home/controller/favourite_controller.dart';
+import 'package:shuroo/features/favorites/controller/favourite_controller.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
 
