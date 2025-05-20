@@ -203,6 +203,16 @@ class AppText {
   static const String hiIamjams = "👋 Hi, I’m Jams Walton — a passionate UI/UX Designer focused on creating intuitive and meaningful digital experiences";
   static const String rechelle = "Rechelle";
 
+  // edit post screen
+
+  static const String sharevia = "Share via";
+  static const String edtPost = "Edit post";
+  static const String deletePost = "Delete post";
+  static const String areYou = "Are you sure you want to";
+  static const String removedThis = " removed this post form Shuroo?";
+  static const String deletePosts = "Delete Post?";
+
+
 }
 
 

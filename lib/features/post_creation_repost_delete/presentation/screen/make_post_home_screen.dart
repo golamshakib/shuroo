@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 
@@ -18,16 +20,22 @@ class MakePostHomeScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
 
       appBar: AppBar(
+      backgroundColor: AppColors.scaffoldBackgroundColor,
+
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Image.asset(
-                  IconPath.cancle,
-                  height: 40,
-                  width: 40,
+                InkWell(onTap: (){
+                  Get.back();
+                },
+                  child: Image.asset(
+                    IconPath.cancle,
+                    height: 40,
+                    width: 40,
+                  ),
                 ),
                 Image.asset(
                   IconPath.icon_pro,

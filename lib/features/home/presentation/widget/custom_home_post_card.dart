@@ -6,6 +6,7 @@ import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart' as Get;
 
@@ -34,7 +35,18 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      margin: EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -113,12 +125,14 @@ class PostCard extends StatelessWidget {
                   ),
                 ],
               ),
-              InkWell(
-                onTap: (){
+      InkWell(
+        onTap: () {
 
-                  showRepostPopup(context);
+          showRepostPopup(
+             context,
 
-                },
+          );
+        },
 
                 child: Row(
                   children: [
