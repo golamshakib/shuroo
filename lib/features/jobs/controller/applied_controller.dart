@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/will_be_deleted.dart';
-import 'package:shuroo/features/home/data/model/applied_model.dart';
+import 'package:shuroo/features/jobs/data/model/applied_model.dart';
 
 class AppliedController extends GetxController{
 
