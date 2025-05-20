@@ -103,14 +103,6 @@ class SignInScreen extends StatelessWidget {
                                     ],
                                   )),
 
-
-
-
-
-
-
-
-
                               InkWell(
                                 onTap: (){
 
@@ -134,7 +126,7 @@ class SignInScreen extends StatelessWidget {
                             onTap: ()async {
                              await _controller.emailAndPasswordvalidatorCheck();
                               if (!_controller.isCheckemailAndPassword.value) {
-
+                                Get.toNamed(AppRoute.nevBar);
                               }
                             },
                             color: AppColors.custom_blue,

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/features/home/presentation/screen/profile_view_screen.dart';
-import 'package:shuroo/features/home/presentation/screen/short_listed_screen.dart';
+import 'package:shuroo/features/jobs/presentation/screen/profile_view_screen.dart';
+import 'package:shuroo/features/jobs/presentation/screen/short_listed_screen.dart';
 
 import '../../../core/utils/constants/will_be_deleted.dart';
 import '../data/model/job_Model.dart';

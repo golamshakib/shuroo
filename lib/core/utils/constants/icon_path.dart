@@ -17,7 +17,7 @@ class IconPath{
   static const  String   email= '$_basePath/email_icon.png';
   static const  String   home= '$_basePath/icon_home.png';
   static const  String   favorites= '$_basePath/favorites.png';
-  static const  String   messages= '$_basePath/messages.png';
+  static const  String   messages1 = '$_basePath/messages1.png';
   static const  String   jobs= '$_basePath/icons_jobs.png';
   static const  String   add= '$_basePath/add.png';
   static const  String   wrong= '$_basePath/wrong.png';
@@ -27,10 +27,11 @@ class IconPath{
   static const  String   viewImage= '$_basePath/viewImage.svg';
   static const  String   shortListImage= '$_basePath/shortListImage.svg';
   static const  String   interViewImage= '$_basePath/interViewImage.svg';
-  static const  String   jobIcon= '$_basePath/jobIcon.svg';
+  static const  String   jobIcon= '$_basePath/workIcon.svg';
   static const  String   locationIcon= '$_basePath/locationIcon.svg';
   static const  String   personIcon= '$_basePath/personIcon.svg';
   static const  String   walletIcon= '$_basePath/walletIcon.svg';
+  static const  String   workIcon= '$_basePath/workIcon.svg';
 
   // Home Screen
 
