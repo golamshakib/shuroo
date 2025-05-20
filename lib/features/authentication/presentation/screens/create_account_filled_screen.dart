@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:password_strength_indicator_plus/password_strength_indicator_plus.dart';
 import 'package:shuroo/core/common/widgets/custom_password_textform_field.dart';
 import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
@@ -15,7 +15,7 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/create_account_filled_screen_controller.dart';
-import 'sign_up_verification_code_screen.dart';
+
 
 class CreateAccountFilledScreen extends StatelessWidget {
   CreateAccountFilledScreen({super.key});

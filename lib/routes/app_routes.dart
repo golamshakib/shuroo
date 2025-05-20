@@ -17,6 +17,7 @@ import '../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
+import '../features/company_user _profile/presentation/screen/company_profile_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
@@ -45,6 +46,7 @@ class AppRoute {
   static String homeScreen = "/homeScreen";
   static String makePostHomeScreen = "/makePostHomeScreen";
   static String repostWithThroughtScreen = "/repostWithThroughtScreen";
+  static String companyProfileScreen = "/companyProfileScreen";
   static String myAllPostScreen = "/myAllPostScreen";
   static String init = "/";
 
@@ -78,6 +80,7 @@ class AppRoute {
     GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
     GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
+    GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
 
     // Nev Bar
     GetPage(name: nevBar, page:() => NavBar()),

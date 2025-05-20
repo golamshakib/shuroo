@@ -1,14 +1,17 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/features/authentication/presentation/screens/login_screen.dart';
+import 'package:shuroo/features/company_user%20_profile/presentation/screen/company_profile_screen.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
-import '../../../../routes/app_routes.dart';
+
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
-import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart' as Get;
+
 
 class PostCard extends StatelessWidget {
   final String organization;
@@ -35,6 +38,7 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -61,10 +65,22 @@ class PostCard extends StatelessWidget {
                     SizedBox(
                       width: 5.w,
                     ),
-                    Text(organization,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Cabinet Grotesk")),
+                    GestureDetector(
+                      onTap: (){
+                        Get.to(()=> CompanyProfileScreen());
+
+                      },
+                        child: Text(organization,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Cabinet Grotesk"))
+
+
+                    )
+
+
+
+
                   ],
                 ),
               ),
