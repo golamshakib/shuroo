@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/home/controller/job_controller.dart';
@@ -31,9 +31,9 @@ class JobScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CustomTextField(
-                      controller: controller.search,
-                      hintText: 'Search job title or keyword ',
-                      prefixIcon: Icon(Icons.search),
+                    controller: controller.search,
+                    hintText: 'Search job title or keyword ',
+                    prefixIcon: Icon(Icons.search),
                   ),
                   SizedBox(height: 12.h),
                   SizedBox(
@@ -117,16 +117,16 @@ class JobScreen extends StatelessWidget {
 
                                 trailing: Obx(() {
                                   return InkWell(
-                                      onTap: ()=> controller.toggleFavorite(index),
-                                      child:  Icon(
-                                        controller.jobModelList[index].isFavorite.value
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: controller.jobModelList[index].isFavorite.value
-                                            ? AppColors.custom_blue
-                                            : AppColors.custom_blue,
-                                        size: 20,
-                                      ),);
+                                    onTap: ()=> controller.toggleFavorite(index),
+                                    child:  Icon(
+                                      controller.jobModelList[index].isFavorite.value
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: controller.jobModelList[index].isFavorite.value
+                                          ? AppColors.custom_blue
+                                          : AppColors.custom_blue,
+                                      size: 20,
+                                    ),);
                                 }),
                               ),
                               Padding(
