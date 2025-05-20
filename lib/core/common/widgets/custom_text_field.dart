@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.prefixIcon,
     this.fillColor,
-    this.maxLine = 1,
+    this.maxLine,
     this.minLine,
     this.radius = 12,
     this.padding,
@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool readOnly;
   final double fontSize;
-  final int maxLine;
+  final int? maxLine;
   final int? minLine;
   final double radius;
   final EdgeInsets? padding;
@@ -50,7 +50,7 @@ class CustomTextField extends StatelessWidget {
           fontSize: fontSize.sp,
           height: 30 / 14,
         ),
-        maxLines: maxLine,
+        maxLines: maxLine??1,
         minLines: minLine,
         readOnly: readOnly,
         keyboardType: keyboardType,

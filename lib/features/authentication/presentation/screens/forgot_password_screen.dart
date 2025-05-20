@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/authentication/presentation/screens/sign_up_verification_code_screen.dart';
+
 import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
@@ -76,8 +76,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 396),
                               child: CustomSubmitButton(
                                 text: AppText.continueB, onTap: () {
-                                Get.toNamed(
-                                    AppRoute.signInVeryficationCodeScreen);
+                                  Get.toNamed(AppRoute.signInVeryficationCodeScreen);
+
+                               /* Get.toNamed(
+                                    AppRoute.signInVeryficationCodeScreen);*/
                               },),
                             )
                             // S
