@@ -85,11 +85,16 @@ class CompanyProfileScreen extends StatelessWidget  {
                 ],
               ),
             ),
-            // TabBarView(
-            //   controller: _controller.tabController,
-            //   children: <Widget>[
-            //
-            // ],)
+            Expanded(
+              child: TabBarView(
+                controller: _controller.tabController,
+                children: <Widget>[
+                  Text('hdhdjjd'),
+                  Text('hdhdjjd'),
+                  Text('hdhdjjd'),
+
+              ],),
+            )
 
             
             
