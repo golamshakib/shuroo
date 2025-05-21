@@ -83,7 +83,7 @@ class _CustomTextFormFieldPassState extends State<CustomTextFormFieldPass> {
                       hintText: widget.hintText,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _controller.obscureText.value
+                          passwordShowAndHide
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: Colors.grey,
