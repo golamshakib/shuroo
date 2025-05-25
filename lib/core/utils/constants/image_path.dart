@@ -13,5 +13,6 @@ class ImagePath{
    static const  String photo_home='$_basePath/photo_home.png';
    static const  String rectangle='$_basePath/rectangle.jpg';
    static const  String image_c='$_basePath/image_c.png';
+   static const  String image_u='$_basePath/image_u.png';
 
 }

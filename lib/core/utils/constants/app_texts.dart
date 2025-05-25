@@ -211,6 +211,7 @@ class AppText {
   static const String areYou = "Are you sure you want to";
   static const String removedThis = " removed this post form Shuroo?";
   static const String deletePosts = "Delete Post?";
+  static const String wildWorldConservation = "Wild World Conservation is a modern, growth-driven company in the IT sector. We’re passionate about innovation, teamwork, and making an impact through everything we do";
 
 
 }
