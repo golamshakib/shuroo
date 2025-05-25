@@ -1,6 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
-import 'package:shuroo/features/jobs/presentation/screen/job_details_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
@@ -19,7 +18,9 @@ import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/company_user _profile/presentation/screen/company_profile_screen.dart';
+import '../features/company_user _profile/presentation/screen/other_user_profile_screen.dart';
 import '../features/home/presentation/screen/home_screen.dart';
+import '../features/jobs/presentation/screen/job_details_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/my_all_post_screen.dart';
@@ -49,6 +50,8 @@ class AppRoute {
   static String repostWithThroughtScreen = "/repostWithThroughtScreen";
   static String companyProfileScreen = "/companyProfileScreen";
   static String myAllPostScreen = "/myAllPostScreen";
+  static String jobDetailsScreen = "/jobDetailsScreen";
+  static String otherUserProfileScreen = "/otherUserProfileScreen";
   static String init = "/";
 
   // Nev Bar
@@ -58,7 +61,6 @@ class AppRoute {
   static String notificationScreen = "/notificationScreen";
   static String searchingScreen = "/searchingScreen";
   static String searchResultScreen = "/searchResultScreen";
-  static String jobDetailsScreen = "/jobDetailsScreen";
 
   static List<GetPage> routes = [
 
@@ -83,6 +85,7 @@ class AppRoute {
     GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
+    GetPage(name: otherUserProfileScreen, page:() => OtherUserProfileScreen()),
 
     // Nev Bar
     GetPage(name: nevBar, page:() => NavBar()),

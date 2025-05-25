@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -9,24 +12,24 @@ import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../home/presentation/widget/custom_home_post_card.dart';
-import '../../controller/company_profile_screen_controller.dart';
 import '../widget/job_tabbar_card.dart';
+import '../widget/other_user_resume_widget.dart';
 import '../widget/tabbar_about_item.dart';
 
-class CompanyProfileScreen extends StatelessWidget {
-  CompanyProfileScreen({super.key});
+class OtherUserProfileScreen extends StatelessWidget {
+  OtherUserProfileScreen({super.key});
 
-  final CompanyProfileScreenController _controller =
-      Get.put(CompanyProfileScreenController());
+  final OtherUserProfileScreenControllar _controller =
+      Get.put(OtherUserProfileScreenControllar());
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3, // required if not already handled in controller
+      length: 2, // required if not already handled in controller
       child: Scaffold(
         appBar: AppBar(
           title: CustomText(
-            text: "Wild World Conservation",
+            text: "Jams Walton",
             fontSize: 20,
             color: AppColors.primaryTextColor,
           ),
@@ -38,12 +41,15 @@ class CompanyProfileScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 39, left: 16, right: 16),
               child: Column(
                 children: [
-                  Image.asset(ImagePath.image_c,height: 120.h,width: 120.w,),
+                  Image.asset(
+                    ImagePath.image_u,
+                    height: 120.h,
+                    width: 120.w,
+                  ),
                   const SizedBox(height: 16),
-                  const CustomText(
-                      text: "Wild World Conservation", fontSize: 20),
+                  const CustomText(text: "Jams Walton", fontSize: 20),
                   CustomText(
-                    text: "www.wildworldconservation.com",
+                    text: "UI/UX Designer",
                     fontSize: 16,
                     color: AppColors.secondaryTextColor,
                   ),
@@ -59,7 +65,7 @@ class CompanyProfileScreen extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child:
-                            Image.asset(IconPath.share, height: 24, width: 24),
+                            Image.asset(IconPath.share1, height: 40, width: 40),
                       ),
                     ],
                   ),
@@ -74,7 +80,6 @@ class CompanyProfileScreen extends StatelessWidget {
                       tabs: const [
                         Tab(text: 'Post'),
                         Tab(text: 'About'),
-                        Tab(text: 'Jobs'),
                       ],
                     ),
                   )
@@ -91,45 +96,20 @@ class CompanyProfileScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(top: 16, left: 16),
-                        child: SingleChildScrollView(
-                          child: PostCard(
-                            context: context,
-                            icon: IconPath.icon_1,
-                            organization: AppText.wildWorld,
-                            timeAgo: "1w ago",
-                            title: AppText.campus_Event,
-                            content: AppText.the_annualCareer,
-                            imageAsset: ImagePath.img_video,
-                            hashtags: AppText.careerFair,
-                          ),
+                        child: PostCard(
+                          context: context,
+                          icon: IconPath.icon_1,
+                          organization: AppText.wildWorld,
+                          timeAgo: "1w ago",
+                          title: AppText.campus_Event,
+                          content: AppText.the_annualCareer,
+                          imageAsset: ImagePath.img_video,
+                          hashtags: AppText.careerFair,
                         ),
                       );
                     },
                   ),
-                  SingleChildScrollView(child: getAboutItem()),
-
-
-
-                  ListView.builder(
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(top: 16, left: 16),
-                        child:       JobTabBarCard(
-                          title: 'UI/UX Designer',
-                          company: 'Wild World Conservation',
-                          tags: ['Fulltime', 'Remote', 'Outreach'],
-                          location: 'Portland, OR',
-                        ),
-                      );
-                    },
-                  ),
-
-
-
-
-
-
+                  ResumeScreen(), // ✅ now it works perfectly
                 ],
               ),
             ),
@@ -138,7 +118,5 @@ class CompanyProfileScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
