@@ -83,9 +83,12 @@ class IconPath{
   static const  String   share1= '$_basePath/share1.png';
   static const  String   user_e= '$_basePath/user_e.png';
   static const  String   user_t= '$_basePath/user_t.png';
-
-
-
+  static const  String   sendButton= '$_basePath/sendButton.png';
+  static const  String   binIcon= '$_basePath/binIcon.png';
+  static const  String   editIcon= '$_basePath/editIcon.png';
+  static const  String   dummyPersonIcon= '$_basePath/dummyPersonIcon.png';
+  static const  String   dummyEmailIcon= '$_basePath/dummyEmailIcon.png';
+  static const  String   phoneIcon= '$_basePath/phoneIcon.png';
 
 
 

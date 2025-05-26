@@ -1,7 +1,12 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
+import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
+import 'package:shuroo/features/profile/presentation/screen/about_screen.dart';
+import 'package:shuroo/features/profile/presentation/screen/change_password_screen.dart';
+import 'package:shuroo/features/profile/presentation/screen/help_screen.dart';
+import 'package:shuroo/features/profile/presentation/screen/profile_information_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_screen.dart';
@@ -62,6 +67,11 @@ class AppRoute {
   static String notificationScreen = "/notificationScreen";
   static String searchingScreen = "/searchingScreen";
   static String searchResultScreen = "/searchResultScreen";
+  static String reactionScreen = "/reactionScreen";
+  static String profileInformationScreen = "/profileInformationScreen";
+  static String changePasswordScreen = "/changePasswordScreen";
+  static String aboutScreen = "/aboutScreen";
+  static String helpScreen = "/helpScreen";
 
   static List<GetPage> routes = [
 
@@ -87,6 +97,11 @@ class AppRoute {
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
     GetPage(name: otherUserProfileScreen, page:() => OtherUserProfileScreen()),
+    GetPage(name: reactionScreen, page:() => ReactionScreen()),
+    GetPage(name: profileInformationScreen, page:() => ProfileInformationScreen()),
+    GetPage(name: changePasswordScreen, page:() => ChangePasswordScreen()),
+    GetPage(name: aboutScreen, page:() => AboutScreen()),
+    GetPage(name: helpScreen, page:() => HelpScreen()),
 
     // Nev Bar
     GetPage(name: nevBar, page:() => NavBar()),

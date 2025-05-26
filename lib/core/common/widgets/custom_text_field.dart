@@ -10,7 +10,9 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.suffixIcon,
+    this.focusNode,
     this.onChange,
+    this.onTapOutside,
     this.fontSize = 14,
     this.textAlign = TextAlign.start,
     this.validator,
@@ -26,6 +28,8 @@ class CustomTextField extends StatelessWidget {
 
   final TextEditingController controller;
   final Function(String)? onChange;
+  final Function(PointerDownEvent)? onTapOutside;
+  final FocusNode? focusNode;
   final String hintText;
   final bool obscureText;
   final dynamic fillColor;
@@ -53,6 +57,7 @@ class CustomTextField extends StatelessWidget {
           fontSize: fontSize.sp,
           height: 30 / 14,
         ),
+        focusNode: focusNode,
         maxLines: maxLine??1,
         minLines: minLine,
         readOnly: readOnly,
@@ -83,7 +88,7 @@ class CustomTextField extends StatelessWidget {
                   left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
         ),
         validator: validator,
-        onTapOutside: (c) {
+        onTapOutside: onTapOutside ?? (c) {
           FocusScope.of(context).unfocus();
         },
       ),
