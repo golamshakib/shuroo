@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
@@ -66,7 +67,7 @@ class AppRoute {
 
     // Auth
     GetPage(name: loginScreen, page: () => const LoginScreen()),
-    GetPage(name: init, page: () =>  SplashScreen()),
+    GetPage(name: init, page: () =>  HomeScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),

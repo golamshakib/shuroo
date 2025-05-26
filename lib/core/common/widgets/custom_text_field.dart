@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.suffixIcon,
+    this.onChange,
     this.fontSize = 14,
     this.textAlign = TextAlign.start,
     this.validator,
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   });
 
   final TextEditingController controller;
+  final Function(String)? onChange;
   final String hintText;
   final bool obscureText;
   final dynamic fillColor;
@@ -44,6 +46,7 @@ class CustomTextField extends StatelessWidget {
     return SizedBox(
       height: 56.h,
       child: TextFormField(
+        onChanged: onChange,
         style: GoogleFonts.inter(
           color: AppColors.textGray,
           fontWeight: FontWeight.w400,
@@ -70,10 +73,10 @@ class CustomTextField extends StatelessWidget {
           fillColor: fillColor ?? Colors.white,
           filled: true,
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
+              borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
               borderRadius: BorderRadius.circular(radius)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
+              borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
               borderRadius: BorderRadius.circular(radius)),
           contentPadding: padding ??
               EdgeInsets.only(

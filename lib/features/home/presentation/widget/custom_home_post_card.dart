@@ -2,18 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
+import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/features/authentication/presentation/screens/login_screen.dart';
 import 'package:shuroo/features/company_user%20_profile/presentation/screen/company_profile_screen.dart';
+import 'package:shuroo/features/home/controller/home_controller.dart';
+import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
 
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
 
 
-class PostCard extends StatelessWidget {
+class PostCard extends GetView<HomeController> {
   final String organization;
   final String timeAgo;
   final String title;
@@ -126,10 +128,70 @@ class PostCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image.asset(
-                    IconPath.comments,
-                    height: 16,
-                    width: 16,
+                  GestureDetector(
+                    onTap: (){
+                      showModalBottomSheet(
+                        backgroundColor: Colors.white,
+                        context: context,
+                        builder: (context){
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ...controller.commentList.map((row) =>
+                                      commentBody(controller, row)
+                                  ),
+
+                                  SizedBox(height: 32.h,),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Flexible(
+                                        flex: 1,
+                                        child: ClipOval(
+                                          child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                                        ),
+                                      ),
+                                      SizedBox(width: 7.w,),
+                                      Flexible(
+                                        flex: 7,
+                                        child: CustomTextField(
+                                          controller: controller.commentTEController.value,
+                                          hintText: "Add a comment...",
+                                          radius: 50,
+                                          suffixIcon: Obx(() =>
+                                          controller.commentTEController.value.text == null ?
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                            child: OutlinedButton(
+                                              style: OutlinedButton.styleFrom(
+                                                  backgroundColor: const Color(0xFF0199E3),
+                                                  side: BorderSide.none
+                                              ),
+                                              onPressed: (){},
+                                              child: CustomText(text: "Reply", fontSize: 12.sp, color: Colors.white,),
+                                            ),
+                                          ) :
+                                          SizedBox()
+                                          )
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                      );
+                    },
+                    child: Image.asset(
+                      IconPath.comments,
+                      height: 16,
+                      width: 16,
+                    ),
                   ),
                   SizedBox(
                     width: 2,
