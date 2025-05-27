@@ -8,6 +8,7 @@ import 'package:shuroo/features/profile/presentation/screen/change_password_scre
 import 'package:shuroo/features/profile/presentation/screen/help_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/personal_creation_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/profile_information_screen.dart';
+import 'package:shuroo/features/search_notification_chat/presentation/screen/chat_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_screen.dart';
@@ -74,6 +75,7 @@ class AppRoute {
   static String aboutScreen = "/aboutScreen";
   static String helpScreen = "/helpScreen";
   static String personalCreationScreen = "/personalCreationScreen";
+  static String chatScreen = "/chatScreen";
 
   static List<GetPage> routes = [
 
@@ -113,6 +115,7 @@ class AppRoute {
     GetPage(name: searchingScreen, page:() => SearchScreen()),
     GetPage(name: searchResultScreen, page:() => SearchResultScreen()),
     GetPage(name: jobDetailsScreen, page:() => JobDetailsScreen()),
+    GetPage(name: chatScreen, page:() => ChatScreen()),
 
 
   ];

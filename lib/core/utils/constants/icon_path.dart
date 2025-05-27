@@ -21,9 +21,14 @@ class IconPath{
   static const  String   jobs= '$_basePath/icons_jobs.png';
   static const  String   add= '$_basePath/add.png';
   static const  String   wrong= '$_basePath/wrong.png';
+  static const  String   gIcon = '$_basePath/gallary.png';
+  static const  String   gIcons = '$_basePath/gallary.png';
+  static const  String   sIcon = '$_basePath/sends.png';
 
   // Added by shahriar
   static const  String   applyImage= '$_basePath/apply_icon.svg';
+  static const  String   send_iocn= '$_basePath/send_iocn.svg';
+  static const  String   g_icon= '$_basePath/g_icon.svg';
   static const  String   viewImage= '$_basePath/viewImage.svg';
   static const  String   shortListImage= '$_basePath/shortListImage.svg';
   static const  String   interViewImage= '$_basePath/interViewImage.svg';
