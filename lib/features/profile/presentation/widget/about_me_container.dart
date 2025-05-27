@@ -1,15 +1,19 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 
-Widget aboutMeContainer(dynamic controller){
+Widget aboutMeContainer(PersonalCreationController controller){
 
   return Container(
     decoration: BoxDecoration(
@@ -28,7 +32,11 @@ Widget aboutMeContainer(dynamic controller){
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(9.sp),
-                  child: Image.asset(ImagePath.profilePic, height: 104.h, width: 86.w, fit: BoxFit.fill,),
+                  child: Obx(() =>
+                    controller.profilePath.value == '' ?
+                    Image.asset(ImagePath.profilePic, height: 104.h, width: 86.w, fit: BoxFit.fill,) :
+                    Image.file(File(controller.profilePath.value), height: 104.h, width: 86.w, fit: BoxFit.fill,)
+                  ),
                 ),
               ),
             ),
@@ -38,7 +46,8 @@ Widget aboutMeContainer(dynamic controller){
               right: 2,
               child: GestureDetector(
                 onTap: (){
-
+                  print("I am here clicking");
+                  controller.pickProfile();
                 },
                 child: Container(
                   decoration: BoxDecoration(

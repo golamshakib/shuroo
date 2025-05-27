@@ -94,7 +94,7 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                       ],
                     ),
                     SizedBox(height: 12.h,),
-                    educationContainer(controller),
+                    educationContainer(controller, context),
                     SizedBox(height: 28.h,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,7 +110,7 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                       ],
                     ),
                     SizedBox(height: 12.h,),
-                    experienceContainer(controller),
+                    experienceContainer(controller, context),
                     SizedBox(height: 28.h,),
                     CustomText(text: "About", color: AppColors.textSecondary, fontSize: 16.sp,),
                     SizedBox(height: 12.h,),
@@ -123,6 +123,30 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: AppColors.customBlue,
+              side: BorderSide.none,
+              padding: EdgeInsets.symmetric(vertical: 14.h),
+            ),
+            onPressed: (){
+              controller.educationEdit.value = false;
+              controller.experienceEdit.value = false;
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+              ],
+            ),
           ),
         ),
       ),

@@ -7,10 +7,11 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
-Widget experienceContainer(PersonalCreationController controller){
+Widget experienceContainer(PersonalCreationController controller, BuildContext context){
 
   return Obx(() =>
       Container(
@@ -53,23 +54,9 @@ Widget experienceContainer(PersonalCreationController controller){
                           CustomText(text: row['companyName'], fontSize: 12.sp, fontWeight: FontWeight.w400,),
                           CustomText(text: "${row['start']} - ${row['end']}", fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,),
                           SizedBox(height: 14.h,),
-                          ...row['objectives'].map((objectives) =>
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 10.h),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 4.w, top: 6.h),
-                                      child: Icon(Icons.circle,color: Colors.black, size: 5.h,),
-                                    ),
-                                    SizedBox(
-                                      width: 265.w,
-                                      child: CustomText(text: objectives, fontWeight: FontWeight.w400, fontSize: 12.sp,),
-                                    )
-                                  ],
-                                ),
-                              )
+                          SizedBox(
+                            width: 265.w,
+                            child: CustomText(text: row['description'], fontWeight: FontWeight.w400, fontSize: 12.sp,),
                           )
                         ],
                       )
@@ -83,7 +70,67 @@ Widget experienceContainer(PersonalCreationController controller){
                 side: BorderSide.none,
                 padding: EdgeInsets.symmetric(vertical: 14.h),
               ),
-              onPressed: (){},
+              onPressed: (){
+                showModalBottomSheet(
+                    context: context,
+                    backgroundColor: AppColors.primaryBackground,
+                    builder: (context){
+                      return SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(text: "Add Experience", fontSize: 12.sp, fontWeight: FontWeight.w400,),
+                                SizedBox(height: 8.h,),
+                                CustomTextField(controller: controller.titleTEController, hintText: "Title", radius: 12),
+                                SizedBox(height: 8.h,),
+                                CustomTextField(controller: controller.companyNameTEController, hintText: "Company", radius: 12),
+                                SizedBox(height: 8.h,),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      child: CustomTextField(controller: controller.startExperienceTEController, hintText: "Start Year", radius: 12,),
+                                    ),
+                                    SizedBox(width: 8.w,),
+                                    Flexible(
+                                      flex: 1,
+                                      child: CustomTextField(controller: controller.endExperienceTEController, hintText: "End Year", radius: 12),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8.h,),
+                                CustomTextField(controller: controller.describeTEController, hintText: "Describe this experience", radius: 12, maxLine: 3,),
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    backgroundColor: AppColors.customBlue,
+                                    side: BorderSide.none,
+                                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                                  ),
+                                  onPressed: (){
+                                    controller.addExperience();
+                                    Get.back();
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                );
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

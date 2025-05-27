@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
 
@@ -36,10 +37,7 @@ class PersonalCreationController extends GetxController{
       "companyName" : "Green Earth Foundation",
       "start" : "2025",
       'end' : "Present",
-      "objectives" : [
-        "Conducted research on sustainable farming practices and climate change mitigation.",
-        "Assisted in community outreach programs focused on environmental awareness."
-      ]
+      "description" : "Conducted research on sustainable farming practices and climate change mitigation."
     },
     {
       "imagePath" : IconPath.educationIcon,
@@ -47,12 +45,66 @@ class PersonalCreationController extends GetxController{
       "companyName" : "Green Earth Foundation",
       "start" : "2025",
       'end' : "Present",
-      "objectives" : [
-        "Conducted research on sustainable farming practices and climate change mitigation.",
-        "Assisted in community outreach programs focused on environmental awareness."
-      ]
+      "description" : "Conducted research on sustainable farming practices and climate change mitigation."
     },
 
   ].obs;
 
+  /// Add education
+
+  final instituteNameTEController = TextEditingController();
+  final majorSubjectTEController = TextEditingController();
+  final minorSubjectTEController = TextEditingController();
+  final degreeTEController = TextEditingController();
+  final startTEController = TextEditingController();
+  final endTEController = TextEditingController();
+
+  /// Add experience
+
+  final titleTEController = TextEditingController();
+  final companyNameTEController = TextEditingController();
+  final describeTEController = TextEditingController();
+  final startExperienceTEController = TextEditingController();
+  final endExperienceTEController = TextEditingController();
+
+  /// Add etc
+
+  final skillTEController = TextEditingController();
+  final technologyTEController = TextEditingController();
+  final interestTEController = TextEditingController();
+  final languageExperienceTEController = TextEditingController();
+
+  var profilePath = "".obs;
+  void pickProfile() async{
+    final picker = ImagePicker();
+    final image = await picker.pickImage(source: ImageSource.gallery);
+    if(image != null){
+      profilePath.value = image.path;
+    }
+  }
+
+  void addEducation(){
+
+    final addBody = {
+      "imagePath" : IconPath.educationIcon,
+      "name" : instituteNameTEController.text,
+      "department" : degreeTEController.text,
+      "start" : startTEController.text,
+      'end' : endTEController.text
+    };
+    educationList.add(addBody);
+  }
+
+  void addExperience(){
+
+    final addBody = {
+      "imagePath" : IconPath.educationIcon,
+      "position" : titleTEController.text,
+      "companyName" : companyNameTEController.text,
+      "start" : startExperienceTEController.text,
+      'end' : endExperienceTEController.text,
+      "description" : describeTEController.text
+    };
+    experienceList.add(addBody);
+  }
 }
