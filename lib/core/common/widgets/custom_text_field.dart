@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.prefixIcon,
     this.fillColor,
-    this.maxLine,
+    this.maxLine = 1,
     this.minLine,
     this.radius = 12,
     this.padding,
@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool readOnly;
   final double fontSize;
-  final int? maxLine;
+  final int maxLine;
   final int? minLine;
   final double radius;
   final EdgeInsets? padding;
@@ -48,7 +48,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56.h,
+      height: (56 * maxLine).h,
       child: TextFormField(
         onChanged: onChange,
         style: GoogleFonts.inter(
@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
           height: 30 / 14,
         ),
         focusNode: focusNode,
-        maxLines: maxLine??1,
+        maxLines: maxLine,
         minLines: minLine,
         readOnly: readOnly,
         keyboardType: keyboardType,

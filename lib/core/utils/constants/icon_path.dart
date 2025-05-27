@@ -89,6 +89,8 @@ class IconPath{
   static const  String   dummyPersonIcon= '$_basePath/dummyPersonIcon.png';
   static const  String   dummyEmailIcon= '$_basePath/dummyEmailIcon.png';
   static const  String   phoneIcon= '$_basePath/phoneIcon.png';
+  static const  String   homeIcon = '$_basePath/homeIcon.png';
+  static const  String   educationIcon = '$_basePath/educationIcon.png';
 
 
 

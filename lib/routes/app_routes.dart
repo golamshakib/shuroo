@@ -6,6 +6,7 @@ import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:shuroo/features/profile/presentation/screen/about_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/change_password_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/help_screen.dart';
+import 'package:shuroo/features/profile/presentation/screen/personal_creation_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/profile_information_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/notification_screen.dart';
 import 'package:shuroo/features/search_notification_chat/presentation/screen/search_result_screen.dart';
@@ -72,6 +73,7 @@ class AppRoute {
   static String changePasswordScreen = "/changePasswordScreen";
   static String aboutScreen = "/aboutScreen";
   static String helpScreen = "/helpScreen";
+  static String personalCreationScreen = "/personalCreationScreen";
 
   static List<GetPage> routes = [
 
@@ -102,6 +104,7 @@ class AppRoute {
     GetPage(name: changePasswordScreen, page:() => ChangePasswordScreen()),
     GetPage(name: aboutScreen, page:() => AboutScreen()),
     GetPage(name: helpScreen, page:() => HelpScreen()),
+    GetPage(name: personalCreationScreen, page:() => PersonalCreationScreen()),
 
     // Nev Bar
     GetPage(name: nevBar, page:() => NavBar()),

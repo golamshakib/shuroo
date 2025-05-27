@@ -8,6 +8,7 @@ class AppColors {
   static const Color primary = Color(0xFF7B61FF);
   static const Color secondary = Color(0xFFF9F9F9);
   static const Color  custom_blue  = Color(0xFF01A8F9);
+  static const Color  customBlue  = Color(0xFF01A8F9);
 
   // Gradient Colors
   static const Gradient linearGradient = LinearGradient(
@@ -27,7 +28,7 @@ class AppColors {
   // Background Colors
   static const Color backgroundLight = Color(0xFFF9FAFB);
   static const Color backgroundDark = Color(0xFF121212);
-  static const Color primaryBackground = Color(0xFFFFFFFF);
+  static const Color primaryBackground = Color(0xFFF5F5F5);
 
   // Surface Colors
   static const Color surfaceLight = Color(0xFFE0E0E0);
