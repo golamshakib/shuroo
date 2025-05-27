@@ -1,0 +1,287 @@
+
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/routes/app_routes.dart';
+
+import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/utils/constants/app_colors.dart';
+
+Widget commentBody(dynamic controller, Map<String, dynamic> row, BuildContext context){
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      /// Main comment
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ClipOval(
+                    child: Image.asset(row['image'], height: 32.h, width: 32.w,),
+                  ),
+                  SizedBox(width: 6.w,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CustomText(text: row['name'], fontWeight: FontWeight.w600, ),
+                      CustomText(text: row['designation'], fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                    ],
+                  )
+                ],
+              ),
+              CustomText(text: row['time'], fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,)
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 12.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CustomText(text: row['comment'], fontWeight: FontWeight.w400, textOverflow: TextOverflow.ellipsis, maxLines: 4,),
+                SizedBox(height: 12.h,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Get.snackbar("Message", "Clickable");
+                      },
+                      child: CustomText(text: "Like", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                    ),
+                    SizedBox(width: 8.w,),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoute.reactionScreen);
+                      },
+                      child: CustomText(text: row['like'].toString(), fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                    ),
+                    SizedBox(width: 12.w,),
+                    CustomText(text: "|", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                    SizedBox(width: 12.w,),
+                    GestureDetector(
+                      onTap: (){
+                        print("The row you gonna reply is ${row['id']}");
+                        controller.replyOf.value = row['id'];
+                        controller.addComment.value = false;
+                        FocusScope.of(context).requestFocus(controller.controllerNode);
+                      },
+                      child: CustomText(text: "Reply", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                    ),
+                    SizedBox(width: 8.w,),
+                    CustomText(text: row['reply'].toString(), fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      /// Replies
+
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 38.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Adding the replies
+
+            if(row['reply'] > 0)
+              Obx(() =>
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...row['replies'].map((subRow) =>
+                        GestureDetector(
+                          onLongPress: (){
+                            showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.white,
+                                builder: (context){
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: (){},
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(IconPath.editIcon),
+                                              SizedBox(width: 6.w,),
+                                              CustomText(text: "Edit reply", fontSize: 14.sp, fontWeight: FontWeight.w400, color: const Color(0xFF353A40),)
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 16.h,),
+                                        GestureDetector(
+                                          onTap: (){
+                                            showDialog(
+                                              context: context,
+                                              builder: (context){
+                                                return AlertDialog(
+                                                  backgroundColor: Colors.white,
+                                                  actionsAlignment: MainAxisAlignment.center,
+                                                  actionsPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                                                  actions: [
+                                                    Center(child: CustomText(text: "Delete Comment?", fontWeight: FontWeight.w600, fontSize: 24.sp, textAlign: TextAlign.center,)),
+                                                    SizedBox(height: 8.h,),
+                                                    CustomText(text: "Once deleted, your comment will be permanently removed.", fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary, textAlign: TextAlign.center,),
+                                                    SizedBox(height: 8.h,),
+                                                    Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Flexible(
+                                                          flex: 1,
+                                                          child: OutlinedButton(
+                                                            style: OutlinedButton.styleFrom(
+                                                              backgroundColor: const Color(0xFFE6E6E7),
+                                                              side: BorderSide.none
+                                                            ),
+                                                            onPressed: (){
+                                                              Get.back();
+                                                              Get.back();
+                                                            },
+                                                            child: SizedBox(
+                                                              width: double.infinity,
+                                                              child: Center(child: CustomText(text: "Cancel", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.textSecondary,)),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 11.w,),
+                                                        Flexible(
+                                                          flex: 1,
+                                                          child: OutlinedButton(
+                                                            style: OutlinedButton.styleFrom(
+                                                                backgroundColor: const Color(0xFF01A8F9),
+                                                                side: BorderSide.none,
+                                                            ),
+                                                            onPressed: (){
+                                                              Get.back();
+                                                              Get.snackbar("Deleted", "Reply Deleted Successfully");
+                                                              row['replies'].remove(subRow);
+                                                            },
+                                                            child: SizedBox(
+                                                              width: double.infinity,
+                                                              child: Center(child: CustomText(text: "Delete", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
+                                                  ],
+                                                );
+                                              }
+                                            );
+                                          },
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(IconPath.binIcon),
+                                              SizedBox(width: 6.w,),
+                                              CustomText(text: "Delete reply", fontSize: 14.sp, fontWeight: FontWeight.w400, color: const Color(0xFF353A40),)
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 27.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        ClipOval(
+                                          child: Image.asset(subRow['image'], height: 32.h, width: 32.w,),
+                                        ),
+                                        SizedBox(width: 6.w,),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            CustomText(text: subRow['name'], fontWeight: FontWeight.w600, ),
+                                            CustomText(text: subRow['designation'], fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    CustomText(text: subRow['time'], fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,)
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 12.h),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      CustomText(text: subRow['comment'], fontWeight: FontWeight.w400, textOverflow: TextOverflow.ellipsis, maxLines: 4,),
+                                      SizedBox(height: 12.h,),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              Get.snackbar("Message", "Clickable");
+                                            },
+                                            child: CustomText(text: "Like", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                                          ),
+                                          SizedBox(width: 8.w,),
+                                          GestureDetector(
+                                            onTap: (){
+                                              Get.toNamed(AppRoute.reactionScreen);
+                                            },
+                                            child: CustomText(text: subRow['like'].toString(), fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                                          ),
+                                          SizedBox(width: 12.w,),
+                                          CustomText(text: "|", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                                          SizedBox(width: 12.w,),
+                                          GestureDetector(
+                                            onTap: (){
+                                              controller.replyOf.value = row['id'];
+                                              controller.addComment.value = false;
+                                              FocusScope.of(context).requestFocus(controller.controllerNode);
+                                            },
+                                            child: CustomText(text: "Reply", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                                          ),
+                                          SizedBox(width: 8.w,),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    )
+                  ],
+                )
+              )
+          ],
+        ),
+      ),
+      SizedBox(height: 12.h,)
+    ],
+  );
+}
