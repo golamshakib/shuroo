@@ -79,7 +79,7 @@ class AppRoute {
 
     // Auth
     GetPage(name: loginScreen, page: () => const LoginScreen()),
-    GetPage(name: init, page: () =>  HomeScreen()),
+    GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),

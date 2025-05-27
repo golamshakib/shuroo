@@ -12,6 +12,10 @@ class PersonalCreationController extends GetxController{
 
   RxBool educationEdit = false.obs;
   RxBool experienceEdit = false.obs;
+  RxBool skillEdit = false.obs;
+  RxBool toolsEdit = false.obs;
+  RxBool interestEdit = false.obs;
+  RxBool languageEdit = false.obs;
 
   RxList<Map<String, dynamic>> educationList = [
     {
@@ -50,6 +54,43 @@ class PersonalCreationController extends GetxController{
 
   ].obs;
 
+  RxList<String> skillList = [
+    "Interface Design",
+    "UI Design",
+    "UX Design",
+    "Branding Design",
+    "Graphic Design",
+    "Motion Design",
+  ].obs;
+
+  RxList<String> toolsList = [
+    "Figma",
+    "UI Design",
+    "UX Design",
+    "Branding Design",
+    "Graphic Design",
+    "Motion Design",
+  ].obs;
+
+  RxList<String> interestList = [
+    "Climate Chane Advocacy",
+    "UI Design",
+    "UX Design",
+    "Branding Design",
+    "Graphic Design",
+    "Motion Design",
+  ].obs;
+
+  RxList<String> languageList = [
+    "English",
+    "Arabic",
+    "Bangla",
+    "Franch",
+    "Spanish",
+  ].obs;
+
+
+
   /// Add education
 
   final instituteNameTEController = TextEditingController();
@@ -72,7 +113,7 @@ class PersonalCreationController extends GetxController{
   final skillTEController = TextEditingController();
   final technologyTEController = TextEditingController();
   final interestTEController = TextEditingController();
-  final languageExperienceTEController = TextEditingController();
+  final languageTEController = TextEditingController();
 
   var profilePath = "".obs;
   void pickProfile() async{
@@ -96,7 +137,6 @@ class PersonalCreationController extends GetxController{
   }
 
   void addExperience(){
-
     final addBody = {
       "imagePath" : IconPath.educationIcon,
       "position" : titleTEController.text,
@@ -106,5 +146,21 @@ class PersonalCreationController extends GetxController{
       "description" : describeTEController.text
     };
     experienceList.add(addBody);
+  }
+
+  void addSkill(){
+    skillList.add(skillTEController.text);
+    skillTEController.clear();
+  }
+
+  void addTechnology(){
+    toolsList.add(technologyTEController.text);
+  }
+
+  void addInterest(){
+    interestList.add(interestTEController.text);
+  }
+  void addLanguage(){
+    languageList.add(languageTEController.text);
   }
 }

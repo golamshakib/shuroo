@@ -12,6 +12,8 @@ class HomeController extends GetxController{
   var commentHint = "Add a comment...".obs;
   final FocusNode controllerNode = FocusNode();
 
+  RxBool activeNotification = true.obs;
+
   final List<String> item = [
 
     ImagePath.photo_home,

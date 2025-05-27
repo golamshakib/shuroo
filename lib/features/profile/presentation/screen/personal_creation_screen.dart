@@ -15,6 +15,7 @@ import 'package:shuroo/features/profile/presentation/widget/custom_back_header.d
 import 'package:shuroo/features/profile/presentation/widget/custom_information_texformfield.dart';
 import 'package:shuroo/features/profile/presentation/widget/education_container.dart';
 import 'package:shuroo/features/profile/presentation/widget/experience_container.dart';
+import 'package:shuroo/features/profile/presentation/widget/short_container.dart';
 
 class PersonalCreationScreen extends GetView<PersonalCreationController> {
   const PersonalCreationScreen({super.key});
@@ -117,8 +118,377 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                     CustomTextField(
                       controller: controller.aboutTEController,
                       hintText: "Write here",
-                      maxLine: 4,
-                    )
+                      maxLine: 3,
+                    ),
+                    SizedBox(height: 28.h,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: "Skills", color: AppColors.textSecondary, fontSize: 16.sp,),
+                        GestureDetector(
+                          onTap: (){
+                            controller.skillEdit.value = true;
+                          },
+                          child: CustomText(text: "Edit", color: AppColors.customBlue, fontSize: 16.sp,),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 12.h,),
+                    Obx(() =>
+                        Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 8.w,
+                          runSpacing: 8.h,
+                          children: [
+                            ...controller.skillList.map((element) =>
+                                shortContainer(element, controller, controller.skillList, controller.skillEdit)
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: AppColors.primaryBackground,
+                                    builder: (context){
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(text: "Add Skill", fontSize: 12.sp, fontWeight: FontWeight.w400,),
+                                                SizedBox(height: 8.h,),
+                                                CustomTextField(controller: controller.skillTEController, hintText: "Type here", radius: 12),
+                                                SizedBox(height: 8.h,),
+                                                OutlinedButton(
+                                                  style: OutlinedButton.styleFrom(
+                                                    backgroundColor: AppColors.customBlue,
+                                                    side: BorderSide.none,
+                                                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                                                  ),
+                                                  onPressed: (){
+                                                    controller.addSkill();
+                                                    Get.back();
+                                                  },
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                );
+                              },
+                              child: Container(
+                                width: 75.w,
+                                margin: EdgeInsets.only(top: 8.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(999),
+                                  color: Color(0xFFE6F6FE),
+                                  border: Border(),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add, color: AppColors.customBlue, size: 20.h,),
+                                    CustomText(text: "New", fontWeight: FontWeight.w500, fontSize: 12.sp, color: AppColors.customBlue,)
+                                  ],
+                                ),
+                              ),
+                            )
+
+                          ],
+                        )
+                    ),
+                    /// Add tools
+                    SizedBox(height: 28.h,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: "Tools", color: AppColors.textSecondary, fontSize: 16.sp,),
+                        GestureDetector(
+                          onTap: (){
+                            controller.toolsEdit.value = true;
+                          },
+                          child: CustomText(text: "Edit", color: AppColors.customBlue, fontSize: 16.sp,),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 12.h,),
+                    Obx(() =>
+                        Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 8.w,
+                          runSpacing: 8.h,
+                          children: [
+                            ...controller.toolsList.map((element) =>
+                                shortContainer(element, controller, controller.toolsList, controller.toolsEdit)
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: AppColors.primaryBackground,
+                                    builder: (context){
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(text: "Add Tools", fontSize: 12.sp, fontWeight: FontWeight.w400,),
+                                                SizedBox(height: 8.h,),
+                                                CustomTextField(controller: controller.technologyTEController, hintText: "Type here", radius: 12),
+                                                SizedBox(height: 8.h,),
+                                                OutlinedButton(
+                                                  style: OutlinedButton.styleFrom(
+                                                    backgroundColor: AppColors.customBlue,
+                                                    side: BorderSide.none,
+                                                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                                                  ),
+                                                  onPressed: (){
+                                                    controller.addTechnology();
+                                                    Get.back();
+                                                  },
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                );
+                              },
+                              child: Container(
+                                width: 75.w,
+                                margin: EdgeInsets.only(top: 8.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(999),
+                                  color: Color(0xFFE6F6FE),
+                                  border: Border(),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add, color: AppColors.customBlue, size: 20.h,),
+                                    CustomText(text: "New", fontWeight: FontWeight.w500, fontSize: 12.sp, color: AppColors.customBlue,)
+                                  ],
+                                ),
+                              ),
+                            )
+
+                          ],
+                        )
+                    ),
+
+                    /// Add interest
+                    SizedBox(height: 28.h,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: "Interest", color: AppColors.textSecondary, fontSize: 16.sp,),
+                        GestureDetector(
+                          onTap: (){
+                            controller.interestEdit.value = true;
+                          },
+                          child: CustomText(text: "Edit", color: AppColors.customBlue, fontSize: 16.sp,),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 12.h,),
+                    Obx(() =>
+                        Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 8.w,
+                          runSpacing: 8.h,
+                          children: [
+                            ...controller.interestList.map((element) =>
+                                shortContainer(element, controller, controller.interestList, controller.interestEdit)
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: AppColors.primaryBackground,
+                                    builder: (context){
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(text: "Add Interest", fontSize: 12.sp, fontWeight: FontWeight.w400,),
+                                                SizedBox(height: 8.h,),
+                                                CustomTextField(controller: controller.interestTEController, hintText: "Type here", radius: 12),
+                                                SizedBox(height: 8.h,),
+                                                OutlinedButton(
+                                                  style: OutlinedButton.styleFrom(
+                                                    backgroundColor: AppColors.customBlue,
+                                                    side: BorderSide.none,
+                                                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                                                  ),
+                                                  onPressed: (){
+                                                    controller.addInterest();
+                                                    Get.back();
+                                                  },
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                );
+                              },
+                              child: Container(
+                                width: 75.w,
+                                margin: EdgeInsets.only(top: 8.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(999),
+                                  color: Color(0xFFE6F6FE),
+                                  border: Border(),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add, color: AppColors.customBlue, size: 20.h,),
+                                    CustomText(text: "New", fontWeight: FontWeight.w500, fontSize: 12.sp, color: AppColors.customBlue,)
+                                  ],
+                                ),
+                              ),
+                            )
+
+                          ],
+                        )
+                    ),
+
+                    /// Add interest
+                    SizedBox(height: 28.h,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(text: "Language", color: AppColors.textSecondary, fontSize: 16.sp,),
+                        GestureDetector(
+                          onTap: (){
+                            controller.languageEdit.value = true;
+                          },
+                          child: CustomText(text: "Edit", color: AppColors.customBlue, fontSize: 16.sp,),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 12.h,),
+                    Obx(() =>
+                        Wrap(
+                          direction: Axis.horizontal,
+                          spacing: 8.w,
+                          runSpacing: 8.h,
+                          children: [
+                            ...controller.languageList.map((element) =>
+                                shortContainer(element, controller, controller.languageList, controller.languageEdit)
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: AppColors.primaryBackground,
+                                    builder: (context){
+                                      return SizedBox(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(text: "Add Language", fontSize: 12.sp, fontWeight: FontWeight.w400,),
+                                                SizedBox(height: 8.h,),
+                                                CustomTextField(controller: controller.languageTEController, hintText: "Type here", radius: 12),
+                                                SizedBox(height: 8.h,),
+                                                OutlinedButton(
+                                                  style: OutlinedButton.styleFrom(
+                                                    backgroundColor: AppColors.customBlue,
+                                                    side: BorderSide.none,
+                                                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                                                  ),
+                                                  onPressed: (){
+                                                    controller.addLanguage();
+                                                    Get.back();
+                                                  },
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      CustomText(text: "Save", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                );
+                              },
+                              child: Container(
+                                width: 75.w,
+                                margin: EdgeInsets.only(top: 8.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(999),
+                                  color: Color(0xFFE6F6FE),
+                                  border: Border(),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add, color: AppColors.customBlue, size: 20.h,),
+                                    CustomText(text: "New", fontWeight: FontWeight.w500, fontSize: 12.sp, color: AppColors.customBlue,)
+                                  ],
+                                ),
+                              ),
+                            )
+
+                          ],
+                        )
+                    ),
                   ],
                 ),
               )
@@ -129,7 +499,7 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               backgroundColor: AppColors.customBlue,
@@ -139,6 +509,10 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
             onPressed: (){
               controller.educationEdit.value = false;
               controller.experienceEdit.value = false;
+              controller.skillEdit.value = false;
+              controller.toolsEdit.value = false;
+              controller.interestEdit.value = false;
+              controller.languageEdit.value = false;
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

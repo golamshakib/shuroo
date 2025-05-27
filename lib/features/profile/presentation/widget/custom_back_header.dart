@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -17,7 +16,7 @@ Widget customBackHeader(String title, double gap){
         child: Icon(Icons.arrow_back_outlined),
       ),
       SizedBox(width: gap.w,),
-      CustomText(text: title, fontSize: 20.sp,)
+      CustomText(text: title, fontSize: 20.sp,),
     ],
   );
 }
