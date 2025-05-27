@@ -24,6 +24,7 @@ class MakePostScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
 
       appBar: AppBar(
+        automaticallyImplyLeading: false ,
         backgroundColor: AppColors.scaffoldBackgroundColor,
 
         title: Row(

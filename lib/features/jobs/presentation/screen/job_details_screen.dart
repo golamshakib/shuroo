@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_back_button.dart';
 import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
@@ -7,6 +8,7 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/will_be_deleted.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   const JobDetailsScreen({super.key});
@@ -208,7 +210,7 @@ class JobDetailsScreen extends StatelessWidget {
               CustomSubmitButton(
                   text: 'Apply Now',
                   onTap: (){
-
+                    Get.offNamed(AppRoute.appliedJobScreen);
                   })
             ],
           ),

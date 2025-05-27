@@ -9,6 +9,7 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 class CustomDrower extends StatelessWidget {
   CustomDrower({super.key});
@@ -54,7 +55,9 @@ class CustomDrower extends StatelessWidget {
               ),
               SizedBox(height: 20.h,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoute.personalCreationScreen);
+                },
                 child: Row(
                  crossAxisAlignment: CrossAxisAlignment.center,
                  children: [
@@ -66,7 +69,9 @@ class CustomDrower extends StatelessWidget {
               ),
               SizedBox(height: 16.h,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoute.changePasswordScreen);
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -77,38 +82,37 @@ class CustomDrower extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h,),
-              GestureDetector(
-                onTap: (){},
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(IconPath.notifyIcon, height: 16.h, width: 16.w,),
-                        SizedBox(width: 6.w,),
-                        CustomText(text: "Notification", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
-                      ],
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(IconPath.notifyIcon, height: 16.h, width: 16.w,),
+                      SizedBox(width: 6.w,),
+                      CustomText(text: "Notification", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
+                    ],
+                  ),
+                  Transform.scale(
+                    scale: .7,
+                    child: Obx(() =>
+                        Switch(
+                          activeTrackColor: const Color(0xFF353A40),
+                          value: homeController.activeNotification.value,
+                          onChanged: (newValue){
+                            homeController.activeNotification.value = !homeController.activeNotification.value;
+                          },
+                        )
                     ),
-                    Transform.scale(
-                      scale: .7,
-                      child: Obx(() =>
-                          Switch(
-                            activeTrackColor: const Color(0xFF353A40),
-                            value: homeController.activeNotification.value,
-                            onChanged: (newValue){
-                              homeController.activeNotification.value = !homeController.activeNotification.value;
-                            },
-                          )
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
               SizedBox(height: 16.h,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoute.aboutScreen);
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -120,7 +124,9 @@ class CustomDrower extends StatelessWidget {
               ),
               SizedBox(height: 16.h,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed(AppRoute.helpScreen);
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -167,10 +173,11 @@ class CustomDrower extends StatelessWidget {
                                           padding: EdgeInsets.symmetric(vertical: 11.h),
                                         ),
                                         onPressed: (){
+                                          Get.back();
                                         },
                                         child: SizedBox(
                                           width: double.infinity,
-                                          child: CustomText(text: "Yes", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.textSecondary, textAlign: TextAlign.center,),
+                                          child: CustomText(text: "No", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.textSecondary, textAlign: TextAlign.center,),
                                         )
                                       ),
                                     ),
@@ -184,10 +191,11 @@ class CustomDrower extends StatelessWidget {
                                             padding: EdgeInsets.symmetric(vertical: 11.h),
                                           ),
                                           onPressed: (){
+                                            Get.offAllNamed(AppRoute.loginScreen);
                                           },
                                           child: SizedBox(
                                             width: double.infinity,
-                                            child: CustomText(text: "Sign In Again", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white, textAlign: TextAlign.center,),
+                                            child: CustomText(text: "Yes", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white, textAlign: TextAlign.center,),
                                           )
                                       ),
                                     )
