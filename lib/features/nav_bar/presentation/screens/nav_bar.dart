@@ -72,33 +72,36 @@ class NavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<NavBarController>(
       builder: (controller) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body: controller.screens[controller.currentIndex],
-          bottomNavigationBar: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 90,sigmaY: 90),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.textWhite,
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withOpacity(0.1),
-                  //     blurRadius: 10,
-                  //     offset: const Offset(0, -5),
-                  //   ),
-                  // ],
-                ),
-                height: 60,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildNavItem(Icons.home_outlined, 'Home', 0, controller),
-                    _buildNavItem(Icons.favorite_border_outlined, 'Favorites', 1, controller),
-                    _buildAddButton(context,2),
-                    _buildNavItem(Icons.email_outlined, 'Messages', 3, controller),
-                    _buildNavItem(Icons.work_outline_outlined, 'Jobs', 4, controller),
-                  ],
+        return SafeArea(
+          top: false,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: controller.screens[controller.currentIndex],
+            bottomNavigationBar: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 90,sigmaY: 90),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.textWhite,
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black.withOpacity(0.1),
+                    //     blurRadius: 10,
+                    //     offset: const Offset(0, -5),
+                    //   ),
+                    // ],
+                  ),
+                  height: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildNavItem(Icons.home_outlined, 'Home', 0, controller),
+                      _buildNavItem(Icons.favorite_border_outlined, 'Favorites', 1, controller),
+                      _buildAddButton(context,2),
+                      _buildNavItem(Icons.email_outlined, 'Messages', 3, controller),
+                      _buildNavItem(Icons.work_outline_outlined, 'Jobs', 4, controller),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/jobs/controller/applied_controller.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 class AppliedJobScreen extends StatelessWidget {
    AppliedJobScreen({super.key});
@@ -105,7 +106,7 @@ class AppliedJobScreen extends StatelessWidget {
                           CustomBlueGrayButton(
                               text: 'Send Message',
                               onTap: (){
-
+                                Get.toNamed(AppRoute.chatScreen);
                               })
                         ],
                       )

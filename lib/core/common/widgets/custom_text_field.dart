@@ -10,6 +10,9 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.suffixIcon,
+    this.focusNode,
+    this.onChange,
+    this.onTapOutside,
     this.fontSize = 14,
     this.textAlign = TextAlign.start,
     this.validator,
@@ -17,13 +20,16 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.prefixIcon,
     this.fillColor,
-    this.maxLine,
+    this.maxLine = 1,
     this.minLine,
     this.radius = 12,
     this.padding,
   });
 
   final TextEditingController controller;
+  final Function(String)? onChange;
+  final Function(PointerDownEvent)? onTapOutside;
+  final FocusNode? focusNode;
   final String hintText;
   final bool obscureText;
   final dynamic fillColor;
@@ -34,56 +40,55 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool readOnly;
   final double fontSize;
-  final int? maxLine;
+  final int maxLine;
   final int? minLine;
   final double radius;
   final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 56.h,
-      child: TextFormField(
-        style: GoogleFonts.inter(
+    return TextFormField(
+      onChanged: onChange,
+      style: GoogleFonts.inter(
+        color: AppColors.textGray,
+        fontWeight: FontWeight.w400,
+        fontSize: fontSize.sp,
+        height: 30 / 14,
+      ),
+      focusNode: focusNode,
+      maxLines: maxLine,
+      minLines: minLine,
+      readOnly: readOnly,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      controller: controller,
+      textAlign: textAlign,
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        hintStyle: GoogleFonts.dmSans(
           color: AppColors.textGray,
           fontWeight: FontWeight.w400,
           fontSize: fontSize.sp,
-          height: 30 / 14,
+          height: 20 / 14,
         ),
-        maxLines: maxLine??1,
-        minLines: minLine,
-        readOnly: readOnly,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        controller: controller,
-        textAlign: textAlign,
-        decoration: InputDecoration(
-          hintText: hintText,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          hintStyle: GoogleFonts.dmSans(
-            color: AppColors.textGray,
-            fontWeight: FontWeight.w400,
-            fontSize: fontSize.sp,
-            height: 20 / 14,
-          ),
-          fillColor: fillColor ?? Colors.white,
-          filled: true,
-          enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
-              borderRadius: BorderRadius.circular(radius)),
-          focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xffF1F1F1), width: 1),
-              borderRadius: BorderRadius.circular(radius)),
-          contentPadding: padding ??
-              EdgeInsets.only(
-                  left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
-        ),
-        validator: validator,
-        onTapOutside: (c) {
-          FocusScope.of(context).unfocus();
-        },
+        fillColor: fillColor ?? Colors.white,
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
+            borderRadius: BorderRadius.circular(radius)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
+            borderRadius: BorderRadius.circular(radius)),
+        contentPadding: padding ??
+            EdgeInsets.only(
+                left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
       ),
+      validator: validator,
+      onTapOutside: onTapOutside ?? (c) {
+        FocusScope.of(context).unfocus();
+      },
     );
   }
 }

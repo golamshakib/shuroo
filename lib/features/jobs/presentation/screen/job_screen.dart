@@ -19,6 +19,7 @@ class JobScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: CustomText(
             text: 'Job Board',
             fontSize: 20.sp,
@@ -34,7 +35,12 @@ class JobScreen extends StatelessWidget {
                   CustomTextField(
                     controller: controller.search,
                     hintText: 'Search job title or keyword ',
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoute.searchResultScreen);
+                      },
+                      child: Icon(Icons.search),
+                    ),
                   ),
                   SizedBox(height: 12.h),
                   SizedBox(
