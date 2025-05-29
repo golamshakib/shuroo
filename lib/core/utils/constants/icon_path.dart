@@ -1,4 +1,6 @@
 
+// ignore_for_file: constant_identifier_names
+
 class IconPath{
   IconPath._();
   static const  String _basePath='assets/icons';

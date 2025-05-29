@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/custom_repost_screen_card.dart';
-
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -16,7 +13,7 @@ import '../../controller/repost_with_throught_screen_controller.dart';
 
 class RepostWithThroughtScreen extends StatelessWidget {
    RepostWithThroughtScreen({super.key});
-   RepostWithThroughtScreenController _controller = Get.put(RepostWithThroughtScreenController());
+   final RepostWithThroughtScreenController _controller = Get.put(RepostWithThroughtScreenController());
 
   @override
   Widget build(BuildContext context) {

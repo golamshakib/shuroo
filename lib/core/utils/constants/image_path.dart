@@ -1,4 +1,6 @@
 
+// ignore_for_file: constant_identifier_names
+
 class ImagePath{
    static const  String _basePath='assets/images';
   static const  String backGroundImage='$_basePath/backgroundImage.png';

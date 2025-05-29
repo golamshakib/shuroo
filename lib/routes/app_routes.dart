@@ -1,5 +1,4 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';

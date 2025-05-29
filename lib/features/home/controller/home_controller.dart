@@ -96,6 +96,7 @@ class HomeController extends GetxController{
       "like" : 1,
       'reply' : 1,
     };
+    // ignore: invalid_use_of_protected_member
     commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
     commentTEController.value.text = "";
     addComment.value = true;

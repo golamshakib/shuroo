@@ -1,13 +1,9 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../../../core/common/widgets/custom_password_textform_field.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
-import '../../../../core/common/widgets/custom_textform_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';

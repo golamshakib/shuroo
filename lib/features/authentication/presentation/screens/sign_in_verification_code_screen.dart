@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -14,7 +11,7 @@ import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/signin_verification_screen_controller.dart';
 
 class SignInVeryficationCodeScreen extends StatelessWidget {
-   SignInVeryficationCodeScreen({Key? key}) : super(key: key);
+   SignInVeryficationCodeScreen({super.key});
 
 
 
@@ -163,6 +160,6 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );;
+    );
   }
 }

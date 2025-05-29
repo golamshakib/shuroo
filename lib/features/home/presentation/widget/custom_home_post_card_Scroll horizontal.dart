@@ -32,7 +32,7 @@ class PostCardScrollhorizonta extends StatelessWidget {
     required this.icon,
   });
 
-  HomeController _controller = Get.put(HomeController());
+  final HomeController _controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

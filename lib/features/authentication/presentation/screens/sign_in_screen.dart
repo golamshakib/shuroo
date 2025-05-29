@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/authentication/controllers/sign_in_screen_controller.dart';
-
 import '../../../../core/common/widgets/custom_password_textform_field.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -15,7 +12,6 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../../routes/app_routes.dart';
-import '../../controllers/create_account_filled_screen_controller.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -91,7 +87,7 @@ class SignInScreen extends StatelessWidget {
                                     children: [
                                       Image.asset(IconPath.wrong,height: 16.h,width: 16.w,),
                                       CustomText(
-                                          text: " "+AppText.WrongEmailAndPass,color: Colors.red,fontSize: 14,),
+                                          text: " ${AppText.WrongEmailAndPass}",color: Colors.red,fontSize: 14,),
                                     ],
                                   )),
 

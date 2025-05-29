@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/core/utils/constants/will_be_deleted.dart';
 import 'package:shuroo/features/search_notification_chat/data/model/top_jobs_model.dart';
 

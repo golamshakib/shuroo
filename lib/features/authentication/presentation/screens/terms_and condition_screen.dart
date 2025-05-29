@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:shuroo/app.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
-
 import '../../../../core/utils/constants/app_colors.dart';
 
 class TermsAndConditionsScreen extends StatelessWidget {
@@ -88,16 +85,16 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
                     Container(
                       child: BulletPoint(
-                          '${AppText.youconfirm}'),
+                          AppText.youconfirm),
                     ),
 
-                    BulletPoint('${AppText.provideAccurate}'),
+                    BulletPoint(AppText.provideAccurate),
 
                     BulletPoint(
-                        '${AppText.useThePlatform}'),
+                        AppText.useThePlatform),
 
                     BulletPoint(
-                        '${AppText.notImpersonate}'),
+                        AppText.notImpersonate),
 
                     Container(
                       margin: EdgeInsets.only(top: 12,bottom: 12),
@@ -114,9 +111,9 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
                     // SectionTitle('3. Job Applications & Referrals'),
                     BulletPoint(
-                        '${AppText.shurooProvidesJob}'),
+                        AppText.shurooProvidesJob),
                     BulletPoint(
-                        '${AppText.referralRewards}'),
+                        AppText.referralRewards),
 
 
                     Container(
@@ -132,15 +129,15 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
                     // SectionTitle('4. Account Security'),
                     BulletPoint(
-                        '${AppText.youAreResponsible}'),
+                        AppText.youAreResponsible),
                     BulletPoint(
-                        '${AppText.notifyUsImmediately}'),
+                        AppText.notifyUsImmediately),
                     // SizedBox(height: 16),
                     // SectionTitle('5. Content Ownership'),
                     BulletPoint(
-                        '${AppText.usersRetain}'),
+                        AppText.usersRetain),
                     BulletPoint(
-                        '${AppText.shurooMayDisplay}'),
+                        AppText.shurooMayDisplay),
 
                     Container(
                       margin: EdgeInsets.only(top: 12,bottom: 12),
@@ -156,7 +153,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
                     // SectionTitle('6. Termination'),
                     BulletPoint(
-                        '${AppText.weReserveThe}'),
+                        AppText.weReserveThe),
 
                     Container(
                       margin: EdgeInsets.only(top: 12,bottom: 12),
@@ -171,7 +168,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
                     // SectionTitle('7. Modifications'),
                     BulletPoint(
-                        '${AppText.weMayUpdate}'),
+                        AppText.weMayUpdate),
 
                     Container(
                       margin: EdgeInsets.only(top: 12,bottom: 12),

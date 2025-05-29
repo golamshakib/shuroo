@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
@@ -10,13 +8,12 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
-
 import '../../../../core/utils/constants/icon_path.dart';
 
 class MakePostScreen extends StatelessWidget {
   MakePostScreen({super.key});
 
-  MakePostController _controller = Get.put(MakePostController());
+  final MakePostController _controller = Get.put(MakePostController());
 
   @override
   Widget build(BuildContext context) {

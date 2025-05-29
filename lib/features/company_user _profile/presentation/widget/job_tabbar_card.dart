@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/image_path.dart';
