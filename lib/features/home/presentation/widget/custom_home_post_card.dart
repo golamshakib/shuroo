@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
@@ -13,7 +12,6 @@ import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
-
 
 class PostCard extends GetView<HomeController> {
   final String organization;
@@ -40,7 +38,7 @@ class PostCard extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -65,24 +63,17 @@ class PostCard extends GetView<HomeController> {
                   children: [
                     Image.asset(icon),
                     SizedBox(
-                      width: 5.w,
+                      width: 8.w,
                     ),
                     GestureDetector(
-                      onTap: (){
-                        Get.to(()=> CompanyProfileScreen());
-
-                      },
+                        onTap: () {
+                          Get.to(() => CompanyProfileScreen());
+                        },
                         child: Text(organization,
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Cabinet Grotesk"))
-
-
-                    )
-
-
-
-
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Cabinet Grotesk")))
                   ],
                 ),
               ),
@@ -94,17 +85,22 @@ class PostCard extends GetView<HomeController> {
                           style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
             title,
             style: TextStyle(
-              color: AppColors.grayText,
-              fontFamily: "Inter",
-              fontSize: 14,
-            ),
+                color: AppColors.textPrimary,
+                fontFamily: "Inter",
+                fontSize: 12,
+                fontWeight: FontWeight.w400),
           ),
           const SizedBox(height: 4),
-          Text(content),
+          CustomText(
+            text: content,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: AppColors.textPrimary,
+          ),
           const SizedBox(height: 4),
           Text(hashtags, style: const TextStyle(color: Colors.blue)),
           const SizedBox(height: 8),
@@ -131,74 +127,112 @@ class PostCard extends GetView<HomeController> {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       showModalBottomSheet(
-                        backgroundColor: Colors.white,
-                        context: context,
-                        builder: (context){
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ...controller.commentList.map((row) =>
-                                      commentBody(controller, row, context)
-                                  ),
-
-                                  SizedBox(height: 32.h,),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Flexible(
-                                        flex: 1,
-                                        child: ClipOval(
-                                          child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                          backgroundColor: Colors.white,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w, vertical: 28.h),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ...controller.commentList.map((row) =>
+                                        commentBody(controller, row, context)),
+                                    SizedBox(
+                                      height: 32.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          flex: 1,
+                                          child: ClipOval(
+                                            child: Image.asset(
+                                              IconPath.icon_pro,
+                                              height: 40.h,
+                                              width: 40.w,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(width: 7.w,),
-                                      Flexible(
-                                        flex: 7,
-                                        child: Obx(() =>
-                                            CustomTextField(
-                                              onTapOutside: (c){
-                                                controller.addComment.value = true;
-                                                FocusScope.of(context).unfocus();
+                                        SizedBox(
+                                          width: 7.w,
+                                        ),
+                                        Flexible(
+                                          flex: 7,
+                                          child: Obx(() => CustomTextField(
+                                              onTapOutside: (c) {
+                                                controller.addComment.value =
+                                                    true;
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                               },
-                                                controller: controller.commentTEController.value,
-                                                hintText: controller.addComment.value ? "Add your comment..." : "Add a reply...",
-                                                focusNode: controller.controllerNode,
-                                                radius: 50,
-                                                suffixIcon: controller.commentTEController.value.text.isNotEmpty ?
-                                                Padding(
-                                                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                                                    child: GestureDetector(
-                                                      onTap: (){
-                                                        if(controller.addComment.value){
-                                                          print(controller.commentTEController.value.text);
-                                                          controller.addCommentFunction(controller.commentTEController.value.text);
-                                                          FocusScope.of(context).unfocus();
-                                                        }
-                                                        else{
-                                                          controller.addReplyFunction(controller.commentTEController.value.text);
-                                                          FocusScope.of(context).unfocus();
-                                                        }
-                                                      },
-                                                      child: Image.asset(IconPath.sendButton, height: 24.h, width: 24.w,),
-                                                    )
-                                                ) :
-                                                SizedBox()
-                                            )
+                                              controller: controller
+                                                  .commentTEController.value,
+                                              hintText:
+                                                  controller.addComment.value
+                                                      ? "Add your comment..."
+                                                      : "Add a reply...",
+                                              focusNode:
+                                                  controller.controllerNode,
+                                              radius: 50,
+                                              suffixIcon: controller
+                                                      .commentTEController
+                                                      .value
+                                                      .text
+                                                      .isNotEmpty
+                                                  ? Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4.w),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          if (controller
+                                                              .addComment
+                                                              .value) {
+                                                            print(controller
+                                                                .commentTEController
+                                                                .value
+                                                                .text);
+                                                            controller
+                                                                .addCommentFunction(
+                                                                    controller
+                                                                        .commentTEController
+                                                                        .value
+                                                                        .text);
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .unfocus();
+                                                          } else {
+                                                            controller
+                                                                .addReplyFunction(
+                                                                    controller
+                                                                        .commentTEController
+                                                                        .value
+                                                                        .text);
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .unfocus();
+                                                          }
+                                                        },
+                                                        child: Image.asset(
+                                                          IconPath.sendButton,
+                                                          height: 24.h,
+                                                          width: 24.w,
+                                                        ),
+                                                      ))
+                                                  : SizedBox())),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        }
-                      );
+                            );
+                          });
                     },
                     child: Image.asset(
                       IconPath.comments,
@@ -216,16 +250,14 @@ class PostCard extends GetView<HomeController> {
                   ),
                 ],
               ),
+
               /// Nifat's END OF part
               InkWell(
-        onTap: () {
-
-          showRepostPopup(
-             context,
-
-          );
-        },
-
+                onTap: () {
+                  showRepostPopup(
+                    context,
+                  );
+                },
                 child: Row(
                   children: [
                     Image.asset(
@@ -268,4 +300,3 @@ class PostCard extends GetView<HomeController> {
     );
   }
 }
-

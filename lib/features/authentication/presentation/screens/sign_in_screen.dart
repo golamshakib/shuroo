@@ -28,6 +28,14 @@ class SignInScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                     child: Column(children: [
                   Container(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(Icons.arrow_back, size: 24)),
+                  ),
+                  Container(
                       margin: EdgeInsets.only(top: 5.h),
                       alignment: Alignment.topCenter,
                       child: Column(children: [
@@ -36,7 +44,6 @@ class SignInScreen extends StatelessWidget {
                         CustomText(text: AppText.sign_in, fontSize: 24.sp),
                         CustomTextFormField(
                           controller: _controller.emailController,
-
                           label: AppText.emailIID,
                           hintSize: 16,
                           hintColor: AppColors.textPrimary,
@@ -73,6 +80,11 @@ class SignInScreen extends StatelessWidget {
                                           value: _controller.isChecked.value,
                                           onChanged: (value) => _controller
                                               .toggleCheckbox(value!),
+                                          shape: CircleBorder(
+                                            side: BorderSide(
+                                                color: AppColors.customBlue),
+                                          ),
+                                          activeColor: AppColors.black,
                                         ),
                                         Text(
                                           AppText.remember_me,
@@ -84,16 +96,21 @@ class SignInScreen extends StatelessWidget {
                                       ],
                                     )
                                   : Row(
-                                    children: [
-                                      Image.asset(IconPath.wrong,height: 16.h,width: 16.w,),
-                                      CustomText(
-                                          text: " ${AppText.WrongEmailAndPass}",color: Colors.red,fontSize: 14,),
-                                    ],
-                                  )),
-
+                                      children: [
+                                        Image.asset(
+                                          IconPath.wrong,
+                                          height: 16.h,
+                                          width: 16.w,
+                                        ),
+                                        CustomText(
+                                          text: " ${AppText.WrongEmailAndPass}",
+                                          color: Colors.red,
+                                          fontSize: 14,
+                                        ),
+                                      ],
+                                    )),
                               InkWell(
-                                onTap: (){
-
+                                onTap: () {
                                   print("........forgotPasswordScreen");
 
                                   Get.toNamed(AppRoute.forgotPasswordScreen);
@@ -101,7 +118,11 @@ class SignInScreen extends StatelessWidget {
                                 child: Text(
                                   AppText.forgotPassword,
                                   style: TextStyle(
-                                      fontSize: 14.sp, fontFamily: "inter"),
+                                      fontSize: 14.sp,
+                                      fontFamily: "inter",
+                                      decoration: TextDecoration.underline,
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               )
                             ],
@@ -111,8 +132,9 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 269),
                           child: CustomSubmitButton(
                             text: AppText.sign_in,
-                            onTap: ()async {
-                             await _controller.emailAndPasswordvalidatorCheck();
+                            onTap: () async {
+                              await _controller
+                                  .emailAndPasswordvalidatorCheck();
                               if (!_controller.isCheckemailAndPassword.value) {
                                 Get.toNamed(AppRoute.nevBar);
                               }
@@ -126,7 +148,7 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
                           child: RichText(
                             text: TextSpan(
-                              text: AppText.already_have_an_account,
+                              text: AppText.DontHaveAccount,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
@@ -141,10 +163,8 @@ class SignInScreen extends StatelessWidget {
                                     decoration: TextDecoration.none,
                                   ),
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () => Get.toNamed(
-                                         AppRoute.signUpScreen
-
-                                    ),
+                                    ..onTap = () =>
+                                        Get.toNamed(AppRoute.signUpScreen),
                                 ),
                               ],
                             ),

@@ -51,26 +51,19 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Column(
                       children: [
-
-
-
-                        Image.asset(
-                            ImagePath.logo, height: 62.w, width: 62.w),
+                        Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
-
                         CustomText(
-                            text: AppText.enterYourEmail, fontSize: 24),
-
+                            text: AppText.enter_verification_code,
+                            fontSize: 24),
                         Container(
                           margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
-
                           child: RichText(
                             text: TextSpan(
-                              text: AppText.already_have_an_account,
+                              text: AppText.weHaveSentCode,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
@@ -80,13 +73,11 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                                     color: AppColors.textPrimary,
                                     decoration: TextDecoration.none,
                                   ),
-
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
-
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: List.generate(6, (i) {
@@ -112,21 +103,19 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
                             " ${controller.formattedTime}s",
-                            style: const TextStyle(color: AppColors.textPrimary,fontFamily: "cabin"),
+                            style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontFamily: "cabin"),
                           ),
                         ),
-
-
                         Container(
                           margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
-
                           child: RichText(
                             text: TextSpan(
                               text: AppText.didntreceiveacode,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
@@ -135,17 +124,18 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                                     fontSize: 14.sp,
                                     color: AppColors.textPrimary,
                                   ),
-
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
-
                         Container(
                           child: CustomSubmitButton(
-                            text: AppText.verify, onTap: () {
-                            Get.toNamed(AppRoute.accountConfirmScreen);
-                          },),
+                            text: AppText.verify,
+                            onTap: () {
+                              Get.toNamed(AppRoute.accountConfirmScreen);
+                            },
+                          ),
                         )
                       ],
                     ),

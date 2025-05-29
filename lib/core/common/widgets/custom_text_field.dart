@@ -4,27 +4,30 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../utils/constants/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    this.obscureText = false,
-    this.suffixIcon,
-    this.focusNode,
-    this.onChange,
-    this.onTapOutside,
-    this.fontSize = 14,
-    this.textAlign = TextAlign.start,
-    this.validator,
-    this.keyboardType = TextInputType.text,
-    this.readOnly = false,
-    this.prefixIcon,
-    this.fillColor,
-    this.maxLine = 1,
-    this.minLine,
-    this.radius = 12,
-    this.padding,
-  });
+  const CustomTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      this.obscureText = false,
+      this.suffixIcon,
+      this.focusNode,
+      this.onChange,
+      this.onTapOutside,
+      this.fontSize = 14,
+      this.textAlign = TextAlign.start,
+      this.validator,
+      this.keyboardType = TextInputType.text,
+      this.readOnly = false,
+      this.prefixIcon,
+      this.fillColor,
+      this.maxLine = 1,
+      this.minLine,
+      this.radius = 12,
+      this.padding,
+      this.borderColor,
+      this.enableBorder,
+      this.focusBorder
+      });
 
   final TextEditingController controller;
   final Function(String)? onChange;
@@ -34,6 +37,8 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final dynamic fillColor;
   final TextAlign textAlign;
+  final InputBorder? enableBorder;
+  final InputBorder? focusBorder;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
@@ -44,6 +49,7 @@ class CustomTextField extends StatelessWidget {
   final int? minLine;
   final double radius;
   final EdgeInsets? padding;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -75,21 +81,22 @@ class CustomTextField extends StatelessWidget {
         ),
         fillColor: fillColor ?? Colors.white,
         filled: true,
-        enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
+        enabledBorder:  enableBorder ??
+        OutlineInputBorder(
+            borderSide:
+                BorderSide(color: borderColor ?? Color(0xFFE6E6E7), width: 1),
             borderRadius: BorderRadius.circular(radius)),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: focusBorder ?? OutlineInputBorder(
             borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
             borderRadius: BorderRadius.circular(radius)),
         contentPadding: padding ??
-            EdgeInsets.only(
-                left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
+            EdgeInsets.only(left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
       ),
       validator: validator,
-      onTapOutside: onTapOutside ?? (c) {
-        FocusScope.of(context).unfocus();
-      },
+      onTapOutside: onTapOutside ??
+          (c) {
+            FocusScope.of(context).unfocus();
+          },
     );
   }
 }
-

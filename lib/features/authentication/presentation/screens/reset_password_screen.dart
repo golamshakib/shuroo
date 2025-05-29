@@ -14,8 +14,8 @@ import '../../controllers/reset_password_screen_controller.dart';
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({super.key});
 
-  final ResetPasswordScreenController _controller = Get.put(
-      ResetPasswordScreenController());
+  final ResetPasswordScreenController _controller =
+      Get.put(ResetPasswordScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,84 +24,76 @@ class ResetPasswordScreen extends StatelessWidget {
             child: Container(
                 margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),
                 child: SingleChildScrollView(
-                    child: Column(children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: Icon(Icons.arrow_back, size: 24.sp)),
+                    child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(Icons.arrow_back, size: 24.sp)),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      alignment: Alignment.topCenter,
+                      child: Column(
+                        children: [
+                          Image.asset(ImagePath.logo,
+                              height: 62.w, width: 62.w),
+                          SizedBox(height: 12),
+                          CustomText(text: AppText.resetPassword, fontSize: 24),
 
+                          Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: CustomText(
+                              text: AppText.setYourNewPassword,
+                              fontSize: 14,
+                              color: AppColors.dark75,
+                            ),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(top: 24),
+                            child: CustomTextFormFieldPass(
+                              onChanged: (qw) {},
+                              controller: _controller.newPassController,
+                              label: AppText.newPassword,
+                              hintText: AppText.hintPassword,
+                              icon: IconPath.eye,
+                              fontFamily: 'Inter',
+                              hintColor: AppColors.textPrimary,
+                              hintSize: 16,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 24),
+                            child: CustomTextFormFieldPass(
+                              onChanged: (qw) {},
+                              controller: _controller.confirmPassController,
+                              label: AppText.confirmPassword,
+                              hintText: AppText.hintPassword,
+                              icon: IconPath.eye,
+                              fontFamily: 'Inter',
+                              hintColor: AppColors.textPrimary,
+                              hintSize: 16,
+                            ),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(top: 293),
+                            child: CustomSubmitButton(
+                              text: AppText.changePassword,
+                              onTap: () {
+                                Get.toNamed(AppRoute.signInScreen);
+                              },
+                            ),
+                          )
+                          // S
+                        ],
                       ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 5),
-
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                                ImagePath.logo, height: 62.w, width: 62.w),
-                            SizedBox(height: 12),
-                            CustomText(
-                                text: AppText.resetPassword, fontSize: 24),
-
-
-                            Container(
-                              margin: EdgeInsets.only(top: 12),
-                              child: CustomText(
-                                text: AppText.setYourNewPassword,
-                                fontSize: 14,
-                                color: AppColors.dark75,)
-                              ,
-                            ),
-
-                            Container(
-                              margin: EdgeInsets.only(top: 24),
-                              child: CustomTextFormFieldPass(
-                                onChanged: (qw) {},
-                                controller: _controller.newPassController,
-                                label: AppText.newPassword,
-                                hintText: AppText.hintPassword,
-                                icon: IconPath.eye,
-                                fontFamily: 'Inter',
-                                hintColor: AppColors.textPrimary,
-                                hintSize: 16,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 24),
-                              child: CustomTextFormFieldPass(
-                                onChanged: (qw) {},
-                                controller: _controller.confirmPassController,
-                                label: AppText.confirmPassword,
-                                hintText: AppText.hintPassword,
-                                icon: IconPath.eye,
-                                fontFamily: 'Inter',
-                                hintColor: AppColors.textPrimary,
-                                hintSize: 16,
-                              ),
-                            ),
-
-
-                            Container(
-                              margin: EdgeInsets.only(top: 293),
-                              child: CustomSubmitButton(
-                                text: AppText.changePassword, onTap: () {
-                                Get.toNamed(
-                                    AppRoute.signInScreen);
-                              },),
-                            )
-                            // S
-
-                          ],
-                        ),
-                      ),
-
-
-                    ],)
-                )
-            )));
+                    ),
+                  ],
+                )))));
   }
 }

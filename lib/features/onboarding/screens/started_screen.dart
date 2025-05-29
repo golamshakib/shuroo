@@ -35,15 +35,15 @@ class StartedScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
               child:
-              // Gap
-              Container(
+                  // Gap
+                  Container(
                 alignment: Alignment.center,
                 child: Text(
                   "Skip",
                   style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 14, // bold
-                  ),
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
             ),
@@ -58,48 +58,47 @@ class StartedScreen extends StatelessWidget {
               children: [
                 Text(
                   AppText.your_create,
-                  style: TextStyle(fontSize: 28, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
                 ),
                 Text(
                   AppText.your_control,
-                  style: TextStyle(fontSize: 28, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 12.h),
                 CustomText(
                   text: AppText.create_your,
-
                   fontSize: 16.sp,
                   color: Colors.white,
                   textAlign: TextAlign.center,
+                  fontWeight: FontWeight.w400,
                 ),
-
                 SizedBox(height: 32),
-
                 CustomSubmitButton(
                   text: AppText.create_account,
                   onTap: () {
                     Get.toNamed(AppRoute.createAccountScreen);
-
                   },
                   fontSize: 15.sp,
-                 color: AppColors.custom_blue,
+                  color: AppColors.custom_blue,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 CustomSubmitButton(
-                  text: AppText.sign_in,
-                  onTap: () {
-                    Get.toNamed(AppRoute.signInAndUnlockScreen);
-                  },
-                  fontSize: 15,
-                  color: AppColors.textWhite,
-
-                  textColor: AppColors.textPrimary
-                ),
-
-
+                    text: AppText.sign_in,
+                    onTap: () {
+                      Get.toNamed(AppRoute.signInAndUnlockScreen);
+                    },
+                    fontSize: 15,
+                    color: AppColors.textWhite,
+                    textColor: AppColors.textPrimary),
               ],
             ),
           ),

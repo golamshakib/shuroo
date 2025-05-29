@@ -9,9 +9,9 @@ import 'package:shuroo/features/jobs/controller/applied_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 class AppliedJobScreen extends StatelessWidget {
-   AppliedJobScreen({super.key});
+  AppliedJobScreen({super.key});
 
-   final AppliedController controller = Get.put(AppliedController());
+  final AppliedController controller = Get.put(AppliedController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,16 @@ class AppliedJobScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: CustomBackButton(),
-        title: CustomText(text: 'Applied Jobs', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
+        title: CustomText(
+          text: 'Applied Jobs',
+          fontSize: 20.sp,
+          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w600,
+        ),
       ),
-      body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
+      body: SafeArea(
+          child: Padding(
+        padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -38,8 +45,8 @@ class AppliedJobScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                            color: Color(0xffF5F5F5), width: 0.2),
+                        border:
+                            Border.all(color: Color(0xffF5F5F5), width: 0.2),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +54,8 @@ class AppliedJobScreen extends StatelessWidget {
                           Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: AssetImage(appliedList.imagePath!),
+                                backgroundImage:
+                                    AssetImage(appliedList.imagePath!),
                               ),
                               SizedBox(width: 12.w),
                               CustomText(
@@ -58,23 +66,30 @@ class AppliedJobScreen extends StatelessWidget {
                               ),
                               Spacer(),
                               GestureDetector(
-                                onTap: (){
-
+                                onTap: () {
+                                  Get.toNamed(AppRoute.jobDetailsScreen);
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(5),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.w, vertical: 5.h),
                                   decoration: BoxDecoration(
                                     color: AppColors.grayBlue,
                                     borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(color: AppColors.custom_blue),
+                                    border: Border.all(
+                                        color: AppColors.custom_blue),
                                   ),
-                                  child: CustomText(text: 'Applied', fontSize: 12.sp,color: AppColors.custom_blue,fontWeight: FontWeight.w400,),
+                                  child: CustomText(
+                                    text: 'Applied',
+                                    fontSize: 12.sp,
+                                    color: AppColors.custom_blue,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               )
                             ],
                           ),
                           Padding(
-                            padding:  EdgeInsets.only(left: 50),
+                            padding: EdgeInsets.only(left: 50),
                             child: CustomText(
                               text: appliedList.name!,
                               fontSize: 12.sp,
@@ -104,12 +119,11 @@ class AppliedJobScreen extends StatelessWidget {
                           SizedBox(height: 14.h),
                           CustomBlueGrayButton(
                               text: 'Send Message',
-                              onTap: (){
+                              onTap: () {
                                 Get.toNamed(AppRoute.chatScreen);
                               })
                         ],
-                      )
-                  );
+                      ));
                 },
               ),
             ],

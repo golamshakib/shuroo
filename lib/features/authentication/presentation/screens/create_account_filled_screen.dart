@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,6 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/create_account_filled_screen_controller.dart';
-
 
 class CreateAccountFilledScreen extends StatelessWidget {
   CreateAccountFilledScreen({super.key});
@@ -55,7 +53,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 32),
                     child: CustomTextFormField(
                       controller: _controller.nameController,
-                      label: AppText.rochelle_backman,
+                      label: AppText.name,
                       hintText: AppText.enterYourName,
                       fontFamily: 'Inter',
                       icon: IconPath.prame,
@@ -67,9 +65,8 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24.h),
                     child: CustomTextFormField(
-
                       controller: _controller.emailController,
-                      label: AppText.hint_rochellebackman,
+                      label: AppText.email,
                       hintText: AppText.hint_rochellebackman,
                       fontFamily: 'Inter',
                       hintSize: 16,
@@ -83,7 +80,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     child: CustomTextFormFieldPass(
                       onChanged: (qw) {
                         _controller.getValidator(qw);
-
                       },
                       controller: _controller.passController,
                       label: AppText.createPassword,
@@ -102,7 +98,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             margin: EdgeInsets.zero,
                             child: PasswordStrengthIndicatorPlus(
-
                               textController: _controller.indicatorController,
                               maxLength: 18,
                               minLength: 6,
@@ -119,36 +114,28 @@ class CreateAccountFilledScreen extends StatelessWidget {
                         )
                       : SizedBox()),
 
-
-
-
-
-
                   Container(
                     margin: EdgeInsets.only(top: 8),
                     child: Text.rich(
                       TextSpan(
-                        text: AppText.passwordstrengthWeak,
+                        text: AppText.passwordType,
                         style: const TextStyle(
-                            color: AppColors.textPrimary, fontSize: 14),
+                            color: Color(0xff757575),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                         children: [
-                          TextSpan(
-                            text: AppText.trylengtheningit,
-                            style: TextStyle(
-                                color: AppColors.textSecondary, fontSize: 14),
-                          ),
+                          // TextSpan(
+                          //   text: AppText.trylengtheningit,
+                          //   style: TextStyle(
+                          //       color: AppColors.textSecondary, fontSize: 14),
+                          // ),
                         ],
                       ),
                     ),
                   ),
 
-
-
-
-
-
                   Container(
-                    margin: EdgeInsets.only(top: 68,bottom: 20),
+                    margin: EdgeInsets.only(top: 68, bottom: 20),
                     child: Text.rich(
                       TextSpan(
                         text: AppText.byproceeding,
@@ -159,19 +146,15 @@ class CreateAccountFilledScreen extends StatelessWidget {
                             text: AppText.termsConditions,
                             style: TextStyle(
                                 color: AppColors.textPrimary, fontSize: 14),
-
-
-                            recognizer:  TapGestureRecognizer()
-                              ..onTap =
-                                  () =>
-                                  Get.toNamed(AppRoute.termsAndConditionsScreen),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Get.toNamed(
+                                  AppRoute.termsAndConditionsScreen),
                           ),
                         ],
                       ),
                     ),
                   ),
                   CustomSubmitButton(
-
                     text: AppText.create_account,
                     onTap: () {
                       Get.toNamed(AppRoute.signUpVeryficationCodeScreen);
@@ -182,14 +165,12 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
-
                     child: RichText(
                       text: TextSpan(
                         text: AppText.already_have_an_account,
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 14.sp,
-
                         ),
                         children: <TextSpan>[
                           TextSpan(
@@ -200,14 +181,13 @@ class CreateAccountFilledScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               decoration: TextDecoration.none,
                             ),
-                            recognizer:
-                            TapGestureRecognizer()
-                              ..onTap =
-                                  () =>
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () =>
                                   Get.toNamed(AppRoute.signInAndUnlockScreen),
                           ),
                         ],
-                      ),),
+                      ),
+                    ),
                   ),
                 ]),
               ))),
