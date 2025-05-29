@@ -191,7 +191,7 @@ class CustomDrower extends StatelessWidget {
                                             padding: EdgeInsets.symmetric(vertical: 11.h),
                                           ),
                                           onPressed: (){
-                                            Get.offAllNamed(AppRoute.loginScreen);
+                                            Get.offAllNamed(AppRoute.signInScreen);
                                           },
                                           child: SizedBox(
                                             width: double.infinity,

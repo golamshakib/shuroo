@@ -32,14 +32,6 @@ class SignInScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                     child: Column(children: [
                   Container(
-                    alignment: Alignment.topLeft,
-                    child: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Icon(Icons.arrow_back, size: 24.sp)),
-                  ),
-                  Container(
                       margin: EdgeInsets.only(top: 5.h),
                       alignment: Alignment.topCenter,
                       child: Column(children: [
