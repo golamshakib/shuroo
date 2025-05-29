@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
-Widget commentBody(dynamic controller, Map<String, dynamic> row, BuildContext context){
+Widget commentBody(HomeController controller, Map<String, dynamic> row, BuildContext context){
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +116,57 @@ Widget commentBody(dynamic controller, Map<String, dynamic> row, BuildContext co
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         GestureDetector(
-                                          onTap: (){},
+                                          onTap: (){
+                                            showModalBottomSheet(
+                                              context: context,
+                                              backgroundColor: AppColors.white,
+                                              builder: (context){
+                                                return Padding(
+                                                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Flexible(
+                                                        flex: 1,
+                                                        child: ClipOval(
+                                                          child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 7.w,),
+                                                      Flexible(
+                                                        flex: 7,
+                                                        child: Obx(() =>
+                                                            CustomTextField(
+                                                                onTapOutside: (c){
+                                                                  controller.addComment.value = true;
+                                                                  FocusScope.of(context).unfocus();
+                                                                },
+                                                                controller: controller.commentTEController.value,
+                                                                hintText: "Edit your reply...",
+                                                                focusNode: controller.controllerNode,
+                                                                radius: 50,
+                                                                suffixIcon: controller.commentTEController.value.text.isNotEmpty ?
+                                                                Padding(
+                                                                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                                                    child: GestureDetector(
+                                                                      onTap: (){
+                                                                        Get.back();
+                                                                        Get.back();
+                                                                        Get.snackbar("Development Message", "Will be implemented by backend", colorText: AppColors.white,backgroundColor: Colors.green.withAlpha(100));
+                                                                      },
+                                                                      child: Image.asset(IconPath.sendButton, height: 24.h, width: 24.w,),
+                                                                    )
+                                                                ) :
+                                                                SizedBox()
+                                                            )
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }
+                                            );
+                                          },
                                           child: Row(
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
@@ -151,7 +203,6 @@ Widget commentBody(dynamic controller, Map<String, dynamic> row, BuildContext co
                                                             ),
                                                             onPressed: (){
                                                               Get.back();
-                                                              Get.back();
                                                             },
                                                             child: SizedBox(
                                                               width: double.infinity,
@@ -168,6 +219,7 @@ Widget commentBody(dynamic controller, Map<String, dynamic> row, BuildContext co
                                                                 side: BorderSide.none,
                                                             ),
                                                             onPressed: (){
+                                                              Get.back();
                                                               Get.back();
                                                               Get.snackbar("Deleted", "Reply Deleted Successfully");
                                                               row['replies'].remove(subRow);

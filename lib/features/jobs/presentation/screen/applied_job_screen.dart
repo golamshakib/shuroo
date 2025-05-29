@@ -106,7 +106,7 @@ class AppliedJobScreen extends StatelessWidget {
                           CustomBlueGrayButton(
                               text: 'Send Message',
                               onTap: (){
-                                // Get.toNamed(AppRoute.)
+                                Get.toNamed(AppRoute.chatScreen);
                               })
                         ],
                       )

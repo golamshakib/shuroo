@@ -6,42 +6,45 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        title: Row(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const BackButton(color: Colors.black),
+          title: Row(
+            children: [
+              const CircleAvatar(
+                backgroundImage: AssetImage(IconPath.personIcon), // Replace with your asset
+              ),
+              const SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('Jhon Jons', style: TextStyle(color: Colors.black, fontSize: 16)),
+                  Text('Active now', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                ],
+              ),
+            ],
+          ),
+          backgroundColor: Colors.white,
+          elevation: 1,
+        ),
+        body: Column(
           children: [
-            const CircleAvatar(
-              backgroundImage: AssetImage(IconPath.personIcon), // Replace with your asset
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  _buildUserMessage("Hi! I’m looking for UI/UX design roles in London. Do you have anything available right now?"),
+                  const SizedBox(height: 12),
+                  _buildBotMessage("Hello! Yes, we have a few openings that match your profile. I’ll send over the details shortly."),
+                ],
+              ),
             ),
-            const SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Jhon Jons', style: TextStyle(color: Colors.black, fontSize: 16)),
-                Text('Active now', style: TextStyle(color: Colors.grey, fontSize: 12)),
-              ],
-            ),
+            const Divider(height: 1),
+            _buildInputArea(),
           ],
         ),
-        backgroundColor: Colors.white,
-        elevation: 1,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                _buildUserMessage("Hi! I’m looking for UI/UX design roles in London. Do you have anything available right now?"),
-                const SizedBox(height: 12),
-                _buildBotMessage("Hello! Yes, we have a few openings that match your profile. I’ll send over the details shortly."),
-              ],
-            ),
-          ),
-          const Divider(height: 1),
-          _buildInputArea(),
-        ],
       ),
     );
   }

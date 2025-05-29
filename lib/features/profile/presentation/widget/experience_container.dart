@@ -105,6 +105,7 @@ Widget experienceContainer(PersonalCreationController controller, BuildContext c
                                 ),
                                 SizedBox(height: 8.h,),
                                 CustomTextField(controller: controller.describeTEController, hintText: "Describe this experience", radius: 12, maxLine: 3,),
+                                SizedBox(height: 8.h,),
                                 OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor: AppColors.customBlue,
