@@ -23,11 +23,8 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+           //initialRoute: AppRoute.nevBar,
 
-           initialRoute: AppRoute.homeScreen,
-          //initialRoute: AppRoute.init,
-
-          // initialRoute: AppRoute.homeScreen,
           initialRoute: AppRoute.init,
           getPages: AppRoute.routes,
           initialBinding: ControllerBinder(),
