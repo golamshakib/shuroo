@@ -50,8 +50,7 @@ class AccountConfirmScreen extends StatelessWidget {
 
                           text: AppText.exploreJobs,
                           onTap: () {
-                            print("....dfd.....");
-                             Get.offAll(AppRoute.homeScreen);
+                             Get.offAllNamed(AppRoute.jobScreen);
                           },
                           color: AppColors.custom_blue,
                           borderRadius: BorderRadius.circular(50),
@@ -59,10 +58,7 @@ class AccountConfirmScreen extends StatelessWidget {
 
                         ),
                       ),
-
-
-
-
+                  
                   SizedBox(
                     width: double.infinity,
                     height: 48, // Fixed height
@@ -76,23 +72,11 @@ class AccountConfirmScreen extends StatelessWidget {
                           color: Colors.blue, // Change to your desired color
                         ),
                       ),
-                      onPressed: (){}, child: CustomText(text: AppText.exploreTheAppFirst,fontSize: 15,color: AppColors.custom_blue,),
+                      onPressed: (){
+                        Get.toNamed(AppRoute.nevBar);
+                      }, child: CustomText(text: AppText.exploreTheAppFirst,fontSize: 15,color: AppColors.custom_blue,),
                     ),
                   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     ],
                   ),

@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
            //initialRoute: AppRoute.nevBar,
 
           initialRoute: AppRoute.init,
+          //initialRoute: AppRoute.init,
           getPages: AppRoute.routes,
           initialBinding: ControllerBinder(),
           themeMode: ThemeMode.system,

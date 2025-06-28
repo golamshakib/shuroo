@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
@@ -42,6 +44,7 @@ class AuthenticationRepositories{
       if(response.isSuccess){
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
+        log("Access Token: ${response.responseData['data']['accessToken']}");
         Get.toNamed(AppRoute.accountConfirmScreen);
       }
       else{
