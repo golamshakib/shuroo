@@ -1,10 +1,19 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/features/authentication/data/repositories/authentication_repositories.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 class SingUpVerificationController extends GetxController {
   final int totalSeconds = 90; // 1 minute 30 seconds
   final RxInt secondsRemaining = 90.obs;
   Timer? _timer;
+
+  final pinTEController = TextEditingController();
+  var active = false.obs;
+
+  var email = "".obs;
 
   bool get isTimerRunning => secondsRemaining.value > 0;
   String get formattedTime {
@@ -16,6 +25,9 @@ class SingUpVerificationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    if(Get.arguments != null){
+      email.value = Get.arguments;
+    }
     startTimer();
   }
 
@@ -45,5 +57,23 @@ class SingUpVerificationController extends GetxController {
   void onClose() {
     _timer?.cancel();
     super.onClose();
+  }
+
+
+  void matchOTP(){
+
+    if(pinTEController.text.length == 6){
+      final requestBody = {
+        "email": email.value,
+        "otp": int.tryParse(pinTEController.text)
+      };
+
+      final object = AuthenticationRepositories();
+      object.registerOTP(requestBody);
+    }
+    else{
+      AppSnackBar.showError("Enter full pin");
+    }
+
   }
 }

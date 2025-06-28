@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
@@ -55,8 +57,6 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                     child: Column(
                       children: [
 
-
-
                         Image.asset(
                             ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
@@ -69,7 +69,7 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
 
                           child: RichText(
                             text: TextSpan(
-                              text: AppText.already_have_an_account,
+                              text: "We have sent a code to ",
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
@@ -83,34 +83,58 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                                     color: AppColors.textPrimary,
                                     decoration: TextDecoration.none,
                                   ),
-
                                 ),
                               ],
                             ),),
                         ),
 
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: List.generate(6, (i) {
-                            return SizedBox(
-                              width: 45,
-                              child: TextField(
-                                controller: otpFields[i],
-                                maxLength: 1,
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                onChanged: (value) =>
-                                    _handleOtpInput(i, value, context),
-                                decoration:
-                                    const InputDecoration(counterText: ''),
-                              ),
-                            );
-                          }),
+
+                        Pinput(
+                          controller: controller.pinTEController,
+                          length: 6,
+                          defaultPinTheme: PinTheme(
+                            width: 56,
+                            height: 56,
+                            textStyle: GoogleFonts.cabin(
+                                decorationColor: const Color(0xff2972FF),
+                                fontSize: 14.sp,
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.w600
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onCompleted: (v){
+                            controller.active.value = true;
+                          },
+                          onTapOutside: (v){
+                            FocusScope.of(context).unfocus();
+                          },
                         ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: List.generate(6, (i) {
+                        //     return SizedBox(
+                        //       width: 45,
+                        //       child: TextField(
+                        //         controller: otpFields[i],
+                        //         maxLength: 1,
+                        //         textAlign: TextAlign.center,
+                        //         keyboardType: TextInputType.number,
+                        //         inputFormatters: [
+                        //           FilteringTextInputFormatter.digitsOnly
+                        //         ],
+                        //         onChanged: (value) =>
+                        //             _handleOtpInput(i, value, context),
+                        //         decoration:
+                        //             const InputDecoration(counterText: ''),
+                        //       ),
+                        //     );
+                        //   }),
+                        // ),
                         Container(
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
@@ -144,11 +168,19 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                             ),),
                         ),
 
-                        Container(
-                          child: CustomSubmitButton(
-                            text: AppText.verify, onTap: () {
-                            Get.toNamed(AppRoute.accountConfirmScreen);
-                          },),
+                        Obx(() =>
+                          controller.active.value ?
+                          CustomSubmitButton(
+                            text: AppText.verify,
+                            onTap: () {
+                              //Get.toNamed(AppRoute.accountConfirmScreen);
+                              controller.matchOTP();
+                          },) :
+                          CustomSubmitButton(
+                            text: AppText.verify,
+                            color: AppColors.custom_blue.withAlpha(50),
+                            onTap: () {},
+                          )
                         )
                       ],
                     ),

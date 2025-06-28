@@ -1,11 +1,15 @@
 
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import 'package:password_strength_indicator_plus/password_strength_indicator_plus.dart';
 import 'package:shuroo/core/common/widgets/custom_password_textform_field.dart';
 import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
+import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/routes/app_routes.dart';
@@ -55,7 +59,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 32),
                     child: CustomTextFormField(
                       controller: _controller.nameController,
-                      label: AppText.rochelle_backman,
+                      label: "Name",
                       hintText: AppText.enterYourName,
                       fontFamily: 'Inter',
                       icon: IconPath.prame,
@@ -67,9 +71,8 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24.h),
                     child: CustomTextFormField(
-
                       controller: _controller.emailController,
-                      label: AppText.hint_rochellebackman,
+                      label: "Email",
                       hintText: AppText.hint_rochellebackman,
                       fontFamily: 'Inter',
                       hintSize: 16,
@@ -173,10 +176,10 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     ),
                   ),
                   CustomSubmitButton(
-
                     text: AppText.create_account,
                     onTap: () {
-                      Get.toNamed(AppRoute.signUpVeryficationCodeScreen);
+                      log("I am nifat");
+                      _controller.requestToCreateAccount();
                     },
                     color: AppColors.custom_blue,
                     borderRadius: BorderRadius.circular(50),
