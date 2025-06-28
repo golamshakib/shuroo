@@ -10,4 +10,14 @@ class AppUrls {
   static const String verifyOTP = '$_baseUrl/auth/forget-otp-verify';
   static const String resetPassword = '$_baseUrl/auth/reset-password';
 
+
+
+
+
+
+
+
+  // Sifat ===================================
+  static const String createPost = '$_baseUrl/post/create';
+
 }
