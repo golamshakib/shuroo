@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
@@ -191,7 +192,7 @@ class CustomDrower extends StatelessWidget {
                                             padding: EdgeInsets.symmetric(vertical: 11.h),
                                           ),
                                           onPressed: (){
-                                            Get.offAllNamed(AppRoute.signInScreen);
+                                            AuthService.logoutUser();
                                           },
                                           child: SizedBox(
                                             width: double.infinity,
