@@ -15,4 +15,7 @@ class MakePostController extends GetxController {
       imagePath.value = pickImage.path;
     }
   }
+
+
+  
 }
