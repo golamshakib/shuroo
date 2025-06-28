@@ -7,19 +7,18 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
-import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
 class MakePostScreen extends StatelessWidget {
   MakePostScreen({super.key});
 
-  final MakePostController controller = Get.find<MakePostController>();
+  final controller = Get.put(MakePostController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       bottomSheet: _buildBottomSheet(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -40,7 +39,7 @@ class MakePostScreen extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.white,
@@ -71,7 +70,7 @@ class MakePostScreen extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(AppRoute.makePostHomeScreen),
+            onTap: () => controller.createPost(context: context, postText: controller.textController.text),
             child: Container(
               width: 72.w,
               height: 40.h,

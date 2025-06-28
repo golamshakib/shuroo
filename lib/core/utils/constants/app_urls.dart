@@ -7,4 +7,14 @@ class AppUrls {
   static const String login = '$_baseUrl/auth/login';
   static const String registerOTPAPI = '$_baseUrl/auth/verify-otp';
 
+
+
+
+
+
+
+
+  // Sifat ===================================
+  static const String createPost = '$_baseUrl/post/create';
+
 }
