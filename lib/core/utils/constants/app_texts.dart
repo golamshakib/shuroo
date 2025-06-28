@@ -46,7 +46,7 @@ class AppText {
       'and agree to out';
   static const String termsConditions = ' Terms and Conditions';
   static const String already_have_an_account
-  = 'Already have an account?';
+  = 'Already have an account? ';
   static const String passwordstrengthWeak
   = 'Password strength: Weak';
 
