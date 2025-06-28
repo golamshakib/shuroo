@@ -1,5 +1,4 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
@@ -23,7 +22,6 @@ import '../features/authentication/presentation/screens/forgot_password_screen.d
 import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_screen.dart';
-import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/company_user _profile/presentation/screen/company_profile_screen.dart';

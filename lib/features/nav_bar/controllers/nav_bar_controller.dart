@@ -42,12 +42,10 @@
 import 'package:get/get.dart';
 import 'package:shuroo/features/favorites/presentation/screen/favourite_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/home_screen.dart';
-import 'package:shuroo/features/jobs/presentation/screen/job_details_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/messages/presentation/screen/messages_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/make_post_screen.dart';
 
-import '../../post_creation_repost_delete/presentation/screen/make_post_screen.dart';
 
 class NavBarController extends GetxController {
   int selectedIndex = 0;

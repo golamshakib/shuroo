@@ -4,14 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
-import 'package:shuroo/core/services/auth_service.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 
 class MakePostController extends GetxController {
   final textController = TextEditingController();
-  var picUpload = "".obs;
+  var picUploads = <String>[].obs;
 
   @override
   void onClose() {
@@ -19,27 +18,33 @@ class MakePostController extends GetxController {
     super.onClose();
   }
 
-  void pickProfile() async {
-    final picker = ImagePicker();
-    final image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      picUpload.value = image.path;
+  /// Pick multiple images and update picUploads
+  Future<void> pickImages() async {
+    try {
+      final picker = ImagePicker();
+      final images = await picker.pickMultiImage();
+      if (images.isNotEmpty) {
+        picUploads.value = images.map((e) => e.path).toList();
+      }
+    } catch (e) {
+      log('Image picking error: $e');
+      AppSnackBar.showError("Failed to pick images.");
     }
   }
 
+  /// Main method to create a post
   Future<void> createPost({
     required BuildContext context,
     required String postText,
   }) async {
-    final Map<String, dynamic> requestBody = {"content": postText};
+    final Map<String, dynamic> requestBody = {"content": postText, };
     debugPrint("Request Body: $requestBody");
 
     try {
-      await _sendPostRequestWithOptionalImage(
+      await _sendPostRequestWithOptionalImages(
         url: AppUrls.createPost,
         body: requestBody,
-        imagePath: picUpload.value,
-        token: AuthService.token,
+        imagePaths: picUploads,
         context: context,
       );
     } catch (e) {
@@ -48,56 +53,73 @@ class MakePostController extends GetxController {
     }
   }
 
-  Future<void> _sendPostRequestWithOptionalImage({
-    required String url,
-    required Map<String, dynamic> body,
-    required String? imagePath,
-    required String? token,
-    required BuildContext context,
-  }) async {
-    if (token == null || token.isEmpty) {
-      AppSnackBar.showError('Token is invalid or expired.');
+  /// Internal helper for sending multipart request with multiple images
+  Future<void> _sendPostRequestWithOptionalImages({
+  required String url,
+  required Map<String, dynamic> body,
+  required List<String> imagePaths,
+  required BuildContext context,
+}) async {
+  try {
+    final accessToken = AuthService.token;
+
+    if (accessToken == null || accessToken.isEmpty) {
+      AppSnackBar.showError("Unauthorized: Missing token. Please log in again.");
       return;
     }
 
-    try {
-      final request = http.MultipartRequest('POST', Uri.parse(url));
-      request.headers.addAll({'Authorization': "Bearer $token"});
-      request.fields['bodyData'] = jsonEncode(body);
+    final request = http.MultipartRequest('POST', Uri.parse(url));
+    request.fields['bodyData'] = jsonEncode(body);
+    request.headers['Authorization'] = 'Bearer $accessToken';
 
-      if (imagePath != null && imagePath.isNotEmpty) {
-        log('Attaching image: $imagePath');
-        request.files.add(
-          await http.MultipartFile.fromPath('postImage', imagePath),
-        );
+    for (final path in imagePaths) {
+      try {
+        log('Attaching image: $path');
+        request.files.add(await http.MultipartFile.fromPath('postImage', path));
+      } catch (e) {
+        log('Failed to attach image $path: $e');
+        AppSnackBar.showError("Failed to attach image: $path");
       }
-
-      final response = await request.send();
-      final responseBody = await response.stream.bytesToString();
-      final responseData = jsonDecode(responseBody);
-
-      debugPrint("Status Code: ${response.statusCode}");
-      debugPrint("Response Body: $responseBody");
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final message = responseData['message'] ?? 'Post created successfully';
-        AppSnackBar.showSuccess(message);
-
-        // Optional logging of response data
-        final postId = responseData['data']['id'];
-        final imageUrls = List<String>.from(responseData['data']['image']);
-        log("Post created: $postId");
-        log("Image URLs: $imageUrls");
-
-        // Clear inputs
-        textController.clear();
-        picUpload.value = '';
-      } else {
-        AppSnackBar.showError(responseData['message'] ?? 'Post failed.');
-      }
-    } catch (e) {
-      log('Request error: $e');
-      AppSnackBar.showError("Failed to create post.");
     }
+
+    final response = await request.send();
+    final responseBody = await response.stream.bytesToString();
+
+    debugPrint("Status Code: ${response.statusCode}");
+    debugPrint("Response Body: $responseBody");
+
+    Map<String, dynamic>? responseData;
+    try {
+      responseData = jsonDecode(responseBody);
+    } catch (e) {
+      log('Response JSON decode error: $e');
+      AppSnackBar.showError("Unexpected server response.");
+      return;
+    }
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final message = responseData?['message'] ?? 'Post created successfully';
+      AppSnackBar.showSuccess(message);
+
+      final postId = responseData?['data']?['id'];
+      final imageUrls = responseData?['data']?['image'] != null
+          ? List<String>.from(responseData?['data']['image'])
+          : <String>[];
+      log("Post created: $postId");
+      log("Image URLs: $imageUrls");
+
+      textController.clear();
+      picUploads.clear();
+    } else {
+      AppSnackBar.showError(responseData?['message'] ?? 'Post failed.');
+    }
+  } catch (e) {
+    log('Request error: $e');
+    AppSnackBar.showError("Failed to create post.");
   }
+}
+
+
+
+
 }
