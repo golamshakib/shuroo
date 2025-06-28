@@ -41,11 +41,11 @@ class AuthenticationRepositories{
     try{
       showProgressIndicator();
       final response = await NetworkCaller().postRequest(AppUrls.registerOTPAPI, body: requestBody);
-      if(response.isSuccess){
+      if(response.statusCode == 200){
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
-        log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
-        AuthService.saveToken(response.responseData['data']['accessToken'], response.responseData['data']['id']);
+        log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['updateUserInfo']["id"]}");
+        AuthService.saveToken(response.responseData['data']['accessToken'], response.responseData['data']['updateUserInfo']["id"]);
         Get.toNamed(AppRoute.accountConfirmScreen);
       }
       else{
