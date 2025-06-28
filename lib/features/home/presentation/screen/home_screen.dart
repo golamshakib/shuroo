@@ -82,10 +82,6 @@ class HomeScreen extends GetView<HomeController> {
 
 
 
-
-
-
-
            PostCard(
             context: context,
             icon: IconPath.icon_1,

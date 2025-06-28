@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/utils/validators/app_validator.dart';
+import 'package:shuroo/features/authentication/data/repositories/authentication_repositories.dart';
 
 class SignInScreenController extends GetxController {
   final TextEditingController emailController = TextEditingController();
@@ -37,6 +40,16 @@ class SignInScreenController extends GetxController {
 
 
   void requestToLogin(){
-
+    if(emailController.text.isNotEmpty && passController.text.isNotEmpty){
+      final requestBody = {
+        "email": emailController.text,
+        "password": passController.text
+      };
+      final object = AuthenticationRepositories();
+      object.login(requestBody);
+    }
+    else{
+      AppSnackBar.showError("Enter all the inputs");
+    }
   }
 }

@@ -1,7 +1,10 @@
 
 
 import 'dart:developer';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../routes/app_routes.dart';
 
 class AuthService {
   static const String _tokenKey = 'token';
@@ -45,7 +48,7 @@ class AuthService {
   }
 
   static Future<void> goToLogin() async {
-    // Get.offAllNamed('/login');
+    Get.offAllNamed(AppRoute.signInScreen);
   }
 
   // Getter for token

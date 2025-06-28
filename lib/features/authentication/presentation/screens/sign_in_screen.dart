@@ -108,11 +108,8 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 269),
                           child: CustomSubmitButton(
                             text: AppText.sign_in,
-                            onTap: ()async {
-                             await _controller.emailAndPasswordvalidatorCheck();
-                              if (!_controller.isCheckemailAndPassword.value) {
-                                Get.toNamed(AppRoute.nevBar);
-                              }
+                            onTap: (){
+                              _controller.requestToLogin();
                             },
                             color: AppColors.custom_blue,
                             borderRadius: BorderRadius.circular(50),

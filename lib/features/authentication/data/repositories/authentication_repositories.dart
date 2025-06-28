@@ -44,7 +44,8 @@ class AuthenticationRepositories{
       if(response.isSuccess){
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
-        log("Access Token: ${response.responseData['data']['accessToken']}");
+        log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
+        AuthService.saveToken(response.responseData['data']['accessToken'], response.responseData['data']['id']);
         Get.toNamed(AppRoute.accountConfirmScreen);
       }
       else{
@@ -56,4 +57,55 @@ class AuthenticationRepositories{
       AppSnackBar.showError(e.toString());
     }
   }
+
+  Future<void> login(Map<String, dynamic> requestBody) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.login, body: requestBody);
+      if(response.isSuccess){
+        Get.back();
+        AppSnackBar.showSuccess(response.responseData['message']);
+        log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
+        AuthService.saveToken(response.responseData['data']['accessToken'], response.responseData['data']['id']);
+        Get.offAllNamed(AppRoute.nevBar);
+      }
+      else if(response.statusCode == 404){
+        Get.back();
+        AppSnackBar.showError("User Not Found!!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  Future<void> sendOTPToEmail(Map<String, dynamic> requestBody) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.sendOTPToEmail, body: requestBody);
+      if(response.isSuccess){
+        Get.back();
+        AppSnackBar.showSuccess(response.responseData['message']);
+        Get.toNamed(AppRoute.signInVeryficationCodeScreen, arguments: requestBody['email']);
+      }
+      else if(response.statusCode == 404){
+        Get.back();
+        AppSnackBar.showError("User Not Found!!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
 }
