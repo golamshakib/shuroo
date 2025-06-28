@@ -63,11 +63,7 @@ class CreateAccountScreen extends StatelessWidget {
                   left: 53,
                   right: 8.5,
                 ),
-            
-            
-            
-            
-            
+
                 CustomButtonCreateScreen(onTap: (){},
                   text: AppText.sign_up_google,
                   img: IconPath.google_icon,
