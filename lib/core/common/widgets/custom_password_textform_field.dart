@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart';
-import 'package:shuroo/app.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/core/utils/constants/app_texts.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
-
 import '../../../features/authentication/controllers/create_account_default_controller.dart';
-import '../../../features/authentication/controllers/create_account_filled_screen_controller.dart';
 
 class CustomTextFormFieldPass extends StatefulWidget {
   final String label;

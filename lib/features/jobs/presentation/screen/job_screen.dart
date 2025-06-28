@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
-import 'applied_job_screen.dart';
 
 class JobScreen extends StatelessWidget {
   JobScreen({super.key});

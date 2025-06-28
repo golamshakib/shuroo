@@ -1,14 +1,10 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
-
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
-import '../../../../routes/app_routes.dart';
 
 void showPostEditePopup(BuildContext context) {
   showModalBottomSheet(

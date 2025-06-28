@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
 
 import '../../controller/my_all_post_screen_controller.dart';
 
 void showPeopleBottomSheet(BuildContext context) {
-
-  MyAllPostScreenController _controller = Get.put(MyAllPostScreenController());
+  final controller = Get.put(MyAllPostScreenController());
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
@@ -33,18 +30,23 @@ void showPeopleBottomSheet(BuildContext context) {
             Expanded(
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: _controller.people_name.length,
+                itemCount: controller.peopleName.length,
                 separatorBuilder: (_, __) => SizedBox(width: 20),
                 itemBuilder: (context, index) {
                   return Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(_controller.people_icons[index], height: 32,width: 32,),
+                        Image.asset(
+                          controller.peopleIcons[index],
+                          height: 32,
+                          width: 32,
+                        ),
                         SizedBox(height: 6),
                         Container(
-                          alignment: Alignment.center,
-                             child: CustomText(text: _controller.people_name[index])),
+                            alignment: Alignment.center,
+                            child: CustomText(
+                                text: controller.peopleName[index])),
                       ],
                     ),
                   );

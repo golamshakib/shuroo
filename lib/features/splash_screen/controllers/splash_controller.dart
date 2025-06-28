@@ -1,6 +1,5 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/features/authentication/presentation/screens/login_screen.dart';
 
 import '../../onboarding/screens/started_screen.dart';
 

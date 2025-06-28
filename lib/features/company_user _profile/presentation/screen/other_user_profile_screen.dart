@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
-
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -12,9 +9,7 @@ import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../home/presentation/widget/custom_home_post_card.dart';
-import '../widget/job_tabbar_card.dart';
 import '../widget/other_user_resume_widget.dart';
-import '../widget/tabbar_about_item.dart';
 
 class OtherUserProfileScreen extends StatelessWidget {
   OtherUserProfileScreen({super.key});

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/search_notification_chat/controller/notification_controller.dart';
 import '../../../../core/common/widgets/custom_back_button.dart';
-import '../../../../core/common/widgets/custom_blue_gray_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 

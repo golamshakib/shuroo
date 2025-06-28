@@ -32,7 +32,7 @@ class PostCardScrollhorizonta extends StatelessWidget {
     required this.icon,
   });
 
-  HomeController _controller = Get.put(HomeController());
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class PostCardScrollhorizonta extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 10),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _controller.item.length,
+              itemCount: controller.item.length,
               itemBuilder: (context, index) {
                 return Container(
                   width: 123.w,
@@ -114,7 +114,7 @@ class PostCardScrollhorizonta extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      _controller.item[index],
+                      controller.item[index],
 
                       fit: BoxFit.cover,
                     ),
