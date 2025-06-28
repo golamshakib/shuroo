@@ -2,14 +2,11 @@
 
 import 'dart:developer';
 
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
-import 'package:shuroo/core/utils/constants/app_colors.dart';
-import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 
 import '../../../../routes/app_routes.dart';
@@ -59,7 +56,7 @@ class AuthenticationRepositories{
   }
 
   Future<void> login(Map<String, dynamic> requestBody) async{
-
+ 
     try{
       showProgressIndicator();
       final response = await NetworkCaller().postRequest(AppUrls.login, body: requestBody);
