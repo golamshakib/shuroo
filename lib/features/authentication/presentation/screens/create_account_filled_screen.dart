@@ -77,6 +77,18 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     ),
                   ),
                   // SizedBox(height: 24,),
+                  Container(
+                    margin: EdgeInsets.only(top: 24.h),
+                    child: CustomTextFormField(
+
+                      controller: _controller.phoneController,
+                      label: "Phone",
+                      hintText: "+1",
+                      fontFamily: 'Inter',
+                      hintSize: 16,
+                      icon: IconPath.phoneIcon,
+                    ),
+                  ),
 
                   Container(
                     margin: EdgeInsets.only(top: 24.h, bottom: 10.w),
@@ -118,11 +130,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                         )
                       : SizedBox()),
 
-
-
-
-
-
                   Container(
                     margin: EdgeInsets.only(top: 8),
                     child: Text.rich(
@@ -140,10 +147,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-
-
-
 
 
                   Container(
