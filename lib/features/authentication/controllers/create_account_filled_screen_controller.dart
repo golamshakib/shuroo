@@ -28,19 +28,24 @@ class FilledScreenController extends GetxController {
       phoneController.text.isNotEmpty &&
       passController.text.isNotEmpty
     ){
-      if(GetUtils.isEmail(emailController.text)){
-        final requestBody = {
-          "name": nameController.text,
-          "email": emailController.text,
-          "phone": phoneController.text,
-          "password": passController.text
-        };
+      if(passController.text.length > 7){
+        if(GetUtils.isEmail(emailController.text)){
+          final requestBody = {
+            "name": nameController.text,
+            "email": emailController.text,
+            "phone": phoneController.text,
+            "password": passController.text
+          };
 
-        final object = AuthenticationRepositories();
-        object.createAccount(requestBody);
+          final object = AuthenticationRepositories();
+          object.createAccount(requestBody);
+        }
+        else{
+          Get.snackbar("Error", "Enter a valid Email Format", backgroundColor: Colors.red.withAlpha(180), colorText: Colors.white);
+        }
       }
       else{
-        Get.snackbar("Error", "Enter a valid Email Format", backgroundColor: Colors.red.withAlpha(180), colorText: Colors.white);
+        Get.snackbar("Error", "Password length have at least 8", backgroundColor: Colors.red.withAlpha(180), colorText: Colors.white);
       }
     }
     else{

@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/authentication/controllers/sign_in_screen_controller.dart';
@@ -15,7 +14,6 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../../routes/app_routes.dart';
-import '../../controllers/create_account_filled_screen_controller.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -24,7 +22,6 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("........SignInScreen");
     return Scaffold(
         body: SafeArea(
             child: Container(
@@ -40,11 +37,10 @@ class SignInScreen extends StatelessWidget {
                         CustomText(text: AppText.sign_in, fontSize: 24.sp),
                         CustomTextFormField(
                           controller: _controller.emailController,
-
                           label: AppText.emailIID,
                           hintSize: 16,
                           hintColor: AppColors.textPrimary,
-                          hintText: AppText.hint_rochellebackman,
+                          hintText: "Enter your email",
                           icon: IconPath.email,
                           fontFamily: 'Inter',
                         ),
@@ -91,15 +87,12 @@ class SignInScreen extends StatelessWidget {
                                     children: [
                                       Image.asset(IconPath.wrong,height: 16.h,width: 16.w,),
                                       CustomText(
-                                          text: " "+AppText.WrongEmailAndPass,color: Colors.red,fontSize: 14,),
+                                          text: AppText.WrongEmailAndPass,color: Colors.red,fontSize: 14,),
                                     ],
                                   )),
 
                               InkWell(
                                 onTap: (){
-
-                                  print("........forgotPasswordScreen");
-
                                   Get.toNamed(AppRoute.forgotPasswordScreen);
                                 },
                                 child: Text(
@@ -147,7 +140,6 @@ class SignInScreen extends StatelessWidget {
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => Get.toNamed(
                                          AppRoute.signUpScreen
-
                                     ),
                                 ),
                               ],

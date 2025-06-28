@@ -34,4 +34,9 @@ class SignInScreenController extends GetxController {
   void togglePasswordVisibility() {
     obscureText.value = !obscureText.value;
   }
+
+
+  void requestToLogin(){
+
+  }
 }

@@ -2,6 +2,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
+import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
 import 'package:shuroo/features/profile/presentation/screen/about_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/change_password_screen.dart';
@@ -64,7 +65,7 @@ class AppRoute {
 
   // Nev Bar
   static String nevBar = "/nevBar";
-
+  static String jobScreen = "/jobScreen";
   static String appliedJobScreen = "/appliedJobScreen";
   static String notificationScreen = "/notificationScreen";
   static String searchingScreen = "/searchingScreen";
@@ -88,7 +89,7 @@ class AppRoute {
     GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
     GetPage(name: signInAndUnlockScreen, page:() => SignInAndUnlockScreen()),
     GetPage(name: signInScreen, page:() => SignInScreen()),
-    GetPage(name: signUpScreen, page:() => SignUpScreen()),
+    GetPage(name: signUpScreen, page:() => CreateAccountFilledScreen()),
     GetPage(name: forgotPasswordScreen, page:() => ForgotPasswordScreen()),
     GetPage(name: signUpVeryficationCodeScreen, page:() => SignUpVeryficationCodeScreen()),
     GetPage(name: accountConfirmScreen, page:() => AccountConfirmScreen()),
@@ -116,7 +117,6 @@ class AppRoute {
     GetPage(name: searchResultScreen, page:() => SearchResultScreen()),
     GetPage(name: jobDetailsScreen, page:() => JobDetailsScreen()),
     GetPage(name: chatScreen, page:() => ChatScreen()),
-
-
+    GetPage(name: jobScreen, page:() => JobScreen()),
   ];
 }
