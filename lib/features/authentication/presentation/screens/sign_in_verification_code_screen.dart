@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/authentication/presentation/screens/reset_password_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -91,28 +91,31 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                             ),),
                         ),
 
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: List.generate(6, (i) {
-                            return SizedBox(
-                              width: 45,
-                              child: TextField(
-                                controller: otpFields[i],
-                                maxLength: 1,
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                onChanged: (value) =>
-                                    _handleOtpInput(i, value, context),
-                                decoration:
-                                const InputDecoration(counterText: ''),
-                              ),
-                            );
-                          }),
+                        Pinput(
+                          controller: controller.pinTEController,
+                          length: 6,
+                          defaultPinTheme: PinTheme(
+                            width: 56,
+                            height: 56,
+                            textStyle: GoogleFonts.cabin(
+                                decorationColor: const Color(0xff2972FF),
+                                fontSize: 14.sp,
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.w600
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onCompleted: (v){
+                            controller.active.value = true;
+                          },
+                          onTapOutside: (v){
+                            FocusScope.of(context).unfocus();
+                          },
                         ),
+
                         Container(
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
@@ -147,12 +150,19 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                             ),),
                         ),
 
-                        Container(
-                          child: CustomSubmitButton(
-                            text: AppText.verify, onTap: () {
-                            Get.toNamed(AppRoute.resetPasswordScreen);
-                            print("..............code");
-                          },),
+                        Obx(() =>
+                          controller.active.value ?
+                          CustomSubmitButton(
+                            text: AppText.verify,
+                            onTap: () {
+                              controller.verifyOtp();
+                          },
+                          ) :
+                          CustomSubmitButton(
+                            color: AppColors.custom_blue.withAlpha(100),
+                            text: AppText.verify,
+                            onTap: (){},
+                          )
                         )
                       ],
                     ),

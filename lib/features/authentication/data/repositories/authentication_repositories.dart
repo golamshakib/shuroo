@@ -108,4 +108,54 @@ class AuthenticationRepositories{
     }
   }
 
+  Future<void> verifyOTP(Map<String, dynamic> requestBody) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.verifyOTP, body: requestBody);
+      if(response.isSuccess){
+        Get.back();
+        AppSnackBar.showSuccess(response.responseData['message']);
+        final token = response.responseData['data'];
+        Get.toNamed(AppRoute.resetPasswordScreen, arguments: token);
+      }
+      else if(response.statusCode == 404){
+        Get.back();
+        AppSnackBar.showError("User Not Found!!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  Future<void> resetPassword(Map<String, dynamic> requestBody) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.resetPassword, body: requestBody);
+      if(response.isSuccess){
+        Get.back();
+        AppSnackBar.showSuccess(response.responseData['message']);
+        final token = response.responseData['data'];
+        Get.toNamed(AppRoute.homeScreen);
+      }
+      else if(response.statusCode == 404){
+        Get.back();
+        AppSnackBar.showError("Failed to reset!!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
 }

@@ -92,9 +92,9 @@ class ResetPasswordScreen extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(top: 293),
                               child: CustomSubmitButton(
-                                text: AppText.changePassword, onTap: () {
-                                Get.toNamed(
-                                    AppRoute.signInScreen);
+                                text: AppText.changePassword,
+                                onTap: () {
+                                  _controller.requestToResetPassword();
                               },),
                             )
                             // S

@@ -11,9 +11,8 @@ class ForgotPasswordController extends GetxController{
     if(emailController.text.isNotEmpty && GetUtils.isEmail(emailController.text)){
 
       final requestBody = {
-        "email":"cetes48842@ofacer.com"
+        "email": emailController.text
       };
-
       final object = AuthenticationRepositories();
       object.sendOTPToEmail(requestBody);
     }

@@ -76,7 +76,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                               margin: EdgeInsets.only(top: 396),
                               child: CustomSubmitButton(
                                 text: AppText.continueB, onTap: () {
-                                  Get.toNamed(AppRoute.signInVeryficationCodeScreen);
+                                  _controller.requestToSendOTP();
 
                                /* Get.toNamed(
                                     AppRoute.signInVeryficationCodeScreen);*/
