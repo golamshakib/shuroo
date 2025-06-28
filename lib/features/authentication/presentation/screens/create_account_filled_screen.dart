@@ -83,7 +83,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     child: CustomTextFormFieldPass(
                       onChanged: (qw) {
                         _controller.getValidator(qw);
-
                       },
                       controller: _controller.passController,
                       label: AppText.createPassword,
