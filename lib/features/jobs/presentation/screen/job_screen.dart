@@ -227,8 +227,9 @@ class JobScreen extends StatelessWidget {
                                       Spacer(),
                                       GestureDetector(
                                         onTap: () {
+                                          final jobId = controller.getAllJobsModel.value.data![index].id.toString();
                                           Get.toNamed(AppRoute.jobDetailsScreen,
-                                              arguments: "id");
+                                              arguments: jobId);
                                         },
                                         child: Row(
                                           children: [
