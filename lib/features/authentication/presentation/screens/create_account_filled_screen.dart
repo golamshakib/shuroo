@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:get/get.dart';
 import 'package:password_strength_indicator_plus/password_strength_indicator_plus.dart';
 import 'package:shuroo/core/common/widgets/custom_password_textform_field.dart';
@@ -78,10 +80,11 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24.h),
                     child: CustomTextFormField(
-
                       controller: _controller.phoneController,
                       label: "Phone",
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       hintText: "+1",
+                      keyboardType: TextInputType.phone,
                       fontFamily: 'Inter',
                       hintSize: 16,
                       icon: IconPath.phoneIcon,
