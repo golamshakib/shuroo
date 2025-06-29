@@ -46,12 +46,12 @@ class JobScreen extends StatelessWidget {
                       height: 76.h,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4, // number of columns
+                          crossAxisCount: 4,
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
-                          childAspectRatio: 1, // width / height
+                          childAspectRatio: 1,
                         ),
-                        itemCount: controller.jobs.length, // number of items
+                        itemCount: controller.jobs.length,
                         itemBuilder: (context, index) {
                           final jobs = controller.jobs[index];
                           return GestureDetector(
@@ -85,6 +85,21 @@ class JobScreen extends StatelessWidget {
                         },
                       )
                   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   SizedBox(height: 16.h),
                   ListView.builder(
                     shrinkWrap: true,
@@ -95,7 +110,8 @@ class JobScreen extends StatelessWidget {
                       final jobList = controller.jobModelList[index];
                       return GestureDetector(
                         onTap: ()=> Get.toNamed(AppRoute.jobDetailsScreen),
-                        child: Container(
+                        child: 
+                        Container(
                             margin: EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               color: Colors.white,

@@ -17,21 +17,21 @@ import '../../../post_creation_repost_delete/presentation/widget/custom_popup.da
 
 class PostCard extends GetView<HomeController> {
   final String organization;
-  final String timeAgo;
+ // final String? timeAgo;
   final String title;
   final String content;
   final String icon;
   final BuildContext context;
-  final String hashtags;
+ // final String? hashtags;
   final String imageAsset;
 
   const PostCard({
     super.key,
     required this.organization,
-    required this.timeAgo,
+  //  this.timeAgo,
     required this.title,
     required this.content,
-    required this.hashtags,
+  //  this.hashtags,
     required this.imageAsset,
     required this.icon,
     required this.context,
@@ -90,7 +90,7 @@ class PostCard extends GetView<HomeController> {
                   flex: 1,
                   child: Container(
                       alignment: Alignment.topCenter,
-                      child: Text(timeAgo,
+                      child: Text('',
                           style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
@@ -106,7 +106,7 @@ class PostCard extends GetView<HomeController> {
           const SizedBox(height: 4),
           Text(content),
           const SizedBox(height: 4),
-          Text(hashtags, style: const TextStyle(color: Colors.blue)),
+          Text('', style: const TextStyle(color: Colors.blue)),
           const SizedBox(height: 8),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),

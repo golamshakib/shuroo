@@ -1,104 +1,77 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
+import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/core/utils/constants/image_path.dart';
-import 'package:get/get.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
-import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
-import '../widget/custom_home_post_card_Scroll horizontal.dart';
 
-class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+
+  final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackgroundColor,
-
       drawer: CustomDrower(),
-
       appBar: AppBar(
         backgroundColor: AppColors.scaffoldBackgroundColor,
         title: GestureDetector(
-          onTap: (){
-
-
-          },
+          onTap: () {},
           child: Row(
             children: [
-              Image.asset(IconPath.icon_pro,height:40,width: 40,),
-              SizedBox(width: 10),
+              Image.asset(
+                IconPath.icon_pro,
+                height: 40.h,
+                width: 40.w,
+              ),
+              SizedBox(width: 10.w),
               const Text(AppText.hi_rochelle),
             ],
           ),
         ),
-        actions:  [
+        actions: [
           IconButton(
-              onPressed: (){
-                Get.toNamed(AppRoute.notificationScreen);
-              }, icon: Icon(Icons.notifications_none_outlined)),
+            onPressed: () {
+              // Navigate to notifications screen
+              // Get.toNamed(AppRoute.notificationScreen);
+            },
+            icon: const Icon(Icons.notifications_none_outlined),
+          ),
           SizedBox(width: 16),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        child: Obx(() {
+          if (controller.postDataList.isEmpty) {
+            return const Center(child: Text("No posts found"));
+          }
 
+          return ListView.builder(
+            itemCount: controller.postDataList.length,
+            itemBuilder: (context, index) {
+              final post = controller.postDataList[index];
 
+              final String? firstImage =
+                  post.image.isNotEmpty ? post.image.first : null;
 
-          PostCard(context:context ,
-            icon: IconPath.icon_1,
-            organization: AppText.wildWorld,
-            timeAgo: "1w ago",
-            title: AppText.campus_Event,
-            content:
-               AppText.the_annualCareer,
-            imageAsset: ImagePath.img_video,
-
-            hashtags: AppText.careerFair,
-
-          ),
-
-
-
-          PostCardScrollhorizonta(
-            icon: IconPath.icon_1,
-
-            organization: AppText.brookfieldUniversity,
-            timeAgo: "1w ago",
-            title: "\uD83C\uDFC6 Alex Martin Wins Debate Tournament",
-            content:
-            "Congratulations to Alex Martin for taking home first place in the National Debate Championship! \uD83C\uDFC5",
-            hashtags: "#StudentSpotlight #DebateChamps",
-            imageAsset: ImagePath.img_video,
-
-
-
-          ),
-
-
-
-           PostCard(
-            context: context,
-            icon: IconPath.icon_1,
-
-            organization: "Brookfield University",
-            timeAgo: "1w ago",
-            title: "\uD83C\uDFC6 Alex Martin Wins Debate Tournament",
-            content:
-                "Congratulations to Alex Martin for taking home first place in the National Debate Championship! \uD83C\uDFC5",
-            hashtags: "#StudentSpotlight #DebateChamps",
-            imageAsset: ImagePath.img_video,
-
-
-
-          ),
-        ],
-      ),      
+              return PostCard(
+                icon: firstImage ?? IconPath.icon_pro,
+                title: post.content,
+                content: post.content,
+                organization: post.userId,
+                imageAsset: firstImage ?? IconPath.icon_pro,
+                context: context,
+              );
+            },
+          );
+        }),
+      ),
     );
   }
 }

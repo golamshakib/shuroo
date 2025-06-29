@@ -25,4 +25,9 @@ class AppUrls {
   static const String editPost = '$_baseUrl/post/update';
   static const String deletePost = '$_baseUrl/post/delete';
 
+
+
+  static const String jobApplie = '$_baseUrl/application/create';
+  static const String appliedItem = '$_baseUrl/application/getAppliedJob';
+
 }

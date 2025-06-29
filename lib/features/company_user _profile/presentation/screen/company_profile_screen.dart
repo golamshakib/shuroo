@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/home/presentation/widget/custom_home_post_card.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -8,7 +9,6 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
-import '../../../home/presentation/widget/custom_home_post_card.dart';
 import '../../controller/company_profile_screen_controller.dart';
 import '../widget/job_tabbar_card.dart';
 import '../widget/tabbar_about_item.dart';
@@ -96,11 +96,11 @@ class CompanyProfileScreen extends StatelessWidget {
                             context: context,
                             icon: IconPath.icon_1,
                             organization: AppText.wildWorld,
-                            timeAgo: "1w ago",
+                        //    timeAgo: "1w ago",
                             title: AppText.campus_Event,
                             content: AppText.the_annualCareer,
                             imageAsset: ImagePath.img_video,
-                            hashtags: AppText.careerFair,
+                        //    hashtags: AppText.careerFair,
                           ),
                         ),
                       );
