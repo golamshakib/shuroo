@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:shuroo/core/common/widgets/custom_appbar.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -43,7 +40,6 @@ class MyAllPostScreen extends StatelessWidget {
                   )
                 ],
               ),
-
               Expanded(
                 child: ListView.builder(
                   itemCount: 10,
@@ -61,7 +57,8 @@ class MyAllPostScreen extends StatelessWidget {
                         ],
                       ),
                       margin: EdgeInsets.only(top: 16),
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: Column(
                         children: [
                           Row(
@@ -90,9 +87,7 @@ class MyAllPostScreen extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-
                                   showPostEditePopup(context);
-
                                 },
                                 child: Image.asset(IconPath.dod),
                               )
@@ -117,11 +112,9 @@ class MyAllPostScreen extends StatelessWidget {
                         ],
                       ),
                     );
-
                   },
                 ),
               )
-
             ],
           ),
         )));

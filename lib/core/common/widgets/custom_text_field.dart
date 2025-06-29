@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.minLine,
     this.radius = 12,
     this.padding,
+    this.showBorder = true,
   });
 
   final TextEditingController controller;
@@ -44,6 +45,7 @@ class CustomTextField extends StatelessWidget {
   final int? minLine;
   final double radius;
   final EdgeInsets? padding;
+  final bool? showBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -75,21 +77,30 @@ class CustomTextField extends StatelessWidget {
         ),
         fillColor: fillColor ?? Colors.white,
         filled: true,
-        enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
-            borderRadius: BorderRadius.circular(radius)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
-            borderRadius: BorderRadius.circular(radius)),
+        enabledBorder: showBorder == true
+            ? OutlineInputBorder(
+                borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
+                borderRadius: BorderRadius.circular(radius),
+              )
+            : InputBorder.none,
+        focusedBorder: showBorder == true
+            ? OutlineInputBorder(
+                borderSide: const BorderSide(color: Color(0xFFE6E6E7), width: 1),
+                borderRadius: BorderRadius.circular(radius),
+              )
+            : InputBorder.none,
         contentPadding: padding ??
             EdgeInsets.only(
-                left: 12.w, right: 10.w, top: 12.h, bottom: 12.h),
+              left: 12.w,
+              right: 10.w,
+              top: 12.h,
+              bottom: 12.h,
+            ),
       ),
       validator: validator,
-      onTapOutside: onTapOutside ?? (c) {
+      onTapOutside: onTapOutside ?? (event) {
         FocusScope.of(context).unfocus();
       },
     );
   }
 }
-

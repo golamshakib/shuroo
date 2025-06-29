@@ -1,5 +1,4 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/dummy/presentation/screen/dummy_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
@@ -23,7 +22,6 @@ import '../features/authentication/presentation/screens/forgot_password_screen.d
 import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_screen.dart';
-import '../features/authentication/presentation/screens/sing_up_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
 import '../features/authentication/presentation/screens/verification_code_screen.dart';
 import '../features/company_user _profile/presentation/screen/company_profile_screen.dart';
@@ -31,7 +29,6 @@ import '../features/company_user _profile/presentation/screen/other_user_profile
 import '../features/home/presentation/screen/home_screen.dart';
 import '../features/jobs/presentation/screen/job_details_screen.dart';
 import '../features/onboarding/screens/started_screen.dart';
-import '../features/post_creation_repost_delete/presentation/screen/make_post_home_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/my_all_post_screen.dart';
 import '../features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import '../features/splash_screen/presentation/screens/splash_screen.dart';
@@ -97,7 +94,7 @@ class AppRoute {
     GetPage(name: signInVeryficationCodeScreen, page:() => SignInVeryficationCodeScreen()),
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
-    GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
+    // GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
     GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),

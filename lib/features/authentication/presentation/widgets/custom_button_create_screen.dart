@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
@@ -48,7 +47,7 @@ class CustomButtonCreateScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: left,right: right),
                   child: Text(
-                    text ?? 'Sign Up with Phone or Email',
+                    text,
                     style: const TextStyle(color: Colors.black,fontSize:15 ),
                   ),
                 ),

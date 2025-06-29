@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/custom_repost_screen_card.dart';
-
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -15,8 +12,9 @@ import '../../../../routes/app_routes.dart';
 import '../../controller/repost_with_throught_screen_controller.dart';
 
 class RepostWithThroughtScreen extends StatelessWidget {
-   RepostWithThroughtScreen({super.key});
-   RepostWithThroughtScreenController _controller = Get.put(RepostWithThroughtScreenController());
+  RepostWithThroughtScreen({super.key});
+  RepostWithThroughtScreenController _controller =
+      Get.put(RepostWithThroughtScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +22,15 @@ class RepostWithThroughtScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.back();
                   },
-
                   child: Image.asset(
                     IconPath.cancle,
                     height: 40,
@@ -54,14 +50,10 @@ class RepostWithThroughtScreen extends StatelessWidget {
                 )
               ],
             ),
-
             InkWell(
-              onTap: (){
-
+              onTap: () {
                 Get.offAll(AppRoute.homeScreen);
-
               },
-
               child: Container(
                 width: 72.0.w,
                 height: 40.0.h,
@@ -72,54 +64,41 @@ class RepostWithThroughtScreen extends StatelessWidget {
                 ),
                 child: Center(
                     child: CustomText(
-                      text: AppText.post,
-                      color: AppColors.white,
-                      fontSize: 14.0,
-                    )),
+                  text: AppText.post,
+                  color: AppColors.white,
+                  fontSize: 14.0,
+                )),
               ),
             ),
-
-
-
-
-
           ],
         ),
       ),
-
-body:  SafeArea(
-  child: SingleChildScrollView(
-    child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-      child: Column(
-        children: [
-          Container(
-
-              child: CustomTextField(
-                  maxLine: 3,
-                  controller: _controller.textController,
-                  hintText: "Share your thoughts...")),
-
-
-
-          CustomRepostScreenCard(context:context ,
-            icon: IconPath.icon_1,
-            organization: AppText.wildWorld,
-            timeAgo: "1w ago",
-            title: AppText.campus_Event,
-            content:
-            AppText.the_annualCareer,
-            imageAsset: ImagePath.img_video,
-
-            hashtags: AppText.careerFair,
-
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: Column(
+              children: [
+                Container(
+                    child: CustomTextField(
+                        maxLine: 3,
+                        controller: _controller.textController,
+                        hintText: "Share your thoughts...")),
+                CustomRepostScreenCard(
+                  context: context,
+                  icon: IconPath.icon_1,
+                  organization: AppText.wildWorld,
+                  timeAgo: "1w ago",
+                  title: AppText.campus_Event,
+                  content: AppText.the_annualCareer,
+                  imageAsset: ImagePath.img_video,
+                  hashtags: AppText.careerFair,
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
-    ),
-  ),
-),
-
     );
   }
 }
