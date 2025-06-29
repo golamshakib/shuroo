@@ -1,15 +1,11 @@
-
 import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:password_strength_indicator_plus/password_strength_indicator_plus.dart';
 import 'package:shuroo/core/common/widgets/custom_password_textform_field.dart';
 import 'package:shuroo/core/common/widgets/custom_submit_button.dart';
-import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/routes/app_routes.dart';
@@ -83,10 +79,11 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24.h),
                     child: CustomTextFormField(
-
                       controller: _controller.phoneController,
                       label: "Phone",
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       hintText: "+1",
+                      keyboardType: TextInputType.phone,
                       fontFamily: 'Inter',
                       hintSize: 16,
                       icon: IconPath.phoneIcon,

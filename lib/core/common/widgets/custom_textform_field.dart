@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -10,6 +11,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? fontFamily;
   final String? icon;
   final int? hintSize;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final Color? hintColor;
   final ValueChanged<String>? onChanged;
   final Widget? prefixIcon;
@@ -21,6 +24,8 @@ class CustomTextFormField extends StatelessWidget {
     this.label,
     required this.hintText,
     this.icon,
+    this.keyboardType,
+    this.inputFormatters,
     this.controller,
     this.isPassword,
     this.hintColor,
@@ -65,6 +70,8 @@ class CustomTextFormField extends StatelessWidget {
                   child: TextFormField(
                     onChanged: onChanged ?? (sd) {},
                     controller: controller,
+                    inputFormatters: inputFormatters,
+                    keyboardType: keyboardType,
                     decoration: InputDecoration(
                       hintText: hintText,
                       prefixIcon: prefixIcon,
