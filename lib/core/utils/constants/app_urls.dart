@@ -15,10 +15,9 @@ class AppUrls {
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
 
 
-
-
-
-
+  // Job Added by Shahriar
+  static const String getAllJobs = '$_baseUrl/job/all';
+  static String getSingleJob(id) => '$_baseUrl/job/$id';
 
 
 
