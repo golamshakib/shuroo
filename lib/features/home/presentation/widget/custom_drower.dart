@@ -31,55 +31,105 @@ class CustomDrower extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipOval(
-                        child: Image.asset(ImagePath.profilePic, height: 44.h, width: 44.h, fit: BoxFit.fill,),
+                        child: Image.asset(
+                          ImagePath.profilePic,
+                          height: 44.h,
+                          width: 44.h,
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                      SizedBox(width: 12.w,),
+                      SizedBox(
+                        width: 12.w,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomText(text: "Nifat Chowdhury", fontWeight: FontWeight.w500,),
-                          CustomText(text: "Complete profile", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.customBlue,),
+                          CustomText(
+                              text: "Nifat Chowdhury",
+                              fontWeight: FontWeight.w500),
+                          GestureDetector(
+                              onTap: () {
+                                Get.toNamed(AppRoute.profileInformationScreen);
+                              },
+                              child: CustomText(
+                                text: "Complete profile",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12.sp,
+                                color: AppColors.customBlue,
+                              )),
                         ],
                       )
                     ],
                   ),
-                  Icon(Icons.arrow_forward_outlined,)
+                  Icon(
+                    Icons.arrow_forward_outlined,
+                  )
                 ],
               ),
-              SizedBox(height: 8.h,),
+              SizedBox(
+                height: 8.h,
+              ),
               Divider(
                 thickness: 1.sp,
                 color: const Color(0xFFE6E6E7),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(AppRoute.personalCreationScreen);
                 },
                 child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                   Image.asset(IconPath.pIcon, height: 16.h, width: 16.w,),
-                   SizedBox(width: 6.w,),
-                   CustomText(text: "My Profile", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
-                 ],
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      IconPath.pIcon,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    CustomText(
+                      text: "My Profile",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      color: const Color(0xFF353A40),
+                    )
+                  ],
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(AppRoute.changePasswordScreen);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(IconPath.lockIcon, height: 16.h, width: 16.w,),
-                    SizedBox(width: 6.w,),
-                    CustomText(text: "Password", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
+                    Image.asset(
+                      IconPath.lockIcon,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    CustomText(
+                      text: "Password",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      color: const Color(0xFF353A40),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,115 +137,192 @@ class CustomDrower extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(IconPath.notifyIcon, height: 16.h, width: 16.w,),
-                      SizedBox(width: 6.w,),
-                      CustomText(text: "Notification", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
+                      Image.asset(
+                        IconPath.notifyIcon,
+                        height: 16.h,
+                        width: 16.w,
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      CustomText(
+                        text: "Notification",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.sp,
+                        color: const Color(0xFF353A40),
+                      )
                     ],
                   ),
                   Transform.scale(
                     scale: .7,
-                    child: Obx(() =>
-                        Switch(
+                    child: Obx(() => Switch(
                           activeTrackColor: const Color(0xFF353A40),
                           value: homeController.activeNotification.value,
-                          onChanged: (newValue){
-                            homeController.activeNotification.value = !homeController.activeNotification.value;
+                          onChanged: (newValue) {
+                            homeController.activeNotification.value =
+                                !homeController.activeNotification.value;
                           },
-                        )
-                    ),
+                        )),
                   )
                 ],
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(AppRoute.aboutScreen);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(IconPath.aboutIcon, height: 16.h, width: 16.w,),
-                    SizedBox(width: 6.w,),
-                    CustomText(text: "About", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
+                    Image.asset(
+                      IconPath.aboutIcon,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    CustomText(
+                      text: "About",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      color: const Color(0xFF353A40),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(AppRoute.helpScreen);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(IconPath.helpIcon, height: 16.h, width: 16.w,),
-                    SizedBox(width: 6.w,),
-                    CustomText(text: "Help & Support", fontWeight: FontWeight.w400, fontSize: 14.sp, color: const Color(0xFF353A40),)
+                    Image.asset(
+                      IconPath.helpIcon,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    CustomText(
+                      text: "Help & Support",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      color: const Color(0xFF353A40),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Divider(
                 thickness: 1.sp,
                 color: const Color(0xFFE6E6E7),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   showDialog(
                       context: context,
-                      builder: (context){
+                      builder: (context) {
                         return AlertDialog(
                           backgroundColor: AppColors.white,
-                          actionsPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                          actionsPadding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 16.h),
                           actionsAlignment: MainAxisAlignment.center,
                           actions: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.asset(ImagePath.group, fit: BoxFit.fill,),
-                                SizedBox(height: 24.h,),
-                                CustomText(text: "You’ve Signed Out!", fontSize: 24.sp, fontWeight: FontWeight.w600, textAlign: TextAlign.center,),
-                                SizedBox(height: 8.h,),
-                                CustomText(text: "Your journey doesn’t stop here see you again soon!", fontWeight: FontWeight.w400, textAlign: TextAlign.center,color: AppColors.textSecondary,),
-                                SizedBox(height: 24.h,),
+                                Image.asset(
+                                  ImagePath.group,
+                                  fit: BoxFit.fill,
+                                ),
+                                SizedBox(
+                                  height: 24.h,
+                                ),
+                                CustomText(
+                                  text: "You’ve Signed Out!",
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                CustomText(
+                                  text:
+                                      "Your journey doesn’t stop here see you again soon!",
+                                  fontWeight: FontWeight.w400,
+                                  textAlign: TextAlign.center,
+                                  color: AppColors.textSecondary,
+                                ),
+                                SizedBox(
+                                  height: 24.h,
+                                ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Flexible(
                                       flex: 1,
                                       child: OutlinedButton(
-                                        style: OutlinedButton.styleFrom(
-                                          backgroundColor: AppColors.white,
-                                          side: BorderSide(color: AppColors.textSecondary),
-                                          padding: EdgeInsets.symmetric(vertical: 11.h),
-                                        ),
-                                        onPressed: (){
-                                          Get.back();
-                                        },
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          child: CustomText(text: "No", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.textSecondary, textAlign: TextAlign.center,),
-                                        )
-                                      ),
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: AppColors.white,
+                                            side: BorderSide(
+                                                color: AppColors.textSecondary),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 11.h),
+                                          ),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: CustomText(
+                                              text: "No",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15.sp,
+                                              color: AppColors.textSecondary,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )),
                                     ),
-                                    SizedBox(width: 11.w,),
+                                    SizedBox(
+                                      width: 11.w,
+                                    ),
                                     Flexible(
                                       flex: 1,
                                       child: OutlinedButton(
                                           style: OutlinedButton.styleFrom(
-                                            backgroundColor: AppColors.customBlue,
+                                            backgroundColor:
+                                                AppColors.customBlue,
                                             side: BorderSide.none,
-                                            padding: EdgeInsets.symmetric(vertical: 11.h),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 11.h),
                                           ),
-                                          onPressed: (){
+                                          onPressed: () {
                                             AuthService.logoutUser();
                                           },
                                           child: SizedBox(
                                             width: double.infinity,
-                                            child: CustomText(text: "Yes", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white, textAlign: TextAlign.center,),
-                                          )
-                                      ),
+                                            child: CustomText(
+                                              text: "Yes",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15.sp,
+                                              color: AppColors.white,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )),
                                     )
                                   ],
                                 )
@@ -203,19 +330,31 @@ class CustomDrower extends StatelessWidget {
                             )
                           ],
                         );
-                      }
-                  );
+                      });
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(IconPath.logoutIcon, height: 16.h, width: 16.w,),
-                    SizedBox(width: 6.w,),
-                    CustomText(text: "Sign Out", fontWeight: FontWeight.w400, fontSize: 14.sp, color: Colors.red,)
+                    Image.asset(
+                      IconPath.logoutIcon,
+                      height: 16.h,
+                      width: 16.w,
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    CustomText(
+                      text: "Sign Out",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      color: Colors.red,
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
             ],
           ),
         ),

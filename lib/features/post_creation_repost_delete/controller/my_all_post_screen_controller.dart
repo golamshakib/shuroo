@@ -34,24 +34,24 @@ class MyAllPostScreenController extends GetxController {
   ];
 
   //! Get All Post ===================================================
-  Future<void> getAllPost() async {
-    try {
-      showProgressIndicator();
-      final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
+  // Future<void> getAllPost() async {
+  //   try {
+  //     showProgressIndicator();
+  //     final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
 
-      if (response.isSuccess && response.statusCode == 200) {
-        AppSnackBar.showSuccess('All Post Fetch Successfully');
-      } else if (response.statusCode == 404) {
-        AppSnackBar.showError('Data Not Found');
-      } else {
-        AppSnackBar.showError('Something went Wrong');
-      }
-    } catch (e) {
-      log('Something went Wrong $e');
-    } finally {
-      hideProgressIndicator();
-    }
-  }
+  //     if (response.isSuccess && response.statusCode == 200) {
+  //       AppSnackBar.showSuccess('All Post Fetch Successfully');
+  //     } else if (response.statusCode == 404) {
+  //       AppSnackBar.showError('Data Not Found');
+  //     } else {
+  //       AppSnackBar.showError('Something went Wrong');
+  //     }
+  //   } catch (e) {
+  //     log('Something went Wrong $e');
+  //   } finally {
+  //     hideProgressIndicator();
+  //   }
+  // }
 
   //! Get Single Post ===================================================
 

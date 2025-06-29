@@ -17,10 +17,10 @@ class JobScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final job = controller.getAllJobsModel.value.data;
-      if(job == null){
-        return Center(child: CircularProgressIndicator(color: AppColors.primary,));
+      if (job == null) {
+        return Center(child: CircularProgressIndicator(color: AppColors.primary));
       }
-      if(job.isEmpty){
+      if (job.isEmpty) {
         return Center(child: CustomText(text: "No jobs available"));
       }
       return Scaffold(
@@ -34,234 +34,193 @@ class JobScreen extends StatelessWidget {
               color: AppColors.textPrimary),
         ),
         body: SafeArea(
-            child: Padding(padding: EdgeInsets.symmetric(
-                horizontal: 16, vertical: 12),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: controller.search,
-                      hintText: 'Search job title or keyword ',
-                      prefixIcon: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoute.searchResultScreen);
-                        },
-                        child: Icon(Icons.search),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: controller.search,
+                    hintText: 'Search job title or keyword ',
+                    prefixIcon: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoute.searchResultScreen);
+                      },
+                      child: Icon(Icons.search),
+                    ),
+                  ),
+
+                  SizedBox(height: 12.h),
+                  SizedBox(
+                    height: 76.h,
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 1,
                       ),
-                    ),
-                    SizedBox(height: 12.h),
-                    SizedBox(
-                        height: 76.h,
-                        child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4, // number of columns
-                            crossAxisSpacing: 8,
-                            mainAxisSpacing: 8,
-                            childAspectRatio: 1, // width / height
-                          ),
-                          itemCount: controller.jobs.length, // number of items
-                          itemBuilder: (context, index) {
-                            final jobs = controller.jobs[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Get.to(controller.jobScreens[index]);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColors.textWhite,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 14, left: 14, right: 14),
-                                      child: SvgPicture.asset(jobs.icon!),
-                                    ),
-                                    Flexible(
-                                      child: CustomText(
-                                        text: jobs.title!,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.textPrimary,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                    ),
-                    SizedBox(height: 16.h),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: job.length,
+                      itemCount: controller.jobs.length,
                       itemBuilder: (context, index) {
-                        final jobList = controller.getAllJobsModel.value.data![index];
-                        return Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
+                        final jobs = controller.jobs[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(controller.jobScreens[index]);
+                          },
+                          child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                  color: Color(0xffF5F5F5), width: 0.2),
+                              color: AppColors.textWhite,
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () =>
-                                      Get.toNamed(
-                                      AppRoute.companyProfileScreen),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          jobList.company?.logoImage ?? ''),
-                                    ),
-                                    title: CustomText(
-                                      text: jobList.company?.name ?? '',
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.textPrimary,
-                                    ),
-                                    subtitle: CustomText(
-                                      text: jobList.company?.name ?? '',
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.textGray,),
-
-                                    trailing: Obx(() {
-                                      return InkWell(
-                                        onTap: () =>
-                                            controller.toggleFavorite(index),
-                                        child: Icon(
-                                          controller.jobModelList[index]
-                                              .isFavorite.value
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
-                                          color: controller.jobModelList[index]
-                                              .isFavorite.value
-                                              ? AppColors.custom_blue
-                                              : AppColors.custom_blue,
-                                          size: 20,
-                                        ),);
-                                    }),
-                                  ),
-                                ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffF4F4F4),
-                                          borderRadius: BorderRadius.circular(
-                                              4),
-                                        ),
-                                        child: CustomText(
-                                          text: jobList.company?.name ?? '',
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.textGray,
-                                        ),
-                                      ),
-                                      SizedBox(width: 8.w),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffF4F4F4),
-                                          borderRadius: BorderRadius.circular(
-                                              4),
-                                        ),
-                                        child: CustomText(
-                                          text: jobList.company?.name ?? '',
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.textGray,
-                                        ),
-                                      ),
-                                      SizedBox(width: 8.w),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffF4F4F4),
-                                          borderRadius: BorderRadius.circular(
-                                              4),
-                                        ),
-                                        child: CustomText(
-                                          text: jobList.company?.name ?? '',
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.textGray,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  padding: const EdgeInsets.only(top: 14, left: 14, right: 14),
+                                  child: SvgPicture.asset(jobs.icon!),
                                 ),
-                                SizedBox(height: 14.h),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Divider(
-                                    color: Color(0xffF5F5F5),
-                                  ),
-                                ),
-                                SizedBox(height: 14.h),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: 16, left: 16, right: 16),
-                                  child: Row(
-                                    children: [
-                                      CustomText(
-                                        text: jobList.location ?? '',
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.textPrimary,),
-
-                                      Spacer(),
-                                      GestureDetector(
-                                        onTap: () {
-                                          final jobId = controller.getAllJobsModel.value.data![index].id.toString();
-                                          Get.toNamed(AppRoute.jobDetailsScreen,
-                                              arguments: jobId);
-                                        },
-                                        child: Row(
-                                          children: [
-                                            CustomText(
-                                              text: 'Apply Now',
-                                              decoration: TextDecoration
-                                                  .underline,
-                                              decorationthickness: 2,
-                                              decorationColor: AppColors
-                                                  .custom_blue,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.custom_blue,),
-                                            SizedBox(width: 4.w,),
-                                            Icon(Icons.arrow_forward,
-                                              color: AppColors.custom_blue,
-                                              size: 16,)
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                Flexible(
+                                  child: CustomText(
+                                    text: jobs.title!,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.textPrimary,
                                   ),
                                 )
                               ],
-                            )
+                            ),
+                          ),
                         );
                       },
                     ),
-                  ],
-                ),
+                  ),
+
+                  SizedBox(height: 16.h),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: job.length,
+                    itemBuilder: (context, index) {
+                      final jobList = controller.getAllJobsModel.value.data![index];
+                      return Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xffF5F5F5), width: 0.2),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () => Get.toNamed(AppRoute.companyProfileScreen),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(jobList.company?.logoImage ?? ''),
+                                ),
+                                title: CustomText(
+                                  text: jobList.company?.name ?? '',
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.textPrimary,
+                                ),
+                                subtitle: CustomText(
+                                  text: jobList.company?.name ?? '',
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.textGray,
+                                ),
+                                trailing: Obx(() {
+                                  return InkWell(
+                                    onTap: () => controller.toggleFavorite(index),
+                                    child: Icon(
+                                      controller.jobModelList[index].isFavorite.value
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: AppColors.custom_blue,
+                                      size: 20,
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 16),
+                              child: Row(
+                                children: [
+                                  ...List.generate(3, (i) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(right: 8.w),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffF4F4F4),
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: CustomText(
+                                          text: jobList.company?.name ?? '',
+                                          fontSize: 11.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.textGray,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 14.h),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Divider(color: Color(0xffF5F5F5)),
+                            ),
+                            SizedBox(height: 14.h),
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 16, left: 16, right: 16),
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    text: jobList.location ?? '',
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.textPrimary,
+                                  ),
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      final jobId = jobList.id.toString();
+                                      Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        CustomText(
+                                          text: 'Apply Now',
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          decorationColor: AppColors.custom_blue,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.custom_blue,
+                                        ),
+                                        SizedBox(width: 4.w),
+                                        Icon(Icons.arrow_forward,
+                                            color: AppColors.custom_blue, size: 16),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-            )),
+            ),
+          ),
+        ),
       );
     });
   }

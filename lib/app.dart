@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-           //initialRoute: AppRoute.nevBar,
+           initialRoute: AppRoute.signInScreen,
 
         //  initialRoute: AppRoute.myAllPostScreen,
-          initialRoute: AppRoute.init,
+        //  initialRoute: AppRoute.makePostHomeScreen,
           getPages: AppRoute.routes,
           initialBinding: ControllerBinder(),
           themeMode: ThemeMode.system,

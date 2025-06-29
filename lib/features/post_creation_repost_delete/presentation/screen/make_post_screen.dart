@@ -14,7 +14,7 @@ import '../../../../core/utils/constants/icon_path.dart';
 class MakePostScreen extends StatelessWidget {
   MakePostScreen({super.key});
 
-  final controller = Get.put(MakePostController());
+  final controller = Get.find<MakePostController>();
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +130,12 @@ class MakePostScreen extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () => controller.createPost(
-              context: context,
-              postText: controller.textController.text,
-            ),
+            onTap: () {
+              controller.createPost(
+                postText: controller.textController.text,
+              );
+              Get.back();
+            },
             child: Container(
               width: 72.w,
               height: 40.h,
