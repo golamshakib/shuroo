@@ -22,18 +22,36 @@ class ProfileInformationScreen extends GetView<ProfileInformationController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 customBackHeader("My Profile", 115),
-                SizedBox(height: 16.h,),
+                SizedBox(
+                  height: 16.h,
+                ),
 
-                customInformationTFFiled("Name", "Enter your full name", controller.nameTEController, Image.asset(IconPath.dummyPersonIcon), true),
-                customInformationTFFiled("Email", "Enter your email address", controller.emailTEController, Image.asset(IconPath.dummyEmailIcon), true),
-                customInformationTFFiled("Phone", "Enter your number", controller.phoneTEController, Image.asset(IconPath.phoneIcon), true),
-                customInformationTFFiled("Country", "Enter your country", controller.countryTEController, null, true),
-                customInformationTFFiled("State", "Enter your state", controller.stateTEController, null, true),
-                customInformationTFFiled("City", "Enter your city", controller.cityTEController, null, true),
-                SizedBox(height: 24.h,),
+                customInformationTFFiled(
+                    "Name",
+                    "Enter your full name",
+                    controller.nameTEController,
+                    Image.asset(IconPath.dummyPersonIcon),
+                    false),
+                //  customInformationTFFiled("Email", "Enter your email address", controller.emailTEController, Image.asset(IconPath.dummyEmailIcon), true),
+                customInformationTFFiled(
+                    "Phone",
+                    "Enter your number",
+                    controller.phoneTEController,
+                    Image.asset(IconPath.phoneIcon),
+                    false),
+                customInformationTFFiled("Country", "Enter your country",
+                    controller.countryTEController, null, false),
+                customInformationTFFiled("State", "Enter your state",
+                    controller.stateTEController, null, false),
+                customInformationTFFiled("City", "Enter your city",
+                    controller.cityTEController, null, false),
+                SizedBox(
+                  height: 24.h,
+                ),
                 CustomSubmitButton(
                   text: "Save",
-                  onTap: (){
+                  onTap: () {
+                    controller.updateProfile();
                     Get.back();
                   },
                 )
