@@ -1,77 +1,68 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
+import 'package:shuroo/core/services/network_caller.dart';
+import 'package:shuroo/core/utils/constants/app_urls.dart';
+import 'package:shuroo/features/favorites/data/model/get_favorite_model.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../core/utils/constants/will_be_deleted.dart';
 import '../data/model/favourite_model.dart';
 
 class FavouriteController extends GetxController{
 
-  final List<FavouriteModel> favoritesList = [
-    FavouriteModel(
-      id: 1,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.uiLogo,
-    ),
-    FavouriteModel(
-      id: 2,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.ecoLogo,
-    ),
-    FavouriteModel(
-      id: 3,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.uiLogo,
-    ),
-    FavouriteModel(
-      id: 4,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.uiLogo,
-    ),
-    FavouriteModel(
-      id: 5,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.ecoLogo,
-    ),
-    FavouriteModel(
-      id: 6,
-      title: "UI/UX Designer",
-      subTitle: "Wild World Conservation",
-      fullTimeText: "Fulltime",
-      remoteText: "Remote",
-      outreachText: "Outreach",
-      orText: "Portland, OR",
-      applyText: "Apply Now",
-      uiImagePath: WillBeDeleted.uiLogo,
-    ),
-  ];
 
+  final isLoading = false.obs;
+
+  @override
+  void onInit() async{
+    // TODO: implement onInit
+    super.onInit();
+    isLoading.value = true;
+    requestToGetFavorite();
+    isLoading.value = false;
+  }
+
+  var favoriteInformation = GetFavoriteModel();
+
+  Future<void> requestToGetFavorite() async{
+    try{
+      final response = await NetworkCaller().getRequest(AppUrls.getFavorite, token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        final data = response.responseData;
+        favoriteInformation = GetFavoriteModel.fromJson(data);
+      }
+      else{
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  void reFresh() async{
+    isLoading.value = true;
+    requestToGetFavorite();
+    isLoading.value = false;
+  }
+
+  Future<void> requestToDeleteFavorite(String id) async{
+
+    try{
+      final response = await NetworkCaller().deleteRequest(AppUrls.removeFavoriteById(id), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        AppSnackBar.showError("Removed from favorite!");
+        reFresh();
+      }
+      else{
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
+    }
+  }
 }
