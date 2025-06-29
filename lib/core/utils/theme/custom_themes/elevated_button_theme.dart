@@ -16,10 +16,14 @@ class AppElevatedButtonTheme {
       style: ButtonStyle(
         elevation: const WidgetStatePropertyAll(0),
         foregroundColor: WidgetStateProperty.resolveWith<Color>(
-              (states) => states.contains(WidgetState.disabled) ? disabledTextColor : defaultTextColor,
+          (states) => states.contains(WidgetState.disabled)
+              ? disabledTextColor
+              : defaultTextColor,
         ),
         backgroundColor: WidgetStateProperty.resolveWith<Color>(
-              (states) => states.contains(WidgetState.disabled) ? disabledBackgroundColor : defaultBackgroundColor,
+          (states) => states.contains(WidgetState.disabled)
+              ? disabledBackgroundColor
+              : defaultBackgroundColor,
         ),
         side: WidgetStateProperty.all(BorderSide(color: borderColor)),
         padding: WidgetStatePropertyAll(padding),

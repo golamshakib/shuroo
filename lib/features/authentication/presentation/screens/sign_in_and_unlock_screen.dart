@@ -13,80 +13,81 @@ class SignInAndUnlockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
-        body: SafeArea(
-          child: Container(
-            margin: EdgeInsets.only(left: 16, top: 12, right: 26),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: InkWell(onTap: (){
-                      Get.back();                },child: Icon(Icons.arrow_back, size: 24)),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          margin: EdgeInsets.only(left: 16, top: 12, right: 26),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(Icons.arrow_back, size: 24)),
+                ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    children: [
+                      Image.asset(ImagePath.logo, height: 62.h, width: 62.w),
+                      SizedBox(height: 12),
+                      CustomText(
+                          text: AppText.signinAndUnlock, fontSize: 24.sp),
+                      CustomText(text: AppText.newpossibilities, fontSize: 24),
+
+                      ///SizedBox(height: 60),
+                      Container(
+                          margin: EdgeInsets.only(top: 60),
+                          child: Image.asset(ImagePath.group,
+                              height: 206.w, width: 217)),
+                    ],
                   ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    child: Column(
-                      children: [
-                        Image.asset(ImagePath.logo, height: 62.h, width: 62.w),
-                        SizedBox(height: 12),
-                        CustomText(text: AppText.signinAndUnlock, fontSize: 24.sp),
-                        CustomText(text: AppText.newpossibilities, fontSize: 24),
-
-
-                        ///SizedBox(height: 60),
-                        Container(margin:EdgeInsets.only(top: 60),child: Image.asset(ImagePath.group, height: 206.w, width: 217)),
-                      ],
-                    ),
-                  ),
-                  // SizedBox(
-                  //   height: 60,
-                  // ),
-                  CustomButtonCreateScreen(onTap: (){
-
+                ),
+                // SizedBox(
+                //   height: 60,
+                // ),
+                CustomButtonCreateScreen(
+                  onTap: () {
                     print("sing in Screen");
                     Get.toNamed(AppRoute.signInScreen);
-
                   },
-                    text: AppText.sign_In_phone_email,
-                    img: IconPath.iconoir_user,
-                    left: 35.5,
-                    right: 7.5,
-                  ),
+                  text: AppText.sign_In_phone_email,
+                  img: IconPath.iconoir_user,
+                  left: 35.5,
+                  right: 7.5,
+                ),
 
-                  CustomButtonCreateScreen(onTap: (){},
-                    text: AppText.sign_In_facebook,
-                    img: IconPath.facebook_icon,
-                    left: 53,
-                    right: 10.5,
-                  ),
+                CustomButtonCreateScreen(
+                  onTap: () {},
+                  text: AppText.sign_In_facebook,
+                  img: IconPath.facebook_icon,
+                  left: 53,
+                  right: 10.5,
+                ),
 
+                CustomButtonCreateScreen(
+                  onTap: () {},
+                  text: AppText.sign_In_google,
+                  img: IconPath.google_icon,
+                  left: 60.79,
+                  right: 10.21,
+                ),
 
-
-
-
-                  CustomButtonCreateScreen(onTap: (){},
-                    text: AppText.sign_In_google,
-                    img: IconPath.google_icon,
-                    left: 60.79,
-                    right: 10.21,
-                  ),
-
-                  CustomButtonCreateScreen(onTap: (){},
-                    text: AppText.sign_In_apple,
-                    img: IconPath.apple_icon,
-                    left: 65,
-                    right: 10.5,
-                  ),
-
-
-                ],
-              ),
+                CustomButtonCreateScreen(
+                  onTap: () {},
+                  text: AppText.sign_In_apple,
+                  img: IconPath.apple_icon,
+                  left: 65,
+                  right: 10.5,
+                ),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }

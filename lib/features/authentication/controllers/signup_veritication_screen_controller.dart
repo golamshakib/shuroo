@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/features/authentication/data/repositories/authentication_repositories.dart';
-import 'package:shuroo/routes/app_routes.dart';
 
 class SingUpVerificationController extends GetxController {
   final int totalSeconds = 90; // 1 minute 30 seconds
@@ -44,12 +43,10 @@ class SingUpVerificationController extends GetxController {
   }
 
   void resendCode() {
-    // TODO: Hook your resend API logic here
     startTimer();
   }
 
   void verifyOtp(String otp) {
-    // TODO: Handle OTP verification logic here
     print("Verifying OTP: $otp");
   }
 

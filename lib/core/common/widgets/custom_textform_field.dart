@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../../features/authentication/controllers/create_account_default_controller.dart';
 
@@ -20,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
 
   CustomTextFormField({
-    Key? key,
+    super.key,
     this.label,
     required this.hintText,
     this.icon,
@@ -33,9 +32,9 @@ class CustomTextFormField extends StatelessWidget {
     this.fontFamily,
     this.onChanged,
     this.prefixIcon,
-  }) : super(key: key);
+  });
 
-  DefaultController _controller = Get.put(DefaultController());
+  final _controller = Get.put(DefaultController());
 
   @override
   Widget build(BuildContext context) {

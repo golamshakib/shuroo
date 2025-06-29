@@ -98,21 +98,7 @@ class HomeScreen extends GetView<HomeController> {
 
           ),
         ],
-      ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: 0,
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.favorite_border), label: 'Favorites'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.add_circle_outline), label: ''),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.message_outlined), label: 'Messages'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.work_outline), label: 'Jobs'),
-      //   ],
-      // ),
+      ),      
     );
   }
 }
