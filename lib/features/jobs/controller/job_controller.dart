@@ -1,6 +1,13 @@
+import 'dart:math' hide log;
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
+import 'package:shuroo/core/services/network_caller.dart';
+import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/features/jobs/data/model/get_all_jobs_model.dart';
 import 'package:shuroo/features/jobs/presentation/screen/profile_view_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/short_listed_screen.dart';
 
@@ -14,6 +21,9 @@ class JobController extends GetxController{
   final isFavorite = false.obs;
   final search = TextEditingController();
 
+  final isLoading = false.obs;
+  final getAllJobsModel = GetAllJobsModel().obs;
+
   final List<Widget> jobScreens = [
     AppliedJobScreen(),
     ProfileViewScreen(),
@@ -21,7 +31,6 @@ class JobController extends GetxController{
     InterviewScreen()
 
   ];
-
 
   final List<Jobs> jobs = [
     Jobs(
@@ -119,4 +128,34 @@ class JobController extends GetxController{
     jobModelList[index].isFavorite.toggle();
   }
 
+  @override
+  void onInit() async {
+    await fetchAllJobs();
+    super.onInit();
+  }
+
+
+  Future<void> fetchAllJobs() async{
+    isLoading.value = true;
+    try{
+      log('Hello jobs ..............................');
+      final response = await NetworkCaller().getRequest(
+        AppUrls.getAllJobs,
+        token: "Bearer ${AuthService.token}"
+      );
+      if(response.isSuccess){
+        print(response.responseData);
+        final data = response.responseData;
+        getAllJobsModel.value = GetAllJobsModel.fromJson(data);
+      }
+      else{
+        AppSnackBar.showError('Something went wrong to fetch all jobs!');
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
+    }
+    finally{
+      isLoading.value = false;
+    }
+  }
 }

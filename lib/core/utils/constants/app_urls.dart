@@ -9,12 +9,15 @@ class AppUrls {
   static const String sendOTPToEmail = '$_baseUrl/auth/forget-password';
   static const String verifyOTP = '$_baseUrl/auth/forget-otp-verify';
   static const String resetPassword = '$_baseUrl/auth/reset-password';
+  static const String getFavorite = '$_baseUrl/favorite/get';
 
 
+  static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
 
 
-
-
+  // Job Added by Shahriar
+  static const String getAllJobs = '$_baseUrl/job/all';
+  static String getSingleJob(id) => '$_baseUrl/job/$id';
 
 
 
