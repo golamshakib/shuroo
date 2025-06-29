@@ -11,10 +11,9 @@ class AppUrls {
   static const String resetPassword = '$_baseUrl/auth/reset-password';
 
 
-
-
-
-
+  // Job Added by Shahriar
+  static const String getAllJobs = '$_baseUrl/job/all';
+  static String getSingleJob(id) => '$_baseUrl/job/$id';
 
 
 

@@ -8,17 +8,23 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/will_be_deleted.dart';
+import 'package:shuroo/features/jobs/controller/job_details_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 class JobDetailsScreen extends StatelessWidget {
-  const JobDetailsScreen({super.key});
+   JobDetailsScreen({super.key});
+
+   final controller = Get.put(JobDetailsController());
 
   @override
   Widget build(BuildContext context) {
+    final jobId  = Get.arguments;
+    final data = controller.getSingleJobModel.value.data;
+
     return Scaffold(
       appBar: AppBar(
         leading: CustomBackButton(),
-        title: CustomText(text: 'UI/UX Designer Job',color: AppColors.textPrimary,fontWeight: FontWeight.w600, fontSize: 20.sp),
+        title: CustomText(text: data?.name ?? '',color: AppColors.textPrimary,fontWeight: FontWeight.w600, fontSize: 20.sp),
         actions: [
           IconButton(
           onPressed: (){
