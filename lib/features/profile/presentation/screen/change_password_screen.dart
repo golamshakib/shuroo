@@ -21,51 +21,59 @@ class ChangePasswordScreen extends GetView<ChangePasswordController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 customBackHeader("Change Password", 82),
-                SizedBox(height: 16.h,),
-
-                Obx(() =>
-                    customInformationTFFiled(
-                        "Current Password", "Enter Password",
-                        controller.currentTEController,
-                        GestureDetector(
-                            onTap: (){
-                              controller.currentVisibility.value = !controller.currentVisibility.value;
-                            },
-                            child: controller.currentVisibility.value ?
-                            Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)
-                        ),
-                        controller.currentVisibility.value
-                    )
+                SizedBox(
+                  height: 16.h,
                 ),
-                Obx(() =>
-                    customInformationTFFiled("New Password", "Enter Password", controller.newTEController,
-                        GestureDetector(
-                            onTap: (){
-                              controller.newVisibility.value = !controller.newVisibility.value;
-                            },
-                            child: controller.newVisibility.value ?
-                            Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)
-                        ),
-                        controller.newVisibility.value
-                    ),
+                Obx(() => customInformationTFFiled(
+                    "Current Password",
+                    "Enter Password",
+                    controller.currentTEController,
+                    GestureDetector(
+                        onTap: () {
+                          controller.currentVisibility.value =
+                              !controller.currentVisibility.value;
+                        },
+                        child: controller.currentVisibility.value
+                            ? Icon(Icons.visibility_outlined)
+                            : Icon(Icons.visibility_off_outlined)),
+                    controller.currentVisibility.value)),
+                Obx(
+                  () => customInformationTFFiled(
+                      "New Password",
+                      "Enter Password",
+                      controller.newTEController,
+                      GestureDetector(
+                          onTap: () {
+                            controller.newVisibility.value =
+                                !controller.newVisibility.value;
+                          },
+                          child: controller.newVisibility.value
+                              ? Icon(Icons.visibility_outlined)
+                              : Icon(Icons.visibility_off_outlined)),
+                      controller.newVisibility.value),
                 ),
-                Obx(() =>
-                    customInformationTFFiled("Confirm Password", "Enter Password", controller.confirmTEController,
-                        GestureDetector(
-                            onTap: (){
-                              controller.confirmVisibility.value = !controller.confirmVisibility.value;
-                            },
-                            child: controller.confirmVisibility.value ?
-                            Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)
-                        ),
-                        controller.confirmVisibility.value
-                    ),
+                Obx(
+                  () => customInformationTFFiled(
+                      "Confirm Password",
+                      "Enter Password",
+                      controller.confirmTEController,
+                      GestureDetector(
+                          onTap: () {
+                            controller.confirmVisibility.value =
+                                !controller.confirmVisibility.value;
+                          },
+                          child: controller.confirmVisibility.value
+                              ? Icon(Icons.visibility_outlined)
+                              : Icon(Icons.visibility_off_outlined)),
+                      controller.confirmVisibility.value),
                 ),
-
-                SizedBox(height: 24.h,),
+                SizedBox(
+                  height: 24.h,
+                ),
                 CustomSubmitButton(
                   text: "Change Password",
-                  onTap: (){
+                  onTap: () {
+                    controller.changePassword();
                     Get.back();
                   },
                 )

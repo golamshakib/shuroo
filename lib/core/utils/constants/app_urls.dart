@@ -30,4 +30,8 @@ class AppUrls {
   static const String jobApplie = '$_baseUrl/application/create';
   static const String appliedItem = '$_baseUrl/application/getAppliedJob';
 
+
+
+  static const String changePassword = '$_baseUrl/user/change-password';
+
 }
