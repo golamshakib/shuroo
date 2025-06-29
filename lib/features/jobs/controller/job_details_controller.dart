@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
@@ -14,6 +16,7 @@ class JobDetailsController extends GetxController{
   @override
   void onInit() async {
     final jobId = Get.arguments;
+    print("Received jobId: $jobId");
     if (jobId != null) {
       fetchSingleJob(jobId);
     }
@@ -26,8 +29,9 @@ class JobDetailsController extends GetxController{
    try{
      final response = await NetworkCaller().getRequest(
        AppUrls.getSingleJob(id),
-       token: AuthService.token
+       token: "Bearer ${AuthService.token}"
      );
+     log("I am heerererer");
      if(response.isSuccess){
        final data = response.responseData;
        getSingleJobModel.value = GetSingleJobModel.fromJson(data);
