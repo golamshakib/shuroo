@@ -10,7 +10,6 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/jobs/data/model/get_all_jobs_model.dart';
 import 'package:shuroo/features/jobs/presentation/screen/profile_view_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/short_listed_screen.dart';
-
 import '../../../core/utils/constants/will_be_deleted.dart';
 import '../data/model/job_Model.dart';
 import '../presentation/screen/applied_job_screen.dart';
@@ -22,14 +21,13 @@ class JobController extends GetxController{
   final search = TextEditingController();
 
   final isLoading = false.obs;
-  final getAllJobsModel = GetAllJobsModel().obs;
+  var getAllJobsModel = GetAllJobsModel().obs;
 
   final List<Widget> jobScreens = [
     AppliedJobScreen(),
     ProfileViewScreen(),
     ShortListedScreen(),
     InterviewScreen()
-
   ];
 
   final List<Jobs> jobs = [
@@ -128,34 +126,58 @@ class JobController extends GetxController{
     jobModelList[index].isFavorite.toggle();
   }
 
-  @override
-  void onInit() async {
-    await fetchAllJobs();
-    super.onInit();
-  }
+  // @override
+  // void onInit() async {
+  //   fetchAllJobs();
+  //   super.onInit();
+  // }
 
-
-  Future<void> fetchAllJobs() async{
+  Future<void> fetchAllJobs() async {
     isLoading.value = true;
-    try{
+    try {
       log('Hello jobs ..............................');
       final response = await NetworkCaller().getRequest(
-        AppUrls.getAllJobs,
-        token: "Bearer ${AuthService.token}"
+          AppUrls.getAllJobs,
+          token: "Bearer ${AuthService.token}"
       );
-      if(response.isSuccess){
-        print(response.responseData);
+      if(response.isSuccess) {
+        print("Job response data : ${response.responseData}");
         final data = response.responseData;
         getAllJobsModel.value = GetAllJobsModel.fromJson(data);
       }
-      else{
+      else {
         AppSnackBar.showError('Something went wrong to fetch all jobs!');
       }
-    }catch(e){
+    } catch(e) {
       AppSnackBar.showError(e.toString());
     }
-    finally{
+    finally {
       isLoading.value = false;
     }
   }
+
+
+  // Future<void> fetchAllJobs() async{
+  //   isLoading.value = true;
+  //   try{
+  //     log('Hello jobs ..............................');
+  //     final response = await NetworkCaller().getRequest(
+  //       AppUrls.getAllJobs,
+  //       token: "Bearer ${AuthService.token}"
+  //     );
+  //     if(response.isSuccess){
+  //       print("Job response data : ${response.responseData}");
+  //       final data = response.responseData;
+  //       getAllJobsModel.value = GetAllJobsModel.fromJson(data);
+  //     }
+  //     else{
+  //       AppSnackBar.showError('Something went wrong to fetch all jobs!');
+  //     }
+  //   }catch(e){
+  //     AppSnackBar.showError(e.toString());
+  //   }
+  //   finally{
+  //     isLoading.value = false;
+  //   }
+  // }
 }

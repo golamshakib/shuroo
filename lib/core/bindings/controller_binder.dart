@@ -38,13 +38,9 @@ class ControllerBinder extends Bindings {
           () => MakePostController(),
       fenix: true,
     );
-    
-
-    Get.lazyPut<JobController>(
-          () => JobController(),
-      fenix: true,
-    );
-
-
+    // Get.lazyPut<JobController>(
+    //       () => JobController(),
+    //   fenix: true,
+    // );
   }
 }
