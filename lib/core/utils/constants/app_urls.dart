@@ -31,7 +31,10 @@ class AppUrls {
 
 
   static const String jobApplie = '$_baseUrl/application/create';
+
+  // Added by Shahriar
   static const String appliedItem = '$_baseUrl/application/getAppliedJob';
+  static const String getProfileViewJob = '$_baseUrl/application/getProfileViewedJob';
 
 
 

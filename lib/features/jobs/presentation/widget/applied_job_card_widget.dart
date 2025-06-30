@@ -39,7 +39,7 @@ class AppliedJobCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(backgroundImage: AssetImage(imagePath)),
+              CircleAvatar(backgroundImage: NetworkImage(imagePath)),
               SizedBox(width: 12.w),
               Expanded(
                 child: CustomText(
