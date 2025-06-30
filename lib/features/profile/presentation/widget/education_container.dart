@@ -104,7 +104,7 @@ Widget educationContainer(PersonalCreationController controller, BuildContext co
                                 padding: EdgeInsets.symmetric(vertical: 14.h),
                               ),
                               onPressed: (){
-                                controller.addEducation();
+                                controller.educationAdd();
                                 Get.back();
                               },
                               child: Row(

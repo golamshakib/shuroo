@@ -19,7 +19,6 @@ class AppUrls {
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
   static String getSingleJob(id) => '$_baseUrl/job/$id';
-  static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
 
   // Sifat ===================================
   static const String createPost = '$_baseUrl/post/create';
@@ -39,6 +38,13 @@ class AppUrls {
   static const String createExperience = '$_baseUrl/experience/create';
   static  String experienceDelete(id) => '$_baseUrl/experience/delete/id';
   static const String experienceUpdate = '$_baseUrl/experience/update/';
+  
+  //Education ---------
+  static const String createEducation = '$_baseUrl/education/create';
+  static  String educationDelete(id) => '$_baseUrl/education/delete/id';
+  static const String educationUpdate = '$_baseUrl//education/update/';
+
+  
 
   // Added by Shahriar
   static const String appliedItem = '$_baseUrl/application/getAppliedJob';
