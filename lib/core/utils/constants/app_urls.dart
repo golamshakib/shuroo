@@ -11,15 +11,11 @@ class AppUrls {
   static const String resetPassword = '$_baseUrl/auth/reset-password';
   static const String getFavorite = '$_baseUrl/favorite/get';
 
-
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
-
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
   static String getSingleJob(id) => '$_baseUrl/job/$id';
-
-
 
   // Sifat ===================================
   static const String createPost = '$_baseUrl/post/create';
@@ -28,17 +24,18 @@ class AppUrls {
   static const String editPost = '$_baseUrl/post/update';
   static const String deletePost = '$_baseUrl/post/delete';
 
-
-
   static const String jobApplie = '$_baseUrl/application/create';
+
+  //experience ---------
+  static const String createExperience = '$_baseUrl/experience/create';
+  static  String experienceDelete(id) => '$_baseUrl/experience/delete/id';
+  static const String experienceUpdate = '$_baseUrl/experience/update/';
 
   // Added by Shahriar
   static const String appliedItem = '$_baseUrl/application/getAppliedJob';
-  static const String getProfileViewJob = '$_baseUrl/application/getProfileViewedJob';
-
-
+  static const String getProfileViewJob =
+      '$_baseUrl/application/getProfileViewedJob';
 
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
-
 }
