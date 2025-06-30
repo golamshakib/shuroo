@@ -7,6 +7,7 @@ import 'package:shuroo/features/post_creation_repost_delete/controller/make_post
 
 import 'package:shuroo/features/jobs/controller/job_controller.dart';
 import 'package:shuroo/features/jobs/controller/job_details_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
 
 import 'package:shuroo/features/profile/controller/change_password_controller.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
@@ -38,6 +39,13 @@ class ControllerBinder extends Bindings {
           () => MakePostController(),
       fenix: true,
     );
+    Get.lazyPut<MyAllPostScreenController>(
+          () => MyAllPostScreenController(),
+      fenix: true,
+    );
+
+
+
     // Get.lazyPut<JobController>(
     //       () => JobController(),
     //   fenix: true,

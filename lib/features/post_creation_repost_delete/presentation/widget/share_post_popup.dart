@@ -5,7 +5,7 @@ import 'package:shuroo/core/common/widgets/custom_text.dart';
 import '../../controller/my_all_post_screen_controller.dart';
 
 void showPeopleBottomSheet(BuildContext context) {
-  final controller = Get.put(MyAllPostScreenController());
+  final controller = Get.find<MyAllPostScreenController>();
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(

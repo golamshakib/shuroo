@@ -11,16 +11,25 @@ class AppUrls {
   static const String resetPassword = '$_baseUrl/auth/reset-password';
   static const String getFavorite = '$_baseUrl/favorite/get';
 
+
+
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
+
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
   static String getSingleJob(id) => '$_baseUrl/job/$id';
+  static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
 
   // Sifat ===================================
   static const String createPost = '$_baseUrl/post/create';
   static const String getAllPost = '$_baseUrl/post/all';
   static const String getSinglePost = '$_baseUrl/post';
+
+
+  static const String singleUserPost = '$_baseUrl/post/user';
+
+  
   static const String editPost = '$_baseUrl/post/update';
   static const String deletePost = '$_baseUrl/post/delete';
 

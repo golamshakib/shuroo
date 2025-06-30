@@ -135,9 +135,6 @@ class HomeController extends GetxController {
     } catch (e) {
       log('Something went wrong: $e');
       AppSnackBar.showError('Failed to fetch posts.');
-    } finally {
-    }
+    } finally {}
   }
-
-
 }
