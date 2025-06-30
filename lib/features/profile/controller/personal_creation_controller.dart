@@ -164,6 +164,9 @@ class PersonalCreationController extends GetxController {
     languageList.add(languageTEController.text);
   }
 
+
+  // Experience ======================
+
   Future<void> experienceAdd() async {
     final requestBody = {
       'title': titleTEController.text.trim(),
@@ -207,6 +210,49 @@ class PersonalCreationController extends GetxController {
       AppSnackBar.showError(e.toString());
     }
   }
+
+
+
+
+
+  // Educaton ================
+  Future<void> educationAdd() async {
+    final requestBody = {
+      'title': titleTEController.text.trim(),
+      'company': companyNameTEController.text.trim(),
+      'startDate': startExperienceTEController.text.trim(),
+      'endDate': endExperienceTEController.text.trim(),
+      'description': describeTEController.text.trim()
+    };
+
+    try {
+      final response = await NetworkCaller().postRequest(
+          AppUrls.createEducation,
+          body: requestBody,
+          token: AuthService.token);
+
+      if (response.isSuccess && response.statusCode == 201) {
+        AppSnackBar.showSuccess('Create experience successfully');
+      } else {
+        AppSnackBar.showError('Something Went Wrong');
+      }
+    } catch (e) {
+      print('Somethint went wrong $e');
+      AppSnackBar.showError('Something Went Wrong $e');
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   void reFresh() {
     update();
