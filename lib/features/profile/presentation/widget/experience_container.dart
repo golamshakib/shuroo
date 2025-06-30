@@ -109,7 +109,7 @@ Widget experienceContainer(PersonalCreationController controller, BuildContext c
                                     padding: EdgeInsets.symmetric(vertical: 14.h),
                                   ),
                                   onPressed: (){
-                                    controller.addExperience();
+                                    controller.experienceAdd();
                                     Get.back();
                                   },
                                   child: Row(

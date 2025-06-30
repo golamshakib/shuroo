@@ -1,13 +1,14 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
+import 'package:shuroo/core/services/network_caller.dart';
+import 'package:shuroo/core/utils/constants/app_urls.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
 
-class PersonalCreationController extends GetxController{
-
+class PersonalCreationController extends GetxController {
   final aboutTEController = TextEditingController();
 
   RxBool educationEdit = false.obs;
@@ -19,39 +20,40 @@ class PersonalCreationController extends GetxController{
 
   RxList<Map<String, dynamic>> educationList = [
     {
-      "imagePath" : IconPath.educationIcon,
-      "name" : "Brookfield University",
-      "department" : "Bachelor of Science in Environmental Science",
-      "start" : "2025",
-      'end' : "Present"
+      "imagePath": IconPath.educationIcon,
+      "name": "Brookfield University",
+      "department": "Bachelor of Science in Environmental Science",
+      "start": "2025",
+      'end': "Present"
     },
     {
-      "imagePath" : IconPath.educationIcon,
-      "name" : "Brookfield University",
-      "department" : "Bachelor of Science in Environmental Science",
-      "start" : "2025",
-      'end' : "Present"
+      "imagePath": IconPath.educationIcon,
+      "name": "Brookfield University",
+      "department": "Bachelor of Science in Environmental Science",
+      "start": "2025",
+      'end': "Present"
     },
   ].obs;
 
   RxList<Map<String, dynamic>> experienceList = [
     {
-      "imagePath" : IconPath.educationIcon,
-      "position" : "Sustainability Intern",
-      "companyName" : "Green Earth Foundation",
-      "start" : "2025",
-      'end' : "Present",
-      "description" : "Conducted research on sustainable farming practices and climate change mitigation."
+      "imagePath": IconPath.educationIcon,
+      "position": "Sustainability Intern",
+      "companyName": "Green Earth Foundation",
+      "start": "2025",
+      'end': "Present",
+      "description":
+          "Conducted research on sustainable farming practices and climate change mitigation."
     },
     {
-      "imagePath" : IconPath.educationIcon,
-      "position" : "Sustainability Intern",
-      "companyName" : "Green Earth Foundation",
-      "start" : "2025",
-      'end' : "Present",
-      "description" : "Conducted research on sustainable farming practices and climate change mitigation."
+      "imagePath": IconPath.educationIcon,
+      "position": "Sustainability Intern",
+      "companyName": "Green Earth Foundation",
+      "start": "2025",
+      'end': "Present",
+      "description":
+          "Conducted research on sustainable farming practices and climate change mitigation."
     },
-
   ].obs;
 
   RxList<String> skillList = [
@@ -89,8 +91,6 @@ class PersonalCreationController extends GetxController{
     "Spanish",
   ].obs;
 
-
-
   /// Add education
 
   final instituteNameTEController = TextEditingController();
@@ -116,51 +116,99 @@ class PersonalCreationController extends GetxController{
   final languageTEController = TextEditingController();
 
   var profilePath = "".obs;
-  void pickProfile() async{
+  void pickProfile() async {
     final picker = ImagePicker();
     final image = await picker.pickImage(source: ImageSource.gallery);
-    if(image != null){
+    if (image != null) {
       profilePath.value = image.path;
     }
   }
 
-  void addEducation(){
-
+  void addEducation() {
     final addBody = {
-      "imagePath" : IconPath.educationIcon,
-      "name" : instituteNameTEController.text,
-      "department" : degreeTEController.text,
-      "start" : startTEController.text,
-      'end' : endTEController.text
+      "imagePath": IconPath.educationIcon,
+      "name": instituteNameTEController.text,
+      "department": degreeTEController.text,
+      "start": startTEController.text,
+      'end': endTEController.text
     };
     educationList.add(addBody);
   }
 
-  void addExperience(){
+  void addExperience() {
     final addBody = {
-      "imagePath" : IconPath.educationIcon,
-      "position" : titleTEController.text,
-      "companyName" : companyNameTEController.text,
-      "start" : startExperienceTEController.text,
-      'end' : endExperienceTEController.text,
-      "description" : describeTEController.text
+      "imagePath": IconPath.educationIcon,
+      "position": titleTEController.text,
+      "companyName": companyNameTEController.text,
+      "start": startExperienceTEController.text,
+      'end': endExperienceTEController.text,
+      "description": describeTEController.text
     };
     experienceList.add(addBody);
   }
 
-  void addSkill(){
+  void addSkill() {
     skillList.add(skillTEController.text);
     skillTEController.clear();
   }
 
-  void addTechnology(){
+  void addTechnology() {
     toolsList.add(technologyTEController.text);
   }
 
-  void addInterest(){
+  void addInterest() {
     interestList.add(interestTEController.text);
   }
-  void addLanguage(){
+
+  void addLanguage() {
     languageList.add(languageTEController.text);
+  }
+
+  Future<void> experienceAdd() async {
+    final requestBody = {
+      'title': titleTEController.text.trim(),
+      'company': companyNameTEController.text.trim(),
+      'startDate': startExperienceTEController.text.trim(),
+      'endDate': endExperienceTEController.text.trim(),
+      'description': describeTEController.text.trim()
+    };
+
+    try {
+      final response = await NetworkCaller().postRequest(
+          AppUrls.createExperience,
+          body: requestBody,
+          token: AuthService.token);
+
+      if (response.isSuccess && response.statusCode == 201) {
+        AppSnackBar.showSuccess('Create experience successfully');
+      } else {
+        AppSnackBar.showError('Something Went Wrong');
+      }
+    } catch (e) {
+      print('Somethint went wrong $e');
+      AppSnackBar.showError('Something Went Wrong $e');
+    }
+  }
+
+
+  Future<void> deleteExperience(String id) async{
+
+    try{
+      final response = await NetworkCaller().deleteRequest(AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        AppSnackBar.showError("Removed from favorite!");
+        reFresh();
+      }
+      else{
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  void reFresh() {
+    update();
   }
 }
