@@ -12,7 +12,7 @@ class SignInVerificationScreenController extends GetxController{
   final pinTEController = TextEditingController();
   var active = false.obs;
   var email = "".obs;
-  final int totalSeconds = 90; // 1 minute 30 seconds
+  final int totalSeconds = 90;
   final RxInt secondsRemaining = 90.obs;
   Timer? _timer;
 
