@@ -59,12 +59,11 @@ class HomeScreen extends StatelessWidget {
 
               final String? firstImage =
                   post.image.isNotEmpty ? post.image.first : null;
-
               return PostCard(
                 icon: firstImage ?? IconPath.icon_pro,
                 title: post.content,
                 content: post.content,
-                organization: post.userId,
+                organization: post.user.name,
                 imageAsset: firstImage ?? IconPath.icon_pro,
                 context: context,
               );

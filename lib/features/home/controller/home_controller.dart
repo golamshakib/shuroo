@@ -2,9 +2,8 @@ import 'dart:developer' show log;
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
-import 'package:shuroo/core/common/widgets/progress_indicator.dart';
+import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
@@ -110,31 +109,31 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      getAllPost();
-    });
+    getAllPost();
   }
 
   Future<void> getAllPost() async {
     try {
-      final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
+      final response = await NetworkCaller()
+          .getRequest(AppUrls.getAllPost, token: "Bearer ${AuthService.token}");
+
+      log("Raw response: ${response.responseData}");
 
       if (response.isSuccess && response.statusCode == 200) {
         final json = response.responseData;
-
         final userInformation = UserInformation.fromJson(json);
 
         postDataList.value = userInformation.data;
-
+        log("userInformation $userInformation");
         AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data not found');
       } else {
         AppSnackBar.showError('Something went wrong');
       }
-    } catch (e) {
-      log('Something went wrong: $e');
+    } catch (e, stackTrace) {
+      log('Error fetching posts: $e\nStackTrace: $stackTrace');
       AppSnackBar.showError('Failed to fetch posts.');
-    } finally {}
+    }
   }
 }
