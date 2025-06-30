@@ -50,3 +50,4 @@ class AppUrls {
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
 }
+
