@@ -47,7 +47,7 @@ Widget experienceContainer(
                                 if (controller.experienceEdit.value)
                                   GestureDetector(
                                     onTap: () {
-                                   //   controller.deleteExperience(user.id);
+                                      //   controller.deleteExperience(user.id);
                                     },
                                     child: CustomText(
                                       text: "Delete",
@@ -176,6 +176,7 @@ Widget experienceContainer(
                                   onPressed: () {
                                     controller.experienceAdd();
                                     Get.back();
+                                    print('Experience added');
                                   },
                                   child: Row(
                                     crossAxisAlignment:

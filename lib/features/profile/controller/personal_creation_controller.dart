@@ -5,10 +5,17 @@ import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
+import 'package:shuroo/features/profile/data/user_data_model.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
 
 class PersonalCreationController extends GetxController {
+  @override
+  void onInit() {
+    getProfile();
+    super.onInit();
+  }
+
   final aboutTEController = TextEditingController();
 
   RxBool educationEdit = false.obs;
@@ -164,6 +171,26 @@ class PersonalCreationController extends GetxController {
     languageList.add(languageTEController.text);
   }
 
+  var userProfile = GetUser().obs;
+
+  // Get Profile =====================
+
+  Future<void> getProfile() async {
+    try {
+      final response = await NetworkCaller()
+          .getRequest(AppUrls.getUserProfile, token: AuthService.token);
+
+      if (response.isSuccess && response.statusCode == 200) {
+        userProfile.value = GetUser.fromJson(response.responseData);
+        AppSnackBar.showSuccess('Data Get Successfully');
+      } else if (response.statusCode == 404) {
+        AppSnackBar.showError('Data Not Found');
+      }
+    } catch (e) {
+      print('Something went wrong $e');
+      AppSnackBar.showError('Data Not Found $e');
+    }
+  }
 
   // Experience ======================
 
@@ -193,27 +220,21 @@ class PersonalCreationController extends GetxController {
     }
   }
 
+  Future<void> deleteExperience(String id) async {
+    try {
+      final response = await NetworkCaller().deleteRequest(
+          AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
 
-  Future<void> deleteExperience(String id) async{
-
-    try{
-      final response = await NetworkCaller().deleteRequest(AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
-
-      if(response.isSuccess){
+      if (response.isSuccess) {
         AppSnackBar.showError("Removed from favorite!");
         reFresh();
-      }
-      else{
+      } else {
         AppSnackBar.showError(response.statusCode.toString());
       }
-    }catch(e){
+    } catch (e) {
       AppSnackBar.showError(e.toString());
     }
   }
-
-
-
-
 
   // Educaton ================
   Future<void> educationAdd() async {
@@ -241,18 +262,6 @@ class PersonalCreationController extends GetxController {
       AppSnackBar.showError('Something Went Wrong $e');
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   void reFresh() {
     update();

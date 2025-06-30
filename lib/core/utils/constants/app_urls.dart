@@ -29,6 +29,7 @@ class AppUrls {
   static const String deletePost = '$_baseUrl/post/delete';
 
   static const String jobApplie = '$_baseUrl/application/create';
+  static const String getUserProfile = '$_baseUrl/user/profile';
 
   //experience ---------
   static const String createExperience = '$_baseUrl/experience/create';
