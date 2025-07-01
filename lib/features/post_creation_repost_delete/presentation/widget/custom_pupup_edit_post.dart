@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/custpm_popup.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
+import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
 void showPostEditePopup(BuildContext context) {
+  final controller = Get.find<MyAllPostScreenController>();
+  final controllerOne = Get.find<MyAllPostScreenController>();
+  final controllerTwo = Get.find<ProfileInformationController>();
+
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.white,
@@ -23,20 +31,24 @@ void showPostEditePopup(BuildContext context) {
               icon: IconPath.share,
               title: AppText.sharevia,
               onTap: () {
-
                 showPeopleBottomSheet(context);
-// Add your logic here
-                // Add your logic here
               },
             ),
             SizedBox(height: 20),
-
             _popupOption(
               icon: IconPath.edit,
               title: AppText.edtPost,
               onTap: () {
-                _showCenteredCustomDialog(context);
-// Add your logic here
+                ConfirmPopup.show(
+                  title: "Edit Post?",
+                  message1: 'Are you want to sure edit on this post?',
+                  confirmText: "Edit",
+                  cancelText: "Cancel",
+                  onConfirm: () {
+                    
+                  },
+                  
+                );
               },
             ),
             SizedBox(height: 20),
@@ -44,9 +56,18 @@ void showPostEditePopup(BuildContext context) {
               icon: IconPath.delete,
               title: AppText.deletePost,
               onTap: () {
-                _showCenteredCustomDialog(context);
-
-                // Add your logic here
+                ConfirmPopup.show(
+                  title: "Delete Post?",
+                  message1: AppText.areYou,
+                  message2: AppText.removedThis,
+                  confirmText: "Delete",
+                  cancelText: "Cancel",
+                  onConfirm: () {
+                    //  log(controllerOne.userProfile.value.data!.id.toString());
+                    controller.deletePost(
+                        controllerTwo.userProfile.value.data!.id.toString());
+                  },
+                );
               },
             ),
           ],
@@ -54,101 +75,6 @@ void showPostEditePopup(BuildContext context) {
       );
     },
   );
-
-
-
-
-}
-
-void _showCenteredCustomDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white, // Set color inside BoxDecoration
-            borderRadius: BorderRadius.circular(8),
-          ),
-          padding: EdgeInsets.all(20),
-          child: Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.min, // Makes the dialog wrap content
-
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: CustomText(text: "Delete Post?",fontSize: 24,color: AppColors.textPrimary,)
-                ),
-                SizedBox(height: 8.h),
-                Center(
-                  child: CustomText(text: AppText.areYou,color: Color(0xFF555555),fontSize: 14,)
-                ),
-                Center(
-                  child: CustomText(text: AppText.removedThis,color: Color(0xFF555555),fontSize: 14,)
-                ),
-                SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                      onTap: (){
-                        Navigator.of(context).pop(); // Closes the dialog
-
-
-                      }
-                      ,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE6E6E7), // Light gray color
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: CustomText(text: "Cancel",fontSize: 15,color: AppColors.grayText,),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8.w,),
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.of(context).pop(); // Closes the dialog
-
-
-                        }
-                        ,
-                        child: Container(
-                          alignment: Alignment.center,
-
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: AppColors.custom_blue, // Light gray color
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child:CustomText(text: "Delete",color: AppColors.white,),
-                        ),
-                      ),
-                    ),
-                  ],
-                )              ],
-            ),
-          ),
-        ),
-      );
-    },
-  );
-
-
-
-
-
 }
 
 Widget _popupOption({
@@ -162,19 +88,18 @@ Widget _popupOption({
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Image.asset(icon),
         SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(text:title ,fontSize: 14,color: AppColors.secondaryTextColor,),
-
-
-
+              CustomText(
+                text: title,
+                fontSize: 14,
+                color: AppColors.secondaryTextColor,
+              ),
               SizedBox(height: 4),
-
             ],
           ),
         ),
@@ -182,6 +107,3 @@ Widget _popupOption({
     ),
   );
 }
-
-
-
