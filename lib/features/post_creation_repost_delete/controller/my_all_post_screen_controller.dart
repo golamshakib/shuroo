@@ -34,39 +34,16 @@ class MyAllPostScreenController extends GetxController {
     'Grace'
   ];
   @override
-  void onInit() async{
-    // TODO: implement onInit
+  void onInit() async {
     super.onInit();
 
     final controllerOne = Get.find<ProfileInformationController>();
     log(controllerOne.userProfile.value.data!.id.toString());
-    await getSingleUserPost(controllerOne.userProfile.value.data!.id.toString());
-
+    await getSingleUserPost(
+        controllerOne.userProfile.value.data!.id.toString());
   }
 
-  // RxList<Datum> getUserPostData = <Datum>[].obs;
-  // //! Get All Post ===================================================
-  // // Future<void> getAllPost() async {
-  // //   try {
-  // //     showProgressIndicator();
-  // //     final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
-
-  // //     if (response.isSuccess && response.statusCode == 200) {
-  // //       AppSnackBar.showSuccess('All Post Fetch Successfully');
-  // //     } else if (response.statusCode == 404) {
-  // //       AppSnackBar.showError('Data Not Found');
-  // //     } else {
-  // //       AppSnackBar.showError('Something went Wrong');
-  // //     }
-  // //   } catch (e) {
-  // //     log('Something went Wrong $e');
-  // //   } finally {
-  // //     hideProgressIndicator();
-  // //   }
-  // // }
-
   //! Get Single Post ===================================================
-
 
   Future<void> getSinglePost(String id) async {
     try {
@@ -103,7 +80,6 @@ class MyAllPostScreenController extends GetxController {
 
         getUserPost.value = GetSingleUser.fromJson(json);
 
-
         AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data not found');
@@ -125,6 +101,8 @@ class MyAllPostScreenController extends GetxController {
           "${AppUrls.deletePost}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess && response.statusCode == 200) {
+        getUserPost.value.data?.data?.removeWhere((post) => post.id == id);
+        getUserPost.refresh();
         AppSnackBar.showSuccess("Delete Post Successfull");
       } else if (response.statusCode == 404) {
         AppSnackBar.showError("Post Not Found");
@@ -140,23 +118,45 @@ class MyAllPostScreenController extends GetxController {
 
   //! Edit Post ===================================================
 
-  Future<void> updatePost(String id) async {
-    try {
-      showProgressIndicator();
-      final response =
-          await NetworkCaller().putRequest("${AppUrls.editPost}/$id");
+  Future<void> updatePost(String id, Map<String, dynamic> updatedData) async {
+  try {
+    showProgressIndicator();
 
-      if (response.isSuccess && response.statusCode == 201) {
-        AppSnackBar.showSuccess("Post Edit Successfully");
-      } else if (response.statusCode == 404) {
-        AppSnackBar.showError("Post Not Found");
-      } else {
-        AppSnackBar.showError("Something Went Wrong");
+    final response = await NetworkCaller().putRequest(
+      "${AppUrls.editPost}/$id",
+      body: updatedData,
+      token: "Bearer ${AuthService.token}",
+    );
+
+    if (response.isSuccess && (response.statusCode == 200 || response.statusCode == 201)) {
+      final updatedJson = response.responseData['data']['update'];
+
+      final index = getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
+
+      if (index != null && index >= 0) {
+        // Update the local list with new values
+        final postList = getUserPost.value.data!.data!;
+        final post = postList[index];
+
+        post.content = updatedJson['content'];
+        post.image = List<String>.from(updatedJson['image'] ?? []);
+        post.updatedAt = DateTime.tryParse(updatedJson['updatedAt'] ?? "");
+
+        getUserPost.refresh(); // Update UI
       }
-    } catch (e) {
-      log('Something went Wrong $e');
-    } finally {
-      hideProgressIndicator();
+
+      AppSnackBar.showSuccess("Post Edited Successfully");
+    } else if (response.statusCode == 404) {
+      AppSnackBar.showError("Post Not Found");
+    } else {
+      AppSnackBar.showError("Something Went Wrong");
     }
+  } catch (e) {
+    log('Something went Wrong $e');
+    AppSnackBar.showError("Something went wrong");
+  } finally {
+    hideProgressIndicator();
   }
+}
+
 }
