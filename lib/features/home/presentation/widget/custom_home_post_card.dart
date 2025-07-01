@@ -17,7 +17,6 @@ import '../../../post_creation_repost_delete/presentation/widget/custom_popup.da
 class PostCard extends GetView<HomeController> {
   final String organization;
   // final String? timeAgo;
-  final String title;
   final String content;
   final String icon;
   final BuildContext context;
@@ -28,7 +27,6 @@ class PostCard extends GetView<HomeController> {
     super.key,
     required this.organization,
     //  this.timeAgo,
-    required this.title,
     required this.content,
     //  this.hashtags,
     required this.imageAsset,
@@ -101,14 +99,14 @@ class PostCard extends GetView<HomeController> {
             ],
           ),
           const SizedBox(height: 8),
-          Text(
-            title,
-            style: TextStyle(
-              color: AppColors.grayText,
-              fontFamily: "Inter",
-              fontSize: 14,
-            ),
-          ),
+          // Text(
+          //   title!,
+          //   style: TextStyle(
+          //     color: AppColors.grayText,
+          //     fontFamily: "Inter",
+          //     fontSize: 14,
+          //   ),
+          // ),
           const SizedBox(height: 4),
           Text(content),
           const SizedBox(height: 4),

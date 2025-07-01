@@ -122,12 +122,11 @@ class HomeController extends GetxController {
       if (response.isSuccess && response.statusCode == 200) {
         final json = response.responseData;
         final userInformation = UserInformation.fromJson(json);
-
+        refresh();
         postDataList.value = userInformation.data;
         //log("userInformation $userInformation");
         //AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
-
       } else {
         AppSnackBar.showError('Something went wrong');
       }
