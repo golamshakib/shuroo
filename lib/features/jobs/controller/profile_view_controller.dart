@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
@@ -10,6 +9,12 @@ class ProfileViewController extends GetxController{
 
   final isLoading = false.obs;
   final getProfileViewJobModel = GetProfileViewJobModel().obs;
+
+  @override
+  void onInit() async {
+    fetchProfileViewJob();
+    super.onInit();
+  }
 
   Future<void> fetchProfileViewJob() async{
     isLoading.value = true;

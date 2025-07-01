@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.focusNode,
+    this.onTap,
     this.onChange,
     this.onTapOutside,
     this.fontSize = 14,
@@ -32,6 +33,7 @@ class CustomTextField extends StatelessWidget {
   final Function(PointerDownEvent)? onTapOutside;
   final FocusNode? focusNode;
   final String hintText;
+  final Function()? onTap;
   final bool obscureText;
   final dynamic fillColor;
   final TextAlign textAlign;
@@ -51,6 +53,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChange,
+      onTap: onTap,
       style: GoogleFonts.inter(
         color: AppColors.textGray,
         fontWeight: FontWeight.w400,

@@ -8,63 +8,62 @@ import 'package:shuroo/features/jobs/controller/applied_controller.dart';
 import 'package:shuroo/features/jobs/presentation/widget/applied_job_card_widget.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
-class AppliedJobScreen extends StatelessWidget {
-  AppliedJobScreen({super.key});
+import '../../../../core/utils/constants/image_path.dart';
 
-  final AppliedController controller = Get.put(AppliedController());
+class AppliedJobScreen extends GetView<AppliedController> {
+ const AppliedJobScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final data = controller.getAppliedJob.value.data;
-      if(data == null){
-        return Center(child: CircularProgressIndicator(color: AppColors.primary));
-      }
-      if(data.isEmpty) {
-        return Center(child: CustomText(text: "No jobs available"));
-      }
+    return Scaffold(
+        backgroundColor: AppColors.scaffoldBackgroundColor,
+        appBar: AppBar(
+          leading: CustomBackButton(),
+          title: CustomText(text: 'Applied Jobs',
+            fontSize: 20.sp,
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,),
+        ),
+        body: SafeArea(child: Padding(
+          padding: EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Obx(() {
+                  if(controller.isLoading.value){
+                    return Center(child: CircularProgressIndicator(color: AppColors.primary));
+                  }
+                  final viewJobList = controller.getAppliedJob.value.data ?? [];
 
-      return Scaffold(
-          backgroundColor: AppColors.scaffoldBackgroundColor,
-          appBar: AppBar(
-            leading: CustomBackButton(),
-            title: CustomText(text: 'Applied Jobs',
-              fontSize: 20.sp,
-              color: AppColors.textPrimary,
-              fontWeight: FontWeight.w600,),
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final item = controller.getAppliedJob.value.data![index];
-                        return AppliedJobCard(
-                          imagePath: item.job?.company?.logoImage ?? '',
-                          title: item.job?.name ?? '',
-                          name: item.job?.company?.name ?? '',
-                          date: item.updatedAt.toString(),
-                          salary: "Salary: \$${item.job!.salary.toString()}",
-                          onTap: () {
-                            Get.toNamed(AppRoute.chatScreen);
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
+                  if(viewJobList.isEmpty){
+                    return Center(child: Text("No Application found"));
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: viewJobList.length,
+                    itemBuilder: (context, index) {
+                      final viewJob = viewJobList[index];
+                      return AppliedJobCard(
+                        imagePath: viewJob.job?.company?.logoImage?.isNotEmpty == true
+                            ? viewJob.job!.company!.logoImage!
+                            : ImagePath.dummyProfilePicture,
+                        title: viewJob.job?.name ?? '',
+                        name: viewJob.job?.company?.name ?? '',
+                        date: viewJob.updatedAt.toString(),
+                        salary: "Salary: \$${viewJob.job!.salary.toString()}",
+                        onTap: () {
+                          Get.toNamed(AppRoute.chatScreen);
+                        },
+                      );
+                    },
+                  );
+                }),
+              ],
             ),
-          )
-
-
-      );
-    });
+          ),
+        )),
+        );
   }
 }

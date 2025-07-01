@@ -9,31 +9,6 @@ import '../data/model/get_single_job_model.dart';
 
 class JobDetailsController extends GetxController {
 
-
-  Future<void> jobApplication(String id) async {
-    try {
-      final response = await NetworkCaller().postRequest(
-          "${AppUrls.jobApplie}/$id",
-          body: {},
-          token: "Bearer ${AuthService.token}");
-
-      if (response.isSuccess && response.statusCode == 201) {
-        AppSnackBar.showSuccess('Application successfully');
-        Get.offNamed(AppRoute.appliedJobScreen);
-      } else if (response.statusCode == 404) {
-        AppSnackBar.showError('You have already applied for this job');
-      } else {
-        AppSnackBar.showError('Something Went Wrong');
-      }
-    } catch (e) {
-      print('Something Went Wrong $e');
-      AppSnackBar.showError('Something Went Wrong');
-
-      // log('Something Went Wrong');
-    }
-  }
-
-
   // Added by Shahriar
   final isLoading = false.obs;
   final getSingleJobModel = GetSingleJobModel().obs;
@@ -48,13 +23,39 @@ class JobDetailsController extends GetxController {
     super.onInit();
   }
 
+  // Added by Shahriar
+  Future<void> jobApplication(String id) async {
+    isLoading.value = true;
+    try {
+      final response = await NetworkCaller().postRequest(
+          "${AppUrls.jobApplie}/$id",
+          body: {},
+          token: "Bearer ${AuthService.token}");
+
+      if (response.isSuccess && response.statusCode == 201) {
+        AppSnackBar.showSuccess('Application successfully');
+        Get.toNamed(AppRoute.appliedJobScreen);
+      } else if (response.statusCode == 400) {
+        AppSnackBar.showSuccess('You have already applied for this job');
+      } else {
+        AppSnackBar.showError('Something Went Wrong');
+      }
+    } catch (e) {
+      print('Something Went Wrong $e');
+      AppSnackBar.showError('Something Went Wrong');
+    }finally{
+      isLoading.value = false;
+    }
+  }
+
+
   // Get Single job added by Shahriar
   Future<void> fetchSingleJob(String id) async{
     isLoading.value = true;
     try{
       final response = await NetworkCaller().getRequest(
           AppUrls.getSingleJob(id),
-          token: "Bearer ${AuthService.token}"
+          token: "Bearer ${AuthService.token}",
       );
       log("I am heerererer");
       if(response.isSuccess){
@@ -73,5 +74,48 @@ class JobDetailsController extends GetxController {
     }
   }
 
+  // Added favorite by Shahriar
+  var isFavorite = false.obs;
+  Future<void> addFavorite(String id) async {
+    isLoading.value = true;
+    try {
+      final response = await NetworkCaller().postRequest(
+        "${AppUrls.addFavorite}/$id",
+        body: {},
+        token: "Bearer ${AuthService.token}",
+      );
+      if (response.isSuccess) {
+        AppSnackBar.showSuccess("Favorite added successfully!");
+        isFavorite.value = true;
+      } else {
+        AppSnackBar.showError("Failed to add to favorite.");
+      }
+    } catch (e) {
+      AppSnackBar.showError(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Added by Shahriar
+  Future<void> removeFavorite(String id) async {
+    isLoading.value = true;
+    try {
+      final response = await NetworkCaller().deleteRequest(
+          "${AppUrls.removeFavorite}/$id",
+          "Bearer ${AuthService.token}"
+      );
+      if (response.isSuccess) {
+        AppSnackBar.showSuccess("Favorite removed successfully!");
+        isFavorite.value = false;
+      } else {
+        AppSnackBar.showError("Failed to remove favorite.");
+      }
+    } catch (e) {
+      AppSnackBar.showError(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }
 

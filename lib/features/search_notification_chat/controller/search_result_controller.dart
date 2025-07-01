@@ -103,4 +103,16 @@ class SearchResultController extends GetxController{
   }
 
 
+
+
+  // New data...............................added
+
+
+
+
 }
+
+
+
+
+
