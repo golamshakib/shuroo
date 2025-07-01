@@ -46,10 +46,10 @@ class HomeScreen extends StatelessWidget {
               // Navigate to notifications screen
               // Get.toNamed(AppRoute.notificationScreen);
             },
-            icon: const Icon(Icons.notifications_none_outlined),
+            icon: const Icon(Icons.notifications_none_outlined)
           ),
-          SizedBox(width: 16),
-        ],
+          SizedBox(width: 16)
+        ]
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
