@@ -13,12 +13,26 @@ class MakePostController extends GetxController {
   final textController = TextEditingController();
   var picUploads = <String>[].obs;
 
- 
+  RxBool isPostButtonEnabled = false.obs;
 
-  @override
-  void onClose() {
-    textController.dispose();
-    super.onClose();
+ @override
+void onInit() {
+  super.onInit();
+  textController.addListener(_validatePost);
+  ever(picUploads, (_) => _validatePost());
+}
+
+@override
+void onClose() {
+  textController.dispose();
+  super.onClose();
+}
+
+
+  void _validatePost() {
+    final hasText = textController.text.trim().isNotEmpty;
+    final hasImage = picUploads.isNotEmpty;
+    isPostButtonEnabled.value = hasText || hasImage;
   }
 
   /// Pick multiple images and update picUploads
@@ -48,7 +62,6 @@ class MakePostController extends GetxController {
         body: requestBody,
         imagePaths: picUploads,
       );
-
     } catch (e) {
       log('Error creating post: $e');
       AppSnackBar.showError("Failed to create post. Please try again.");
@@ -67,7 +80,8 @@ class MakePostController extends GetxController {
       final accessToken = AuthService.token;
 
       if (accessToken == null || accessToken.isEmpty) {
-        AppSnackBar.showError("Unauthorized: Missing token. Please log in again.");
+        AppSnackBar.showError(
+            "Unauthorized: Missing token. Please log in again.");
         return;
       }
 
@@ -79,7 +93,8 @@ class MakePostController extends GetxController {
       for (final path in imagePaths) {
         try {
           log('Attaching image: $path');
-          request.files.add(await http.MultipartFile.fromPath('postImage', path));
+          request.files
+              .add(await http.MultipartFile.fromPath('postImage', path));
         } catch (e) {
           log('Failed to attach image $path: $e');
           AppSnackBar.showError("Failed to attach image: $path");
@@ -122,7 +137,4 @@ class MakePostController extends GetxController {
       AppSnackBar.showError("Failed to create post.");
     }
   }
-
-  
-
 }

@@ -164,28 +164,35 @@ class MakePostScreen extends StatelessWidget {
                   ],
                 ));
           }),
-          GestureDetector(
-            onTap: () {
-              controller.createPost(
-                postText: controller.textController.text,
-              );
-              Get.back();
-            },
-            child: Container(
-              width: 72.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE6E6E7),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              alignment: Alignment.center,
-              child: CustomText(
-                text: AppText.post,
-                color: AppColors.grayText,
-                fontSize: 14.sp,
-              ),
-            ),
-          ),
+          Obx(() {
+  final isEnabled = controller.isPostButtonEnabled.value;
+
+  return GestureDetector(
+    onTap: isEnabled
+        ? () {
+            controller.createPost(
+              postText: controller.textController.text,
+            );
+            Get.back();
+          }
+        : null, // disable tap
+    child: Container(
+      width: 72.w,
+      height: 40.h,
+      decoration: BoxDecoration(
+        color: isEnabled ? AppColors.custom_blue : const Color(0xFFE6E6E7),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      alignment: Alignment.center,
+      child: CustomText(
+        text: AppText.post,
+        color: isEnabled ? AppColors.white : AppColors.grayText,
+        fontSize: 14.sp,
+      ),
+    ),
+  );
+})
+
         ],
       ),
     );

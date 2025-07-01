@@ -112,6 +112,16 @@ class HomeController extends GetxController {
     getAllPost();
   }
 
+  // Refresh Controller
+
+  // Future<void> refreshPostList() async{
+  //   await getAllPost();
+  // }
+
+  Future<void> refreshPostList() async {
+    await getAllPost();
+  }
+
   Future<void> getAllPost() async {
     try {
       final response = await NetworkCaller()
@@ -123,6 +133,7 @@ class HomeController extends GetxController {
         final json = response.responseData;
         final userInformation = UserInformation.fromJson(json);
         refresh();
+        update();
         postDataList.value = userInformation.data;
         //log("userInformation $userInformation");
         //AppSnackBar.showSuccess('All posts fetched successfully');

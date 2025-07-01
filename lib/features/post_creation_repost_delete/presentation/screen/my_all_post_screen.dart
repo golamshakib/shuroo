@@ -64,6 +64,10 @@ class MyAllPostScreen extends StatelessWidget {
                     }
 
                     return Expanded(
+                        child: RefreshIndicator(
+                      onRefresh: controller.refreshMyPost,
+                      color: AppColors.white,
+                      backgroundColor: AppColors.customBlue,
                       child: ListView.builder(
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
@@ -122,7 +126,7 @@ class MyAllPostScreen extends StatelessWidget {
                                     icon:
                                         userPost.user?.image ?? IconPath.icon_1,
                                     organization: AppText.wildWorld,
-                                  //  title: AppText.campus_Event,
+                                    //  title: AppText.campus_Event,
                                     content: userPost.content ?? "",
                                     imageAsset:
                                         (userPost.image?.isNotEmpty ?? false)
@@ -135,7 +139,7 @@ class MyAllPostScreen extends StatelessWidget {
                           );
                         },
                       ),
-                    );
+                    ));
                   }),
                 ]))));
   }

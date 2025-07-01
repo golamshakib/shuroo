@@ -13,11 +13,14 @@ class FavouriteController extends GetxController{
 
   @override
   void onInit() async{
-    // TODO: implement onInit
     super.onInit();
     isLoading.value = true;
     requestToGetFavorite();
     isLoading.value = false;
+  }
+
+  Future<void> favoriteRefresh() async {
+    await requestToGetFavorite();
   }
 
   var favoriteInformation = GetFavoriteModel();

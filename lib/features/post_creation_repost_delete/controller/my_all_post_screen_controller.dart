@@ -43,6 +43,13 @@ class MyAllPostScreenController extends GetxController {
         controllerOne.userProfile.value.data!.id.toString());
   }
 
+  Future<void> refreshMyPost() async {
+    final controllerOne = Get.find<ProfileInformationController>();
+
+    await getSingleUserPost(
+        controllerOne.userProfile.value.data!.id.toString());
+  }
+
   //! Get Single Post ===================================================
 
   Future<void> getSinglePost(String id) async {
@@ -119,44 +126,45 @@ class MyAllPostScreenController extends GetxController {
   //! Edit Post ===================================================
 
   Future<void> updatePost(String id, Map<String, dynamic> updatedData) async {
-  try {
-    showProgressIndicator();
+    try {
+      showProgressIndicator();
 
-    final response = await NetworkCaller().putRequest(
-      "${AppUrls.editPost}/$id",
-      body: updatedData,
-      token: "Bearer ${AuthService.token}",
-    );
+      final response = await NetworkCaller().putRequest(
+        "${AppUrls.editPost}/$id",
+        body: updatedData,
+        token: "Bearer ${AuthService.token}",
+      );
 
-    if (response.isSuccess && (response.statusCode == 200 || response.statusCode == 201)) {
-      final updatedJson = response.responseData['data']['update'];
+      if (response.isSuccess &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        final updatedJson = response.responseData['data']['update'];
 
-      final index = getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
+        final index =
+            getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
 
-      if (index != null && index >= 0) {
-        // Update the local list with new values
-        final postList = getUserPost.value.data!.data!;
-        final post = postList[index];
+        if (index != null && index >= 0) {
+          // Update the local list with new values
+          final postList = getUserPost.value.data!.data!;
+          final post = postList[index];
 
-        post.content = updatedJson['content'];
-        post.image = List<String>.from(updatedJson['image'] ?? []);
-        post.updatedAt = DateTime.tryParse(updatedJson['updatedAt'] ?? "");
+          post.content = updatedJson['content'];
+          post.image = List<String>.from(updatedJson['image'] ?? []);
+          post.updatedAt = DateTime.tryParse(updatedJson['updatedAt'] ?? "");
 
-        getUserPost.refresh(); // Update UI
+          getUserPost.refresh(); // Update UI
+        }
+
+        AppSnackBar.showSuccess("Post Edited Successfully");
+      } else if (response.statusCode == 404) {
+        AppSnackBar.showError("Post Not Found");
+      } else {
+        AppSnackBar.showError("Something Went Wrong");
       }
-
-      AppSnackBar.showSuccess("Post Edited Successfully");
-    } else if (response.statusCode == 404) {
-      AppSnackBar.showError("Post Not Found");
-    } else {
-      AppSnackBar.showError("Something Went Wrong");
+    } catch (e) {
+      log('Something went Wrong $e');
+      AppSnackBar.showError("Something went wrong");
+    } finally {
+      hideProgressIndicator();
     }
-  } catch (e) {
-    log('Something went Wrong $e');
-    AppSnackBar.showError("Something went wrong");
-  } finally {
-    hideProgressIndicator();
   }
-}
-
 }
