@@ -8,6 +8,7 @@ import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/features/post_creation_repost_delete/data/get_single_user_data_model.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
+import '../../profile/controller/profile_information_controller.dart';
 
 class MyAllPostScreenController extends GetxController {
   final peopleIcons = [
@@ -32,6 +33,16 @@ class MyAllPostScreenController extends GetxController {
     'Grace',
     'Grace'
   ];
+  @override
+  void onInit() async{
+    // TODO: implement onInit
+    super.onInit();
+
+    final controllerOne = Get.find<ProfileInformationController>();
+    log(controllerOne.userProfile.value.data!.id.toString());
+    await getSingleUserPost(controllerOne.userProfile.value.data!.id.toString());
+
+  }
 
   // RxList<Datum> getUserPostData = <Datum>[].obs;
   // //! Get All Post ===================================================
@@ -55,6 +66,7 @@ class MyAllPostScreenController extends GetxController {
   // // }
 
   //! Get Single Post ===================================================
+
 
   Future<void> getSinglePost(String id) async {
     try {
