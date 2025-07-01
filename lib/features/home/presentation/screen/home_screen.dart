@@ -43,8 +43,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigate to notifications screen
-              // Get.toNamed(AppRoute.notificationScreen);
+
             },
             icon: const Icon(Icons.notifications_none_outlined)
           ),
