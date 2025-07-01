@@ -1,43 +1,45 @@
-import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
-import 'package:shuroo/features/jobs/data/model/get_applied_job_model.dart';
+import 'package:shuroo/features/jobs/data/model/get_interview_job_model.dart';
 
-class AppliedController extends GetxController {
-
+class InterviewController extends GetxController{
 
   final isLoading = false.obs;
-  final getAppliedJob = GetAppliedJobModel().obs;
-
+  final getInterViewJobModel = GetInterViewJobModel().obs;
 
   @override
   void onInit() {
     super.onInit();
-    getAppliedItem();
+    fetchInterView();
   }
 
   // Added by Shahriar
-  Future<void> getAppliedItem() async {
+  Future<void> fetchInterView() async{
     isLoading.value = true;
-    try {
+    try{
+      print('Calling shortlist API...........................');
       final response = await NetworkCaller().getRequest(
-          AppUrls.appliedItem,
+          AppUrls.getInterViewJob,
           token: "Bearer ${AuthService.token}"
       );
-      if (response.isSuccess && response.statusCode == 200){
+      if(response.isSuccess){
         final data = response.responseData;
-        getAppliedJob.value = GetAppliedJobModel.fromJson(data);
-    } else{
+        print(data);
+        getInterViewJobModel.value = GetInterViewJobModel.fromJson(data);
+      }
+      else if(response.statusCode == 404){
+
+      }
+      else{
         AppSnackBar.showError('Something Went Wrong');
       }
-  }catch (e){
-      AppSnackBar.showError(e.toString());
+    }catch(e){
+      AppSnackBar.showSuccess(e.toString());
     }finally{
       isLoading.value = false;
     }
   }
-
 }

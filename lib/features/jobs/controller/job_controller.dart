@@ -27,7 +27,7 @@ class JobController extends GetxController{
     AppliedJobScreen(),
     ProfileViewScreen(),
     ShortListedScreen(),
-    InterviewScreen()
+    InterviewScreen(),
   ];
 
   final List<Jobs> jobs = [
@@ -126,58 +126,33 @@ class JobController extends GetxController{
     jobModelList[index].isFavorite.toggle();
   }
 
-  // @override
-  // void onInit() async {
-  //   fetchAllJobs();
-  //   super.onInit();
-  // }
+  @override
+  void onInit() async {
+    fetchAllJobs();
+    super.onInit();
+  }
 
-  Future<void> fetchAllJobs() async {
+  Future<void> fetchAllJobs() async{
     isLoading.value = true;
-    try {
+    try{
       log('Hello jobs ..............................');
       final response = await NetworkCaller().getRequest(
-          AppUrls.getAllJobs,
-          token: "Bearer ${AuthService.token}"
+        AppUrls.getAllJobs,
+        token: "Bearer ${AuthService.token}"
       );
-      if(response.isSuccess) {
+      if(response.isSuccess){
         print("Job response data : ${response.responseData}");
         final data = response.responseData;
         getAllJobsModel.value = GetAllJobsModel.fromJson(data);
       }
-      else {
+      else{
         AppSnackBar.showError('Something went wrong to fetch all jobs!');
       }
-    } catch(e) {
+    }catch(e){
       AppSnackBar.showError(e.toString());
     }
-    finally {
+    finally{
       isLoading.value = false;
     }
   }
-
-
-  // Future<void> fetchAllJobs() async{
-  //   isLoading.value = true;
-  //   try{
-  //     log('Hello jobs ..............................');
-  //     final response = await NetworkCaller().getRequest(
-  //       AppUrls.getAllJobs,
-  //       token: "Bearer ${AuthService.token}"
-  //     );
-  //     if(response.isSuccess){
-  //       print("Job response data : ${response.responseData}");
-  //       final data = response.responseData;
-  //       getAllJobsModel.value = GetAllJobsModel.fromJson(data);
-  //     }
-  //     else{
-  //       AppSnackBar.showError('Something went wrong to fetch all jobs!');
-  //     }
-  //   }catch(e){
-  //     AppSnackBar.showError(e.toString());
-  //   }
-  //   finally{
-  //     isLoading.value = false;
-  //   }
-  // }
 }

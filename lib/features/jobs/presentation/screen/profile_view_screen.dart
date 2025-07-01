@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/jobs/controller/applied_controller.dart';
-
+import 'package:shuroo/core/utils/constants/image_path.dart';
+import 'package:shuroo/features/jobs/controller/profile_view_controller.dart';
 import '../../../../core/common/widgets/custom_back_button.dart';
-import '../../../../core/common/widgets/custom_blue_gray_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
+import '../../../../routes/app_routes.dart';
+import '../widget/applied_job_card_widget.dart';
 
-class ProfileViewScreen extends StatelessWidget {
-   ProfileViewScreen({super.key});
+class ProfileViewScreen extends GetView<ProfileViewController> {
+  const ProfileViewScreen({super.key});
 
-   final AppliedController controller = Get.put(AppliedController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,100 +19,47 @@ class ProfileViewScreen extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: CustomBackButton(),
-        title: CustomText(text: 'Profile View', fontSize: 20.sp,color: AppColors.textPrimary,fontWeight: FontWeight.w600,),
+        title: CustomText(text: 'Profile View',
+          fontSize: 20.sp,
+          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w600,),
       ),
-      body: SafeArea(child: Padding(padding: EdgeInsets.all(16),
+      body: SafeArea(child: Padding(
+        padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: controller.appliedList.length,
-                itemBuilder: (context, index) {
-                  final appliedList = controller.appliedList[index];
-                  return Container(
-                      margin: EdgeInsets.symmetric(vertical: 6),
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                            color: Color(0xffF5F5F5), width: 0.2),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: AssetImage(appliedList.imagePath!),
-                              ),
-                              SizedBox(width: 12.w),
-                              CustomText(
-                                text: appliedList.title!,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.textPrimary,
-                              ),
-                              Spacer(),
-                              GestureDetector(
-                                onTap: (){
+              Obx(() {
+                if(controller.isLoading.value){
+                  return Center(child: CircularProgressIndicator(color: AppColors.primary));
+                }
+                final viewJobList = controller.getProfileViewJobModel.value.data ?? [];
 
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.grayBlue,
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(color: Color(0xff009D83)),
-                                  ),
-                                  child: CustomText(text: 'Profile View', fontSize: 12.sp,color: Color(0xff009D83),fontWeight: FontWeight.w400,),
-                                ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding:  EdgeInsets.only(left: 50),
-                            child: CustomText(
-                              text: appliedList.name!,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textGray,
-                            ),
-                          ),
-                          SizedBox(height: 6.h),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: CustomText(
-                              text: appliedList.date!,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textGray,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: CustomText(
-                              text: appliedList.salary!,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.textGray,
-                            ),
-                          ),
-                          SizedBox(height: 14.h),
-
-                          CustomBlueGrayButton(
-                              text: 'Send Message',
-                              onTap: (){
-
-                              })
-                        ],
-                      )
-                  );
-                },
-              ),
+                if(viewJobList.isEmpty){
+                  return Center(child: Text("No jobs found"));
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: viewJobList.length,
+                  itemBuilder: (context, index) {
+                    final viewJob = viewJobList[index];
+                    return AppliedJobCard(
+                      imagePath: viewJob.job?.company?.logoImage?.isNotEmpty == true
+                          ? viewJob.job!.company!.logoImage!
+                          : ImagePath.dummyProfilePicture,
+                      title: viewJob.job?.name ?? '',
+                      name: viewJob.job?.company?.name ?? '',
+                      date: viewJob.updatedAt.toString(),
+                      salary: "Salary: \$${viewJob.job!.salary.toString()}",
+                      onTap: () {
+                        Get.toNamed(AppRoute.chatScreen);
+                      },
+                    );
+                  },
+                );
+              }),
             ],
           ),
         ),
