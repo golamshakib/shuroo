@@ -8,14 +8,17 @@ import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
+import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
-import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/my_all_post_screen.dart';
+import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
+import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
 class MakePostScreen extends StatelessWidget {
   MakePostScreen({super.key});
 
   final controller = Get.find<MakePostController>();
+  final controllerOne = Get.find<ProfileInformationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -107,34 +110,60 @@ class MakePostScreen extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: Image.asset(
-                  IconPath.cancle,
-                  height: 40.w,
-                  width: 40.w,
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  Get.to(MyAllPostScreen());
+          Obx(() {
+            final user = controllerOne.userProfile.value.data;
+
+            return GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoute.myAllPostScreen);
                 },
-                child: Image.asset(
-                  IconPath.icon_pro,
-                  height: 40.w,
-                  width: 40.w,
-                ),
-              ),
-              SizedBox(width: 10.w),
-              CustomText(
-                text: AppText.rochelle,
-                fontSize: 18.sp,
-                color: AppColors.textPrimary,
-              ),
-            ],
-          ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Image.asset(
+                            IconPath.cancle,
+                            height: 40.w,
+                            width: 40.w,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+
+                        // Profile Image
+                        if (user?.image != null)
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              user!.image,
+                              height: 40.w,
+                              width: 40.w,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Icon(Icons.person, size: 24),
+                            ),
+                          )
+                        else
+                          CircleAvatar(
+                              radius: 20.w,
+                              child:
+                                  Image.asset(ImagePath.dummyProfilePicture)),
+
+                        SizedBox(width: 10.w),
+
+                        // User Name
+                        CustomText(
+                          text: user?.name ?? 'User Name',
+                          fontSize: 18.sp,
+                          color: AppColors.textPrimary,
+                        ),
+                      ],
+                    ),
+                  ],
+                ));
+          }),
           GestureDetector(
             onTap: () {
               controller.createPost(

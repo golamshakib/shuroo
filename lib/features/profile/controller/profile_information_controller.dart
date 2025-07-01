@@ -5,6 +5,7 @@ import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
+import 'package:shuroo/features/profile/data/user_data_model.dart';
 
 class ProfileInformationController extends GetxController {
   late String originalName;
@@ -23,6 +24,8 @@ class ProfileInformationController extends GetxController {
     originalCountry = countryTEController.text;
     originalState = stateTEController.text;
     originalCity = cityTEController.text;
+
+    getUser();
   }
 
   @override
@@ -103,6 +106,28 @@ class ProfileInformationController extends GetxController {
       AppSnackBar.showError('Something went wrong');
     } finally {
       hideProgressIndicator();
+    }
+  }
+
+  // Get User Profile
+
+  var userProfile = GetUser().obs;
+
+  Future<void> getUser() async {
+    try {
+      final response = await NetworkCaller().getRequest(AppUrls.getUserProfile,
+          token: "Bearer ${AuthService.token}");
+
+      if (response.isSuccess && response.statusCode == 200) {
+        userProfile.value = GetUser.fromJson(response.responseData);
+        AppSnackBar.showSuccess("User profile Get successfully");
+      } else if (response.statusCode == 404) {
+        AppSnackBar.showError("User Not Found");
+      } else {
+        AppSnackBar.showError("Something went wrong");
+      }
+    } catch (e) {
+      print('Something went wrong $e');
     }
   }
 }

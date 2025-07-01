@@ -7,6 +7,7 @@ import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
+import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 
 import '../../../home/presentation/widget/custom_home_post_card.dart';
 import '../widget/custom_pupup_edit_post.dart';
@@ -15,6 +16,7 @@ class MyAllPostScreen extends StatelessWidget {
   MyAllPostScreen({super.key});
 
   final controller = Get.find<MyAllPostScreenController>();
+  final controllerOne = Get.find<ProfileInformationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,56 +24,71 @@ class MyAllPostScreen extends StatelessWidget {
         backgroundColor: AppColors.scaffoldBackgroundColor,
         body: SafeArea(
             child: Container(
-          margin: EdgeInsets.only(left: 16, right: 10, top: 10),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  InkWell(
-                    child: Image.asset(IconPath.back_arrow),
-                    onTap: () {
-                      Get.back();
-                    },
+                margin: EdgeInsets.only(left: 16, right: 10, top: 10),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        child: Image.asset(IconPath.back_arrow),
+                        onTap: () {
+                          Get.back();
+                        },
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Obx(() {
+                        final user = controllerOne.userProfile.value.data;
+
+                        return CustomText(
+                          text: user?.name ?? 'User Name',
+                          fontSize: 20,
+                          color: AppColors.primaryTextColor,
+                        );
+                      }),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CustomText(
-                    text: AppText.rechelle,
-                    fontSize: 20,
-                    color: AppColors.primaryTextColor,
-                  )
-                ],
-              ),
-              Obx(() {
-                if (controller.getUserPostData.isEmpty) {
-                  return const Center(child: Text("No posts found"));
-                }
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              offset: const Offset(4, 4),
-                              blurRadius: 10,
-                            ),
-                          ],
+                  Obx(() {
+                    final postWrapper = controller.getUserPost.value.data;
+                    final posts = postWrapper?.data;
+
+                    if (posts == null || posts.isEmpty) {
+                      return Center(
+                        child: CustomText(
+                          text: 'Post Not Found',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primaryTextColor,
                         ),
-                        margin: EdgeInsets.only(top: 16),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      );
+                    }
+
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          final userPost = posts[index];
+
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 10,
+                                ),
+                              ],
+                            ),
+                            margin: const EdgeInsets.only(top: 16),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -80,51 +97,46 @@ class MyAllPostScreen extends StatelessWidget {
                                           height: 24.h,
                                           width: 24.w,
                                         ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
+                                        SizedBox(width: 5.w),
                                         CustomText(
-                                          text: " Rochelle reposted this",
+                                          text:
+                                              "${userPost.user?.name ?? "Unknown"} reposted this",
                                           fontSize: 14,
                                           color: AppColors.primaryTextColor,
-                                        )
+                                        ),
                                       ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        showPostEditePopup(context);
+                                      },
+                                      child: Image.asset(IconPath.dod),
                                     ),
                                   ],
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    showPostEditePopup(context);
-                                  },
-                                  child: Image.asset(IconPath.dod),
-                                )
+                                const SizedBox(height: 5),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 10),
+                                  child: PostCard(
+                                    context: context,
+                                    icon:
+                                        userPost.user?.image ?? IconPath.icon_1,
+                                    organization: AppText.wildWorld,
+                                    title: AppText.campus_Event,
+                                    content: userPost.content ?? "",
+                                    imageAsset:
+                                        (userPost.image?.isNotEmpty ?? false)
+                                            ? userPost.image!.first
+                                            : ImagePath.img_video,
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: PostCard(
-                                context: context,
-                                icon: IconPath.icon_1,
-                                organization: AppText.wildWorld,
-                                //  timeAgo: "1w ago",
-                                title: AppText.campus_Event,
-                                content: AppText.the_annualCareer,
-                                imageAsset: ImagePath.img_video,
-                                //  hashtags: AppText.careerFair,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                );
-              })
-            ],
-          ),
-        )));
+                          );
+                        },
+                      ),
+                    );
+                  }),
+                ]))));
   }
 }
