@@ -122,7 +122,7 @@ class MyAllPostScreen extends StatelessWidget {
                                     icon:
                                         userPost.user?.image ?? IconPath.icon_1,
                                     organization: AppText.wildWorld,
-                                    title: AppText.campus_Event,
+                                  //  title: AppText.campus_Event,
                                     content: userPost.content ?? "",
                                     imageAsset:
                                         (userPost.image?.isNotEmpty ?? false)

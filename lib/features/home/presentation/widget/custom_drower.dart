@@ -7,12 +7,15 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
+import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 class CustomDrower extends StatelessWidget {
   CustomDrower({super.key});
 
   final HomeController homeController = Get.put(HomeController());
+
+  final controller = Get.find<ProfileInformationController>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -44,9 +47,12 @@ class CustomDrower extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomText(
-                              text: "Nifat Chowdhury",
-                              fontWeight: FontWeight.w500),
+                          Obx(() {
+                            final user = controller.userProfile.value.data;
+                            return CustomText(
+                                text: user?.name ?? 'User Name',
+                                fontWeight: FontWeight.w500);
+                          }),
                           GestureDetector(
                               onTap: () {
                                 Get.toNamed(AppRoute.profileInformationScreen);

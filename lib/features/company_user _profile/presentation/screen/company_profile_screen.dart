@@ -97,7 +97,7 @@ class CompanyProfileScreen extends StatelessWidget {
                             icon: IconPath.icon_1,
                             organization: AppText.wildWorld,
                         //    timeAgo: "1w ago",
-                            title: AppText.campus_Event,
+                          //  title: AppText.campus_Event,
                             content: AppText.the_annualCareer,
                             imageAsset: ImagePath.img_video,
                         //    hashtags: AppText.careerFair,

@@ -177,8 +177,8 @@ class PersonalCreationController extends GetxController {
 
   Future<void> getProfile() async {
     try {
-      final response = await NetworkCaller()
-          .getRequest(AppUrls.getUserProfile, token: AuthService.token);
+      final response = await NetworkCaller().getRequest(AppUrls.getUserProfile,
+          token: "Bearer ${AuthService.token}");
 
       if (response.isSuccess && response.statusCode == 200) {
         userProfile.value = GetUser.fromJson(response.responseData);
@@ -207,7 +207,7 @@ class PersonalCreationController extends GetxController {
       final response = await NetworkCaller().postRequest(
           AppUrls.createExperience,
           body: requestBody,
-          token: AuthService.token);
+          token: "Bearer ${AuthService.token}");
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
@@ -236,21 +236,26 @@ class PersonalCreationController extends GetxController {
     }
   }
 
+
   // Educaton ================
   Future<void> educationAdd() async {
     final requestBody = {
-      'title': titleTEController.text.trim(),
-      'company': companyNameTEController.text.trim(),
-      'startDate': startExperienceTEController.text.trim(),
-      'endDate': endExperienceTEController.text.trim(),
-      'description': describeTEController.text.trim()
+      'institute': instituteNameTEController.text.trim(),
+      'degreeName': majorSubjectTEController.text.trim(),
+      'grade': double.tryParse( minorSubjectTEController.text.trim()),
+      'fieldOfStudy': degreeTEController.text.trim(),
+      'startDate': startTEController.text.trim(),
+      'endDate': endTEController.text.trim()
     };
+
+
 
     try {
       final response = await NetworkCaller().postRequest(
           AppUrls.createEducation,
           body: requestBody,
-          token: AuthService.token);
+          token: "Bearer ${AuthService.token}");
+      print(requestBody);
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');

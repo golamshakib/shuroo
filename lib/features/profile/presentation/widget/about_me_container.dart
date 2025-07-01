@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
+import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 
-Widget aboutMeContainer(PersonalCreationController controller){
+Widget aboutMeContainer(PersonalCreationController controller) {
+  final controllerOne = Get.find<ProfileInformationController>();
 
   return Container(
     decoration: BoxDecoration(
@@ -27,20 +29,27 @@ Widget aboutMeContainer(PersonalCreationController controller){
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(9.sp),
-                  child: Obx(() =>
-                    controller.profilePath.value == '' ?
-                    Image.asset(ImagePath.profilePic, height: 104.h, width: 86.w, fit: BoxFit.fill,) :
-                    Image.file(File(controller.profilePath.value), height: 104.h, width: 86.w, fit: BoxFit.fill,)
-                  ),
+                  child: Obx(() => controller.profilePath.value == ''
+                      ? Image.asset(
+                          ImagePath.profilePic,
+                          height: 104.h,
+                          width: 86.w,
+                          fit: BoxFit.fill,
+                        )
+                      : Image.file(
+                          File(controller.profilePath.value),
+                          height: 104.h,
+                          width: 86.w,
+                          fit: BoxFit.fill,
+                        )),
                 ),
               ),
             ),
-
             Positioned(
               top: -1,
               right: 2,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   print("I am here clicking");
                   controller.pickProfile();
                 },
@@ -48,33 +57,64 @@ Widget aboutMeContainer(PersonalCreationController controller){
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: const Color(0xFF01A8F9),
-                      border: Border.all(color: AppColors.white)
-                  ),
+                      border: Border.all(color: AppColors.white)),
                   padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-                  child: Icon(Icons.add, color: AppColors.white,),
+                  child: Icon(
+                    Icons.add,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             )
           ],
         ),
-        SizedBox(width: 12.w,),
+        SizedBox(
+          width: 12.w,
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: "Rochelle Backman", fontSize: 18.sp,),
-            SizedBox(height: 4.5.h,),
+            Obx(() {
+              final user = controllerOne.userProfile.value.data;
+              return CustomText(
+                text: user?.name ?? 'User Name',
+                fontSize: 18.sp,
+              );
+            }),
+            SizedBox(
+              height: 4.5.h,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(IconPath.homeIcon),
-                SizedBox(width: 1.w,),
-                CustomText(text: "Brookfield University", fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,)
+                SizedBox(
+                  width: 1.w,
+                ),
+                CustomText(
+                  text: "Brookfield University",
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textSecondary,
+                )
               ],
             ),
-            SizedBox(height: 14.5.w,),
-            CustomText(text: "Major", fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,),
-            CustomText(text: "Environmental Science", fontSize: 12.sp, fontWeight: FontWeight.w500, color: AppColors.textPrimary,),
+            SizedBox(
+              height: 14.5.w,
+            ),
+            CustomText(
+              text: "Major",
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textSecondary,
+            ),
+            CustomText(
+              text: "Environmental Science",
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textPrimary,
+            ),
           ],
         )
       ],
