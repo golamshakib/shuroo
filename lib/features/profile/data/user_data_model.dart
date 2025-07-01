@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final getUser = getUserFromJson(jsonString);
-
 import 'dart:convert';
 
 GetUser getUserFromJson(String str) => GetUser.fromJson(json.decode(str));
@@ -39,9 +35,14 @@ class Data {
     String? phone;
     String? role;
     String? password;
-    String? country;
-    String? state;
-    String? city;
+    dynamic country;
+    dynamic state;
+    dynamic city;
+    dynamic videoProfile;
+    List<dynamic>? skills;
+    List<dynamic>? tools;
+    List<dynamic>? interests;
+    List<dynamic>? languages;
     dynamic companyType;
     dynamic establishmentYear;
     dynamic yearsOfBusinesses;
@@ -52,15 +53,14 @@ class Data {
     dynamic logoImage;
     dynamic coverImage;
     dynamic fcmToken;
-    String? image;
+    dynamic image;
     String? status;
     String? customerId;
     dynamic connectAccountId;
     bool? isVerified;
     DateTime? createdAt;
     DateTime? updatedAt;
-    List<Post>? post;
-    List<dynamic>? job;
+    List<dynamic>? experience;
 
     Data({
         this.id,
@@ -72,6 +72,11 @@ class Data {
         this.country,
         this.state,
         this.city,
+        this.videoProfile,
+        this.skills,
+        this.tools,
+        this.interests,
+        this.languages,
         this.companyType,
         this.establishmentYear,
         this.yearsOfBusinesses,
@@ -89,8 +94,7 @@ class Data {
         this.isVerified,
         this.createdAt,
         this.updatedAt,
-        this.post,
-        this.job,
+        this.experience,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -103,6 +107,11 @@ class Data {
         country: json["country"],
         state: json["state"],
         city: json["city"],
+        videoProfile: json["videoProfile"],
+        skills: json["skills"] == null ? [] : List<dynamic>.from(json["skills"]!.map((x) => x)),
+        tools: json["tools"] == null ? [] : List<dynamic>.from(json["tools"]!.map((x) => x)),
+        interests: json["interests"] == null ? [] : List<dynamic>.from(json["interests"]!.map((x) => x)),
+        languages: json["languages"] == null ? [] : List<dynamic>.from(json["languages"]!.map((x) => x)),
         companyType: json["companyType"],
         establishmentYear: json["establishmentYear"],
         yearsOfBusinesses: json["yearsOfBusinesses"],
@@ -120,8 +129,7 @@ class Data {
         isVerified: json["isVerified"],
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        post: json["Post"] == null ? [] : List<Post>.from(json["Post"]!.map((x) => Post.fromJson(x))),
-        job: json["Job"] == null ? [] : List<dynamic>.from(json["Job"]!.map((x) => x)),
+        experience: json["Experience"] == null ? [] : List<dynamic>.from(json["Experience"]!.map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
@@ -134,6 +142,11 @@ class Data {
         "country": country,
         "state": state,
         "city": city,
+        "videoProfile": videoProfile,
+        "skills": skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
+        "tools": tools == null ? [] : List<dynamic>.from(tools!.map((x) => x)),
+        "interests": interests == null ? [] : List<dynamic>.from(interests!.map((x) => x)),
+        "languages": languages == null ? [] : List<dynamic>.from(languages!.map((x) => x)),
         "companyType": companyType,
         "establishmentYear": establishmentYear,
         "yearsOfBusinesses": yearsOfBusinesses,
@@ -151,75 +164,6 @@ class Data {
         "isVerified": isVerified,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
-        "Post": post == null ? [] : List<dynamic>.from(post!.map((x) => x.toJson())),
-        "Job": job == null ? [] : List<dynamic>.from(job!.map((x) => x)),
-    };
-}
-
-class Post {
-    String? id;
-    String? content;
-    List<String>? image;
-    String? userId;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    User? user;
-
-    Post({
-        this.id,
-        this.content,
-        this.image,
-        this.userId,
-        this.createdAt,
-        this.updatedAt,
-        this.user,
-    });
-
-    factory Post.fromJson(Map<String, dynamic> json) => Post(
-        id: json["id"],
-        content: json["content"],
-        image: json["image"] == null ? [] : List<String>.from(json["image"]!.map((x) => x)),
-        userId: json["userId"],
-        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        user: json["user"] == null ? null : User.fromJson(json["user"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "content": content,
-        "image": image == null ? [] : List<dynamic>.from(image!.map((x) => x)),
-        "userId": userId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "user": user?.toJson(),
-    };
-}
-
-class User {
-    String? id;
-    String? name;
-    String? image;
-    dynamic logoImage;
-
-    User({
-        this.id,
-        this.name,
-        this.image,
-        this.logoImage,
-    });
-
-    factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"],
-        image: json["image"],
-        logoImage: json["logoImage"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
-        "logoImage": logoImage,
+        "Experience": experience == null ? [] : List<dynamic>.from(experience!.map((x) => x)),
     };
 }

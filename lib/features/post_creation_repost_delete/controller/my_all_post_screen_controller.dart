@@ -1,12 +1,11 @@
 import 'dart:developer' show log;
-
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
-import 'package:shuroo/features/post_creation_repost_delete/data/get_my_post_date_model.dart';
+import 'package:shuroo/features/post_creation_repost_delete/data/get_single_user_data_model.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
 
@@ -34,28 +33,26 @@ class MyAllPostScreenController extends GetxController {
     'Grace'
   ];
 
-  
+  // RxList<Datum> getUserPostData = <Datum>[].obs;
+  // //! Get All Post ===================================================
+  // // Future<void> getAllPost() async {
+  // //   try {
+  // //     showProgressIndicator();
+  // //     final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
 
-  RxList<Datum> getUserPostData = <Datum>[].obs;
-  //! Get All Post ===================================================
-  // Future<void> getAllPost() async {
-  //   try {
-  //     showProgressIndicator();
-  //     final response = await NetworkCaller().getRequest(AppUrls.getAllPost);
-
-  //     if (response.isSuccess && response.statusCode == 200) {
-  //       AppSnackBar.showSuccess('All Post Fetch Successfully');
-  //     } else if (response.statusCode == 404) {
-  //       AppSnackBar.showError('Data Not Found');
-  //     } else {
-  //       AppSnackBar.showError('Something went Wrong');
-  //     }
-  //   } catch (e) {
-  //     log('Something went Wrong $e');
-  //   } finally {
-  //     hideProgressIndicator();
-  //   }
-  // }
+  // //     if (response.isSuccess && response.statusCode == 200) {
+  // //       AppSnackBar.showSuccess('All Post Fetch Successfully');
+  // //     } else if (response.statusCode == 404) {
+  // //       AppSnackBar.showError('Data Not Found');
+  // //     } else {
+  // //       AppSnackBar.showError('Something went Wrong');
+  // //     }
+  // //   } catch (e) {
+  // //     log('Something went Wrong $e');
+  // //   } finally {
+  // //     hideProgressIndicator();
+  // //   }
+  // // }
 
   //! Get Single Post ===================================================
 
@@ -81,6 +78,8 @@ class MyAllPostScreenController extends GetxController {
 
   //! Get My Post Post ===================================================
 
+  var getUserPost = GetSingleUser().obs;
+
   Future<void> getSingleUserPost(String userId) async {
     try {
       final response = await NetworkCaller().getRequest(
@@ -90,9 +89,8 @@ class MyAllPostScreenController extends GetxController {
       if (response.isSuccess && response.statusCode == 200) {
         final json = response.responseData;
 
-        final userInformation = GetUserPost.fromJson(json);
+        getUserPost.value = GetSingleUser.fromJson(json);
 
-        getUserPostData.value = userInformation.data.data;
 
         AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
