@@ -16,8 +16,8 @@ class CustomTextFormFieldPass extends StatefulWidget {
   final bool isPassword = true;
   final TextEditingController? controller;
 
-  CustomTextFormFieldPass({
-    Key? key,
+  const CustomTextFormFieldPass({
+    super.key,
     required this.label,
     required this.hintText,
     required this.icon,
@@ -26,7 +26,7 @@ class CustomTextFormFieldPass extends StatefulWidget {
     this.hintSize,
     this.fontFamily,
     this.onChanged, this.titleColor,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomTextFormFieldPass> createState() => _CustomTextFormFieldPassState();

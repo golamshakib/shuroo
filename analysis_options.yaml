@@ -10,6 +10,8 @@
 analyzer:
   errors:
     avoid_print: ignore
+    constant_identifier_names: ignore
+    file_names: ignore
     must_be_immutable: ignore
 include: package:flutter_lints/flutter.yaml
 

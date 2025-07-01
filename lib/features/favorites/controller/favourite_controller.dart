@@ -1,15 +1,10 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/features/favorites/data/model/get_favorite_model.dart';
-import 'package:shuroo/routes/app_routes.dart';
 
-import '../../../core/utils/constants/will_be_deleted.dart';
-import '../data/model/favourite_model.dart';
 
 class FavouriteController extends GetxController{
 

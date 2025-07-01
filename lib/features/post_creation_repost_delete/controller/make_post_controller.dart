@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -8,9 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
-import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
-import 'package:shuroo/features/post_creation_repost_delete/data/get_post_data_model.dart';
 
 class MakePostController extends GetxController {
   final textController = TextEditingController();

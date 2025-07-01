@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_blue_gray_button.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/routes/app_routes.dart';
 
 class AppliedJobCard extends StatelessWidget {
   final String imagePath;
@@ -15,14 +13,13 @@ class AppliedJobCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const AppliedJobCard(
-      {Key? key,
+      {super.key,
       required this.imagePath,
       required this.title,
       required this.name,
       required this.date,
       required this.salary,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
