@@ -45,8 +45,8 @@ void showPeopleBottomSheet(BuildContext context) {
                         SizedBox(height: 6),
                         Container(
                             alignment: Alignment.center,
-                            child: CustomText(
-                                text: controller.peopleName[index])),
+                            child:
+                                CustomText(text: controller.peopleName[index])),
                       ],
                     ),
                   );
