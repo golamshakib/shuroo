@@ -8,12 +8,15 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/jobs/controller/job_details_controller.dart';
+import '../../../favorites/controller/favourite_controller.dart';
 
 
 class JobDetailsScreen extends StatelessWidget {
   JobDetailsScreen({super.key});
 
   final controller = Get.put(JobDetailsController());
+  final favoriteController = Get.find<FavouriteController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,25 +43,25 @@ class JobDetailsScreen extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontSize: 20.sp),
           actions: [
-            Obx(() => IconButton(
-              onPressed: () {
-                if (controller.isFavorite.value) {
-                  controller.removeFavorite(data.id.toString());
-                  print('Favorite Remove id is............... : ${data.id}');
-                } else {
-                  print('Favorite Add id is............... : ${data.id}');
-                  controller.addFavorite(data.id.toString());
-                }
-              },
-              icon: Icon(
-                controller.isFavorite.value
-                    ? Icons.favorite
-                    : Icons.favorite_border_outlined,
-                color: controller.isFavorite.value
-                    ? Colors.red
-                    : AppColors.textPrimary,
-              ),
-            )),
+            Obx(() {
+              final jobId = data.id.toString();
+              final isFav = favoriteController.isJobFavorite(jobId);
+
+              return IconButton(
+                onPressed: () {
+                  if (isFav) {
+                    favoriteController.removeFavorite(jobId);
+                  } else {
+                    favoriteController.addFavorite(jobId);
+                  }
+                },
+                icon: Icon(
+                  isFav ? Icons.favorite : Icons.favorite_border_outlined,
+                  color: isFav ? Colors.red : AppColors.textPrimary,
+                ),
+              );
+            }),
+
 
             IconButton(
                 onPressed: () {
@@ -357,7 +360,7 @@ class JobDetailsScreen extends StatelessWidget {
                     text: 'Apply Now',
                     onTap: () {
                       controller.jobApplication(jobId);
-                      Get.back();
+                      //Get.back();
                     })
               ],
             ),

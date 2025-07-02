@@ -8,10 +8,12 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/jobs/controller/job_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/image_path.dart';
+import '../../../favorites/controller/favourite_controller.dart';
 
 
 class JobScreen extends StatelessWidget {
 
+  final favouriteController = Get.find<FavouriteController>();
   final JobController controller = Get.put(JobController());
 
   JobScreen({super.key});
@@ -104,6 +106,7 @@ class JobScreen extends StatelessWidget {
                       return Center(child: Text("No jobs found"));
                     }
                     return ListView.builder(
+                      padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: jobs.length,
@@ -141,11 +144,24 @@ class JobScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     color: AppColors.textGray,
                                   ),
-                                  trailing: Icon(
-                                    Icons.favorite_border, // optionally make it dynamic later
-                                    color: AppColors.custom_blue,
-                                    size: 20,
-                                  ),
+                                  trailing:  Obx(() {
+                                    final jobId = job.id.toString();
+                                    final isFav = favouriteController.isJobFavorite(jobId);
+
+                                    return IconButton(
+                                      onPressed: () {
+                                        if (isFav) {
+                                          favouriteController.removeFavorite(jobId);
+                                        } else {
+                                          favouriteController.addFavorite(jobId);
+                                        }
+                                      },
+                                      icon: Icon(
+                                        isFav ? Icons.favorite : Icons.favorite_border_outlined,
+                                        color: isFav ? Colors.red : AppColors.textPrimary,
+                                      ),
+                                    );
+                                  }),
                                 ),
 
                                 // Tags (optional, from your model)

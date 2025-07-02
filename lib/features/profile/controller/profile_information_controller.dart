@@ -120,7 +120,7 @@ class ProfileInformationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 200) {
         userProfile.value = GetUser.fromJson(response.responseData);
-        AppSnackBar.showSuccess("User profile Get successfully");
+        //AppSnackBar.showSuccess("User profile Get successfully");
       } else if (response.statusCode == 404) {
         AppSnackBar.showError("User Not Found");
       } else {
