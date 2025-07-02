@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/features/search_notification_chat/data/model/search_result_model.dart';
+import 'package:shuroo/features/search_notification_chat/data/model/search_result_model.dart' hide Jobs;
 
 import '../../../core/utils/constants/will_be_deleted.dart';
+import '../../jobs/data/model/job_Model.dart';
 
 class SearchResultController extends GetxController{
 
@@ -103,16 +104,21 @@ class SearchResultController extends GetxController{
   }
 
 
-
-
-  // New data...............................added
-
-
-
-
 }
 
 
 
 
 
+
+
+//
+// import 'package:get/get.dart';
+//
+// class SearchResultController extends GetxController {
+//   var selectedFilter = 'All Jobs'.obs;
+//
+//   void setFilter(String filter) {
+//     selectedFilter.value = filter;
+//   }
+// }
