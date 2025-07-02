@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/custpm_popup.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/data/get_single_user_data_model.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
 import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -10,9 +13,9 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
-void showPostEditePopup(BuildContext context) {
+void showPostEditePopup(BuildContext context,id) {
   final controller = Get.find<MyAllPostScreenController>();
-  final controllerOne = Get.find<MyAllPostScreenController>();
+  final controllerFour = Get.find<HomeController>();
   final controllerTwo = Get.find<ProfileInformationController>();
 
   showModalBottomSheet(
@@ -44,10 +47,7 @@ void showPostEditePopup(BuildContext context) {
                   message1: 'Are you want to sure edit on this post?',
                   confirmText: "Edit",
                   cancelText: "Cancel",
-                  onConfirm: () {
-                    
-                  },
-                  
+                  onConfirm: () {},
                 );
               },
             ),
@@ -56,18 +56,21 @@ void showPostEditePopup(BuildContext context) {
               icon: IconPath.delete,
               title: AppText.deletePost,
               onTap: () {
+               
+                // Replace 0 with the correct index of the post you want to delete
+                //final currentPostId = controller.getUserPost.value.data?.data?[1].id;
                 ConfirmPopup.show(
-                  title: "Delete Post?",
-                  message1: AppText.areYou,
-                  message2: AppText.removedThis,
-                  confirmText: "Delete",
-                  cancelText: "Cancel",
-                  onConfirm: () {
-                    //  log(controllerOne.userProfile.value.data!.id.toString());
-                    controller.deletePost(
-                        controllerTwo.userProfile.value.data!.id.toString());
-                  },
-                );
+                    title: "Delete Post?",
+                    message1: AppText.areYou,
+                    message2: AppText.removedThis,
+                    confirmText: "Delete",
+                    cancelText: "Cancel",
+                    onConfirm: () {
+                      // if (currentPostId != null) {
+                        controller.deletePost(id);
+                        print("=================================================$id");
+                      } 
+                    );
               },
             ),
           ],

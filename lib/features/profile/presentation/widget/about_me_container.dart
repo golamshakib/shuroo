@@ -18,106 +18,110 @@ Widget aboutMeContainer(PersonalCreationController controller) {
       color: AppColors.white,
     ),
     padding: EdgeInsets.only(left: 8.w, right: 8.w, top: 8.h, bottom: 8.h),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Stack(
-          children: [
-            SizedBox(
-              height: 125.h,
-              width: 110.w,
-              child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(9.sp),
-                  child: Obx(() => controller.profilePath.value == ''
-                      ? Image.asset(
-                          ImagePath.profilePic,
-                          height: 104.h,
-                          width: 86.w,
-                          fit: BoxFit.fill,
-                        )
-                      : Image.file(
-                          File(controller.profilePath.value),
-                          height: 104.h,
-                          width: 86.w,
-                          fit: BoxFit.fill,
-                        )),
-                ),
-              ),
-            ),
-            Positioned(
-              top: -1,
-              right: 2,
-              child: GestureDetector(
-                onTap: () {
-                  print("I am here clicking");
-                  controller.pickProfile();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color(0xFF01A8F9),
-                      border: Border.all(color: AppColors.white)),
-                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-                  child: Icon(
-                    Icons.add,
-                    color: AppColors.white,
+    child: Obx(() {
+      final user = controllerOne.userProfile.value.data;
+
+      return Row(
+        // <-- Missing return added here
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              SizedBox(
+                height: 125.h,
+                width: 110.w,
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(9.sp),
+                    child: Obx(() => controller.profilePath.value == ''
+                        ? Image.asset(
+                            user?.image ?? ImagePath.dummyProfilePicture,
+                            height: 104.h,
+                            width: 86.w,
+                            fit: BoxFit.fill,
+                          )
+                        : Image.file(
+                            File(controller.profilePath.value),
+                            height: 104.h,
+                            width: 86.w,
+                            fit: BoxFit.fill,
+                          )),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
-        SizedBox(
-          width: 12.w,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Obx(() {
-              final user = controllerOne.userProfile.value.data;
-              return CustomText(
+              Positioned(
+                top: -1,
+                right: 2,
+                child: GestureDetector(
+                  onTap: () {
+                    print("I am here clicking");
+                    controller.pickProfile();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFF01A8F9),
+                      border: Border.all(color: AppColors.white),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                    child: Icon(
+                      Icons.add,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            width: 12.w,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
                 text: user?.name ?? 'User Name',
                 fontSize: 18.sp,
-              );
-            }),
-            SizedBox(
-              height: 4.5.h,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(IconPath.homeIcon),
-                SizedBox(
-                  width: 1.w,
-                ),
-                CustomText(
-                  text: "Brookfield University",
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.textSecondary,
-                )
-              ],
-            ),
-            SizedBox(
-              height: 14.5.w,
-            ),
-            CustomText(
-              text: "Major",
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              color: AppColors.textSecondary,
-            ),
-            CustomText(
-              text: "Environmental Science",
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary,
-            ),
-          ],
-        )
-      ],
-    ),
+              ),
+              SizedBox(
+                height: 4.5.h,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.asset(IconPath.homeIcon),
+                  SizedBox(
+                    width: 1.w,
+                  ),
+                  CustomText(
+                    text: 'Brookfield University',
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textSecondary,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 14.5.w,
+              ),
+              CustomText(
+                text: "Major",
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.textSecondary,
+              ),
+              CustomText(
+                text: 'Brookfield University',
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.textPrimary,
+              ),
+            ],
+          )
+        ],
+      );
+    }),
   );
 }

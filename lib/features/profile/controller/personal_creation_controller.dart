@@ -52,15 +52,15 @@ class PersonalCreationController extends GetxController {
       "description":
           "Conducted research on sustainable farming practices and climate change mitigation."
     },
-    {
-      "imagePath": IconPath.educationIcon,
-      "position": "Sustainability Intern",
-      "companyName": "Green Earth Foundation",
-      "start": "2025",
-      'end': "Present",
-      "description":
-          "Conducted research on sustainable farming practices and climate change mitigation."
-    },
+    // {
+    //   "imagePath": IconPath.educationIcon,
+    //   "position": "Sustainability Intern",
+    //   "companyName": "Green Earth Foundation",
+    //   "start": "2025",
+    //   'end': "Present",
+    //   "description":
+    //       "Conducted research on sustainable farming practices and climate change mitigation."
+    // },
   ].obs;
 
   RxList<String> skillList = [
@@ -182,7 +182,8 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 200) {
         userProfile.value = GetUser.fromJson(response.responseData);
-        AppSnackBar.showSuccess('Data Get Successfully');
+        userProfile.refresh();
+        //  AppSnackBar.showSuccess('Data Get Successfully');
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data Not Found');
       }
@@ -195,12 +196,17 @@ class PersonalCreationController extends GetxController {
   // Experience ======================
 
   Future<void> experienceAdd() async {
+    final title = titleTEController.text.trim();
+    final company = companyNameTEController.text.trim();
+    final startDate = startExperienceTEController.text.trim();
+    final endDate = endExperienceTEController.text.trim();
+    final desc = describeTEController.text.trim();
     final requestBody = {
-      'title': titleTEController.text.trim(),
-      'company': companyNameTEController.text.trim(),
-      'startDate': startExperienceTEController.text.trim(),
-      'endDate': endExperienceTEController.text.trim(),
-      'description': describeTEController.text.trim()
+      'title': title,
+      'company': company,
+      'startDate': startDate,
+      'endDate': endDate,
+      'description': desc
     };
 
     try {
@@ -211,6 +217,11 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
+        titleTEController.clear();
+        companyNameTEController.clear();
+        startExperienceTEController.clear();
+        endExperienceTEController.clear();
+        describeTEController.clear();
       } else {
         AppSnackBar.showError('Something Went Wrong');
       }
@@ -236,19 +247,16 @@ class PersonalCreationController extends GetxController {
     }
   }
 
-
   // Educaton ================
   Future<void> educationAdd() async {
     final requestBody = {
       'institute': instituteNameTEController.text.trim(),
       'degreeName': majorSubjectTEController.text.trim(),
-      'grade': double.tryParse( minorSubjectTEController.text.trim()),
-      'fieldOfStudy': degreeTEController.text.trim(),
+      'fieldOfStudy': minorSubjectTEController.text.trim(),
+      'grade': double.tryParse(degreeTEController.text.trim()),
       'startDate': startTEController.text.trim(),
       'endDate': endTEController.text.trim()
     };
-
-
 
     try {
       final response = await NetworkCaller().postRequest(
@@ -259,6 +267,13 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
+
+        instituteNameTEController.clear();
+        majorSubjectTEController.clear();
+        minorSubjectTEController.clear();
+        degreeTEController.clear();
+        startTEController.clear();
+        endTEController.clear();
       } else {
         AppSnackBar.showError('Something Went Wrong');
       }

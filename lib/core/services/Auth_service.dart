@@ -33,21 +33,34 @@ class AuthService {
       log('Error saving token: $e');
     }
   }
+static bool _isInitialized = false;
 
 
-  static Future<void> logoutUser() async {
-    try {
-      await _preferences.clear();
-      _token = null;
-      await goToLogin();
-    } catch (e) {
-      log('Error during logout: $e');
+
+static Future<void> logoutUser() async {
+  try {
+    log('Logout called, _isInitialized: $_isInitialized');
+    if (!_isInitialized) {
+      log('Initializing SharedPreferences in logoutUser');
+      _preferences = await SharedPreferences.getInstance();
+      _isInitialized = true;
     }
-  }
-
-  static Future<void> goToLogin() async {
+    await _preferences.clear();
+    _token = null;
+    log('Logout cleared preferences');
     Get.offAllNamed(AppRoute.signInScreen);
+  } catch (e) {
+    log('Error during logout: $e');
   }
+}
+
+
+
+
+static Future<void> goToLogin() async {
+  Get.offAllNamed(AppRoute.signInScreen);
+}
+
 
   // Getter for token
   static String? get token => _token;

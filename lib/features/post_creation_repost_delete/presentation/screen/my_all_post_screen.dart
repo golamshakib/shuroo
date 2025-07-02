@@ -112,7 +112,8 @@ class MyAllPostScreen extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        showPostEditePopup(context);
+                                       
+                                        showPostEditePopup(context, userPost.id.toString());
                                       },
                                       child: Image.asset(IconPath.dod),
                                     ),
@@ -126,7 +127,6 @@ class MyAllPostScreen extends StatelessWidget {
                                     icon:
                                         userPost.user?.image ?? IconPath.icon_1,
                                     organization: AppText.wildWorld,
-                                    //  title: AppText.campus_Event,
                                     content: userPost.content ?? "",
                                     imageAsset:
                                         (userPost.image?.isNotEmpty ?? false)

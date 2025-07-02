@@ -153,7 +153,6 @@ class MakePostScreen extends StatelessWidget {
 
                         SizedBox(width: 10.w),
 
-                        // User Name
                         CustomText(
                           text: user?.name ?? 'User Name',
                           fontSize: 18.sp,
@@ -175,7 +174,7 @@ class MakePostScreen extends StatelessWidget {
             );
             Get.back();
           }
-        : null, // disable tap
+        : null,
     child: Container(
       width: 72.w,
       height: 40.h,

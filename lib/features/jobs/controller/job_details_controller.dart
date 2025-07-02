@@ -41,11 +41,11 @@ class JobDetailsController extends GetxController {
       else if (response.statusCode == 400) {
         AppSnackBar.showSuccess('You have already applied for this job');
       } else {
-        AppSnackBar.showError('Something Went Wrong');
+       // AppSnackBar.showError('Something Went Wrong');
       }
     } catch (e) {
       print('Something Went Wrong $e');
-      AppSnackBar.showError('Something Went Wrong');
+    //  AppSnackBar.showError('Something Went Wrong');
     }finally{
       isLoading.value = false;
     }
@@ -66,12 +66,10 @@ class JobDetailsController extends GetxController {
         getSingleJobModel.value = GetSingleJobModel.fromJson(data);
       }
       else{
-        AppSnackBar.showError(
-          'Something went wrong to fetch all Details!! ${response.statusCode}',
-        );
+     //   AppSnackBar.showError('Something went wrong to fetch all Details!! ${response.statusCode}');
       }
     }catch(e){
-      AppSnackBar.showError(e.toString());
+   //   AppSnackBar.showError(e.toString());
     }finally{
       isLoading.value = false;
     }

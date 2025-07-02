@@ -96,14 +96,16 @@ class MyAllPostScreenController extends GetxController {
     } catch (e) {
       log('Something went wrong: $e');
       AppSnackBar.showError('Failed to fetch posts.');
-    } finally {}
+    } finally {
+     
+    }
   }
 
   //! Delete Post ===================================================
 
   Future<void> deletePost(String id) async {
     try {
-      showProgressIndicator();
+      //  showProgressIndicator();
       final response = await NetworkCaller().deleteRequest(
           "${AppUrls.deletePost}/$id", "Bearer ${AuthService.token}");
 
@@ -119,7 +121,7 @@ class MyAllPostScreenController extends GetxController {
     } catch (e) {
       log('Something went Wrong $e');
     } finally {
-      hideProgressIndicator();
+       // hideProgressIndicator();
     }
   }
 

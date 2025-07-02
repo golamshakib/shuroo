@@ -132,18 +132,18 @@ class HomeController extends GetxController {
       if (response.isSuccess && response.statusCode == 200) {
         final json = response.responseData;
         final userInformation = UserInformation.fromJson(json);
-        refresh();
-        update();
+      postDataList.refresh();
+      //  update();
         postDataList.value = userInformation.data;
         //log("userInformation $userInformation");
         //AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
       } else {
-        AppSnackBar.showError('Something went wrong');
+       // AppSnackBar.showError('Something went wrong');
       }
     } catch (e, stackTrace) {
       log('Error fetching posts: $e\nStackTrace: $stackTrace');
-      AppSnackBar.showError('Failed to fetch posts.');
+     // AppSnackBar.showError('Failed to fetch posts.');
     }
   }
 }

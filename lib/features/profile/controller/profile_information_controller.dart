@@ -92,6 +92,18 @@ class ProfileInformationController extends GetxController {
       if (response.isSuccess && response.statusCode == 200) {
         AppSnackBar.showSuccess('Data updated successfully');
 
+        // Auto-update UI-bound observable data
+        userProfile.update((val) {
+          if (val != null && val.data != null) {
+            val.data!.name = name;
+            val.data!.email = email;
+            val.data!.phone = phone;
+            val.data!.country = country;
+            val.data!.state = state;
+            val.data!.city = city;
+          }
+        });
+
         originalName = name;
         originalEmail = email;
         originalPhone = phone;
@@ -115,12 +127,28 @@ class ProfileInformationController extends GetxController {
 
   Future<void> getUser() async {
     try {
-      final response = await NetworkCaller().getRequest(AppUrls.getUserProfile,
-          token: "Bearer ${AuthService.token}");
+      final response = await NetworkCaller().getRequest(
+        AppUrls.getUserProfile,
+        token: "Bearer ${AuthService.token}",
+      );
 
       if (response.isSuccess && response.statusCode == 200) {
         userProfile.value = GetUser.fromJson(response.responseData);
-        //AppSnackBar.showSuccess("User profile Get successfully");
+
+        final user = userProfile.value.data;
+        nameTEController.text = user?.name ?? '';
+        emailTEController.text = user?.email ?? '';
+        phoneTEController.text = user?.phone ?? '';
+        countryTEController.text = user?.country ?? '';
+        stateTEController.text = user?.state ?? '';
+        cityTEController.text = user?.city ?? '';
+
+        originalName = nameTEController.text;
+        originalEmail = emailTEController.text;
+        originalPhone = phoneTEController.text;
+        originalCountry = countryTEController.text;
+        originalState = stateTEController.text;
+        originalCity = cityTEController.text;
       } else if (response.statusCode == 404) {
         AppSnackBar.showError("User Not Found");
       } else {
