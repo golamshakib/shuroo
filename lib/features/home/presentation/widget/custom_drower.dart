@@ -60,7 +60,7 @@ class CustomDrower extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Get.toNamed(AppRoute.profileInformationScreen);
+                                Get.toNamed(AppRoute.personalCreationScreen);
                               },
                               child: CustomText(
                                 text: "Complete profile",
@@ -85,7 +85,7 @@ class CustomDrower extends StatelessWidget {
               _drawerItem(
                 icon: IconPath.pIcon,
                 label: "My Profile",
-                onTap: () => Get.toNamed(AppRoute.personalCreationScreen),
+                onTap: () => Get.toNamed(AppRoute.profileInformationScreen),
               ),
 
               // Password
@@ -139,84 +139,90 @@ class CustomDrower extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          backgroundColor: AppColors.white,
-                          actionsPadding: EdgeInsets.symmetric(
-                              horizontal: 16.w, vertical: 16.h),
-                          actionsAlignment: MainAxisAlignment.center,
-                          actions: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(ImagePath.group, fit: BoxFit.fill),
-                                SizedBox(height: 24.h),
-                                CustomText(
-                                  text: "You’ve Signed Out!",
-                                  fontSize: 24.sp,
-                                  fontWeight: FontWeight.w600,
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(height: 8.h),
-                                CustomText(
-                                  text:
-                                      "Your journey doesn’t stop here see you again soon!",
-                                  fontWeight: FontWeight.w400,
-                                  textAlign: TextAlign.center,
-                                  color: AppColors.textSecondary,
-                                ),
-                                SizedBox(height: 24.h),
-                                Row(
-                                  children: [
-                                    Flexible(
-                                      child: OutlinedButton(
-                                        style: OutlinedButton.styleFrom(
-                                          backgroundColor: AppColors.white,
-                                          side: BorderSide(
-                                              color: AppColors.textSecondary),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 11.h),
-                                        ),
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: CustomText(
-                                          text: "No",
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15.sp,
-                                          color: AppColors.textSecondary,
-                                          textAlign: TextAlign.center,
-                                        ),
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: AppColors.white,
+                        actionsPadding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 16.h),
+                        actionsAlignment: MainAxisAlignment.center,
+                        actions: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(ImagePath.group, fit: BoxFit.fill),
+                              SizedBox(height: 24.h),
+                              CustomText(
+                                text: "You’ve Signed Out!",
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w600,
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 8.h),
+                              CustomText(
+                                text:
+                                    "Your journey doesn’t stop here see you again soon!",
+                                fontWeight: FontWeight.w400,
+                                textAlign: TextAlign.center,
+                                color: AppColors.textSecondary,
+                              ),
+                              SizedBox(height: 24.h),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: AppColors.white,
+                                        side: BorderSide(
+                                            color: AppColors.textSecondary),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 11.h),
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: CustomText(
+                                        text: "No",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15.sp,
+                                        color: AppColors.textSecondary,
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    SizedBox(width: 11.w),
-                                    Flexible(
-                                      child: OutlinedButton(
-                                        style: OutlinedButton.styleFrom(
-                                          backgroundColor: AppColors.customBlue,
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 11.h),
-                                        ),
-                                        onPressed: () {
-                                          AuthService.logoutUser();
-                                        },
-                                        child: CustomText(
-                                          text: "Yes",
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15.sp,
-                                          color: AppColors.white,
-                                          textAlign: TextAlign.center,
-                                        ),
+                                  ),
+                                  SizedBox(width: 11.w),
+                                  Flexible(
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: AppColors.customBlue,
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 11.h),
+                                      ),
+                                      onPressed: () async {
+                                        Get.back(); // close dialog first
+                                        print('============================Logout started');
+                                        await AuthService.logoutUser();
+                                        print('============================Logout completed');
+                                      },
+                                      child: CustomText(
+                                        text: "Yes",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15.sp,
+                                        color: AppColors.white,
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      });
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: Row(
                   children: [
@@ -231,6 +237,7 @@ class CustomDrower extends StatelessWidget {
                   ],
                 ),
               ),
+
               SizedBox(height: 16.h),
             ],
           ),

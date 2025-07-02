@@ -62,7 +62,7 @@ class AuthenticationRepositories{
       final response = await NetworkCaller().postRequest(AppUrls.login, body: requestBody);
       if(response.isSuccess){
         Get.back();
-        AppSnackBar.showSuccess(response.responseData['message']);
+       // AppSnackBar.showSuccess(response.responseData['message']);
         log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
         AuthService.saveToken(response.responseData['data']['accessToken'], id:  response.responseData['data']['id']);
         Get.offAllNamed(AppRoute.nevBar);

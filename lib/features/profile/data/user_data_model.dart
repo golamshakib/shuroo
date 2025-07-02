@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final getUser = getUserFromJson(jsonString);
+
 import 'dart:convert';
 
 GetUser getUserFromJson(String str) => GetUser.fromJson(json.decode(str));
@@ -60,7 +64,8 @@ class Data {
     bool? isVerified;
     DateTime? createdAt;
     DateTime? updatedAt;
-    List<dynamic>? experience;
+    List<Experience>? experience;
+    List<Education>? education;
 
     Data({
         this.id,
@@ -95,6 +100,7 @@ class Data {
         this.createdAt,
         this.updatedAt,
         this.experience,
+        this.education,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -129,7 +135,8 @@ class Data {
         isVerified: json["isVerified"],
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        experience: json["Experience"] == null ? [] : List<dynamic>.from(json["Experience"]!.map((x) => x)),
+        experience: json["Experience"] == null ? [] : List<Experience>.from(json["Experience"]!.map((x) => Experience.fromJson(x))),
+        education: json["Education"] == null ? [] : List<Education>.from(json["Education"]!.map((x) => Education.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -164,6 +171,107 @@ class Data {
         "isVerified": isVerified,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
-        "Experience": experience == null ? [] : List<dynamic>.from(experience!.map((x) => x)),
+        "Experience": experience == null ? [] : List<dynamic>.from(experience!.map((x) => x.toJson())),
+        "Education": education == null ? [] : List<dynamic>.from(education!.map((x) => x.toJson())),
+    };
+}
+
+class Education {
+    String? id;
+    String? userId;
+    String? institute;
+    String? degreeName;
+    String? fieldOfStudy;
+    String? startDate;
+    String? endDate;
+    double? grade;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+
+    Education({
+        this.id,
+        this.userId,
+        this.institute,
+        this.degreeName,
+        this.fieldOfStudy,
+        this.startDate,
+        this.endDate,
+        this.grade,
+        this.createdAt,
+        this.updatedAt,
+    });
+
+    factory Education.fromJson(Map<String, dynamic> json) => Education(
+        id: json["id"],
+        userId: json["userId"],
+        institute: json["institute"],
+        degreeName: json["degreeName"],
+        fieldOfStudy: json["fieldOfStudy"],
+        startDate: json["startDate"],
+        endDate: json["endDate"],
+        grade: json["grade"]?.toDouble(),
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "userId": userId,
+        "institute": institute,
+        "degreeName": degreeName,
+        "fieldOfStudy": fieldOfStudy,
+        "startDate": startDate,
+        "endDate": endDate,
+        "grade": grade,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+    };
+}
+
+class Experience {
+    String? id;
+    String? userId;
+    String? title;
+    String? company;
+    String? startDate;
+    String? endDate;
+    String? description;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+
+    Experience({
+        this.id,
+        this.userId,
+        this.title,
+        this.company,
+        this.startDate,
+        this.endDate,
+        this.description,
+        this.createdAt,
+        this.updatedAt,
+    });
+
+    factory Experience.fromJson(Map<String, dynamic> json) => Experience(
+        id: json["id"],
+        userId: json["userId"],
+        title: json["title"],
+        company: json["company"],
+        startDate: json["startDate"],
+        endDate: json["endDate"],
+        description: json["description"],
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "userId": userId,
+        "title": title,
+        "company": company,
+        "startDate": startDate,
+        "endDate": endDate,
+        "description": description,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
     };
 }

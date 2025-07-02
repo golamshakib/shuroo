@@ -15,19 +15,12 @@ class MakePostController extends GetxController {
 
   RxBool isPostButtonEnabled = false.obs;
 
- @override
-void onInit() {
-  super.onInit();
-  textController.addListener(_validatePost);
-  ever(picUploads, (_) => _validatePost());
-}
-
-@override
-void onClose() {
-  textController.dispose();
-  super.onClose();
-}
-
+  @override
+  void onInit() {
+    super.onInit();
+    textController.addListener(_validatePost);
+    ever(picUploads, (_) => _validatePost());
+  }
 
   void _validatePost() {
     final hasText = textController.text.trim().isNotEmpty;

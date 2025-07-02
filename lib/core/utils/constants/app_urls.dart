@@ -3,6 +3,9 @@ class AppUrls {
 
   static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
 
+  // VPS Server ===========================
+ // static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
   static const String registerOTPAPI = '$_baseUrl/auth/verify-otp';
@@ -31,6 +34,11 @@ class AppUrls {
   static const String jobApplie = '$_baseUrl/application/create';
   static const String getUserProfile = '$_baseUrl/user/profile';
 
+
+  static const String like = '$_baseUrl/like';
+
+
+
   //experience ---------
   static const String createExperience = '$_baseUrl/experience/create';
   static String experienceDelete(id) => '$_baseUrl/experience/delete/id';
@@ -49,10 +57,8 @@ class AppUrls {
   static const String getShortlistedJob = '$_baseUrl/application/getShortlistedJob';
   static const String getInterViewJob = '$_baseUrl/application/getInterviewJob';
 
-  // Added by Shahriar
   static const String addFavorite = '$_baseUrl/favorite/add';
   static const String removeFavorite = '$_baseUrl/favorite/delete';
-
 
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';

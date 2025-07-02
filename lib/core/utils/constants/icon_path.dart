@@ -24,6 +24,8 @@ class IconPath{
   static const  String   gIcon = '$_basePath/gallary.png';
   static const  String   gIcons = '$_basePath/gallary.png';
   static const  String   sIcon = '$_basePath/sends.png';
+  static const  String   heart = '$_basePath/react.png';
+  static const  String   heartFill = '$_basePath/herat_fill.png';
 
   // Added by shahriar
   static const  String   applyImage= '$_basePath/apply_icon.svg';

@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AuthService.init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
-        (value) {
+    (value) {
       Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
       runApp(const MyApp());
     },

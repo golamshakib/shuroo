@@ -146,10 +146,10 @@ class JobController extends GetxController{
         getAllJobsModel.value = GetAllJobsModel.fromJson(data);
       }
       else{
-        AppSnackBar.showError('Something went wrong to fetch all jobs!');
+     //   AppSnackBar.showError('Something went wrong to fetch all jobs!');
       }
     }catch(e){
-      AppSnackBar.showError(e.toString());
+    //  AppSnackBar.showError(e.toString());
     }
     finally{
       isLoading.value = false;
