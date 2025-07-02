@@ -9,9 +9,9 @@ GetFavoriteModel getFavoriteModelFromJson(String str) => GetFavoriteModel.fromJs
 String getFavoriteModelToJson(GetFavoriteModel data) => json.encode(data.toJson());
 
 class GetFavoriteModel {
-  bool? success;
-  String? message;
-  List<Datum>? data;
+  final bool? success;
+  final String? message;
+  final List<Datum>? data;
 
   GetFavoriteModel({
     this.success,
@@ -33,12 +33,12 @@ class GetFavoriteModel {
 }
 
 class Datum {
-  String? id;
-  String? userId;
-  String? jobId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  Job? job;
+  final String? id;
+  final String? userId;
+  final String? jobId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final Job? job;
 
   Datum({
     this.id,
@@ -69,89 +69,61 @@ class Datum {
 }
 
 class Job {
-  String? id;
-  String? name;
-  String? deadline;
-  int? salary;
-  String? experience;
-  String? location;
-  int? vacancy;
-  List<String>? mustSkills;
-  List<String>? goodSkills;
-  String? description;
-  String? industryType;
-  String? department;
-  String? role;
-  String? employmentType;
-  String? education;
-  String? aboutCompany;
-  String? companyId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  final String? id;
+  final String? name;
+  final int? salary;
+  final String? location;
+  final String? employmentType;
+  final Company? company;
 
   Job({
     this.id,
     this.name,
-    this.deadline,
     this.salary,
-    this.experience,
     this.location,
-    this.vacancy,
-    this.mustSkills,
-    this.goodSkills,
-    this.description,
-    this.industryType,
-    this.department,
-    this.role,
     this.employmentType,
-    this.education,
-    this.aboutCompany,
-    this.companyId,
-    this.createdAt,
-    this.updatedAt,
+    this.company,
   });
 
   factory Job.fromJson(Map<String, dynamic> json) => Job(
     id: json["id"],
     name: json["name"],
-    deadline: json["deadline"],
     salary: json["salary"],
-    experience: json["experience"],
     location: json["location"],
-    vacancy: json["vacancy"],
-    mustSkills: json["mustSkills"] == null ? [] : List<String>.from(json["mustSkills"]!.map((x) => x)),
-    goodSkills: json["goodSkills"] == null ? [] : List<String>.from(json["goodSkills"]!.map((x) => x)),
-    description: json["description"],
-    industryType: json["industryType"],
-    department: json["department"],
-    role: json["role"],
     employmentType: json["employmentType"],
-    education: json["education"],
-    aboutCompany: json["aboutCompany"],
-    companyId: json["companyId"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    company: json["company"] == null ? null : Company.fromJson(json["company"]),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "deadline": deadline,
     "salary": salary,
-    "experience": experience,
     "location": location,
-    "vacancy": vacancy,
-    "mustSkills": mustSkills == null ? [] : List<dynamic>.from(mustSkills!.map((x) => x)),
-    "goodSkills": goodSkills == null ? [] : List<dynamic>.from(goodSkills!.map((x) => x)),
-    "description": description,
-    "industryType": industryType,
-    "department": department,
-    "role": role,
     "employmentType": employmentType,
-    "education": education,
-    "aboutCompany": aboutCompany,
-    "companyId": companyId,
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
+    "company": company?.toJson(),
+  };
+}
+
+class Company {
+  final String? id;
+  final String? name;
+  final String? logoImage;
+
+  Company({
+    this.id,
+    this.name,
+    this.logoImage,
+  });
+
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
+    id: json["id"],
+    name: json["name"],
+    logoImage: json["logoImage"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "logoImage": logoImage,
   };
 }
