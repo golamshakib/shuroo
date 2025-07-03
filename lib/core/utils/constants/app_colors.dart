@@ -5,7 +5,7 @@ class AppColors {
 
   // Added by arif..................................................//
   // Brand Colors
-  static const Color primary = Color(0xFF7B61FF);
+  static const Color primary = Color(0xFF01A8F9);
   static const Color secondary = Color(0xFFF9F9F9);
   static const Color  custom_blue  = Color(0xFF01A8F9);
   static const Color  customBlue  = Color(0xFF01A8F9);
