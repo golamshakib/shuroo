@@ -144,8 +144,20 @@ class PostCard extends GetView<HomeController> {
                       GestureDetector(
                         onTap: () async{
                           likedByME.value = !likedByME.value;
+                          if(!likedByME.value){
+                            likeCount!.value = (int.parse(likeCount!.value) - 1).toString();
+                          }
+                          else{
+                            likeCount!.value = (int.parse(likeCount!.value) + 1).toString();
+                          }
                           if(!await controller.changeLikeStatus(postId.toString())){
                             likedByME.value = !likedByME.value;
+                            if(!likedByME.value){
+                              likeCount!.value = (int.parse(likeCount!.value) - 1).toString();
+                            }
+                            else{
+                              likeCount!.value = (int.parse(likeCount!.value) + 1).toString();
+                            }
                           }
                         },
                         child: likedByME.value ?
@@ -153,10 +165,12 @@ class PostCard extends GetView<HomeController> {
                         Icon(Icons.favorite_border_rounded, color: AppColors.containerBorder, size: 18.h,),
                       )
                   ),
-                  CustomText(
-                    text: "$likeCount likes",
-                    fontSize: 14,
-                    color: AppColors.grayText,
+                  Obx(() =>
+                      CustomText(
+                        text: "${likeCount!.value} likes",
+                        fontSize: 14,
+                        color: AppColors.grayText,
+                      )
                   ),
                 ],
               ),
