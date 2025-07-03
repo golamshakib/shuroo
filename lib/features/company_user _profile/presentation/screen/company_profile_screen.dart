@@ -94,8 +94,11 @@ class CompanyProfileScreen extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: PostCard(
                             context: context,
+                            likedByME: false.obs,
                             icon: IconPath.icon_1,
                             organization: AppText.wildWorld,
+                            likeCount: 2.toString().obs,
+                            commentCount: 2.toString(),
                         //    timeAgo: "1w ago",
                           //  title: AppText.campus_Event,
                             content: AppText.the_annualCareer,

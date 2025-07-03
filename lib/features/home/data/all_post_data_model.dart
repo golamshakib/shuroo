@@ -9,106 +9,130 @@ UserInformation userInformationFromJson(String str) => UserInformation.fromJson(
 String userInformationToJson(UserInformation data) => json.encode(data.toJson());
 
 class UserInformation {
-    bool success;
-    String message;
-    UserInformationData data;
+    bool? success;
+    String? message;
+    List<Datum>? data;
 
     UserInformation({
-        required this.success,
-        required this.message,
-        required this.data,
+        this.success,
+        this.message,
+        this.data,
     });
 
     factory UserInformation.fromJson(Map<String, dynamic> json) => UserInformation(
         success: json["success"],
         message: json["message"],
-        data: UserInformationData.fromJson(json["data"]),
+        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": data.toJson(),
+        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
     };
 }
 
-class UserInformationData {
-    String type;
-    PostClass data;
-
-    UserInformationData({
-        required this.type,
-        required this.data,
-    });
-
-    factory UserInformationData.fromJson(Map<String, dynamic> json) => UserInformationData(
-        type: json["type"],
-        data: PostClass.fromJson(json["data"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "type": type,
-        "data": data.toJson(),
-    };
-}
-
-class PostClass {
-    String id;
-    String userId;
-    String? postId;
-    String content;
-    DateTime createdAt;
-    DateTime updatedAt;
-    User user;
-    PostClass? post;
+class Datum {
+    String? id;
+    String? userId;
+    String? content;
     List<String>? image;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    int? totalLike;
+    User? user;
+    List<Comment>? like;
+    List<Comment>? comment;
+    Count? count;
 
-    PostClass({
-        required this.id,
-        required this.userId,
-        this.postId,
-        required this.content,
-        required this.createdAt,
-        required this.updatedAt,
-        required this.user,
-        this.post,
+    Datum({
+        this.id,
+        this.userId,
+        this.content,
         this.image,
+        this.createdAt,
+        this.updatedAt,
+        this.totalLike,
+        this.user,
+        this.like,
+        this.comment,
+        this.count,
     });
 
-    factory PostClass.fromJson(Map<String, dynamic> json) => PostClass(
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         userId: json["userId"],
-        postId: json["postId"],
         content: json["content"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        user: User.fromJson(json["user"]),
-        post: json["post"] == null ? null : PostClass.fromJson(json["post"]),
         image: json["image"] == null ? [] : List<String>.from(json["image"]!.map((x) => x)),
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+        totalLike: json["totalLike"],
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        like: json["Like"] == null ? [] : List<Comment>.from(json["Like"]!.map((x) => Comment.fromJson(x))),
+        comment: json["Comment"] == null ? [] : List<Comment>.from(json["Comment"]!.map((x) => Comment.fromJson(x))),
+        count: json["_count"] == null ? null : Count.fromJson(json["_count"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "userId": userId,
-        "postId": postId,
         "content": content,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "user": user.toJson(),
-        "post": post?.toJson(),
         "image": image == null ? [] : List<dynamic>.from(image!.map((x) => x)),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "totalLike": totalLike,
+        "user": user?.toJson(),
+        "Like": like == null ? [] : List<dynamic>.from(like!.map((x) => x.toJson())),
+        "Comment": comment == null ? [] : List<dynamic>.from(comment!.map((x) => x.toJson())),
+        "_count": count?.toJson(),
+    };
+}
+
+class Comment {
+    String? userId;
+
+    Comment({
+        this.userId,
+    });
+
+    factory Comment.fromJson(Map<String, dynamic> json) => Comment(
+        userId: json["userId"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "userId": userId,
+    };
+}
+
+class Count {
+    int? like;
+    int? comment;
+
+    Count({
+        this.like,
+        this.comment,
+    });
+
+    factory Count.fromJson(Map<String, dynamic> json) => Count(
+        like: json["Like"],
+        comment: json["Comment"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "Like": like,
+        "Comment": comment,
     };
 }
 
 class User {
-    String id;
-    String name;
-    String image;
+    String? id;
+    String? name;
+    String? image;
 
     User({
-        required this.id,
-        required this.name,
-        required this.image,
+        this.id,
+        this.name,
+        this.image,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(

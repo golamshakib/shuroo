@@ -64,13 +64,17 @@ class HomeScreen extends StatelessWidget {
                   final post = controller.postDataList[index];
 
                   final String? firstImage =
-                      post.image.isNotEmpty ? post.image.first : null;
+                      post.image!.isNotEmpty ? post.image!.first : null;
                   return PostCard(
                     icon: firstImage ?? IconPath.icon_pro,
                     //  title: post.content ?? '',
-                    content: post.content,
-                    organization: post.user.name,
+                    content: post.content!,
+                    postId: post.id,
+                    likedByME: post.like!.any((element) => element.userId == controllerOne.userProfile.value.data!.id.toString()).obs,
+                    organization: post.user!.name!,
                     imageAsset: firstImage ?? "",
+                    likeCount: post.count != null ? post.count!.like.toString().obs : "0".obs,
+                    commentCount: post.count != null ? post.count!.comment.toString() : "0",
                     context: context,
                   );
                 },
