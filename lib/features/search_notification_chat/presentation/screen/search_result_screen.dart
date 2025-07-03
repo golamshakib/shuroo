@@ -6,8 +6,6 @@ import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../favorites/controller/favourite_controller.dart';
-import '../../../favorites/data/model/get_favorite_model.dart' as AllJobs;
-import '../../../favorites/data/model/get_favorite_model.dart' as SearchJobs;
 import '../../controller/search_result_controller.dart';
 import '../../data/model/get_searched_jobs_model.dart';
 
