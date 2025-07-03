@@ -14,7 +14,6 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final HomeController controller = Get.put(HomeController());
-  final controllerOne = Get.find<ProfileInformationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: AppColors.scaffoldBackgroundColor,
           title: Obx(() {
-            final user = controllerOne.userProfile.value.data;
+            final user = controller.controllerOne.userProfile.value.data;
             return GestureDetector(
               onTap: () {},
               child: Row(
@@ -70,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                     //  title: post.content ?? '',
                     content: post.content!,
                     postId: post.id,
-                    likedByME: post.like!.any((element) => element.userId == controllerOne.userProfile.value.data!.id.toString()).obs,
+                    likedByME: post.like!.any((element) => element.userId == controller.controllerOne.userProfile.value.data!.id.toString()).obs,
                     organization: post.user!.name!,
                     imageAsset: firstImage ?? "",
                     likeCount: post.count != null ? post.count!.like.toString().obs : "0".obs,

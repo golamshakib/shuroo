@@ -10,6 +10,7 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/post_creation_repost_delete/data/get_post_data_model.dart';
 
 import '../../../core/utils/constants/image_path.dart';
+import '../../profile/controller/profile_information_controller.dart';
 
 class HomeController extends GetxController {
   final commentTEController = TextEditingController().obs;
@@ -105,10 +106,12 @@ class HomeController extends GetxController {
   }
 
   RxList<Datum> postDataList = <Datum>[].obs;
+  late ProfileInformationController controllerOne;
 
   @override
   void onInit() {
     super.onInit();
+    controllerOne = Get.find<ProfileInformationController>();
     getAllPost();
   }
 
