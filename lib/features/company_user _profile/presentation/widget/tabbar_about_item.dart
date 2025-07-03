@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
@@ -8,8 +9,9 @@ import '../../../../core/utils/constants/app_texts.dart';
 import 'getAboutTabBarWidget.dart';
 
 Widget getAboutItem() {
-  final controllerOne = Get.find<PersonalCreationController>();
-  final user = controllerOne.userProfile.value.data;
+  final controllerOne = Get.find<OtherUserProfileScreenControllar>();
+  final user = controllerOne.othersUserProfile.value.data;
+  
 
   return Container(
     padding: EdgeInsets.all(16),

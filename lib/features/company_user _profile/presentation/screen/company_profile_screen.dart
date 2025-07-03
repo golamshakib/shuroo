@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 import 'package:shuroo/features/home/presentation/widget/custom_home_post_card.dart';
-import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
-
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -18,11 +17,11 @@ class CompanyProfileScreen extends StatelessWidget {
   CompanyProfileScreen({super.key});
 
   final controller = Get.put(CompanyProfileScreenController());
-  final controllerOne = Get.find<PersonalCreationController>();
+  final controllerOne = Get.find<OtherUserProfileScreenControllar>();
 
   @override
   Widget build(BuildContext context) {
-    final user = controllerOne.userProfile.value.data;
+    final user = controllerOne.othersUserProfile.value.data;
     return DefaultTabController(
       length: 3, // required if not already handled in controller
       child: Scaffold(
