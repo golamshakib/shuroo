@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           initialBinding: ControllerBinder(),
           themeMode: ThemeMode.system,
           theme: _getLightTheme(),
-          darkTheme: _getDarkTheme(),
+          darkTheme: _getLightTheme(),
           defaultTransition:
               PlatformUtils.isIOS ? Transition.cupertino : Transition.fade,
           locale: Get.deviceLocale,
