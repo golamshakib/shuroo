@@ -7,6 +7,7 @@ import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/features/home/data/get_post_comment_model.dart';
 import 'package:shuroo/features/post_creation_repost_delete/data/get_post_data_model.dart';
 
 import '../../../core/utils/constants/image_path.dart';
@@ -172,4 +173,32 @@ class HomeController extends GetxController {
       return false;
     }
   }
+
+  var getPostCommentInformation = GetPostCommentModel().obs;
+  var loadComment = false.obs;
+  Future<void> requestForPostComment(String postId) async{
+    loadComment.value = true;
+    try{
+      final response = await NetworkCaller().getRequest(AppUrls.getCommentById(postId), token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        final data = response.responseData;
+        getPostCommentInformation.value = GetPostCommentModel.fromJson(data);
+        loadComment.value = false;
+      }
+      else if(response.statusCode == 404){
+        log("No comments");
+        loadComment.value = false;
+      }
+      else{
+        log(response.statusCode.toString());
+        loadComment.value = false;
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
+      loadComment.value = false;
+    }
+  }
+
+
 }
