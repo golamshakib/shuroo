@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
@@ -16,10 +18,14 @@ import '../../../post_creation_repost_delete/presentation/widget/custom_popup.da
 
 class PostCard extends GetView<HomeController> {
   final String organization;
+  final String? postId;
   // final String? timeAgo;
   final String content;
   final String icon;
+  final RxBool likedByME;
   final BuildContext context;
+  final RxString? likeCount;
+  final String commentCount;
   // final String? hashtags;
   final String imageAsset;
 
@@ -28,10 +34,14 @@ class PostCard extends GetView<HomeController> {
     required this.organization,
     //  this.timeAgo,
     required this.content,
+    this.postId,
+    required this.likedByME,
     //  this.hashtags,
     required this.imageAsset,
     required this.icon,
     required this.context,
+    this.likeCount,
+    required this.commentCount,
   });
 
   @override
@@ -120,26 +130,36 @@ class PostCard extends GetView<HomeController> {
               fit: BoxFit.cover,
               height: 151.h,
               width: 341.w,
-              // errorBuilder: (context, error, stackTrace) {
-              //   return Image.asset(
-              //     ImagePath.placeholder,
-              //     fit: BoxFit.cover,
-              //     height: 151.h,
-              //     width: 341.w,
-              //   );
-              // },
             ),
           ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const CustomText(
-                text: "\u2764\uFE0F 13 likes",
-                fontSize: 14,
-                color: AppColors.grayText,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 4.w,
+                children: [
+                  Obx(() =>
+                      GestureDetector(
+                        onTap: () async{
+                          likedByME.value = !likedByME.value;
+                          if(!await controller.changeLikeStatus(postId.toString())){
+                            likedByME.value = !likedByME.value;
+                          }
+                        },
+                        child: likedByME.value ?
+                        Icon(Icons.favorite_rounded, color: AppColors.primary, size: 18.h,) :
+                        Icon(Icons.favorite_border_rounded, color: AppColors.containerBorder, size: 18.h,),
+                      )
+                  ),
+                  CustomText(
+                    text: "$likeCount likes",
+                    fontSize: 14,
+                    color: AppColors.grayText,
+                  ),
+                ],
               ),
-
               /// Nifat's part
               Row(
                 children: [
@@ -260,8 +280,8 @@ class PostCard extends GetView<HomeController> {
                   SizedBox(
                     width: 2,
                   ),
-                  const CustomText(
-                    text: AppText.comments,
+                  CustomText(
+                    text: "$commentCount comments",
                     fontSize: 14,
                     color: AppColors.grayText,
                   ),

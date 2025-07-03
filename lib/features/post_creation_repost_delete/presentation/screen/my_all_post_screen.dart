@@ -124,8 +124,10 @@ class MyAllPostScreen extends StatelessWidget {
                                   margin: const EdgeInsets.only(top: 10),
                                   child: PostCard(
                                     context: context,
-                                    icon:
-                                        userPost.user?.image ?? IconPath.icon_1,
+                                    icon: userPost.user?.image ?? IconPath.icon_1,
+                                    likeCount: "2".obs,
+                                    commentCount: "5",
+                                    likedByME: false.obs,
                                     organization: AppText.wildWorld,
                                     content: userPost.content ?? "",
                                     imageAsset:

@@ -134,7 +134,7 @@ class HomeController extends GetxController {
         final userInformation = UserInformation.fromJson(json);
       postDataList.refresh();
       //  update();
-        postDataList.value = userInformation.data;
+        postDataList.value = userInformation.data!;
         //log("userInformation $userInformation");
         //AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
@@ -144,6 +144,26 @@ class HomeController extends GetxController {
     } catch (e, stackTrace) {
       log('Error fetching posts: $e\nStackTrace: $stackTrace');
      // AppSnackBar.showError('Failed to fetch posts.');
+    }
+  }
+
+  Future<bool> changeLikeStatus(String postId) async{
+
+    try{
+      final response = await NetworkCaller().postRequest(AppUrls.likeById(postId), body: {}, token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        log("Changed");
+        return true;
+      }
+      else{
+        log(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong!!");
+        return false;
+      }
+    }catch(e){
+      AppSnackBar.showError("Something went wrong!!");
+      return false;
     }
   }
 }
