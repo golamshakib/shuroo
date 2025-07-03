@@ -17,6 +17,7 @@ class AppUrls {
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
   static String likeById(id) => '$_baseUrl/like/$id';
   static String createCommentById(id) => '$_baseUrl/comment/create/$id';
+  static String getCommentById(postId) => '$_baseUrl/comment/post/$postId';
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
@@ -59,11 +60,10 @@ class AppUrls {
   static const String getProfileViewJob = '$_baseUrl/application/getProfileViewedJob';
   static const String getShortlistedJob = '$_baseUrl/application/getShortlistedJob';
   static const String getInterViewJob = '$_baseUrl/application/getInterviewJob';
-  static String getSearchJobs(searchValue) => '$_baseUrl/job/all?name=/$searchValue';
+  static String getSearchJobs(searchValue) => '$_baseUrl/job/all?name=$searchValue';
 
   static const String addFavorite = '$_baseUrl/favorite/add';
   static const String removeFavorite = '$_baseUrl/favorite/delete';
-
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
 }

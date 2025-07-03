@@ -6,6 +6,7 @@ import 'package:shuroo/features/post_creation_repost_delete/controller/make_post
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
 import 'package:shuroo/features/profile/controller/change_password_controller.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
+import '../../features/favorites/controller/favourite_controller.dart';
 import '../../features/jobs/controller/applied_controller.dart';
 import '../../features/jobs/controller/interview_controller.dart';
 import '../../features/jobs/controller/job_details_controller.dart';
@@ -46,6 +47,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<FavoriteController>(() => FavoriteController(), fenix: true,);
     Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
     Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
+    Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
 
 
 
