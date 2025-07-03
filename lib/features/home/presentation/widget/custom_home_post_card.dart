@@ -204,7 +204,7 @@ class PostCard extends GetView<HomeController> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          ...controller.commentList.map((row) =>
+                                          ...controller.getPostCommentInformation.value.data!.map((row) =>
                                               commentBody(controller, row, context)),
                                           SizedBox(
                                             height: 32.h,
