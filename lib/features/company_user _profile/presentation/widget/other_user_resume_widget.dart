@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
 class ResumeScreen extends StatelessWidget {
-  const ResumeScreen({super.key});
+  ResumeScreen({super.key});
+
+  final controllerOne = Get.find<PersonalCreationController>();
 
   Widget sectionTitle(String title) {
     return Padding(
@@ -31,6 +35,8 @@ class ResumeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = controllerOne.userProfile.value.data;
+
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackgroundColor,
       body: SafeArea(
@@ -59,8 +65,7 @@ class ResumeScreen extends StatelessWidget {
                       ],
                     ),
                     child: CustomText(
-                      text:
-                      "I'm a passionate UI/UX Designer focused on creating intuitive, beautiful, and user-centered digital experiences. With a strong foundation in design principles and a deep understanding of user behavior, I craft interfaces that not only look great but also drive engagement and usability.",
+                      text: user?.about ?? "No bio provided",
                       fontSize: 16,
                       color: AppColors.secondaryTextColor,
                     )),
@@ -109,17 +114,20 @@ class ResumeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: "Sustainability Intern",
+                                  text: user?.experience?.first.company ??
+                                      "Position not available",
                                   fontSize: 15,
                                   color: AppColors.textPrimary,
                                 ),
                                 CustomText(
-                                  text: "Green Earth Foundation",
+                                  text: user?.experience?.first.title ??
+                                      "Company not available",
                                   fontSize: 12,
                                   color: AppColors.textPrimary,
                                 ),
                                 CustomText(
-                                  text: "June 2023 - August 2023",
+                                  text:
+                                      "${user?.experience?.first.startDate} - ${user?.experience?.first.endDate} ",
                                   fontSize: 12,
                                   color: AppColors.grayText,
                                 ),
@@ -128,16 +136,16 @@ class ResumeScreen extends StatelessWidget {
                                 ),
                                 CustomText(
                                   text:
-                                  "• Conducted research on sustainable farming.",
+                                      "• ${user?.experience?.first.description}.",
                                   fontSize: 12,
                                   color: AppColors.textPrimary,
                                 ),
-                                CustomText(
-                                  text:
-                                  "  Assisted in community outreach programs..",
-                                  fontSize: 12,
-                                  color: AppColors.textPrimary,
-                                ),
+                                // CustomText(
+                                //   text:
+                                //       "  Assisted in community outreach programs..",
+                                //   fontSize: 12,
+                                //   color: AppColors.textPrimary,
+                                // ),
                               ],
                             ),
                           ),
@@ -193,7 +201,7 @@ class ResumeScreen extends StatelessWidget {
                                     Expanded(
                                       child: CustomText(
                                         text:
-                                        "Helped organize and facilitate educational workshops on biodiversity conservation.",
+                                            "Helped organize and facilitate educational workshops on biodiversity conservation.",
                                         fontSize: 12,
                                         color: AppColors.textPrimary,
                                       ),
@@ -259,7 +267,7 @@ class ResumeScreen extends StatelessWidget {
                                 ),
                                 CustomText(
                                   text:
-                                  "Bachelor of Science in Environmental Science",
+                                      "Bachelor of Science in Environmental Science",
                                   fontSize: 12,
                                   color: AppColors.textSecondary,
                                 ),
@@ -316,12 +324,9 @@ class ResumeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-
-
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -330,10 +335,6 @@ class ResumeScreen extends StatelessWidget {
                   color: AppColors.secondaryTextColor,
                   fontSize: 16,
                 ),
-
-
-
-
                 Wrap(
                   children: [
                     pill("Interface Design"),
@@ -344,8 +345,6 @@ class ResumeScreen extends StatelessWidget {
                     pill("Motion Design"),
                   ],
                 ),
-
-
                 SizedBox(
                   height: 10,
                 ),
@@ -366,9 +365,6 @@ class ResumeScreen extends StatelessWidget {
                     pill("Eco-Friendly Architecture"),
                   ],
                 ),
-
-
-
                 SizedBox(
                   height: 10,
                 ),
@@ -414,9 +410,9 @@ class ResumeScreen extends StatelessWidget {
             Text(company, style: const TextStyle(color: Colors.grey)),
             Text(date, style: const TextStyle(fontSize: 12)),
             ...details.map((e) => Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text("• $e"),
-            )),
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Text("• $e"),
+                )),
           ],
         ),
       ),
@@ -433,7 +429,7 @@ class ResumeScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         title:
-        Text(school, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(school, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

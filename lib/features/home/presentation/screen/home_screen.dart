@@ -6,7 +6,6 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
-import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
 
@@ -34,7 +33,11 @@ class HomeScreen extends StatelessWidget {
                     width: 40.w,
                   ),
                   SizedBox(width: 10.w),
-                  CustomText(text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}", fontSize: 18.sp, fontWeight: FontWeight.w600,)
+                  CustomText(
+                    text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}",
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                  )
                 ],
               ),
             );
@@ -63,18 +66,31 @@ class HomeScreen extends StatelessWidget {
                   final post = controller.postDataList[index];
 
                   final String? firstImage =
-                      post.image!.isNotEmpty ? post.image!.first : null;
+                      post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
+                    
                     icon: firstImage ?? IconPath.icon_pro,
-                    //  title: post.content ?? '',
                     content: post.content!,
                     postId: post.id,
-                    likedByME: post.like!.any((element) => element.userId == controller.controllerOne.userProfile.value.data!.id.toString()).obs,
+                    likedByME: post.like!
+                        .any((element) =>
+                            element.userId ==
+                            controller.controllerOne.userProfile.value.data!.id
+                                .toString())
+                        .obs,
                     organization: post.user!.name!,
                     imageAsset: firstImage ?? "",
-                    likeCount: post.count != null ? post.count!.like.toString().obs : "0".obs,
-                    commentCount: post.count != null ? post.count!.comment.toString() : "0",
+                    likeCount: post.count != null
+                        ? post.count!.like.toString().obs
+                        : "0".obs,
+                    commentCount: post.count != null
+                        ? post.count!.comment.toString()
+                        : "0",
                     context: context,
+                    role: post.user?.role?.toString() ?? "USER",
+               //     role: post.user!.role ?? "USER",
+
+
                   );
                 },
               ));

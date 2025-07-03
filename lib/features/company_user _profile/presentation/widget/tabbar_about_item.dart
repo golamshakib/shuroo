@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -6,8 +8,11 @@ import '../../../../core/utils/constants/app_texts.dart';
 import 'getAboutTabBarWidget.dart';
 
 Widget getAboutItem() {
+  final controllerOne = Get.find<PersonalCreationController>();
+  final user = controllerOne.userProfile.value.data;
+
   return Container(
-    padding: EdgeInsets.only(left: 16, top: 16, right: 16),
+    padding: EdgeInsets.all(16),
     margin: EdgeInsets.only(top: 16, left: 16),
     decoration: BoxDecoration(
       color: Colors.white,
@@ -23,17 +28,22 @@ Widget getAboutItem() {
     child: Column(
       children: [
         CustomText(
-          text: AppText.wildWorldConservation,
+          text: user?.about ?? 'No About Found',
           fontSize: 16,
           color: AppColors.secondaryTextColor,
         ),
         SizedBox(
           height: 20,
         ),
-        getAboutTabBarWidget(name: "Industry", details: "Software"),
         getAboutTabBarWidget(
-            name: "Company Size", details: "51-200 employees"),
-        getAboutTabBarWidget(name: "Founded", details: "2020"),
+            name: "Industry", details: user?.companyType ?? 'Not Found'),
+            
+        getAboutTabBarWidget(
+            name: "Company Size",
+            details: "${user?.totalEmployees ?? '00'} employees"),
+        getAboutTabBarWidget(
+            name: "Founded",
+            details: user?.establishmentYear ?? 'Founded date not found'),
       ],
     ),
   );
