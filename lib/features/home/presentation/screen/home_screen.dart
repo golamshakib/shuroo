@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                     width: 40.w,
                   ),
                   SizedBox(width: 10.w),
-                  Text(user?.name ?? 'User Name'),
+                  CustomText(text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}", fontSize: 18.sp, fontWeight: FontWeight.w600,)
                 ],
               ),
             );

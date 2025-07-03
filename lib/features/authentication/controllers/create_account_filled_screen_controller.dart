@@ -44,7 +44,6 @@ class FilledScreenController extends GetxController {
           Get.snackbar("Error", "Enter a valid Email Format",
               backgroundColor: Colors.red.withAlpha(180),
               colorText: Colors.white);
-
         }
       } else {
         Get.snackbar("Error", "Password length have at least 8",
