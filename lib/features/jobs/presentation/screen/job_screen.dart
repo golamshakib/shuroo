@@ -158,7 +158,7 @@ class JobScreen extends StatelessWidget {
                                       },
                                       icon: Icon(
                                         isFav ? Icons.favorite : Icons.favorite_border_outlined,
-                                        color: isFav ? Colors.red : AppColors.textPrimary,
+                                        color: isFav ? AppColors.primary : AppColors.textPrimary,
                                       ),
                                     );
                                   }),
