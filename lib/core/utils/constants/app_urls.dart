@@ -58,7 +58,7 @@ class AppUrls {
   static const String getProfileViewJob = '$_baseUrl/application/getProfileViewedJob';
   static const String getShortlistedJob = '$_baseUrl/application/getShortlistedJob';
   static const String getInterViewJob = '$_baseUrl/application/getInterviewJob';
-  static const String getSearchJobs = '$_baseUrl/job/all?name=Graphics Designer';
+  static String getSearchJobs(searchValue) => '$_baseUrl/job/all?name=/$searchValue';
 
   static const String addFavorite = '$_baseUrl/favorite/add';
   static const String removeFavorite = '$_baseUrl/favorite/delete';
