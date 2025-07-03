@@ -228,6 +228,8 @@ class JobScreen extends StatelessWidget {
                               ],
                             ),
                           ),
+                        
+                        
                         );
                       },
                     );

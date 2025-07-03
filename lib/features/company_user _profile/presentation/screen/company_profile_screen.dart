@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/home/presentation/widget/custom_home_post_card.dart';
+import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -16,17 +17,18 @@ import '../widget/tabbar_about_item.dart';
 class CompanyProfileScreen extends StatelessWidget {
   CompanyProfileScreen({super.key});
 
-  final CompanyProfileScreenController _controller =
-      Get.put(CompanyProfileScreenController());
+  final controller = Get.put(CompanyProfileScreenController());
+  final controllerOne = Get.find<PersonalCreationController>();
 
   @override
   Widget build(BuildContext context) {
+    final user = controllerOne.userProfile.value.data;
     return DefaultTabController(
       length: 3, // required if not already handled in controller
       child: Scaffold(
         appBar: AppBar(
           title: CustomText(
-            text: "Wild World Conservation",
+            text: user!.name ?? 'User Name',
             fontSize: 20,
             color: AppColors.primaryTextColor,
           ),
@@ -38,12 +40,15 @@ class CompanyProfileScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 39, left: 16, right: 16),
               child: Column(
                 children: [
-                  Image.asset(ImagePath.image_c,height: 120.h,width: 120.w,),
+                  Image.network(
+                    user.image ?? ImagePath.image_c,
+                    height: 120.h,
+                    width: 120.w,
+                  ),
                   const SizedBox(height: 16),
-                  const CustomText(
-                      text: "Wild World Conservation", fontSize: 20),
+                  CustomText(text: user.name ?? 'User Name', fontSize: 20),
                   CustomText(
-                    text: "www.wildworldconservation.com",
+                    text: user!.email ?? 'youremail@gmail.com',
                     fontSize: 16,
                     color: AppColors.secondaryTextColor,
                   ),
@@ -66,7 +71,7 @@ class CompanyProfileScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 3),
                     child: TabBar(
-                      controller: _controller.tabController,
+                      controller: controller.tabController,
                       indicatorColor: AppColors.custom_blue,
                       labelColor: AppColors.custom_blue,
                       unselectedLabelColor: Colors.grey,
@@ -84,7 +89,7 @@ class CompanyProfileScreen extends StatelessWidget {
             // This Expanded is valid now because it's inside Column outside ScrollView
             Expanded(
               child: TabBarView(
-                controller: _controller.tabController,
+                controller: controller.tabController,
                 children: [
                   ListView.builder(
                     itemCount: 6,
@@ -99,26 +104,23 @@ class CompanyProfileScreen extends StatelessWidget {
                             organization: AppText.wildWorld,
                             likeCount: 2.toString().obs,
                             commentCount: 2.toString(),
-                        //    timeAgo: "1w ago",
-                          //  title: AppText.campus_Event,
+                            //    timeAgo: "1w ago",
+                            //  title: AppText.campus_Event,
                             content: AppText.the_annualCareer,
                             imageAsset: ImagePath.img_video,
-                        //    hashtags: AppText.careerFair,
+                            //    hashtags: AppText.careerFair,
                           ),
                         ),
                       );
                     },
                   ),
                   SingleChildScrollView(child: getAboutItem()),
-
-
-
                   ListView.builder(
                     itemCount: 6,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(top: 16, left: 16),
-                        child:       JobTabBarCard(
+                        child: JobTabBarCard(
                           title: 'UI/UX Designer',
                           company: 'Wild World Conservation',
                           tags: ['Fulltime', 'Remote', 'Outreach'],
@@ -127,12 +129,6 @@ class CompanyProfileScreen extends StatelessWidget {
                       );
                     },
                   ),
-
-
-
-
-
-
                 ],
               ),
             ),
@@ -141,7 +137,4 @@ class CompanyProfileScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }
-

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -12,6 +10,7 @@ import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/company_user%20_profile/presentation/screen/company_profile_screen.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
+import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/utils/constants/app_colors.dart';
 
@@ -29,21 +28,24 @@ class PostCard extends GetView<HomeController> {
   final String commentCount;
   // final String? hashtags;
   final String imageAsset;
+  final VoidCallback? navigateClick;
+  final String? role;
 
-  const PostCard({
-    super.key,
-    required this.organization,
-    //  this.timeAgo,
-    required this.content,
-    this.postId,
-    required this.likedByME,
-    //  this.hashtags,
-    required this.imageAsset,
-    required this.icon,
-    required this.context,
-    this.likeCount,
-    required this.commentCount,
-  });
+  const PostCard(
+      {super.key,
+      required this.organization,
+      //  this.timeAgo,
+      required this.content,
+      this.postId,
+      required this.likedByME,
+      //  this.hashtags,
+      required this.imageAsset,
+      required this.icon,
+      required this.context,
+      this.likeCount,
+      required this.commentCount,
+      this.navigateClick,
+      this.role});
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +94,15 @@ class PostCard extends GetView<HomeController> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Get.to(() => CompanyProfileScreen());
+                          print("Tapped role: $role");
+                          if (role == 'USER') {
+                            Get.toNamed(AppRoute.otherUserProfileScreen);
+                          } else if (role == 'COMPANY') {
+                            Get.toNamed(AppRoute.companyProfileScreen);
+                          } else {
+                            Get.snackbar(
+                                "Navigation Error", "Invalid role: $role");
+                          }
                         },
                         child: Text(organization,
                             style: const TextStyle(
@@ -109,30 +119,21 @@ class PostCard extends GetView<HomeController> {
                           style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
-          const SizedBox(height: 8),
-          // Text(
-          //   title!,
-          //   style: TextStyle(
-          //     color: AppColors.grayText,
-          //     fontFamily: "Inter",
-          //     fontSize: 14,
-          //   ),
-          // ),
           const SizedBox(height: 4),
           Text(content),
           const SizedBox(height: 4),
           Text('', style: const TextStyle(color: Colors.blue)),
           const SizedBox(height: 8),
-          if(imageAsset != "")
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              imageAsset,
-              fit: BoxFit.cover,
-              height: 151.h,
-              width: 341.w,
+          if (imageAsset != "")
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                imageAsset,
+                fit: BoxFit.cover,
+                height: 151.h,
+                width: 341.w,
+              ),
             ),
-          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,40 +142,48 @@ class PostCard extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 4.w,
                 children: [
-                  Obx(() =>
-                      GestureDetector(
-                        onTap: () async{
+                  Obx(() => GestureDetector(
+                        onTap: () async {
                           likedByME.value = !likedByME.value;
-                          if(!likedByME.value){
-                            likeCount!.value = (int.parse(likeCount!.value) - 1).toString();
+                          if (!likedByME.value) {
+                            likeCount!.value =
+                                (int.parse(likeCount!.value) - 1).toString();
+                          } else {
+                            likeCount!.value =
+                                (int.parse(likeCount!.value) + 1).toString();
                           }
-                          else{
-                            likeCount!.value = (int.parse(likeCount!.value) + 1).toString();
-                          }
-                          if(!await controller.changeLikeStatus(postId.toString())){
+                          if (!await controller
+                              .changeLikeStatus(postId.toString())) {
                             likedByME.value = !likedByME.value;
-                            if(!likedByME.value){
-                              likeCount!.value = (int.parse(likeCount!.value) - 1).toString();
-                            }
-                            else{
-                              likeCount!.value = (int.parse(likeCount!.value) + 1).toString();
+                            if (!likedByME.value) {
+                              likeCount!.value =
+                                  (int.parse(likeCount!.value) - 1).toString();
+                            } else {
+                              likeCount!.value =
+                                  (int.parse(likeCount!.value) + 1).toString();
                             }
                           }
                         },
-                        child: likedByME.value ?
-                        Icon(Icons.favorite_rounded, color: AppColors.primary, size: 18.h,) :
-                        Icon(Icons.favorite_border_rounded, color: AppColors.containerBorder, size: 18.h,),
-                      )
-                  ),
-                  Obx(() =>
-                      CustomText(
+                        child: likedByME.value
+                            ? Icon(
+                                Icons.favorite_rounded,
+                                color: AppColors.primary,
+                                size: 18.h,
+                              )
+                            : Icon(
+                                Icons.favorite_border_rounded,
+                                color: AppColors.containerBorder,
+                                size: 18.h,
+                              ),
+                      )),
+                  Obx(() => CustomText(
                         text: "${likeCount!.value} likes",
                         fontSize: 14,
                         color: AppColors.grayText,
-                      )
-                  ),
+                      )),
                 ],
               ),
+
               /// Nifat's part
               Row(
                 children: [

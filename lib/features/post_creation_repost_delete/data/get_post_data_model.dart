@@ -128,22 +128,26 @@ class User {
   String? id;
   String? name;
   String? image;
+  String? role;
 
   User({
     this.id,
     this.name,
     this.image,
+    this.role
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
     name: json["name"],
     image: json["image"],
+    role: json["role"]
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
     "image": image,
+    "role" : role
   };
 }

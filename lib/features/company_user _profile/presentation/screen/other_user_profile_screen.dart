@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
+import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
+import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -14,17 +16,18 @@ import '../widget/other_user_resume_widget.dart';
 class OtherUserProfileScreen extends StatelessWidget {
   OtherUserProfileScreen({super.key});
 
-  final OtherUserProfileScreenControllar _controller =
-      Get.put(OtherUserProfileScreenControllar());
+  final controller = Get.put(OtherUserProfileScreenControllar());
+  final controllerOne = Get.find<PersonalCreationController>();
 
   @override
   Widget build(BuildContext context) {
+    final user = controllerOne.userProfile.value.data;
     return DefaultTabController(
-      length: 2, // required if not already handled in controller
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: CustomText(
-            text: "Jams Walton",
+            text: user!.name ?? "User Name",
             fontSize: 20,
             color: AppColors.primaryTextColor,
           ),
@@ -42,9 +45,9 @@ class OtherUserProfileScreen extends StatelessWidget {
                     width: 120.w,
                   ),
                   const SizedBox(height: 16),
-                  const CustomText(text: "Jams Walton", fontSize: 20),
+                  CustomText(text: user.name ?? "User Name", fontSize: 20),
                   CustomText(
-                    text: "UI/UX Designer",
+                    text: user.email ?? "youremail@gmail.com",
                     fontSize: 16,
                     color: AppColors.secondaryTextColor,
                   ),
@@ -53,8 +56,11 @@ class OtherUserProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 6,
-                        child:
-                            CustomSubmitButton(text: ' Message', onTap: () {}),
+                        child: CustomSubmitButton(
+                            text: ' Message',
+                            onTap: () {
+                              //  Get.toNamed(AppRoute.)
+                            }),
                       ),
                       const SizedBox(width: 18),
                       Expanded(
@@ -67,7 +73,7 @@ class OtherUserProfileScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 3),
                     child: TabBar(
-                      controller: _controller.tabController,
+                      controller: controller.tabController,
                       indicatorColor: AppColors.custom_blue,
                       labelColor: AppColors.custom_blue,
                       unselectedLabelColor: Colors.grey,
@@ -84,7 +90,7 @@ class OtherUserProfileScreen extends StatelessWidget {
             // This Expanded is valid now because it's inside Column outside ScrollView
             Expanded(
               child: TabBarView(
-                controller: _controller.tabController,
+                controller: controller.tabController,
                 children: [
                   ListView.builder(
                     itemCount: 6,
@@ -98,11 +104,11 @@ class OtherUserProfileScreen extends StatelessWidget {
                           organization: AppText.wildWorld,
                           likeCount: 2.toString().obs,
                           commentCount: 2.toString(),
-                       //   timeAgo: "1w ago",
-                        //  title: AppText.campus_Event,
+                          //   timeAgo: "1w ago",
+                          //  title: AppText.campus_Event,
                           content: AppText.the_annualCareer,
                           imageAsset: ImagePath.img_video,
-                        //  hashtags: AppText.careerFair,
+                          //  hashtags: AppText.careerFair,
                         ),
                       );
                     },
@@ -117,4 +123,3 @@ class OtherUserProfileScreen extends StatelessWidget {
     );
   }
 }
-
