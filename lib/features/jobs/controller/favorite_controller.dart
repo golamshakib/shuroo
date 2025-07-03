@@ -1,8 +1,4 @@
 import 'package:get/get.dart';
-import '../../../core/common/widgets/app_snackbar.dart';
-import '../../../core/services/Auth_service.dart';
-import '../../../core/services/network_caller.dart';
-import '../../../core/utils/constants/app_urls.dart';
 
 class FavoriteController extends GetxController{
 

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
-import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
-import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -14,7 +12,7 @@ import '../../../home/presentation/widget/custom_home_post_card.dart';
 import '../widget/other_user_resume_widget.dart';
 
 class OtherUserProfileScreen extends StatelessWidget {
-  OtherUserProfileScreen({super.key});
+   OtherUserProfileScreen({super.key});
 
   late final OtherUserProfileScreenControllar controller;
 

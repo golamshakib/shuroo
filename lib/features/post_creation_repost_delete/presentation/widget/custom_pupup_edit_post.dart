@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/custpm_popup.dart';
-import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
-import 'package:shuroo/features/post_creation_repost_delete/data/get_single_user_data_model.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
 import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
