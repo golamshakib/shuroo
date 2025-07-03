@@ -11,17 +11,17 @@ import 'package:shuroo/features/jobs/controller/job_details_controller.dart';
 import '../../../favorites/controller/favourite_controller.dart';
 
 
-class JobDetailsScreen extends StatelessWidget {
+class JobDetailsScreen extends GetView<JobDetailsController> {
   JobDetailsScreen({super.key});
 
-  final controller = Get.put(JobDetailsController());
+  //final controller = Get.put(JobDetailsController());
   final favoriteController = Get.find<FavouriteController>();
 
 
   @override
   Widget build(BuildContext context) {
-    final jobId = Get.arguments;
-    print('Passed job id is................: $jobId');
+    // final jobId = Get.arguments;
+    // print('Passed job id is................: $jobId');
     return Obx(() {
       final data = controller.getSingleJobModel.value.data;
       if(controller.isLoading.value) {
@@ -46,7 +46,6 @@ class JobDetailsScreen extends StatelessWidget {
             Obx(() {
               final jobId = data.id.toString();
               final isFav = favoriteController.isJobFavorite(jobId);
-
               return IconButton(
                 onPressed: () {
                   if (isFav) {
@@ -81,7 +80,6 @@ class JobDetailsScreen extends StatelessWidget {
                     color: AppColors.textWhite,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Color(0xffF5F5F5), width: 1),
-
                   ),
                   child: Column(
                     children: [
@@ -359,8 +357,7 @@ class JobDetailsScreen extends StatelessWidget {
                 CustomSubmitButton(
                     text: 'Apply Now',
                     onTap: () {
-                      controller.jobApplication(jobId);
-                      //Get.back();
+                      controller.jobApplication(controller.jobId.value);
                     })
               ],
             ),

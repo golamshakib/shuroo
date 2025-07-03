@@ -18,6 +18,8 @@ class HomeController extends GetxController {
   var commentHint = "Add a comment...".obs;
   final FocusNode controllerNode = FocusNode();
 
+  final isLoading = false.obs;
+
   RxBool activeNotification = true.obs;
 
   final List<String> item = [
@@ -123,6 +125,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllPost() async {
+    isLoading.value = true;
     try {
       final response = await NetworkCaller()
           .getRequest(AppUrls.getAllPost, token: "Bearer ${AuthService.token}");

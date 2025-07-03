@@ -7,6 +7,7 @@ import 'package:shuroo/features/profile/controller/change_password_controller.da
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 import '../../features/jobs/controller/applied_controller.dart';
 import '../../features/jobs/controller/interview_controller.dart';
+import '../../features/jobs/controller/job_details_controller.dart';
 import '../../features/jobs/controller/profile_view_controller.dart';
 import '../../features/jobs/controller/short_listed_controller.dart';
 import '../../features/profile/controller/profile_information_controller.dart';
@@ -42,6 +43,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<InterviewController>(() => InterviewController(), fenix: true,);
     Get.lazyPut<AppliedController>(() => AppliedController(), fenix: true,);
     Get.lazyPut<FavoriteController>(() => FavoriteController(), fenix: true,);
+    Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
 
 
 

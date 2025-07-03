@@ -12,15 +12,16 @@ class JobDetailsController extends GetxController {
   // Added by Shahriar
   final isLoading = false.obs;
   final getSingleJobModel = GetSingleJobModel().obs;
+  var jobId = "".obs;
 
   @override
   void onInit() async {
-    final jobId = Get.arguments;
-    print("Received jobId: $jobId");
-    if (jobId != null) {
-      fetchSingleJob(jobId);
-    }
     super.onInit();
+    if(Get.arguments != null){
+      jobId.value = Get.arguments;
+      print("Received jobId: $jobId");
+      await fetchSingleJob(jobId.value);
+    }
   }
 
   // Added by Shahriar

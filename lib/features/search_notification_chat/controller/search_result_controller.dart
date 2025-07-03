@@ -1,135 +1,19 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:get/get.dart';
-// import 'package:shuroo/features/search_notification_chat/data/model/search_result_model.dart' hide Jobs;
-//
-// import '../../../core/utils/constants/will_be_deleted.dart';
-// import '../../jobs/data/model/job_Model.dart';
-//
-// class SearchResultController extends GetxController{
-//
-//   final isFavorite = false.obs;
-//
-//   final search = TextEditingController();
-//
-//   final List<Jobs> jobsSystemsModel = [
-//     Jobs(
-//       id: 1,
-//       title: "💼  All Jobs",
-//     ),
-//     Jobs(
-//       id: 2,
-//       title: "🛠️  Full-time",
-//     ),
-//     Jobs(
-//       id: 3,
-//       title: "🕐  Part-time",
-//     ),
-//     Jobs(
-//       id: 4,
-//       title: "🏠 Hybrid",
-//     ),
-//   ];
-//
-//   final List<SearchResultModel> searchModelList = [
-//     SearchResultModel(
-//       id: 1,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.uiLogo,
-//     ),
-//     SearchResultModel(
-//       id: 2,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.ecoLogo,
-//     ),
-//     SearchResultModel(
-//       id: 3,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.uiLogo,
-//     ),
-//     SearchResultModel(
-//       id: 4,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.uiLogo,
-//     ),
-//     SearchResultModel(
-//       id: 5,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.ecoLogo,
-//     ),
-//     SearchResultModel(
-//       id: 6,
-//       title: "UI/UX Designer",
-//       subTitle: "Wild World Conservation",
-//       fullTimeText: "Fulltime",
-//       remoteText: "Remote",
-//       outreachText: "Outreach",
-//       orText: "Portland, OR",
-//       applyText: "Apply Now",
-//       uiImagePath: WillBeDeleted.uiLogo,
-//     ),
-//   ];
-//
-//   void toggleFavorite(int index) {
-//     searchModelList[index].isFavorite.toggle();
-//   }
-//
-//
-// }
-
-
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
-import 'package:shuroo/features/jobs/data/model/get_all_jobs_model.dart';
 import 'package:shuroo/features/search_notification_chat/data/model/get_searched_jobs_model.dart' hide Datum;
-
 import '../../../core/utils/constants/will_be_deleted.dart';
+import '../../jobs/data/model/get_all_jobs_model.dart';
 import '../data/model/search_result_model.dart';
 
 class SearchResultController extends GetxController {
 
   // variable
   final isLoading = false.obs;
-  var selectedFilter = 'ALL JOB'.obs;
+  var selectedFilter = ''.obs;
 
   final search = TextEditingController();
 
@@ -145,6 +29,7 @@ class SearchResultController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    searchJobs('');
     fetchAllJobs();
   }
 
@@ -243,7 +128,7 @@ class SearchResultController extends GetxController {
     }
   }
 
-  // Added by Shahriar type handel
+  //Added by Shahriar type handel
   List<Datum> get filteredJobs {
     if (getAllJob.value.data == null) return [];
 
@@ -261,10 +146,12 @@ class SearchResultController extends GetxController {
     isLoading.value = true;
     try{
       final response = await NetworkCaller().getRequest(
-        "${AppUrls.getSearchJobs}/$searchValue"
+        AppUrls.getSearchJobs(searchValue),
+        token: "Bearer ${AuthService.token}"
       );
       if(response.isSuccess){
         final data = response.responseData;
+        print('Search data is:  $data');
         getSearchJobModel.value = GetSearchedJobsModel.fromJson(data);
       }else{
         AppSnackBar.showError('Something Went Wrong!');
