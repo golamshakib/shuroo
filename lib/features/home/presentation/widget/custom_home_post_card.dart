@@ -6,7 +6,6 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
-import 'package:shuroo/features/company_user%20_profile/presentation/screen/company_profile_screen.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
 import 'package:shuroo/routes/app_routes.dart';

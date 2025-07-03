@@ -1,10 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-
-import 'package:shuroo/routes/app_routes.dart';
 
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
