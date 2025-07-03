@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
@@ -151,7 +153,8 @@ class SearchResultController extends GetxController {
       );
       if(response.isSuccess){
         final data = response.responseData;
-        print('Search data is:  $data');
+        log("===========================================");
+        log("I am hitting it!!");
         getSearchJobModel.value = GetSearchedJobsModel.fromJson(data);
       }else{
         AppSnackBar.showError('Something Went Wrong!');
