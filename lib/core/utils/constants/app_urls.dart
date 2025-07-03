@@ -36,8 +36,9 @@ class AppUrls {
   static const String jobApplie = '$_baseUrl/application/create';
   static const String getUserProfile = '$_baseUrl/user/profile';
 
+  static  String othersUserProfile(id) => '$_baseUrl/user/get/$id';
 
-  static const String like = '$_baseUrl/like';
+
 
 
 

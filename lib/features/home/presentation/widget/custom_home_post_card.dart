@@ -94,10 +94,12 @@ class PostCard extends GetView<HomeController> {
                     GestureDetector(
                         onTap: () {
                           print("Tapped role: $role");
+                          // Replace 'userId' below with the actual user ID variable from your data model
+                          final userId = postId; // Example: using postId as userId, change as needed
                           if (role == 'USER') {
-                            Get.toNamed(AppRoute.otherUserProfileScreen);
+                            Get.toNamed(AppRoute.otherUserProfileScreen, arguments: {"userId": userId});
                           } else if (role == 'COMPANY') {
-                            Get.toNamed(AppRoute.companyProfileScreen);
+                            Get.toNamed(AppRoute.companyProfileScreen, arguments: {"userId": userId});
                           } else {
                             Get.snackbar(
                                 "Navigation Error", "Invalid role: $role");
