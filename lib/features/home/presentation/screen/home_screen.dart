@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                     //  title: post.content ?? '',
                     content: post.content,
                     organization: post.user.name,
-                    imageAsset: firstImage ?? IconPath.icon_pro,
+                    imageAsset: firstImage ?? "",
                     context: context,
                   );
                 },

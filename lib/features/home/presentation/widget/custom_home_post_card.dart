@@ -68,7 +68,7 @@ class PostCard extends GetView<HomeController> {
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Image.asset(
-                            ImagePath.placeholder,
+                            ImagePath.dummyProfilePicture,
                             width: 24.w,
                             height: 24.h,
                             fit: BoxFit.cover,
@@ -112,6 +112,7 @@ class PostCard extends GetView<HomeController> {
           const SizedBox(height: 4),
           Text('', style: const TextStyle(color: Colors.blue)),
           const SizedBox(height: 8),
+          if(imageAsset != "")
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
@@ -119,14 +120,14 @@ class PostCard extends GetView<HomeController> {
               fit: BoxFit.cover,
               height: 151.h,
               width: 341.w,
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  ImagePath.placeholder,
-                  fit: BoxFit.cover,
-                  height: 151.h,
-                  width: 341.w,
-                );
-              },
+              // errorBuilder: (context, error, stackTrace) {
+              //   return Image.asset(
+              //     ImagePath.placeholder,
+              //     fit: BoxFit.cover,
+              //     height: 151.h,
+              //     width: 341.w,
+              //   );
+              // },
             ),
           ),
           const SizedBox(height: 8),
