@@ -17,4 +17,6 @@ class ImagePath {
   static const String dummyProfilePicture =
       '$_basePath/dummyProfilePicture.png';
   static const String placeholder = '$_basePath/placeholder.png';
+  static const String dummyExperience = '$_basePath/suitcase.png';
+  
 }

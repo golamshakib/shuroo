@@ -16,8 +16,9 @@ import '../widget/tabbar_about_item.dart';
 class CompanyProfileScreen extends StatelessWidget {
   CompanyProfileScreen({super.key});
 
+  
+  final controllerOne = Get.put(OtherUserProfileScreenControllar());
   final controller = Get.put(CompanyProfileScreenController());
-  final controllerOne = Get.find<OtherUserProfileScreenControllar>();
 
   @override
   Widget build(BuildContext context) {
