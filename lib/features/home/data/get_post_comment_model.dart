@@ -40,7 +40,7 @@ class Nifat {
   String? comment;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<dynamic>? like;
+  List<Like>? like;
   Count? count;
   List<ReplyComment>? replyComment;
 
@@ -65,7 +65,7 @@ class Nifat {
     comment: json["comment"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    like: json["Like"] == null ? [] : List<dynamic>.from(json["Like"]!.map((x) => x)),
+    like: json["Like"] == null ? [] : List<Like>.from(json["Like"]!.map((x) => Like.fromJson(x))),
     count: json["_count"] == null ? null : Count.fromJson(json["_count"]),
     replyComment: json["ReplyComment"] == null ? [] : List<ReplyComment>.from(json["ReplyComment"]!.map((x) => ReplyComment.fromJson(x))),
   );
@@ -78,7 +78,7 @@ class Nifat {
     "comment": comment,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
-    "Like": like == null ? [] : List<dynamic>.from(like!.map((x) => x)),
+    "Like": like == null ? [] : List<dynamic>.from(like!.map((x) => x.toJson())),
     "_count": count?.toJson(),
     "ReplyComment": replyComment == null ? [] : List<dynamic>.from(replyComment!.map((x) => x.toJson())),
   };
@@ -101,6 +101,22 @@ class Count {
   Map<String, dynamic> toJson() => {
     "ReplyComment": replyComment,
     "Like": like,
+  };
+}
+
+class Like {
+  String? userId;
+
+  Like({
+    this.userId,
+  });
+
+  factory Like.fromJson(Map<String, dynamic> json) => Like(
+    userId: json["userId"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "userId": userId,
   };
 }
 
@@ -147,7 +163,7 @@ class ReplyComment {
 class User {
   String? id;
   String? name;
-  dynamic image;
+  String? image;
 
   User({
     this.id,
