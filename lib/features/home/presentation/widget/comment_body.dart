@@ -24,31 +24,179 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ClipOval(
-                    child: row.user!.image == null ?
-                    Image.asset(ImagePath.dummyProfilePicture, height: 32.h, width: 32.w, fit: BoxFit.fill,) :
-                    Image.network(row.user!.image!, height: 32.h, width: 32.w, fit: BoxFit.fill,)
-                  ),
-                  SizedBox(width: 6.w,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomText(text: row.user!.name.toString(), fontWeight: FontWeight.w600, ),
-                      //CustomText(text: row['designation'], fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
-                    ],
-                  )
-                ],
-              ),
-              CustomText(text: DateFormat("dd MMM").format(row.updatedAt!), fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,)
-            ],
+          GestureDetector(
+            onLongPress: (){
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  builder: (context){
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              showModalBottomSheet(
+                                  context: context,
+                                  backgroundColor: AppColors.white,
+                                  builder: (context){
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                            flex: 1,
+                                            child: ClipOval(
+                                              child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                                            ),
+                                          ),
+                                          SizedBox(width: 7.w,),
+                                          Flexible(
+                                            flex: 7,
+                                            child: Obx(() =>
+                                                CustomTextField(
+                                                    onTapOutside: (c){
+                                                      controller.addComment.value = true;
+                                                      FocusScope.of(context).unfocus();
+                                                    },
+                                                    controller: controller.commentTEController.value,
+                                                    hintText: "Edit your reply...",
+                                                    focusNode: controller.controllerNode,
+                                                    radius: 50,
+                                                    suffixIcon: controller.commentTEController.value.text.isNotEmpty ?
+                                                    Padding(
+                                                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                                        child: GestureDetector(
+                                                          onTap: (){
+                                                            Get.back();
+                                                            Get.back();
+                                                            Get.snackbar("Development Message", "Will be implemented by backend", colorText: AppColors.white,backgroundColor: Colors.green.withAlpha(100));
+                                                          },
+                                                          child: Image.asset(IconPath.sendButton, height: 24.h, width: 24.w,),
+                                                        )
+                                                    ) :
+                                                    SizedBox()
+                                                )
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                              );
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(IconPath.editIcon),
+                                SizedBox(width: 6.w,),
+                                CustomText(text: "Edit comment", fontSize: 14.sp, fontWeight: FontWeight.w400, color: const Color(0xFF353A40),)
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 16.h,),
+                          GestureDetector(
+                            onTap: (){
+                              showDialog(
+                                  context: context,
+                                  builder: (context){
+                                    return AlertDialog(
+                                      backgroundColor: Colors.white,
+                                      actionsAlignment: MainAxisAlignment.center,
+                                      actionsPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                                      actions: [
+                                        Center(child: CustomText(text: "Delete Comment?", fontWeight: FontWeight.w600, fontSize: 24.sp, textAlign: TextAlign.center,)),
+                                        SizedBox(height: 8.h,),
+                                        CustomText(text: "Once deleted, your comment will be permanently removed.", fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary, textAlign: TextAlign.center,),
+                                        SizedBox(height: 8.h,),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Flexible(
+                                              flex: 1,
+                                              child: OutlinedButton(
+                                                style: OutlinedButton.styleFrom(
+                                                    backgroundColor: const Color(0xFFE6E6E7),
+                                                    side: BorderSide.none
+                                                ),
+                                                onPressed: (){
+                                                  Get.back();
+                                                },
+                                                child: SizedBox(
+                                                  width: double.infinity,
+                                                  child: Center(child: CustomText(text: "Cancel", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.textSecondary,)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 11.w,),
+                                            Flexible(
+                                              flex: 1,
+                                              child: OutlinedButton(
+                                                style: OutlinedButton.styleFrom(
+                                                  backgroundColor: const Color(0xFF01A8F9),
+                                                  side: BorderSide.none,
+                                                ),
+                                                onPressed: () async{
+                                                  log("${row.postId!} & ${row.id}");
+                                                  await controller.deletedComment(row.postId!, row.id!);
+                                                  //row['replies'].remove(subRow);
+                                                },
+                                                child: SizedBox(
+                                                  width: double.infinity,
+                                                  child: Center(child: CustomText(text: "Delete", fontWeight: FontWeight.w500, fontSize: 15.sp, color: AppColors.white,)),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }
+                              );
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(IconPath.binIcon),
+                                SizedBox(width: 6.w,),
+                                CustomText(text: "Delete comment", fontSize: 14.sp, fontWeight: FontWeight.w400, color: const Color(0xFF353A40),)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+              );
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipOval(
+                      child: row.user!.image == null ?
+                      Image.asset(ImagePath.dummyProfilePicture, height: 32.h, width: 32.w, fit: BoxFit.fill,) :
+                      Image.network(row.user!.image!, height: 32.h, width: 32.w, fit: BoxFit.fill,)
+                    ),
+                    SizedBox(width: 6.w,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(text: row.user!.name.toString(), fontWeight: FontWeight.w600, ),
+                        //CustomText(text: row['designation'], fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                      ],
+                    )
+                  ],
+                ),
+                CustomText(text: DateFormat("dd MMM").format(row.updatedAt!), fontSize: 12.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary,)
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 12.h),

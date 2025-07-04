@@ -18,6 +18,7 @@ class AppUrls {
   static String likeById(id) => '$_baseUrl/like/$id';
   static String createCommentById(id) => '$_baseUrl/comment/create/$id';
   static String getCommentById(postId) => '$_baseUrl/comment/post/$postId';
+  static String deleteCommentById(commentId) => '$_baseUrl/comment/delete/$commentId';
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
