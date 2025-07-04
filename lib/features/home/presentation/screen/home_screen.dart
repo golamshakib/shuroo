@@ -6,6 +6,7 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
+import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
 
@@ -44,7 +45,9 @@ class HomeScreen extends StatelessWidget {
           }),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(AppRoute.notificationScreen);
+                },
                 icon: const Icon(Icons.notifications_none_outlined)),
             SizedBox(width: 16)
           ]),
@@ -52,7 +55,7 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Obx(() {
           if (controller.postDataList.isEmpty) {
-            return const Center(child: Text("No posts found"));
+            return const Center(child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
           }
 
           return RefreshIndicator(

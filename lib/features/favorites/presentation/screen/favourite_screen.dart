@@ -170,7 +170,9 @@ class FavouriteScreen extends StatelessWidget {
                                   Spacer(),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed(AppRoute.jobDetailsScreen);
+                                      final jobId = favoritesList.job?.id.toString();
+                                      Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
+                                      print(jobId);
                                     },
                                     child: Row(
                                       children: [
