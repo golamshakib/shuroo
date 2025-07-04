@@ -115,42 +115,70 @@ class CompanyProfileScreen extends StatelessWidget {
                 child: TabBarView(
                   controller: controller.tabController,
                   children: [
-                    ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(top: 16, left: 16),
-                          child: SingleChildScrollView(
-                            child: PostCard(
-                              context: context,
-                              likedByME: false.obs,
-                              icon: IconPath.icon_1,
-                              organization: AppText.wildWorld,
-                              likeCount: 2.toString().obs,
-                              commentCount: 2.toString(),
-                              content: AppText.the_annualCareer,
-                              imageAsset: ImagePath.img_video,
+                    user.post == null || user.post!.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 24),
+                              child: CustomText(
+                                text: 'No posts available.',
+                                fontSize: 16.sp,
+                                color: AppColors.secondaryTextColor,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                          )
+                        : ListView.builder(
+                            itemCount: user.post!.length,
+                            itemBuilder: (context, index) {
+                              final post = user.post![index];
+                              final firstImage =
+                                  (post.image?.isNotEmpty ?? false)
+                                      ? post.image!.first
+                                      : null;
 
-                    SingleChildScrollView(child: getAboutItem()),
-                    ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(top: 16, left: 16),
-                          child: JobTabBarCard(
-                            title: 'UI/UX Designer',
-                            company: 'Wild World Conservation',
-                            tags: ['Fulltime', 'Remote', 'Outreach'],
-                            location: 'Portland, OR',
+                              return Container(
+                                margin: EdgeInsets.only(top: 16, left: 16),
+                                child: PostCard(
+                                  context: context,
+                                  likedByME: false.obs,
+                                  icon: post.user?.logoImage ?? IconPath.icon_1,
+                                  organization:
+                                      post.user?.name ?? 'Company Name',
+                                  likeCount: 2.toString().obs,
+                                  commentCount: 2.toString(),
+                                  content: post.content ?? '',
+                                  imageAsset: firstImage ?? '',
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
+                    SingleChildScrollView(child: getAboutItem()),
+                    user.job == null || user.job!.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 24),
+                              child: CustomText(
+                                text: 'No jobs available.',
+                                fontSize: 16.sp,
+                                color: AppColors.secondaryTextColor,
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: user.job!.length,
+                            itemBuilder: (context, index) {
+                              final job = user.job![index];
+                              return Container(
+                                margin: EdgeInsets.only(top: 16, left: 16),
+                                child: JobTabBarCard(
+                                  title: job.name ?? '',
+                                  company:
+                                      job.company?.name ?? 'Unknown Company',
+                                  tags: job.mustSkills ?? [],
+                                  location: job.location ?? 'Unknown Location',
+                                ),
+                              );
+                            },
+                          ),
                   ],
                 ),
               ),

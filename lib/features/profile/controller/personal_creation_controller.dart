@@ -171,6 +171,36 @@ class PersonalCreationController extends GetxController {
     languageList.add(languageTEController.text);
   }
 
+// Upload User Data
+
+  // var favoriteJobIds = <String>{}.obs;
+
+  // Future<void> addFavorite(String id) async {
+  // //  isLoading.value = true;
+  //   try {
+  //     final response = await NetworkCaller().postRequest(
+  //       "${AppUrls.addFavorite}/$id",
+  //       body: {},
+  //       token: "Bearer ${AuthService.token}",
+  //     );
+  //     if (response.isSuccess) {
+  //       favoriteJobIds.add(id);
+  //       requestToGetFavorite();
+  //       favoriteJobIds.refresh();
+  //       AppSnackBar.showSuccess("Favorite added successfully!");
+  //     } else if (response.statusCode == 400) {
+  //       AppSnackBar.showSuccess("Favorite already exists");
+  //       favoriteJobIds.add(id); // Optional: trust API
+  //     } else {
+  //       AppSnackBar.showError("Failed to add to favorite.");
+  //     }
+  //   } catch (e) {
+  //     AppSnackBar.showError(e.toString());
+  //   } finally {
+  //   //  isLoading.value = false;
+  //   }
+  // }
+
   var userProfile = GetUser().obs;
 
   // Get Profile =====================
