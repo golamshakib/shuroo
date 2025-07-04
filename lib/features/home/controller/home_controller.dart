@@ -16,6 +16,7 @@ import '../../profile/controller/profile_information_controller.dart';
 class HomeController extends GetxController {
   final commentTEController = TextEditingController().obs;
   var replyOf = ''.obs;
+  var commentIDToReply = ''.obs;
   var addComment = true.obs;
   var commentHint = "Add a comment...".obs;
   final FocusNode controllerNode = FocusNode();
@@ -197,6 +198,29 @@ class HomeController extends GetxController {
     }catch(e){
       AppSnackBar.showError(e.toString());
       loadComment.value = false;
+    }
+  }
+
+  void requestToSubmitComment() async{
+    final requestBody = {
+      "comment": commentTEController.value.text
+    };
+    await submitComment(requestBody);
+  }
+
+  Future<void> submitComment(Map<String, dynamic> requestBody) async{
+
+    try{
+      final response = await NetworkCaller().postRequest(AppUrls.createCommentById(commentIDToReply), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        AppSnackBar.showSuccess("Comment Posted");
+      }
+      else{
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      AppSnackBar.showError(e.toString());
     }
   }
 
