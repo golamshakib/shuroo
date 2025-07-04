@@ -17,7 +17,6 @@ class OtherUserProfileScreen extends StatelessWidget {
   final controller = Get.put(
     OtherUserProfileScreenControllar(),
   );
-  final userId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +45,6 @@ class OtherUserProfileScreen extends StatelessWidget {
               fontSize: 20,
               color: AppColors.primaryTextColor,
             ),
-            bottom: const TabBar(
-              indicatorColor: AppColors.custom_blue,
-              labelColor: AppColors.custom_blue,
-              unselectedLabelColor: Colors.grey,
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
-                Tab(text: 'Post'),
-                Tab(text: 'About'),
-              ],
-            ),
           ),
           body: Column(
             children: [
@@ -72,7 +61,7 @@ class OtherUserProfileScreen extends StatelessWidget {
                         width: 120.w,
                         fit: BoxFit.cover,
                         errorBuilder: (_, __, ___) => Image.asset(
-                          ImagePath.image_u,
+                          ImagePath.dummyProfilePicture,
                           height: 120.h,
                           width: 120.w,
                         ),
@@ -93,8 +82,7 @@ class OtherUserProfileScreen extends StatelessWidget {
                           child: CustomSubmitButton(
                             text: 'Message',
                             onTap: () {
-                              // Implement message screen navigation
-                              // Get.toNamed(AppRoute.messageScreen, arguments: user.id);
+                              // Message navigation
                             },
                           ),
                         ),
@@ -113,11 +101,21 @@ class OtherUserProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
+              const TabBar(
+                indicatorColor: AppColors.custom_blue,
+                labelColor: AppColors.custom_blue,
+                unselectedLabelColor: Colors.grey,
+                indicatorSize: TabBarIndicatorSize.tab,
+                tabs: [
+                  Tab(text: 'Post'),
+                  Tab(text: 'About'),
+                ],
+              ),
               Expanded(
                 child: TabBarView(
                   children: [
                     ListView.builder(
-                      itemCount: 6,
+                      itemCount: 1,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.only(top: 16, left: 16),

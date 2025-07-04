@@ -51,6 +51,9 @@ Widget educationContainer(
                                     if (controller.educationEdit.value)
                                       GestureDetector(
                                         onTap: () {
+                                          controller.deleteEducation(
+                                              row.id.toString());
+
                                           // controller.educationList.remove();
                                         },
                                         child: CustomText(

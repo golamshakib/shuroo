@@ -153,7 +153,7 @@ class MyAllPostScreenController extends GetxController {
           post.image = List<String>.from(updatedJson['image'] ?? []);
           post.updatedAt = DateTime.tryParse(updatedJson['updatedAt'] ?? "");
 
-          getUserPost.refresh(); // Update UI
+          getUserPost.refresh();
         }
 
         AppSnackBar.showSuccess("Post Edited Successfully");

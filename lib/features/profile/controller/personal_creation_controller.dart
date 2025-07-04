@@ -174,6 +174,36 @@ class PersonalCreationController extends GetxController {
     languageList.add(languageTEController.text);
   }
 
+// Upload User Data
+
+  // var favoriteJobIds = <String>{}.obs;
+
+  // Future<void> addFavorite(String id) async {
+  // //  isLoading.value = true;
+  //   try {
+  //     final response = await NetworkCaller().postRequest(
+  //       "${AppUrls.addFavorite}/$id",
+  //       body: {},
+  //       token: "Bearer ${AuthService.token}",
+  //     );
+  //     if (response.isSuccess) {
+  //       favoriteJobIds.add(id);
+  //       requestToGetFavorite();
+  //       favoriteJobIds.refresh();
+  //       AppSnackBar.showSuccess("Favorite added successfully!");
+  //     } else if (response.statusCode == 400) {
+  //       AppSnackBar.showSuccess("Favorite already exists");
+  //       favoriteJobIds.add(id); // Optional: trust API
+  //     } else {
+  //       AppSnackBar.showError("Failed to add to favorite.");
+  //     }
+  //   } catch (e) {
+  //     AppSnackBar.showError(e.toString());
+  //   } finally {
+  //   //  isLoading.value = false;
+  //   }
+  // }
+
   var userProfile = GetUser().obs;
 
   // Get Profile =====================
@@ -241,20 +271,20 @@ class PersonalCreationController extends GetxController {
   Future<void> deleteExperience(String id) async {
     try {
       final response = await NetworkCaller().deleteRequest(
-          AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
+          "${AppUrls.experienceDelete}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess) {
-        AppSnackBar.showError("Removed from favorite!");
+        AppSnackBar.showSuccess("Experience deleted successfully!");
 
         userProfile.value.data?.experience
             ?.removeWhere((post) => post.id == id);
         userProfile.refresh();
         reFresh();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
     } catch (e) {
-      AppSnackBar.showError(e.toString());
+      AppSnackBar.showError("Error: ${e.toString()}");
     }
   }
 
@@ -294,22 +324,19 @@ class PersonalCreationController extends GetxController {
     }
   }
 
-  Future<void> educationDelete(String id) async {
+  Future<void> deleteEducation(String id) async {
     try {
       final response = await NetworkCaller().deleteRequest(
-          AppUrls.educationDelete(id), "Bearer ${AuthService.token}");
+          "${AppUrls.educationDelete}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess) {
-        AppSnackBar.showError("Removed from favorite!");
-
-        userProfile.value.data?.education?.removeWhere((post) => post.id == id);
-        userProfile.refresh();
+        AppSnackBar.showSuccess("Education deleted successfully!");
         reFresh();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
     } catch (e) {
-      AppSnackBar.showError(e.toString());
+      AppSnackBar.showError("Error: ${e.toString()}");
     }
   }
 

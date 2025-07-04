@@ -24,11 +24,12 @@ Widget experienceContainer(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            ImagePath.dummyExperience,
+                            // ✅ Use the latest or correct image path (resolve conflict here)
+                            ImagePath.dummyExperience, // Keep `dummyExperience` as it's more likely to be correct
                             height: 28.h,
                             width: 28.w,
                             fit: BoxFit.fill,
-                            color: AppColors.primary,
+                            color: AppColors.primary, // ✅ Keep primary color from `main`
                           ),
                           SizedBox(
                             width: 12.w,
@@ -51,6 +52,7 @@ Widget experienceContainer(
                                     if (controller.experienceEdit.value)
                                       GestureDetector(
                                         onTap: () {
+                                          // ✅ Unified deleteExperience call
                                           controller.deleteExperience(
                                               row.id.toString());
                                         },
