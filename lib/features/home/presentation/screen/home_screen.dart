@@ -55,7 +55,8 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Obx(() {
           if (controller.postDataList.isEmpty) {
-            return const Center(child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
+            return const Center(
+                child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
           }
 
           return RefreshIndicator(
@@ -71,7 +72,6 @@ class HomeScreen extends StatelessWidget {
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
-                    
                     icon: firstImage ?? IconPath.icon_pro,
                     content: post.content!,
                     postId: post.id,
@@ -92,19 +92,21 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
 
-              navigateClick: (){
-                // print("Tapped role: $role");
-                //           // Replace 'userId' below with the actual user ID variable from your data model
-                //           final userId = post.id; // Example: using postId as userId, change as needed
-                //           if (role == 'USER') {
-                //             Get.toNamed(AppRoute.otherUserProfileScreen, arguments: {"userId": userId});
-                //           } else if (role == 'COMPANY') {
-                //             Get.toNamed(AppRoute.companyProfileScreen, arguments: {"userId": userId});
-                //           } else {
-                //             Get.snackbar(
-                //                 "Navigation Error", "Invalid role: $role");
-                //           }
-              },
+
+                    navigateClick: () {
+                      print("Tapped role: ${post.user?.role}=======================================");
+                      final userId = post.user?.id;
+                      final role = post.user?.role?.toString();
+                      if (role == 'USER') {
+                        Get.toNamed(AppRoute.otherUserProfileScreen,
+                            arguments: {"userId": userId});
+                      } else if (role == 'COMPANY') {
+                        Get.toNamed(AppRoute.companyProfileScreen,
+                            arguments: {"userId": userId});
+                      } 
+                    },
+
+
 
                   );
                 },
