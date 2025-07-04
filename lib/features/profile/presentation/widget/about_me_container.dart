@@ -22,7 +22,6 @@ Widget aboutMeContainer(PersonalCreationController controller) {
       final user = controllerOne.userProfile.value.data;
 
       return Row(
-        // <-- Missing return added here
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(

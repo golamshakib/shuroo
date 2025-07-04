@@ -23,7 +23,7 @@ class CompanyProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = controllerOne.othersUserProfile.value.data;
     return DefaultTabController(
-      length: 3, // required if not already handled in controller
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: CustomText(
@@ -51,8 +51,7 @@ class CompanyProfileScreen extends StatelessWidget {
                     fontSize: 16,
                     color: AppColors.secondaryTextColor,
                   ),
-                   SizedBox(height: 20),
-
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
