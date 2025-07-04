@@ -16,8 +16,7 @@ import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../data/get_post_comment_model.dart';
 
-Widget commentBody(HomeController controller, Nifat row, BuildContext context){
-
+Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt likeCount,BuildContext context){
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -35,7 +34,7 @@ Widget commentBody(HomeController controller, Nifat row, BuildContext context){
                   ClipOval(
                     child: row.user!.image == null ?
                     Image.asset(ImagePath.dummyProfilePicture, height: 32.h, width: 32.w, fit: BoxFit.fill,) :
-                    Image.network(row.user!.image, height: 32.h, width: 32.w, fit: BoxFit.fill,)
+                    Image.network(row.user!.image!, height: 32.h, width: 32.w, fit: BoxFit.fill,)
                   ),
                   SizedBox(width: 6.w,),
                   Column(
@@ -63,17 +62,32 @@ Widget commentBody(HomeController controller, Nifat row, BuildContext context){
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: (){
-                        Get.snackbar("Message", "Clickable");
+                      onTap: () async{
+                        likedByMe.value = !likedByMe.value;
+                        if (!likedByMe.value) {
+                          likeCount = likeCount - 1;
+                        } else {
+                          likeCount = likeCount + 1;
+                        }
+                        if (!await controller.changeLikeStatus(row.id!)) {
+                          likedByMe.value = !likedByMe.value;
+                          if (!likedByMe.value) {
+                            likeCount = likeCount - 1;
+                          } else {
+                            likeCount = likeCount + 1;
+                          }
+                        }
                       },
-                      child: CustomText(text: "Like", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                      child: Obx(() => CustomText(text: "Like", fontWeight: FontWeight.w400, fontSize: 12.sp, color: likedByMe.value ? AppColors.primary : AppColors.textSecondary,)),
                     ),
                     SizedBox(width: 8.w,),
                     GestureDetector(
                       onTap: (){
                         Get.toNamed(AppRoute.reactionScreen);
                       },
-                      child: CustomText(text: row.count!.like.toString(), fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
+                      child: Obx(() =>
+                          CustomText(text: likeCount.value.toString(), fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,)
+                      ),
                     ),
                     SizedBox(width: 12.w,),
                     CustomText(text: "|", fontWeight: FontWeight.w400, fontSize: 12.sp, color: AppColors.textSecondary,),
@@ -99,7 +113,7 @@ Widget commentBody(HomeController controller, Nifat row, BuildContext context){
       /// Replies
 
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 38.w),
+        padding: EdgeInsets.only(left: 38.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -259,10 +273,19 @@ Widget commentBody(HomeController controller, Nifat row, BuildContext context){
                           );
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(top: 27.h),
+                          padding: EdgeInsets.only(top: 4.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: Divider(
+                                  thickness: 0.5.h,
+                                  color: AppColors.textSecondary,
+                                  height: .5.h,
+                                ),
+                              ),
+                              SizedBox(height: 16.h,),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -273,7 +296,7 @@ Widget commentBody(HomeController controller, Nifat row, BuildContext context){
                                       ClipOval(
                                           child: row.user!.image == null ?
                                           Image.asset(ImagePath.dummyProfilePicture, height: 32.h, width: 32.w, fit: BoxFit.fill,) :
-                                          Image.network(reply.user!.image, height: 32.h, width: 32.w, fit: BoxFit.fill,)
+                                          Image.network(reply.user!.image!, height: 32.h, width: 32.w, fit: BoxFit.fill,)
                                       ),
                                       SizedBox(width: 6.w,),
                                       Column(
