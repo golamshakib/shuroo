@@ -1,10 +1,10 @@
 class AppUrls {
   AppUrls._();
 
-  //static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+  static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
 
   // VPS Server ===========================
-  static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+  //static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
 
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
@@ -18,6 +18,7 @@ class AppUrls {
   static String likeById(id) => '$_baseUrl/like/$id';
   static String createCommentById(id) => '$_baseUrl/comment/create/$id';
   static String getCommentById(postId) => '$_baseUrl/comment/post/$postId';
+  static String deleteCommentById(commentId) => '$_baseUrl/comment/delete/$commentId';
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';

@@ -28,6 +28,7 @@ Widget educationContainer(
                             height: 34.h,
                             width: 34.w,
                             fit: BoxFit.fill,
+                            color: AppColors.primary,
                           ),
                           SizedBox(
                             width: 12.w,
@@ -52,6 +53,8 @@ Widget educationContainer(
                                         onTap: () {
                                           controller.deleteEducation(
                                               row.id.toString());
+
+                                          // controller.educationList.remove();
                                         },
                                         child: CustomText(
                                           text: "Delete",

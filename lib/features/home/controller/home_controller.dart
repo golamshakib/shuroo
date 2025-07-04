@@ -3,6 +3,7 @@ import 'dart:developer' show log;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
@@ -201,28 +202,55 @@ class HomeController extends GetxController {
     }
   }
 
-  void requestToSubmitComment() async{
+  void requestToSubmitComment(String postId) async{
     final requestBody = {
       "comment": commentTEController.value.text
     };
-    await submitComment(requestBody);
+    await submitComment(requestBody, postId);
   }
 
-  Future<void> submitComment(Map<String, dynamic> requestBody) async{
+  Future<void> submitComment(Map<String, dynamic> requestBody, String postId) async{
 
     try{
-      final response = await NetworkCaller().postRequest(AppUrls.createCommentById(commentIDToReply), body: requestBody,token: "Bearer ${AuthService.token}");
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.createCommentById(postId), body: requestBody,token: "Bearer ${AuthService.token}");
 
       if(response.isSuccess){
+        Get.back();
+        requestForPostComment(postId);
         AppSnackBar.showSuccess("Comment Posted");
       }
       else{
+        Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
     }catch(e){
+      Get.back();
       AppSnackBar.showError(e.toString());
     }
   }
 
+  Future<void> deletedComment(String postId, String commentId) async{
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
 
 }
+///
