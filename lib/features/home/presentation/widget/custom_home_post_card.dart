@@ -16,7 +16,7 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
 
 class PostCard extends GetView<HomeController> {
-  final String organization;
+  final String? organization;
   final String? postId;
   // final String? timeAgo;
   final String content;
@@ -32,7 +32,7 @@ class PostCard extends GetView<HomeController> {
 
   const PostCard(
       {super.key,
-      required this.organization,
+      this.organization,
       //  this.timeAgo,
       required this.content,
       this.postId,
@@ -106,7 +106,7 @@ class PostCard extends GetView<HomeController> {
                           //       "Navigation Error", "Invalid role: $role");
                           // }
                         },
-                        child: Text(organization,
+                        child: Text(organization ?? '',
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Cabinet Grotesk")))

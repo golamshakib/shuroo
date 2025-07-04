@@ -45,12 +45,12 @@ class AppUrls {
 
   //experience ---------
   static const String createExperience = '$_baseUrl/experience/create';
-  static String experienceDelete(id) => '$_baseUrl/experience/delete/id';
+  static String experienceDelete = '$_baseUrl/experience/delete';
   static const String experienceUpdate = '$_baseUrl/experience/update/';
   
   //Education ---------
   static const String createEducation = '$_baseUrl/education/create';
-  static  String educationDelete(id) => '$_baseUrl/education/delete/id';
+  static  String educationDelete = '$_baseUrl/education/delete';
   static const String educationUpdate = '$_baseUrl//education/update/';
 
   

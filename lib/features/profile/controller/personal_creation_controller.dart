@@ -234,16 +234,16 @@ class PersonalCreationController extends GetxController {
   Future<void> deleteExperience(String id) async {
     try {
       final response = await NetworkCaller().deleteRequest(
-          AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
+          "${AppUrls.experienceDelete}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess) {
-        AppSnackBar.showError("Removed from favorite!");
+        AppSnackBar.showSuccess("Experience deleted successfully!");
         reFresh();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
     } catch (e) {
-      AppSnackBar.showError(e.toString());
+      AppSnackBar.showError("Error: ${e.toString()}");
     }
   }
 
@@ -280,6 +280,22 @@ class PersonalCreationController extends GetxController {
     } catch (e) {
       print('Somethint went wrong $e');
       AppSnackBar.showError('Something Went Wrong $e');
+    }
+  }
+
+  Future<void> deleteEducation(String id) async {
+    try {
+      final response = await NetworkCaller().deleteRequest(
+          "${AppUrls.educationDelete}/$id", "Bearer ${AuthService.token}");
+
+      if (response.isSuccess) {
+        AppSnackBar.showSuccess("Education deleted successfully!");
+        reFresh();
+      } else {
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
+      }
+    } catch (e) {
+      AppSnackBar.showError("Error: ${e.toString()}");
     }
   }
 
