@@ -88,8 +88,20 @@ class HomeScreen extends StatelessWidget {
                         : "0",
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
-               //     role: post.user!.role ?? "USER",
 
+              navigateClick: (){
+                // print("Tapped role: $role");
+                //           // Replace 'userId' below with the actual user ID variable from your data model
+                //           final userId = post.id; // Example: using postId as userId, change as needed
+                //           if (role == 'USER') {
+                //             Get.toNamed(AppRoute.otherUserProfileScreen, arguments: {"userId": userId});
+                //           } else if (role == 'COMPANY') {
+                //             Get.toNamed(AppRoute.companyProfileScreen, arguments: {"userId": userId});
+                //           } else {
+                //             Get.snackbar(
+                //                 "Navigation Error", "Invalid role: $role");
+                //           }
+              },
 
                   );
                 },
