@@ -230,5 +230,26 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> deletedComment(String postId, String commentId) async{
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
 
 }
