@@ -131,39 +131,122 @@ class SearchResultController extends GetxController {
   }
 
   //Added by Shahriar type handel
-  List<Datum> get filteredJobs {
-    if (getAllJob.value.data == null) return [];
+  // List<Datum> get filteredJobs {
+  //   if (getAllJob.value.data == null) return [];
+  //
+  //   if (selectedFilter.value == 'ALL JOB') {
+  //     return getAllJob.value.data!;
+  //   }
+  //
+  //   return getAllJob.value.data!
+  //       .where((job) => job.employmentType?.toUpperCase() == selectedFilter.value)
+  //       .toList();
+  // }
 
-    if (selectedFilter.value == 'ALL JOB') {
-      return getAllJob.value.data!;
+
+  // only search work
+  // List<dynamic> get filteredJobs {
+  //   if (isSearching.value) {
+  //     return getSearchJobModel.value.data ?? [];
+  //   }
+  //
+  //   if (getAllJob.value.data == null) return [];
+  //
+  //   if (selectedFilter.value == 'ALL JOB' || selectedFilter.value.isEmpty) {
+  //     return getAllJob.value.data!;
+  //   }
+  //
+  //   return getAllJob.value.data!
+  //       .where((job) => job.employmentType?.toUpperCase() == selectedFilter.value)
+  //       .toList();
+  // }
+
+  List<dynamic> get filteredJobs {
+    if (isSearching.value) {
+      return getSearchJobModel.value.data ?? [];
     }
 
-    return getAllJob.value.data!
-        .where((job) => job.employmentType?.toUpperCase() == selectedFilter.value)
-        .toList();
+    final allJobs = getAllJob.value.data ?? [];
+
+    if (selectedFilter.value == 'ALL JOB' || selectedFilter.value.isEmpty) {
+      return allJobs;
+    }
+
+    return allJobs.where((job) =>
+    job.employmentType?.toUpperCase() == selectedFilter.value).toList();
   }
 
   // Added by Shahriar
-  Future<void> searchJobs(String searchValue) async{
+  // Future<void> searchJobs(String searchValue) async{
+  //   isLoading.value = true;
+  //   try{
+  //     final response = await NetworkCaller().getRequest(
+  //       AppUrls.getSearchJobs(searchValue),
+  //       token: "Bearer ${AuthService.token}"
+  //     );
+  //     if(response.isSuccess){
+  //       final data = response.responseData;
+  //       log("===========================================");
+  //       log("I am hitting it!!");
+  //       getSearchJobModel.value = GetSearchedJobsModel.fromJson(data);
+  //     }else{
+  //       AppSnackBar.showError('Something Went Wrong!');
+  //     }
+  //   }catch(e){
+  //     AppSnackBar.showError(e.toString());
+  //   }finally{
+  //     isLoading.value = false;
+  //   }
+  // }
+
+
+  final isSearching = false.obs; // <-- Add this
+// only search work
+//   Future<void> searchJobs(String searchValue) async {
+//     isLoading.value = true;
+//     try {
+//       final response = await NetworkCaller().getRequest(
+//           AppUrls.getSearchJobs(searchValue),
+//           token: "Bearer ${AuthService.token}"
+//       );
+//
+//       if (response.isSuccess) {
+//         final data = response.responseData;
+//         getSearchJobModel.value = GetSearchedJobsModel.fromJson(data);
+//         isSearching.value = true; // Now we're in "search mode"
+//         selectedFilter.value = ''; // Clear filters
+//       } else {
+//         AppSnackBar.showError('Something Went Wrong!');
+//       }
+//     } catch (e) {
+//       AppSnackBar.showError(e.toString());
+//     } finally {
+//       isLoading.value = false;
+//     }
+//   }
+
+
+  Future<void> searchJobs(String searchValue) async {
     isLoading.value = true;
-    try{
+    try {
       final response = await NetworkCaller().getRequest(
-        AppUrls.getSearchJobs(searchValue),
-        token: "Bearer ${AuthService.token}"
+          AppUrls.getSearchJobs(searchValue),
+          token: "Bearer ${AuthService.token}"
       );
-      if(response.isSuccess){
+
+      if (response.isSuccess) {
         final data = response.responseData;
-        log("===========================================");
-        log("I am hitting it!!");
         getSearchJobModel.value = GetSearchedJobsModel.fromJson(data);
-      }else{
+        isSearching.value = true;
+      } else {
         AppSnackBar.showError('Something Went Wrong!');
       }
-    }catch(e){
+    } catch (e) {
       AppSnackBar.showError(e.toString());
-    }finally{
+    } finally {
       isLoading.value = false;
     }
   }
+
 
 }

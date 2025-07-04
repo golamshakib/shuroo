@@ -1,10 +1,10 @@
 class AppUrls {
   AppUrls._();
 
-  static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+  //static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
 
   // VPS Server ===========================
-  //static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+  static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
 
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
@@ -60,7 +60,8 @@ class AppUrls {
   static const String getProfileViewJob = '$_baseUrl/application/getProfileViewedJob';
   static const String getShortlistedJob = '$_baseUrl/application/getShortlistedJob';
   static const String getInterViewJob = '$_baseUrl/application/getInterviewJob';
-  static String getSearchJobs(searchValue) => '$_baseUrl/job/all?name=$searchValue';
+  static const String getAllNotification = '$_baseUrl/notification/all';
+  static String getSearchJobs(searchValue) => '$_baseUrl/job/all?search=$searchValue';
 
   static const String addFavorite = '$_baseUrl/favorite/add';
   static const String removeFavorite = '$_baseUrl/favorite/delete';
