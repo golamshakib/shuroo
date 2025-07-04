@@ -12,19 +12,15 @@ import '../../../home/presentation/widget/custom_home_post_card.dart';
 import '../widget/other_user_resume_widget.dart';
 
 class OtherUserProfileScreen extends StatelessWidget {
-   OtherUserProfileScreen({super.key});
+  OtherUserProfileScreen({super.key});
 
-  late final OtherUserProfileScreenControllar controller;
+  final controller = Get.put(
+    OtherUserProfileScreenControllar(),
+  );
+  final userId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    // Get userId dynamically from arguments
-    final args = Get.arguments as Map<String, dynamic>?;
-    final userId = args?['userId'] ?? '';
-
-    // Initialize controller only once with dynamic id
-    controller = Get.put(OtherUserProfileScreenControllar());
-
     return Obx(() {
       final user = controller.othersUserProfile.value.data;
 
@@ -50,6 +46,16 @@ class OtherUserProfileScreen extends StatelessWidget {
               fontSize: 20,
               color: AppColors.primaryTextColor,
             ),
+            bottom: const TabBar(
+              indicatorColor: AppColors.custom_blue,
+              labelColor: AppColors.custom_blue,
+              unselectedLabelColor: Colors.grey,
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: 'Post'),
+                Tab(text: 'About'),
+              ],
+            ),
           ),
           body: Column(
             children: [
@@ -58,10 +64,19 @@ class OtherUserProfileScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 39, left: 16, right: 16),
                 child: Column(
                   children: [
-                    Image.asset(
-                      ImagePath.image_u,
-                      height: 120.h,
-                      width: 120.w,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(60),
+                      child: Image.network(
+                        user.image ?? '',
+                        height: 120.h,
+                        width: 120.w,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Image.asset(
+                          ImagePath.image_u,
+                          height: 120.h,
+                          width: 120.w,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 16),
                     CustomText(text: user.name ?? "User Name", fontSize: 20),
@@ -78,7 +93,7 @@ class OtherUserProfileScreen extends StatelessWidget {
                           child: CustomSubmitButton(
                             text: 'Message',
                             onTap: () {
-                              // TODO: Implement message navigation, e.g.
+                              // Implement message screen navigation
                               // Get.toNamed(AppRoute.messageScreen, arguments: user.id);
                             },
                           ),
@@ -86,31 +101,20 @@ class OtherUserProfileScreen extends StatelessWidget {
                         const SizedBox(width: 18),
                         Expanded(
                           flex: 1,
-                          child:
-                              Image.asset(IconPath.share1, height: 40, width: 40),
+                          child: Image.asset(
+                            IconPath.share1,
+                            height: 40,
+                            width: 40,
+                          ),
                         ),
                       ],
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 3),
-                      child: TabBar(
-                        controller: controller.tabController,
-                        indicatorColor: AppColors.custom_blue,
-                        labelColor: AppColors.custom_blue,
-                        unselectedLabelColor: Colors.grey,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        tabs: const [
-                          Tab(text: 'Post'),
-                          Tab(text: 'About'),
-                        ],
-                      ),
-                    )
                   ],
                 ),
               ),
+              const SizedBox(height: 10),
               Expanded(
                 child: TabBarView(
-                  controller: controller.tabController,
                   children: [
                     ListView.builder(
                       itemCount: 6,

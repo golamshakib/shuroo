@@ -14,6 +14,8 @@ class OtherUserProfileScreenControllar extends GetxController
   var userId = "".obs;
   var othersUserProfile = OtherUserInformation().obs;
 
+  OtherUserProfileScreenControllar();
+
   @override
   void onInit() {
     super.onInit();

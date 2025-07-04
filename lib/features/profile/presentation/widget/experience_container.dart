@@ -18,13 +18,13 @@ Widget experienceContainer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ...controller.experienceList.map((row) => Padding(
+            ...controller.userProfile.value.data!.experience!.map((row) => Padding(
                   padding: EdgeInsets.only(bottom: 32.h),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        IconPath.educationIcon,
+                        IconPath.dummyEducation,
                         height: 34.h,
                         width: 34.w,
                         fit: BoxFit.fill,
@@ -42,7 +42,7 @@ Widget experienceContainer(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: row['position'],
+                                  text: row.company ?? '',
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -62,12 +62,12 @@ Widget experienceContainer(
                             ),
                           ),
                           CustomText(
-                            text: row['companyName'],
+                            text: row.title ?? '',
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                           ),
                           CustomText(
-                            text: "${row['start']} - ${row['end']}",
+                            text: "${row.startDate.toString()} - ${row.endDate.toString()}",
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: AppColors.textSecondary,
@@ -78,7 +78,7 @@ Widget experienceContainer(
                           SizedBox(
                             width: 265.w,
                             child: CustomText(
-                              text: row['description'],
+                              text: row.description ?? '',
                               fontWeight: FontWeight.w400,
                               fontSize: 12.sp,
                             ),

@@ -191,19 +191,13 @@ class PostCard extends GetView<HomeController> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      controller.requestForPostComment(postId!);
                       showModalBottomSheet(
                           backgroundColor: Colors.white,
                           context: context,
                           builder: (context) {
-
                             controller.requestForPostComment(postId!);
                             return Obx(() => controller.loadComment.value
                                 ? Center(
-
-                            return Obx(() =>
-                              controller.loadComment.value ?
-                                  Center(
                                     child: SpinKitFadingCircle(
                                       color: AppColors.primary,
                                       size: 50.h,
@@ -538,7 +532,7 @@ class PostCard extends GetView<HomeController> {
                 ],
               ),
 
-              /// Nifat's part end here
+              /// Nifat's END OF part
               InkWell(
                 onTap: () {
                   showRepostPopup(
