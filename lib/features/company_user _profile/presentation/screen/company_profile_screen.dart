@@ -51,7 +51,8 @@ class CompanyProfileScreen extends StatelessWidget {
                     fontSize: 16,
                     color: AppColors.secondaryTextColor,
                   ),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20),
+
                   Row(
                     children: [
                       Expanded(
