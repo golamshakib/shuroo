@@ -76,6 +76,7 @@ class AppRoute {
   static String personalCreationScreen = "/personalCreationScreen";
   static String chatScreen = "/chatScreen";
   static String dummy2Screen = "/dummy2Screen";
+  static String chatInboxScreen = "/chatInboxScreen";
 
   static List<GetPage> routes = [
 
