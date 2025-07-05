@@ -5,6 +5,8 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 
+import '../../../../core/utils/constants/image_path.dart';
+
 class ReactionScreen extends StatelessWidget {
   const ReactionScreen({super.key});
 
@@ -50,7 +52,7 @@ class ReactionScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipOval(
-                        child: Image.asset(IconPath.icon_pro, fit: BoxFit.fill, height: 40.h, width: 40.w,),
+                        child: Image.asset(ImagePath.dummyProfilePicture, fit: BoxFit.fill, height: 40.h, width: 40.w,),
                       ),
                       SizedBox(width: 8.w,),
                       Column(
