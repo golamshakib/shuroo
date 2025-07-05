@@ -82,7 +82,7 @@ class FavouriteController extends GetxController{
         AppSnackBar.showSuccess("Favorite added successfully!");
       } else if (response.statusCode == 400) {
         AppSnackBar.showSuccess("Favorite already exists");
-        favoriteJobIds.add(id); // Optional: trust API
+        favoriteJobIds.add(id);
       } else {
         AppSnackBar.showError("Failed to add to favorite.");
       }
@@ -120,7 +120,10 @@ class FavouriteController extends GetxController{
 
         favoriteInformation = favoriteInformation;
         AppSnackBar.showSuccess("Favorite removed successfully!");
-      } else {
+      }else if(response.statusCode == 500){
+
+      }
+      else {
         AppSnackBar.showError("Failed to remove favorite.");
       }
     } catch (e) {
