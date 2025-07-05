@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -276,15 +278,16 @@ class PostCard extends GetView<HomeController> {
                                                                       controller.requestToSubmitComment(postId!);
                                                                       FocusScope.of(context).unfocus();
                                                                     } else {
-                                                                      controller
-                                                                          .addReplyFunction(
-                                                                          controller
-                                                                              .commentTEController
-                                                                              .value
-                                                                              .text);
-                                                                      FocusScope.of(
-                                                                          context)
-                                                                          .unfocus();
+                                                                      // controller
+                                                                      //     .addReplyFunction(
+                                                                      //     controller
+                                                                      //         .commentTEController
+                                                                      //         .value
+                                                                      //         .text);
+                                                                      log("==========================================");
+                                                                      log(controller.commentIDToReply.value);
+                                                                      controller.requestToSubmitReply(controller.commentIDToReply.value, postId!);
+                                                                      FocusScope.of(context).unfocus();
                                                                     }
                                                                   },
                                                                   child: Image.asset(
@@ -373,20 +376,24 @@ class PostCard extends GetView<HomeController> {
                                                               horizontal: 4.w),
                                                           child: GestureDetector(
                                                             onTap: () {
+
+                                                              log("Value of add comment: ${controller.addComment.value}");
                                                               if (controller.addComment.value) {
                                                                 controller.requestToSubmitComment(postId!);
                                                                 FocusScope.of(context).unfocus();
                                                               } else {
-                                                                controller
-                                                                    .addReplyFunction(
-                                                                    controller
-                                                                        .commentTEController
-                                                                        .value
-                                                                        .text);
-                                                                FocusScope.of(
-                                                                    context)
-                                                                    .unfocus();
+                                                                log("==========================================");
+                                                                log(controller.commentIDToReply.value);
+                                                                controller.requestToSubmitReply(controller.commentIDToReply.value, postId!);
+                                                                FocusScope.of(context).unfocus();
                                                               }
+                                                              // if (controller.addComment.value) {
+                                                              //   log("I am here to comment");
+                                                              //   FocusScope.of(context).unfocus();
+                                                              // } else {
+                                                              //   log("I am here to reply");
+                                                              //   FocusScope.of(context).unfocus();
+                                                              // }
                                                             },
                                                             child: Image.asset(
                                                               IconPath.sendButton,
