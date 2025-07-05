@@ -286,10 +286,10 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> deletedReply(String postId, String commentId) async{
+  Future<void> deletedReply(String postId, String replyId) async{
     try{
       showProgressIndicator();
-      final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteReplyById(replyId), "Bearer ${AuthService.token}");
 
       if(response.isSuccess){
         Get.back();
