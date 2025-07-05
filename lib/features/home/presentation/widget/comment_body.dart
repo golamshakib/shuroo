@@ -48,7 +48,7 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
                                         Flexible(
                                           flex: 1,
                                           child: ClipOval(
-                                            child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                                            child: Image.asset(ImagePath.dummyProfilePicture, height: 40.h, width: 40.w,),
                                           ),
                                         ),
                                         SizedBox(width: 7.w,),
@@ -309,7 +309,7 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
                                                           Flexible(
                                                             flex: 1,
                                                             child: ClipOval(
-                                                              child: Image.asset(IconPath.icon_pro, height: 40.h, width: 40.w,),
+                                                              child: Image.asset(ImagePath.dummyProfilePicture, height: 40.h, width: 40.w,),
                                                             ),
                                                           ),
                                                           SizedBox(width: 7.w,),
