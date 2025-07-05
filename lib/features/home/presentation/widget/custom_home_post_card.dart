@@ -379,13 +379,13 @@ class PostCard extends GetView<HomeController> {
 
                                                               log("Value of add comment: ${controller.addComment.value}");
                                                               if (controller.addComment.value) {
-                                                                controller.requestToSubmitComment(postId!);
                                                                 FocusScope.of(context).unfocus();
+                                                                controller.requestToSubmitComment(postId!);
                                                               } else {
+                                                                FocusScope.of(context).unfocus();
                                                                 log("==========================================");
                                                                 log(controller.commentIDToReply.value);
                                                                 controller.requestToSubmitReply(controller.commentIDToReply.value, postId!);
-                                                                FocusScope.of(context).unfocus();
                                                               }
                                                               // if (controller.addComment.value) {
                                                               //   log("I am here to comment");
