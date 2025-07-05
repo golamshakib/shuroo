@@ -8,8 +8,11 @@ import 'package:shuroo/features/favorites/data/model/get_favorite_model.dart';
 
 class FavouriteController extends GetxController{
 
+  // Added by Shahriar
 
   final isLoading = false.obs;
+  var favoriteJobIds = <String>{}.obs;
+  var favoriteInformation = GetFavoriteModel();
 
   @override
   void onInit() async{
@@ -19,60 +22,51 @@ class FavouriteController extends GetxController{
     isLoading.value = false;
   }
 
-  Future<void> favoriteRefresh() async {
-    await requestToGetFavorite();
-  }
-
-  var favoriteInformation = GetFavoriteModel();
-
-  Future<void> requestToGetFavorite() async{
-    try{
-      final response = await NetworkCaller().getRequest(AppUrls.getFavorite, token: "Bearer ${AuthService.token}");
-
-      if(response.isSuccess){
-        final data = response.responseData;
-        favoriteInformation = GetFavoriteModel.fromJson(data);
-      }else if(response.statusCode == 404){
-
-      }
-      else{
-        AppSnackBar.showError(response.statusCode.toString());
-      }
-    }catch(e){
-      AppSnackBar.showError(e.toString());
-    }
-  }
-
   void reFresh() async{
     isLoading.value = true;
     requestToGetFavorite();
     isLoading.value = false;
   }
 
-  // Future<void> requestToDeleteFavorite(String id) async{
-  //
-  //   try{
-  //     final response = await NetworkCaller().deleteRequest(AppUrls.removeFavoriteById(id), "Bearer ${AuthService.token}");
-  //
-  //     if(response.isSuccess){
-  //       AppSnackBar.showError("Removed from favorite!");
-  //       reFresh();
-  //     }
-  //     else{
-  //       AppSnackBar.showError(response.statusCode.toString());
-  //     }
-  //   }catch(e){
-  //     AppSnackBar.showError(e.toString());
-  //   }
-  // }
+  Future<void> favoriteRefresh() async {
+    await requestToGetFavorite();
+  }
 
 
+ // Added by Shahriar
+  Future<void> requestToGetFavorite() async {
+    try {
+      final response = await NetworkCaller().getRequest(
+        AppUrls.getFavorite,
+        token: "Bearer ${AuthService.token}",
+      );
+
+      if (response.isSuccess) {
+        final data = response.responseData;
+        favoriteInformation = GetFavoriteModel.fromJson(data);
+
+        final ids = <String>{};
+        for (var item in favoriteInformation.data ?? []) {
+          if (item.job?.id != null) {
+            ids.add(item.job!.id.toString());
+          }
+        }
+        favoriteJobIds.value = ids;
+        favoriteJobIds.refresh();
+      } else if (response.statusCode == 404) {
+        favoriteJobIds.clear();
+        favoriteJobIds.refresh();
+      } else {
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    } catch (e) {
+      AppSnackBar.showError(e.toString());
+    }
+  }
 
 
 
   // Added by Shahriar
-  var favoriteJobIds = <String>{}.obs;
-
   Future<void> addFavorite(String id) async {
     isLoading.value = true;
     try {
@@ -99,6 +93,7 @@ class FavouriteController extends GetxController{
     }
   }
 
+  // Added by Shahriar
   Future<void> removeFavorite(String id) async {
     isLoading.value = true;
     try {
@@ -106,16 +101,26 @@ class FavouriteController extends GetxController{
         "${AppUrls.removeFavorite}/$id",
         "Bearer ${AuthService.token}",
       );
-      print('Favorite Remove id : ${id}');
-      if (response.isSuccess) {
-        favoriteJobIds.remove(id);
-        requestToGetFavorite();
-        favoriteJobIds.refresh();
-        AppSnackBar.showSuccess("Favorite removed successfully!");
-      }else if(response.statusCode == 500) {
 
-      }
-      else {
+      if (response.isSuccess) {
+        String? jobIdToRemove;
+        final dataList = favoriteInformation.data;
+
+        if (dataList != null) {
+          final targetItem = dataList.firstWhereOrNull((item) => item.id.toString() == id);
+          jobIdToRemove = targetItem?.job?.id?.toString();
+
+          dataList.removeWhere((item) => item.id.toString() == id);
+        }
+
+        if (jobIdToRemove != null) {
+          favoriteJobIds.remove(jobIdToRemove);
+          favoriteJobIds.refresh();
+        }
+
+        favoriteInformation = favoriteInformation;
+        AppSnackBar.showSuccess("Favorite removed successfully!");
+      } else {
         AppSnackBar.showError("Failed to remove favorite.");
       }
     } catch (e) {
@@ -124,6 +129,7 @@ class FavouriteController extends GetxController{
       isLoading.value = false;
     }
   }
+
 
   bool isJobFavorite(String id) => favoriteJobIds.contains(id);
 }
