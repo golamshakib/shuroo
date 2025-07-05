@@ -38,7 +38,7 @@ class RepostWithThroughtScreen extends StatelessWidget {
                   ),
                 ),
                 Image.asset(
-                  IconPath.icon_pro,
+                  ImagePath.dummyProfilePicture,
                   height: 40,
                   width: 40,
                 ),

@@ -34,6 +34,7 @@ class FavouriteController extends GetxController{
 
 
 
+ // Added by Shahriar
   Future<void> requestToGetFavorite() async {
     try {
       final response = await NetworkCaller().getRequest(
@@ -65,8 +66,7 @@ class FavouriteController extends GetxController{
   }
 
 
-
-
+  // Added by Shahriar
   Future<void> addFavorite(String id) async {
     isLoading.value = true;
     try {
@@ -93,6 +93,7 @@ class FavouriteController extends GetxController{
     }
   }
 
+  // Added by Shahriar
   Future<void> removeFavorite(String id) async {
     isLoading.value = true;
     try {
