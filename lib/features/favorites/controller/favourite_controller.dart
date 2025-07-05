@@ -33,6 +33,7 @@ class FavouriteController extends GetxController{
   }
 
 
+
  // Added by Shahriar
   Future<void> requestToGetFavorite() async {
     try {
@@ -63,7 +64,6 @@ class FavouriteController extends GetxController{
       AppSnackBar.showError(e.toString());
     }
   }
-
 
 
   // Added by Shahriar
