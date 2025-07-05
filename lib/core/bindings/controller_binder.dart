@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
+import 'package:shuroo/features/dummy/controller/dummy2_controller.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/jobs/controller/favorite_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
@@ -46,6 +47,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
     Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
     Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
+    Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
 
 
 

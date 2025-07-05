@@ -55,6 +55,14 @@ class CompanyProfileScreen extends StatelessWidget {
                       user.image ?? ImagePath.dummyProfilePicture,
                       height: 120.h,
                       width: 120.w,
+                      errorBuilder: (context, object, stacktrace){
+                        return Image.asset(
+                          ImagePath.dummyProfilePicture,
+                          height: 120.h,
+                          width: 120.w,
+
+                        );
+                      },
                     ),
                     const SizedBox(height: 16),
                     CustomText(

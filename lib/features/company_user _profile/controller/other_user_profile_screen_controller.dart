@@ -17,7 +17,7 @@ class OtherUserProfileScreenControllar extends GetxController
   OtherUserProfileScreenControllar();
 
  @override
-void onInit() {
+void onInit() async{
   super.onInit();
   tabController = TabController(length: 2, vsync: this);
 
@@ -33,7 +33,7 @@ void onInit() {
       return;
     }
     print("Received userId: ${userId.value}");
-    getOthersProfile(userId.value);
+    await getOthersProfile(userId.value);
   } else {
     Future.microtask(() {
       AppSnackBar.showError("No user ID provided");

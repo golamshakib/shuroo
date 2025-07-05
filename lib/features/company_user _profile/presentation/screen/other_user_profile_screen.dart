@@ -127,7 +127,7 @@ class OtherUserProfileScreen extends StatelessWidget {
                             likeCount: '2'.obs,
                             commentCount: '2',
                             content: AppText.the_annualCareer,
-                            imageAsset: ImagePath.img_video,
+                            imageAsset: "",
                           ),
                         );
                       },
