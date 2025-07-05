@@ -164,7 +164,7 @@ class JobScreen extends StatelessWidget {
                                   }),
                                 ),
 
-                                // Tags (optional, from your model)
+
                                 if (job.employmentType != null)
                                   Padding(
                                     padding: EdgeInsets.only(left: 16),
