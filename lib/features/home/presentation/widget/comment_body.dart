@@ -355,9 +355,9 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
                                                   actionsAlignment: MainAxisAlignment.center,
                                                   actionsPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                                                   actions: [
-                                                    Center(child: CustomText(text: "Delete Comment?", fontWeight: FontWeight.w600, fontSize: 24.sp, textAlign: TextAlign.center,)),
+                                                    Center(child: CustomText(text: "Delete Reply?", fontWeight: FontWeight.w600, fontSize: 24.sp, textAlign: TextAlign.center,)),
                                                     SizedBox(height: 8.h,),
-                                                    CustomText(text: "Once deleted, your comment will be permanently removed.", fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary, textAlign: TextAlign.center,),
+                                                    CustomText(text: "Once deleted, your reply will be permanently removed.", fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColors.textSecondary, textAlign: TextAlign.center,),
                                                     SizedBox(height: 8.h,),
                                                     Row(
                                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -386,11 +386,9 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
                                                               backgroundColor: const Color(0xFF01A8F9),
                                                               side: BorderSide.none,
                                                             ),
-                                                            onPressed: (){
-                                                              Get.back();
-                                                              Get.back();
-                                                              Get.snackbar("Deleted", "Reply Deleted Successfully");
-                                                              //row['replies'].remove(subRow);
+                                                            onPressed: () async{
+                                                              log("${row.postId!} & ${reply.id}");
+                                                              await controller.deletedReply(row.postId!, reply.id!);
                                                             },
                                                             child: SizedBox(
                                                               width: double.infinity,

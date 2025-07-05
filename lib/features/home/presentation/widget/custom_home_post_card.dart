@@ -376,7 +376,6 @@ class PostCard extends GetView<HomeController> {
                                                         horizontal: 4.w),
                                                     child: GestureDetector(
                                                       onTap: () {
-
                                                               log("Value of add comment: ${controller.addComment.value}");
                                                               if (controller.addComment.value) {
                                                                 FocusScope.of(context).unfocus();
