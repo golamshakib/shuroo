@@ -92,22 +92,24 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
 
-
                     navigateClick: () {
-                      print("Tapped role: ${post.user?.role}=======================================");
-                      final userId = post.user?.id;
+                      print("Tapped role: ${post.user?.role} =======================");
+                      final userId = post.user?.id?.toString();
                       final role = post.user?.role?.toString();
+
+                      if (userId == null) {
+                        print("User ID is null");
+                        return;
+                      }
+
                       if (role == 'USER') {
                         Get.toNamed(AppRoute.otherUserProfileScreen,
-                            arguments: {"userId": userId});
+                            arguments: {"userId": userId, "role": role});
                       } else if (role == 'COMPANY') {
                         Get.toNamed(AppRoute.companyProfileScreen,
-                            arguments: {"userId": userId});
-                      } 
+                            arguments: {"userId": userId, "role": role});
+                      }
                     },
-
-
-
                   );
                 },
               ));
