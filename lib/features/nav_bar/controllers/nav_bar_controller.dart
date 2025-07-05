@@ -46,6 +46,8 @@ import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/messages/presentation/screen/messages_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/make_post_screen.dart';
 
+import '../../message/presentation/screens/inbox_screens.dart';
+
 
 class NavBarController extends GetxController {
   int selectedIndex = 0;
@@ -55,7 +57,7 @@ class NavBarController extends GetxController {
     HomeScreen(),
     FavouriteScreen(),
     MakePostScreen(),
-    MessagesScreen(),
+    InboxScreen(),
     JobScreen(),
   ];
   void changeIndex(int index) {
