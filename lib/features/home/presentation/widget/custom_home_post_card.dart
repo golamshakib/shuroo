@@ -377,39 +377,39 @@ class PostCard extends GetView<HomeController> {
                                                     child: GestureDetector(
                                                       onTap: () {
 
-                                                        log("Value of add comment: ${controller.addComment.value}");
-                                                        if (controller.addComment.value) {
-                                                          FocusScope.of(context).unfocus();
-                                                          controller.requestToSubmitComment(postId!);
-                                                        } else {
-                                                          FocusScope.of(context).unfocus();
-                                                          log("==========================================");
-                                                          log(controller.commentIDToReply.value);
-                                                          controller.requestToSubmitReply(controller.commentIDToReply.value, postId!);
-                                                        }
-                                                        // if (controller.addComment.value) {
-                                                        //   log("I am here to comment");
-                                                        //   FocusScope.of(context).unfocus();
-                                                        // } else {
-                                                        //   log("I am here to reply");
-                                                        //   FocusScope.of(context).unfocus();
-                                                        // }
-                                                      },
-                                                      child: Image.asset(
-                                                        IconPath.sendButton,
-                                                        height: 24.h,
-                                                        width: 24.w,
-                                                      ),
-                                                    ))
-                                                    : SizedBox())),
+                                                              log("Value of add comment: ${controller.addComment.value}");
+                                                              if (controller.addComment.value) {
+                                                                FocusScope.of(context).unfocus();
+                                                                controller.requestToSubmitComment(postId!);
+                                                              } else {
+                                                                FocusScope.of(context).unfocus();
+                                                                log("==========================================");
+                                                                log(controller.commentIDToReply.value);
+                                                                controller.requestToSubmitReply(controller.commentIDToReply.value, postId!);
+                                                              }
+                                                              // if (controller.addComment.value) {
+                                                              //   log("I am here to comment");
+                                                              //   FocusScope.of(context).unfocus();
+                                                              // } else {
+                                                              //   log("I am here to reply");
+                                                              //   FocusScope.of(context).unfocus();
+                                                              // }
+                                                            },
+                                                            child: Image.asset(
+                                                              IconPath.sendButton,
+                                                              height: 24.h,
+                                                              width: 24.w,
+                                                            ),
+                                                          ))
+                                                          : SizedBox())),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   )
-                                ],
-                              ),
-                            )
                             );
                           });
                     },

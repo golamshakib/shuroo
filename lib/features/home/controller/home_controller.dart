@@ -268,15 +268,19 @@ class HomeController extends GetxController {
       final response = await NetworkCaller().postRequest(AppUrls.createReplyById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
 
       if(response.isSuccess){
+        log("===========================I am in success+++++++++++++++++++");
         Get.back();
         requestForPostComment(postId);
+        log("===========================I am in after loading success+++++++++++++++++++");
         AppSnackBar.showSuccess("Reply Posted");
       }
       else{
+        log("===========================I am in failed+++++++++++++++++++");
         Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
     }catch(e){
+      log("===========================I am in problem+++++++++++++++++++");
       Get.back();
       AppSnackBar.showError(e.toString());
     }
