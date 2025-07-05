@@ -131,7 +131,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllPost() async {
-    isLoading.value = true;
     try {
       final response = await NetworkCaller()
           .getRequest(AppUrls.getAllPost, token: "Bearer ${AuthService.token}");

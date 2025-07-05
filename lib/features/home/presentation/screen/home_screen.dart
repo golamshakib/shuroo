@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
@@ -55,10 +56,13 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Obx(() {
           if (controller.postDataList.isEmpty) {
-            return const Center(
-                child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
+            return Center(
+                child: SpinKitFadingCircle(
+                  color: AppColors.primary,
+                  size: 50.sp,
+                )
+            );
           }
-
           return RefreshIndicator(
               onRefresh: controller.refreshPostList,
               displacement: 50,
