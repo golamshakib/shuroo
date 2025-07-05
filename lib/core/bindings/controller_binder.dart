@@ -13,6 +13,7 @@ import '../../features/jobs/controller/job_details_controller.dart';
 import '../../features/jobs/controller/profile_view_controller.dart';
 import '../../features/jobs/controller/short_listed_controller.dart';
 import '../../features/profile/controller/profile_information_controller.dart';
+import '../../features/search_notification_chat/controller/notification_controller.dart';
 
 class ControllerBinder extends Bindings {
   @override
@@ -44,6 +45,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
     Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
     Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
+    Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
 
 
 
