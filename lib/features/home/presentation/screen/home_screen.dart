@@ -55,7 +55,8 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Obx(() {
           if (controller.postDataList.isEmpty) {
-            return const Center(child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
+            return const Center(
+                child: CircularProgressIndicator(color: Color(0xFF01A8F9)));
           }
 
           return RefreshIndicator(
@@ -71,7 +72,6 @@ class HomeScreen extends StatelessWidget {
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
-                    
                     icon: firstImage ?? IconPath.icon_pro,
                     content: post.content!,
                     postId: post.id,
@@ -91,9 +91,25 @@ class HomeScreen extends StatelessWidget {
                         : "0",
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
-               //     role: post.user!.role ?? "USER",
 
+                    navigateClick: () {
+                      print("Tapped role: ${post.user?.role} =======================");
+                      final userId = post.user?.id?.toString();
+                      final role = post.user?.role?.toString();
 
+                      if (userId == null) {
+                        print("User ID is null");
+                        return;
+                      }
+
+                      if (role == 'USER') {
+                        Get.toNamed(AppRoute.otherUserProfileScreen,
+                            arguments: {"userId": userId, "role": role});
+                      } else if (role == 'COMPANY') {
+                        Get.toNamed(AppRoute.companyProfileScreen,
+                            arguments: {"userId": userId, "role": role});
+                      }
+                    },
                   );
                 },
               ));

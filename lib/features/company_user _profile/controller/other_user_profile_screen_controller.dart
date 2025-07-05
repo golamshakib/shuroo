@@ -14,19 +14,32 @@ class OtherUserProfileScreenControllar extends GetxController
   var userId = "".obs;
   var othersUserProfile = OtherUserInformation().obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    tabController = TabController(length: 2, vsync: this);
+  OtherUserProfileScreenControllar();
 
-    if (Get.arguments != null && Get.arguments is String) {
+ @override
+void onInit() {
+  super.onInit();
+  tabController = TabController(length: 2, vsync: this);
+
+  if (Get.arguments != null) {
+    if (Get.arguments is String) {
       userId.value = Get.arguments;
-      print("Received userId: ${userId.value}");
-      getOthersProfile(userId.value);
+    } else if (Get.arguments is Map && Get.arguments['userId'] != null) {
+      userId.value = Get.arguments['userId'];
     } else {
-      AppSnackBar.showError("No user ID provided");
+      Future.microtask(() {
+        AppSnackBar.showError("No user ID provided");
+      });
+      return;
     }
+    print("Received userId: ${userId.value}");
+    getOthersProfile(userId.value);
+  } else {
+    Future.microtask(() {
+      AppSnackBar.showError("No user ID provided");
+    });
   }
+}
 
   Future<void> getOthersProfile(String userId) async {
     try {
@@ -39,13 +52,13 @@ class OtherUserProfileScreenControllar extends GetxController
         othersUserProfile.value =
             OtherUserInformation.fromJson(response.responseData);
       } else if (response.statusCode == 404) {
-        AppSnackBar.showError('Data Not Found');
+        Future.microtask(() => AppSnackBar.showError('Data Not Found'));
       } else {
-        AppSnackBar.showError('Failed to fetch data');
+        Future.microtask(() => AppSnackBar.showError('Failed to fetch data'));
       }
     } catch (e) {
       print('Something went wrong $e');
-      AppSnackBar.showError('Data Not Found: $e');
+      Future.microtask(() => AppSnackBar.showError('Data Not Found: $e'));
     }
   }
 }

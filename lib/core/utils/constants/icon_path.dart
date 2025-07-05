@@ -104,6 +104,7 @@ class IconPath{
   static const  String   lockIcon = '$_basePath/lockIcon.png';
   static const  String   notifyIcon = '$_basePath/notifyIcon.png';
   static const  String   logoutIcon = '$_basePath/logoutIcon.png';
+  static const  String   dummyEducation = '$_basePath/dummy_education.png';
 
 
 
