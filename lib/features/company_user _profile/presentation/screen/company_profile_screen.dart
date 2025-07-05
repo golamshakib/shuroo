@@ -12,7 +12,7 @@ import '../../../../core/utils/constants/image_path.dart';
 import '../../controller/company_profile_screen_controller.dart';
 import '../widget/job_tabbar_card.dart';
 import '../widget/tabbar_about_item.dart';
-
+import 'package:flutter/material.dart';
 class CompanyProfileScreen extends StatelessWidget {
   CompanyProfileScreen({super.key});
 
