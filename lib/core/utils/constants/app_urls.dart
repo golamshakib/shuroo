@@ -83,3 +83,4 @@ class AppUrls {
   static const String generateImageLink = "$_baseUrl/chats/generateFile";
 }
 
+
