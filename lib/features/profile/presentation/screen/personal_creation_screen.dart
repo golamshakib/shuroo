@@ -211,7 +211,9 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                         element,
                                         controller,
                                         controller.skillList,
-                                        controller.skillEdit)),
+                                        controller.skillEdit
+                                        
+                                        )),
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
@@ -789,29 +791,22 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
               padding: EdgeInsets.symmetric(vertical: 14.h),
             ),
             onPressed: () {
-              controller.educationEdit.value = false;
-              controller.experienceEdit.value = false;
-              controller.skillEdit.value = false;
-              controller.toolsEdit.value = false;
-              controller.interestEdit.value = false;
-              controller.languageEdit.value = false;
+              controller.updateProfile();
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomText(
-                  text: "Save",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.sp,
-                  color: AppColors.white,
-                ),
-                CustomText(
-                  text: "Save",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.sp,
-                  color: AppColors.white,
-                )
+                GestureDetector(
+                    onTap: () {
+                      //  controller.updateProfile();
+                    },
+                    child: CustomText(
+                      text: "Save",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15.sp,
+                      color: AppColors.white,
+                    ))
               ],
             ),
           ),

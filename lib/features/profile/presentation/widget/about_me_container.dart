@@ -31,21 +31,27 @@ Widget aboutMeContainer(PersonalCreationController controller) {
                 width: 110.w,
                 child: Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(9.sp),
-                    child: Obx(() => controller.profilePath.value == ''
-                        ? Image.asset(
-                            user?.image ?? ImagePath.dummyProfilePicture,
-                            height: 104.h,
-                            width: 86.w,
-                            fit: BoxFit.fill,
-                          )
-                        : Image.file(
-                            File(controller.profilePath.value),
-                            height: 104.h,
-                            width: 86.w,
-                            fit: BoxFit.fill,
-                          )),
-                  ),
+                      borderRadius: BorderRadius.circular(9.sp),
+                      child: Obx(() => controller.profilePath.value == ''
+                          ? Image.network(
+                              user?.image?.isNotEmpty == true
+                                  ? user!.image!
+                                  : ImagePath.dummyProfilePicture,
+                              height: 104.h,
+                              width: 86.w,
+                              fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(ImagePath.dummyProfilePicture,
+                                      height: 104.h,
+                                      width: 86.w,
+                                      fit: BoxFit.fill),
+                            )
+                          : Image.file(
+                              File(controller.profilePath.value),
+                              height: 104.h,
+                              width: 86.w,
+                              fit: BoxFit.fill,
+                            ))),
                 ),
               ),
               Positioned(
@@ -95,7 +101,10 @@ Widget aboutMeContainer(PersonalCreationController controller) {
                     width: 1.w,
                   ),
                   CustomText(
-                    text: 'Brookfield University',
+                    text:
+                        (user?.education != null && user!.education!.isNotEmpty)
+                            ? user!.education!.first.institute ?? ''
+                            : 'No education added',
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     color: AppColors.textSecondary,
@@ -112,7 +121,9 @@ Widget aboutMeContainer(PersonalCreationController controller) {
                 color: AppColors.textSecondary,
               ),
               CustomText(
-                text: 'Brookfield University',
+                text: (user?.education != null && user!.education!.isNotEmpty)
+                    ? user!.education!.first.degreeName ?? ''
+                    : 'No education added',
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
                 color: AppColors.textPrimary,
