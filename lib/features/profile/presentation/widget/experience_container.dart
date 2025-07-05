@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/common/widgets/custom_text_field.dart';
@@ -9,8 +10,6 @@ import '../../../../core/utils/constants/icon_path.dart';
 
 Widget experienceContainer(
     PersonalCreationController controller, BuildContext context) {
-
-
   return Obx(() => Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.h), color: AppColors.white),
@@ -18,76 +17,83 @@ Widget experienceContainer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ...controller.experienceList.map((row) => Padding(
-                  padding: EdgeInsets.only(bottom: 32.h),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        IconPath.educationIcon,
-                        height: 34.h,
-                        width: 34.w,
-                        fit: BoxFit.fill,
-                      ),
-                      SizedBox(
-                        width: 12.w,
-                      ),
-                      Column(
+            ...controller.userProfile.value.data!.experience!
+                .map((row) => Padding(
+                      padding: EdgeInsets.only(bottom: 32.h),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Image.asset(
+                            // ✅ Use the latest or correct image path (resolve conflict here)
+                            ImagePath.dummyExperience, // Keep `dummyExperience` as it's more likely to be correct
+                            height: 28.h,
+                            width: 28.w,
+                            fit: BoxFit.fill,
+                            color: AppColors.primary, // ✅ Keep primary color from `main`
+                          ),
                           SizedBox(
-                            width: 265.w,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: row['position'],
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                if (controller.experienceEdit.value)
-                                  GestureDetector(
-                                    onTap: () {
-                                      //   controller.deleteExperience(user.id);
-                                    },
-                                    child: CustomText(
-                                      text: "Delete",
+                            width: 12.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 265.w,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: row.company ?? '',
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.red,
                                     ),
-                                  )
-                              ],
-                            ),
-                          ),
-                          CustomText(
-                            text: row['companyName'],
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          CustomText(
-                            text: "${row['start']} - ${row['end']}",
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textSecondary,
-                          ),
-                          SizedBox(
-                            height: 14.h,
-                          ),
-                          SizedBox(
-                            width: 265.w,
-                            child: CustomText(
-                              text: row['description'],
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12.sp,
-                            ),
+                                    if (controller.experienceEdit.value)
+                                      GestureDetector(
+                                        onTap: () {
+                                          // ✅ Unified deleteExperience call
+                                          controller.deleteExperience(
+                                              row.id.toString());
+                                        },
+                                        child: CustomText(
+                                          text: "Delete",
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.red,
+                                        ),
+                                      )
+                                  ],
+                                ),
+                              ),
+                              CustomText(
+                                text: row.title ?? '',
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              CustomText(
+                                text:
+                                    "${row.startDate.toString()} - ${row.endDate.toString()}",
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.textSecondary,
+                              ),
+                              SizedBox(
+                                height: 14.h,
+                              ),
+                              SizedBox(
+                                width: 265.w,
+                                child: CustomText(
+                                  text: row.description ?? '',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                ),
+                              )
+                            ],
                           )
                         ],
-                      )
-                    ],
-                  ),
-                )),
+                      ),
+                    )),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: const Color(0xFFE6F6FE),

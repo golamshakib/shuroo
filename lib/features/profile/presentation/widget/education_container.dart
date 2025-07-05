@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/core/utils/constants/icon_path.dart';
+import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -15,65 +17,72 @@ Widget educationContainer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ...controller.educationList.map((row) => Padding(
-                  padding: EdgeInsets.only(bottom: 32.h),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        row['imagePath'],
-                        height: 34.h,
-                        width: 34.w,
-                        fit: BoxFit.fill,
-                      ),
-                      SizedBox(
-                        width: 12.w,
-                      ),
-                      Column(
+            ...controller.userProfile.value.data!.education!
+                .map((row) => Padding(
+                      padding: EdgeInsets.only(bottom: 32.h),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Image.asset(
+                            IconPath.dummyEducation,
+                            height: 34.h,
+                            width: 34.w,
+                            fit: BoxFit.fill,
+                            color: AppColors.primary,
+                          ),
                           SizedBox(
-                            width: 265.w,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: row['name'],
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                if (controller.educationEdit.value)
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.educationList.remove(row);
-                                    },
-                                    child: CustomText(
-                                      text: "Delete",
+                            width: 12.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 265.w,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: row.institute ?? '',
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.red,
                                     ),
-                                  )
-                              ],
-                            ),
-                          ),
-                          CustomText(
-                            text: row['department'],
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          CustomText(
-                            text: "${row['start']} - ${row['end']}",
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textSecondary,
-                          ),
+                                    if (controller.educationEdit.value)
+                                      GestureDetector(
+                                        onTap: () {
+                                          controller.deleteEducation(
+                                              row.id.toString());
+
+                                          // controller.educationList.remove();
+                                        },
+                                        child: CustomText(
+                                          text: "Delete",
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.red,
+                                        ),
+                                      )
+                                  ],
+                                ),
+                              ),
+                              CustomText(
+                                text: row.fieldOfStudy ?? '',
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              CustomText(
+                                text:
+                                    "${row.startDate!.toString()} - ${row.endDate!.toString()}",
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.textSecondary,
+                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                )),
+                      ),
+                    )),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: const Color(0xFFE6F6FE),

@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
+import 'getAboutTabBarWidget.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
-import 'getAboutTabBarWidget.dart';
+import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 
 Widget getAboutItem() {
   final controllerOne = Get.find<OtherUserProfileScreenControllar>();
   final user = controllerOne.othersUserProfile.value.data;
-  
 
   return Container(
     padding: EdgeInsets.all(16),
@@ -35,14 +34,18 @@ Widget getAboutItem() {
           height: 20,
         ),
         getAboutTabBarWidget(
-            name: "Industry", details: user?.companyType ?? 'Not Found'),
-            
+          name: "Industry",
+          details: user?.companyType ?? 'Not Found',
+        ),
         getAboutTabBarWidget(
-            name: "Company Size",
-            details: "${user?.totalEmployees ?? '00'} employees"),
+          name: "Company Size",
+          details: "${user?.totalEmployees?.toString() ?? '00'} employees",
+        ),
         getAboutTabBarWidget(
-            name: "Founded",
-            details: user?.establishmentYear ?? 'Founded date not found'),
+          name: "Founded",
+          details:
+              user?.establishmentYear?.toString() ?? 'Founded date not found',
+        ),
       ],
     ),
   );

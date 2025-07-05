@@ -74,7 +74,9 @@ class CustomTextFormField extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: hintText,
                       prefixIcon: prefixIcon,
-                      suffixIcon:icon!=null? Image.asset(icon!, height: 24.h, width: 24.w):null,
+                      suffixIcon: icon != null
+                          ? Image.asset(icon!, height: 24.h, width: 24.w)
+                          : null,
                       hintStyle: TextStyle(
                           fontFamily: fontFamily ?? null,
                           color: hintColor ?? Colors.grey,
