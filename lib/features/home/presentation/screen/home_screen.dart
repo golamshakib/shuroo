@@ -7,6 +7,8 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
@@ -14,7 +16,8 @@ import '../widget/custom_home_post_card.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final HomeController controller = Get.put(HomeController());
+  final controller = Get.put(HomeController());
+  final controllerOne = Get.find<MakePostController>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +61,9 @@ class HomeScreen extends StatelessWidget {
           if (controller.postDataList.isEmpty) {
             return Center(
                 child: SpinKitFadingCircle(
-                  color: AppColors.primary,
-                  size: 50.sp,
-                )
-            );
+              color: AppColors.primary,
+              size: 50.sp,
+            ));
           }
           return RefreshIndicator(
               onRefresh: controller.refreshPostList,
@@ -95,9 +97,9 @@ class HomeScreen extends StatelessWidget {
                         : "0",
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
-
                     navigateClick: () {
-                      print("Tapped role: ${post.user?.role} =======================");
+                      print(
+                          "Tapped role: ${post.user?.role} =======================");
                       final userId = post.user?.id?.toString();
                       final role = post.user?.role?.toString();
 
@@ -113,6 +115,9 @@ class HomeScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.companyProfileScreen,
                             arguments: {"userId": userId, "role": role});
                       }
+                    },
+                    repostClick: () {
+                    //  Get.to(() => RepostWithThroughtScreen(post: post));
                     },
                   );
                 },
