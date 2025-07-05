@@ -8,6 +8,7 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
@@ -116,8 +117,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     repostClick: () {
-                      controllerOne.postRepost(post.id.toString());
-                      print('Click Repost');
+                    //  Get.to(() => RepostWithThroughtScreen(post: post));
                     },
                   );
                 },
