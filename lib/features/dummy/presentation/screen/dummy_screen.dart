@@ -4,6 +4,8 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 
+import '../../../../core/utils/constants/image_path.dart';
+
 class DummyScreen extends StatelessWidget {
   const DummyScreen({super.key});
 
@@ -24,7 +26,7 @@ class DummyScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ClipOval(
-                        child: Image.asset(IconPath.icon_pro, height: 32.h, width: 32.w,),
+                        child: Image.asset(ImagePath.dummyProfilePicture, height: 32.h, width: 32.w,),
                       ),
                       SizedBox(width: 6.w,),
                       Column(
