@@ -105,7 +105,7 @@ class HomeController extends GetxController {
       "like": 1,
       'reply': 1,
     };
-    commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
+    //commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
     commentTEController.value.text = "";
     addComment.value = true;
   }
@@ -231,6 +231,58 @@ class HomeController extends GetxController {
   }
 
   Future<void> deletedComment(String postId, String commentId) async{
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  /// Reply part
+
+  void requestToSubmitReply(String commentID, String postId) async{
+    final requestBody = {
+      "replyComment": commentTEController.value.text
+    };
+    await submitReply(requestBody, commentID, postId);
+  }
+
+  Future<void> submitReply(Map<String, dynamic> requestBody, String commentId, String postId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.createReplyById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Posted");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  Future<void> deletedReply(String postId, String commentId) async{
     try{
       showProgressIndicator();
       final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
