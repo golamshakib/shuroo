@@ -8,7 +8,7 @@ import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
-import '../../../home/presentation/widget/custom_home_post_card.dart';
+import '../../../home/presentation/widget/custom_home_post_card.dart' hide CustomText;
 import '../widget/other_user_resume_widget.dart';
 
 class OtherUserProfileScreen extends StatelessWidget {
