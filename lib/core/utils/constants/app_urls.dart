@@ -17,10 +17,12 @@ class AppUrls {
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
   static String likeById(id) => '$_baseUrl/like/$id';
   static String createCommentById(id) => '$_baseUrl/comment/create/$id';
+  static String editCommentById(id) => '$_baseUrl/comment/update/$id';
   static String getCommentById(postId) => '$_baseUrl/comment/post/$postId';
   static String deleteCommentById(commentId) => '$_baseUrl/comment/delete/$commentId';
   static String createReplyById(commentId) => '$_baseUrl/comment/reply/create/$commentId';
-  static String deleteReplyById(commentId) => '$_baseUrl/comment/reply/delete/$commentId';
+  static String deleteReplyById(replyId) => '$_baseUrl/comment/reply/delete/$replyId';
+  static String editReplyById(replyId) => '$_baseUrl/comment/reply/update/$replyId';
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';

@@ -251,6 +251,7 @@ class PostCard extends GetView<HomeController> {
                                                   onTapOutside: (c) {
                                                     controller.addComment.value =
                                                     true;
+                                                    controller.commentTEController.value.clear();
                                                     FocusScope.of(context)
                                                         .unfocus();
                                                   },
@@ -351,8 +352,8 @@ class PostCard extends GetView<HomeController> {
                                             flex: 7,
                                             child: Obx(() => CustomTextField(
                                                 onTapOutside: (c) {
-                                                  controller.addComment.value =
-                                                  true;
+                                                  controller.addComment.value = true;
+                                                  controller.commentTEController.value.clear();
                                                   FocusScope.of(context)
                                                       .unfocus();
                                                 },
@@ -365,12 +366,7 @@ class PostCard extends GetView<HomeController> {
                                                 focusNode:
                                                 controller.controllerNode,
                                                 radius: 50,
-                                                suffixIcon: controller
-                                                    .commentTEController
-                                                    .value
-                                                    .text
-                                                    .isNotEmpty
-                                                    ? Padding(
+                                                suffixIcon: controller.commentTEController.value.text.isNotEmpty ? Padding(
                                                     padding:
                                                     EdgeInsets.symmetric(
                                                         horizontal: 4.w),

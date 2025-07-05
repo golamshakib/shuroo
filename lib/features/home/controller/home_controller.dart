@@ -217,8 +217,40 @@ class HomeController extends GetxController {
 
       if(response.isSuccess){
         Get.back();
+        commentTEController.value.clear();
         requestForPostComment(postId);
         AppSnackBar.showSuccess("Comment Posted");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  void requestToEditComment(String postId, String commentId) async{
+    final requestBody = {
+      "comment": commentTEController.value.text
+    };
+    await editComment(requestBody, postId, commentId);
+  }
+
+  Future<void> editComment(Map<String, dynamic> requestBody, String postId, String commentId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().putRequest(AppUrls.editCommentById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Edited");
       }
       else{
         Get.back();
@@ -268,19 +300,47 @@ class HomeController extends GetxController {
       final response = await NetworkCaller().postRequest(AppUrls.createReplyById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
 
       if(response.isSuccess){
-        log("===========================I am in success+++++++++++++++++++");
         Get.back();
+        commentTEController.value.clear();
         requestForPostComment(postId);
-        log("===========================I am in after loading success+++++++++++++++++++");
         AppSnackBar.showSuccess("Reply Posted");
       }
       else{
-        log("===========================I am in failed+++++++++++++++++++");
         Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
     }catch(e){
-      log("===========================I am in problem+++++++++++++++++++");
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  void requestToEditReply(String postId, String replyId) async{
+    final requestBody = {
+      "replyComment": commentTEController.value.text
+    };
+    await editReply(requestBody, postId, replyId);
+  }
+
+  Future<void> editReply(Map<String, dynamic> requestBody, String postId, String replyId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().putRequest(AppUrls.editReplyById(replyId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Edited");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
       Get.back();
       AppSnackBar.showError(e.toString());
     }
