@@ -159,6 +159,7 @@ class HomeController extends GetxController {
         Get.back();
         commentTEController.value.clear();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Posted");
       }
       else{
         Get.back();
@@ -189,6 +190,7 @@ class HomeController extends GetxController {
         Get.back();
         commentTEController.value.clear();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Edited");
       }
       else{
         Get.back();
@@ -210,6 +212,7 @@ class HomeController extends GetxController {
         Get.back();
         Get.back();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
       }
       else{
         Get.back();
@@ -240,6 +243,7 @@ class HomeController extends GetxController {
         Get.back();
         commentTEController.value.clear();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Posted");
       }
       else{
         Get.back();
@@ -270,6 +274,7 @@ class HomeController extends GetxController {
         Get.back();
         commentTEController.value.clear();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Edited");
       }
       else{
         Get.back();
@@ -291,6 +296,7 @@ class HomeController extends GetxController {
         Get.back();
         Get.back();
         requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
       }
       else{
         Get.back();
@@ -303,3 +309,4 @@ class HomeController extends GetxController {
   }
 
 }
+///
