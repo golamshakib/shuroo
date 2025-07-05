@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -9,6 +11,7 @@ import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../home/presentation/widget/custom_home_post_card.dart' hide CustomText;
+import '../../../message/presentation/screens/chat_details_screen.dart';
 import '../widget/other_user_resume_widget.dart';
 
 class OtherUserProfileScreen extends StatelessWidget {
@@ -82,7 +85,10 @@ class OtherUserProfileScreen extends StatelessWidget {
                           child: CustomSubmitButton(
                             text: 'Message',
                             onTap: () {
-                              // Message navigation
+                              log(user.id.toString());
+                              log(user.name.toString());
+                              log(user.image.toString());
+                              Get.to(() => ChatInboxScreen(receiverId: user.id!, userName: user.name!, image: user.image.toString(), ));
                             },
                           ),
                         ),
