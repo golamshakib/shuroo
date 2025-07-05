@@ -122,11 +122,9 @@ class PostCard extends GetView<HomeController> {
                           style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
-          const SizedBox(height: 4),
-          Text(content),
-          const SizedBox(height: 4),
-          Text('', style: const TextStyle(color: Colors.blue)),
           const SizedBox(height: 8),
+          Text(content),
+          SizedBox(height: 12.h),
           if (imageAsset != "")
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
