@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
@@ -799,6 +800,12 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                CustomText(
+                  text: "Save",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15.sp,
+                  color: AppColors.white,
+                ),
                 CustomText(
                   text: "Save",
                   fontWeight: FontWeight.w500,

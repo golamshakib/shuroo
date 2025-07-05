@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:shuroo/features/dummy/presentation/screen/dummy2_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
@@ -74,6 +75,7 @@ class AppRoute {
   static String helpScreen = "/helpScreen";
   static String personalCreationScreen = "/personalCreationScreen";
   static String chatScreen = "/chatScreen";
+  static String dummy2Screen = "/dummy2Screen";
 
   static List<GetPage> routes = [
 
@@ -115,5 +117,6 @@ class AppRoute {
     GetPage(name: jobDetailsScreen, page:() => JobDetailsScreen()),
     GetPage(name: chatScreen, page:() => ChatScreen()),
     GetPage(name: jobScreen, page:() => JobScreen()),
+    GetPage(name: dummy2Screen, page:() => Dummy2Screen()),
   ];
 }

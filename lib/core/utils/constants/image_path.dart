@@ -5,6 +5,7 @@ class ImagePath {
 
   //splash Screen
   static const String started_screen_bg = '$_basePath/started_screen_bg.png';
+  static const String dummyProfilePicture = '$_basePath/dummyProfilePicture.png';
   //create account Screen
   static const String group = '$_basePath/group.png';
   static const String group21 = '$_basePath/group21.png';
@@ -14,8 +15,7 @@ class ImagePath {
   static const String image_c = '$_basePath/image_c.png';
   static const String image_u = '$_basePath/image_u.png';
   static const String profilePic = '$_basePath/profilePic.png';
-  static const String dummyProfilePicture =
-      '$_basePath/dummyProfilePicture.png';
   static const String placeholder = '$_basePath/placeholder.png';
   static const String dummyExperiencelano = '$_basePath/suitcase.png';
-}
+  static const String dummyExperience = '$_basePath/suitcase.png';
+  }

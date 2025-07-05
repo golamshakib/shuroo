@@ -26,7 +26,6 @@ class ProfileViewController extends GetxController{
       if(response.isSuccess){
         final data = response.responseData;
         getProfileViewJobModel.value = GetProfileViewJobModel.fromJson(data);
-        AppSnackBar.showSuccess('Profile View');
       }
 
     }catch(e){

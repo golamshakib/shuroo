@@ -42,8 +42,8 @@ class IconPath{
 
   // Home Screen
 
-  static const  String   icon_pro=
-      '$_basePath/icon_pro.png';
+  // static const  String   icon_pro=
+  //     '$_basePath/icon_pro.png';
 
   static const  String   icon_1=
       '$_basePath/iconspp.png';

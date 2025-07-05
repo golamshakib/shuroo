@@ -25,10 +25,12 @@ Widget experienceContainer(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            ImagePath.dummyExperiencelano,
+                            // ✅ Use the latest or correct image path (resolve conflict here)
+                            ImagePath.dummyExperience, // Keep `dummyExperience` as it's more likely to be correct
                             height: 28.h,
                             width: 28.w,
                             fit: BoxFit.fill,
+                            color: AppColors.primary, // ✅ Keep primary color from `main`
                           ),
                           SizedBox(
                             width: 12.w,

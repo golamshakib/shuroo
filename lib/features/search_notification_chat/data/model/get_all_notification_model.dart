@@ -39,6 +39,7 @@ class Datum {
   final String? title;
   final String? body;
   final String? jobId;
+  final String? commentId;
   final bool? read;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -50,6 +51,7 @@ class Datum {
     this.title,
     this.body,
     this.jobId,
+    this.commentId,
     this.read,
     this.createdAt,
     this.updatedAt,
@@ -62,6 +64,7 @@ class Datum {
     title: json["title"],
     body: json["body"],
     jobId: json["jobId"],
+    commentId: json["commentId"],
     read: json["read"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -74,6 +77,7 @@ class Datum {
     "title": title,
     "body": body,
     "jobId": jobId,
+    "commentId": commentId,
     "read": read,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),

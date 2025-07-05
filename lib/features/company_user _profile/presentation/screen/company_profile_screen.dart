@@ -1,22 +1,26 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
-import 'package:shuroo/features/home/presentation/widget/custom_home_post_card.dart';
+
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
+import '../../../home/presentation/widget/custom_home_post_card.dart';
 import '../../controller/company_profile_screen_controller.dart';
+import '../../controller/other_user_profile_screen_controller.dart';
 import '../widget/job_tabbar_card.dart';
 import '../widget/tabbar_about_item.dart';
 
 class CompanyProfileScreen extends StatelessWidget {
   CompanyProfileScreen({super.key});
 
+  
+  final controllerOne = Get.put(OtherUserProfileScreenControllar());
   final controller = Get.put(CompanyProfileScreenController());
-  final controllerOne = Get.find<OtherUserProfileScreenControllar>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,14 @@ class CompanyProfileScreen extends StatelessWidget {
                       user.image ?? ImagePath.dummyProfilePicture,
                       height: 120.h,
                       width: 120.w,
+                      errorBuilder: (context, object, stacktrace){
+                        return Image.asset(
+                          ImagePath.dummyProfilePicture,
+                          height: 120.h,
+                          width: 120.w,
+
+                        );
+                      },
                     ),
                     const SizedBox(height: 16),
                     CustomText(

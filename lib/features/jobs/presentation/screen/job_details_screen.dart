@@ -43,23 +43,23 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
               fontWeight: FontWeight.w600,
               fontSize: 20.sp),
           actions: [
-            Obx(() {
-              final jobId = data.id.toString();
-              final isFav = favoriteController.isJobFavorite(jobId);
-              return IconButton(
-                onPressed: () {
-                  if (isFav) {
-                    favoriteController.removeFavorite(jobId);
-                  } else {
-                    favoriteController.addFavorite(jobId);
-                  }
-                },
-                icon: Icon(
-                  isFav ? Icons.favorite : Icons.favorite_border_outlined,
-                  color: isFav ? AppColors.primary : AppColors.textPrimary,
-                ),
-              );
-            }),
+            // Obx(() {
+            //   final jobId = data.id.toString();
+            //   final isFav = favoriteController.isJobFavorite(jobId);
+            //   return IconButton(
+            //     onPressed: () {
+            //       if (isFav) {
+            //         favoriteController.removeFavorite(jobId);
+            //       } else {
+            //         favoriteController.addFavorite(jobId);
+            //       }
+            //     },
+            //     icon: Icon(
+            //       isFav ? Icons.favorite : Icons.favorite_border_outlined,
+            //       color: isFav ? AppColors.primary : AppColors.textPrimary,
+            //     ),
+            //   );
+            // }),
 
 
             // IconButton(

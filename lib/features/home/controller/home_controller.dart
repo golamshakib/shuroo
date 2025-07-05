@@ -3,6 +3,7 @@ import 'dart:developer' show log;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
@@ -32,71 +33,12 @@ class HomeController extends GetxController {
     ImagePath.photo_home,
   ];
 
-  RxList<Map<String, dynamic>> commentList = [
-    {
-      'id': '0',
-      'image': IconPath.icon_pro,
-      'name': "Johan Ronsse",
-      'designation': "Designer & Educator",
-      "time": "2d",
-      "comment": "Why are these not visible for viewers?",
-      "like": 1,
-      'reply': 1,
-      'replies': [
-        {
-          'image': IconPath.icon_pro,
-          'name': "Johan Ronsse",
-          'designation': "Designer & Educator",
-          "time": "2d",
-          "comment": "Why are these not visible for viewers?",
-          "like": 1,
-          'reply': ""
-        },
-      ].obs
-    },
-    {
-      'id': '1',
-      'image': IconPath.icon_pro,
-      'name': "Johan Ronsse",
-      'designation': "Designer & Educator",
-      "time": "2d",
-      "comment": "Why are these not visible for viewers?",
-      "like": 1,
-      'reply': 1,
-      'replies': [
-        {
-          'image': IconPath.icon_pro,
-          'name': "Johan Ronsse",
-          'designation': "Designer & Educator",
-          "time": "2d",
-          "comment": "Why are these not visible for viewers?",
-          "like": 1,
-          'reply': ""
-        },
-      ].obs
-    }
-  ].obs;
 
-  void addCommentFunction(String comment) {
-    final addBody = {
-      'id': commentList.length.toString(),
-      'image': IconPath.icon_pro,
-      'name': "Johan Ronsse",
-      'designation': "Designer & Educator",
-      "time": "2d",
-      "comment": comment,
-      "like": 1,
-      'reply': 1,
-      'replies': [].obs
-    };
-    commentList.add(addBody);
-    commentTEController.value.text = "";
-    addComment.value = true;
-  }
+
 
   void addReplyFunction(String comment) {
     final addBody = {
-      'image': IconPath.icon_pro,
+      'image': ImagePath.dummyProfilePicture,
       'name': "Johan Ronsse",
       'designation': "Designer & Educator",
       "time": "2d",
@@ -104,7 +46,7 @@ class HomeController extends GetxController {
       "like": 1,
       'reply': 1,
     };
-    commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
+    //commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
     commentTEController.value.text = "";
     addComment.value = true;
   }
@@ -130,7 +72,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllPost() async {
-    isLoading.value = true;
     try {
       final response = await NetworkCaller()
           .getRequest(AppUrls.getAllPost, token: "Bearer ${AuthService.token}");
@@ -201,28 +142,171 @@ class HomeController extends GetxController {
     }
   }
 
-  void requestToSubmitComment() async{
+  void requestToSubmitComment(String postId) async{
     final requestBody = {
       "comment": commentTEController.value.text
     };
-    await submitComment(requestBody);
+    await submitComment(requestBody, postId);
   }
 
-  Future<void> submitComment(Map<String, dynamic> requestBody) async{
+  Future<void> submitComment(Map<String, dynamic> requestBody, String postId) async{
 
     try{
-      final response = await NetworkCaller().postRequest(AppUrls.createCommentById(commentIDToReply), body: requestBody,token: "Bearer ${AuthService.token}");
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.createCommentById(postId), body: requestBody,token: "Bearer ${AuthService.token}");
 
       if(response.isSuccess){
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
         AppSnackBar.showSuccess("Comment Posted");
       }
       else{
+        Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
     }catch(e){
+      Get.back();
       AppSnackBar.showError(e.toString());
     }
   }
 
+  void requestToEditComment(String postId, String commentId) async{
+    final requestBody = {
+      "comment": commentTEController.value.text
+    };
+    await editComment(requestBody, postId, commentId);
+  }
+
+  Future<void> editComment(Map<String, dynamic> requestBody, String postId, String commentId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().putRequest(AppUrls.editCommentById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Edited");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  Future<void> deletedComment(String postId, String commentId) async{
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteCommentById(commentId), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  /// Reply part
+
+  void requestToSubmitReply(String commentID, String postId) async{
+    final requestBody = {
+      "replyComment": commentTEController.value.text
+    };
+    await submitReply(requestBody, commentID, postId);
+  }
+
+  Future<void> submitReply(Map<String, dynamic> requestBody, String commentId, String postId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().postRequest(AppUrls.createReplyById(commentId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Posted");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  void requestToEditReply(String postId, String replyId) async{
+    final requestBody = {
+      "replyComment": commentTEController.value.text
+    };
+    await editReply(requestBody, postId, replyId);
+  }
+
+  Future<void> editReply(Map<String, dynamic> requestBody, String postId, String replyId) async{
+
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().putRequest(AppUrls.editReplyById(replyId), body: requestBody,token: "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Reply Edited");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
+
+  Future<void> deletedReply(String postId, String replyId) async{
+    try{
+      showProgressIndicator();
+      final response = await NetworkCaller().deleteRequest(AppUrls.deleteReplyById(replyId), "Bearer ${AuthService.token}");
+
+      if(response.isSuccess){
+        Get.back();
+        Get.back();
+        Get.back();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment deleted!");
+      }
+      else{
+        Get.back();
+        AppSnackBar.showError(response.statusCode.toString());
+      }
+    }catch(e){
+      Get.back();
+      AppSnackBar.showError(e.toString());
+    }
+  }
 
 }
+///
