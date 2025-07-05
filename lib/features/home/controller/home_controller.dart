@@ -33,82 +33,23 @@ class HomeController extends GetxController {
     ImagePath.photo_home,
   ];
 
-  // RxList<Map<String, dynamic>> commentList = [
-  //   {
-  //     'id': '0',
-  //     'image': IconPath.icon_pro,
-  //     'name': "Johan Ronsse",
-  //     'designation': "Designer & Educator",
-  //     "time": "2d",
-  //     "comment": "Why are these not visible for viewers?",
-  //     "like": 1,
-  //     'reply': 1,
-  //     'replies': [
-  //       {
-  //         'image': IconPath.icon_pro,
-  //         'name': "Johan Ronsse",
-  //         'designation': "Designer & Educator",
-  //         "time": "2d",
-  //         "comment": "Why are these not visible for viewers?",
-  //         "like": 1,
-  //         'reply': ""
-  //       },
-  //     ].obs
-  //   },
-  //   {
-  //     'id': '1',
-  //     'image': IconPath.icon_pro,
-  //     'name': "Johan Ronsse",
-  //     'designation': "Designer & Educator",
-  //     "time": "2d",
-  //     "comment": "Why are these not visible for viewers?",
-  //     "like": 1,
-  //     'reply': 1,
-  //     'replies': [
-  //       {
-  //         'image': IconPath.icon_pro,
-  //         'name': "Johan Ronsse",
-  //         'designation': "Designer & Educator",
-  //         "time": "2d",
-  //         "comment": "Why are these not visible for viewers?",
-  //         "like": 1,
-  //         'reply': ""
-  //       },
-  //     ].obs
-  //   }
-  // ].obs;
-  //
-  // void addCommentFunction(String comment) {
-  //   final addBody = {
-  //     'id': commentList.length.toString(),
-  //     'image': IconPath.icon_pro,
-  //     'name': "Johan Ronsse",
-  //     'designation': "Designer & Educator",
-  //     "time": "2d",
-  //     "comment": comment,
-  //     "like": 1,
-  //     'reply': 1,
-  //     'replies': [].obs
-  //   };
-  //   commentList.add(addBody);
-  //   commentTEController.value.text = "";
-  //   addComment.value = true;
-  // }
-  //
-  // void addReplyFunction(String comment) {
-  //   final addBody = {
-  //     'image': IconPath.icon_pro,
-  //     'name': "Johan Ronsse",
-  //     'designation': "Designer & Educator",
-  //     "time": "2d",
-  //     "comment": comment,
-  //     "like": 1,
-  //     'reply': 1,
-  //   };
-  //   //commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
-  //   commentTEController.value.text = "";
-  //   addComment.value = true;
-  // }
+
+
+
+  void addReplyFunction(String comment) {
+    final addBody = {
+      'image': ImagePath.dummyProfilePicture,
+      'name': "Johan Ronsse",
+      'designation': "Designer & Educator",
+      "time": "2d",
+      "comment": comment,
+      "like": 1,
+      'reply': 1,
+    };
+    //commentList.value[int.parse(replyOf.value)]["replies"].add(addBody);
+    commentTEController.value.text = "";
+    addComment.value = true;
+  }
 
   RxList<Datum> postDataList = <Datum>[].obs;
   late ProfileInformationController controllerOne;
