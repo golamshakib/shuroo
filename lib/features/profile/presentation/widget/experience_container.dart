@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
@@ -50,7 +51,8 @@ Widget experienceContainer(
                                     if (controller.experienceEdit.value)
                                       GestureDetector(
                                         onTap: () {
-                                             controller.deleteExperience(row.id.toString());
+                                          controller.deleteExperience(
+                                              row.id.toString());
                                         },
                                         child: CustomText(
                                           text: "Delete",
@@ -143,6 +145,9 @@ Widget experienceContainer(
                                             .startExperienceTEController,
                                         hintText: "Start Year",
                                         radius: 12,
+                                        inputFormat: [
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -154,6 +159,10 @@ Widget experienceContainer(
                                           controller: controller
                                               .endExperienceTEController,
                                           hintText: "End Year",
+                                          inputFormat: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                           radius: 12),
                                     ),
                                   ],

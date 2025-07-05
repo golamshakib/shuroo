@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -135,6 +136,7 @@ Widget educationContainer(
                                 controller: controller.degreeTEController,
                                 hintText: "Degree Earned(3.0)",
                                 radius: 12,
+                                inputFormat: [FilteringTextInputFormatter.digitsOnly],
                                 keyboardType: TextInputType.number,
                               ),
                               SizedBox(
@@ -148,6 +150,7 @@ Widget educationContainer(
                                     child: CustomTextField(
                                       controller: controller.startTEController,
                                       hintText: "Start Year",
+                                      inputFormat: [FilteringTextInputFormatter.digitsOnly],
                                       radius: 12,
                                     ),
                                   ),
@@ -159,6 +162,7 @@ Widget educationContainer(
                                     child: CustomTextField(
                                         controller: controller.endTEController,
                                         hintText: "End Year",
+                                        inputFormat: [FilteringTextInputFormatter.digitsOnly],
                                         radius: 12),
                                   ),
                                 ],

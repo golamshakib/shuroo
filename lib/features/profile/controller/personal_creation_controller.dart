@@ -25,6 +25,10 @@ class PersonalCreationController extends GetxController {
   RxBool interestEdit = false.obs;
   RxBool languageEdit = false.obs;
 
+  Future<void> refreshProfile() async {
+    await userProfile();
+  }
+
   RxList<Map<String, dynamic>> educationList = [
     {
       "imagePath": IconPath.educationIcon,
@@ -247,6 +251,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
+        await getProfile();
         titleTEController.clear();
         companyNameTEController.clear();
         startExperienceTEController.clear();
@@ -268,7 +273,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess) {
         AppSnackBar.showSuccess("Experience deleted successfully!");
-        reFresh();
+        await getProfile();
       } else {
         AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
@@ -297,7 +302,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
-
+        await getProfile();
         instituteNameTEController.clear();
         majorSubjectTEController.clear();
         minorSubjectTEController.clear();
@@ -320,7 +325,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess) {
         AppSnackBar.showSuccess("Education deleted successfully!");
-        reFresh();
+        await getProfile();
       } else {
         AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
