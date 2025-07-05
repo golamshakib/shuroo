@@ -264,12 +264,7 @@ class PostCard extends GetView<HomeController> {
                                                   focusNode:
                                                   controller.controllerNode,
                                                   radius: 50,
-                                                  suffixIcon: controller
-                                                      .commentTEController
-                                                      .value
-                                                      .text
-                                                      .isNotEmpty
-                                                      ? Padding(
+                                                  suffixIcon: Padding(
                                                       padding:
                                                       EdgeInsets.symmetric(
                                                           horizontal: 4.w),
@@ -297,7 +292,7 @@ class PostCard extends GetView<HomeController> {
                                                           width: 24.w,
                                                         ),
                                                       ))
-                                                      : SizedBox())),
+                                                      )),
                                             ),
                                           ],
                                         ),
@@ -366,7 +361,7 @@ class PostCard extends GetView<HomeController> {
                                                 focusNode:
                                                 controller.controllerNode,
                                                 radius: 50,
-                                                suffixIcon: controller.commentTEController.value.text.isNotEmpty ? Padding(
+                                                suffixIcon: Padding(
                                                     padding:
                                                     EdgeInsets.symmetric(
                                                         horizontal: 4.w),
@@ -396,7 +391,7 @@ class PostCard extends GetView<HomeController> {
                                                               width: 24.w,
                                                             ),
                                                           ))
-                                                          : SizedBox())),
+                                                          )),
                                                 ),
                                               ],
                                             ),

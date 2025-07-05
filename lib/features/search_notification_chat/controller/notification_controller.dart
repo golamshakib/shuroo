@@ -30,8 +30,8 @@ class NotificationController extends GetxController{
 
   @override
   void onInit() {
-    fetchNotification();
     super.onInit();
+    fetchNotification();
   }
 
 
