@@ -34,7 +34,9 @@ class SearchResultScreen extends StatelessWidget {
                 if (value.trim().isNotEmpty) {
                   controller.searchJobs(value.trim());
                 } else {
-                  controller.getSearchJobModel.value = GetSearchedJobsModel(); // clear result
+                  controller.isSearching.value = false;
+                  controller.getSearchJobModel.value = GetSearchedJobsModel(); // clear search result
+                  //controller.selectedFilter.value = 'ALL JOB'; // reset filter
                 }
               },
             ),
@@ -51,7 +53,10 @@ class SearchResultScreen extends StatelessWidget {
                       backgroundColor: AppColors.textWhite,
                       label: Text(filter),
                       selected: isSelected,
-                      onSelected: (_) => controller.setFilter(filter),
+                      onSelected: (_) {
+                        controller.isSearching.value = false; // ← Exit search mode
+                        controller.setFilter(filter);
+                      },
                       selectedColor: Colors.blue,
                       labelStyle: TextStyle(
                         color: isSelected ? Colors.white : Color(0xff757575),
@@ -63,6 +68,133 @@ class SearchResultScreen extends StatelessWidget {
             )),
             SizedBox(height: 16.h),
 
+            // No remove this data
+            // Expanded(
+            //   child: Obx(() {
+            //     final jobs = controller.filteredJobs;
+            //
+            //     if (controller.isLoading.value) {
+            //       return const Center(child: CircularProgressIndicator());
+            //     }
+            //
+            //     if (jobs.isEmpty) {
+            //       return const Center(child: Text("No jobs available"));
+            //     }
+            //
+            //     return ListView.builder(
+            //       itemCount: jobs.length,
+            //       itemBuilder: (context, index) {
+            //         final job = jobs[index];
+            //         return Container(
+            //           margin: const EdgeInsets.symmetric(vertical: 10),
+            //           decoration: BoxDecoration(
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(12),
+            //             border: Border.all(color: const Color(0xffF5F5F5), width: 0.2),
+            //           ),
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               ListTile(
+            //                 leading: CircleAvatar(
+            //                   backgroundImage: NetworkImage(job.company?.logoImage ?? ''),
+            //                 ),
+            //                 title: CustomText(
+            //                   text: job.name ?? '',
+            //                   fontSize: 15.sp,
+            //                   fontWeight: FontWeight.w500,
+            //                   color: AppColors.textPrimary,
+            //                 ),
+            //                 subtitle: CustomText(
+            //                   text: job.company?.name ?? '',
+            //                   fontSize: 12.sp,
+            //                   fontWeight: FontWeight.w400,
+            //                   color: AppColors.textGray,
+            //                 ),
+            //                 trailing: Obx(() {
+            //                   final jobId = job.id.toString();
+            //                   final isFav = favouriteController.isJobFavorite(jobId);
+            //                   return IconButton(
+            //                     onPressed: () {
+            //                       if (isFav) {
+            //                         favouriteController.removeFavorite(jobId);
+            //                       } else {
+            //                         favouriteController.addFavorite(jobId);
+            //                       }
+            //                     },
+            //                     icon: Icon(
+            //                       isFav ? Icons.favorite : Icons.favorite_border_outlined,
+            //                       color: isFav ? AppColors.primary : AppColors.textPrimary,
+            //                     ),
+            //                   );
+            //                 }),
+            //               ),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(left: 16),
+            //                 child: Row(
+            //                   children: [
+            //                     _buildTag(job.employmentType ?? ''),
+            //                     SizedBox(width: 8.w),
+            //                     // _buildTag(jobData.location ?? ''),
+            //                     // SizedBox(width: 8.w),
+            //                     // _buildTag(jobData.industryType ?? ''),
+            //                   ],
+            //                 ),
+            //               ),
+            //               SizedBox(height: 14.h),
+            //               Padding(
+            //                 padding: const EdgeInsets.symmetric(horizontal: 16),
+            //                 child: Divider(color: const Color(0xffF5F5F5)),
+            //               ),
+            //               SizedBox(height: 14.h),
+            //               Padding(
+            //                 padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+            //                 child: Row(
+            //                   children: [
+            //                     CustomText(
+            //                       text: job.location ?? '',
+            //                       fontSize: 12.sp,
+            //                       fontWeight: FontWeight.w500,
+            //                       color: AppColors.textPrimary,
+            //                     ),
+            //                     const Spacer(),
+            //                     GestureDetector(
+            //                       onTap: () {
+            //                         final jobId = job.id?.toString() ?? '';
+            //                         if (jobId.isNotEmpty) {
+            //                           Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
+            //                         }
+            //                       },
+            //                       child: Row(
+            //                         children: [
+            //                           CustomText(
+            //                             text: "Apply Now",
+            //                             decoration: TextDecoration.underline,
+            //                             decorationthickness: 2,
+            //                             decorationColor: AppColors.custom_blue,
+            //                             fontSize: 14.sp,
+            //                             fontWeight: FontWeight.w500,
+            //                             color: AppColors.custom_blue,
+            //                           ),
+            //                           SizedBox(width: 4.w),
+            //                           Icon(
+            //                             Icons.arrow_forward,
+            //                             color: AppColors.custom_blue,
+            //                             size: 16,
+            //                           )
+            //                         ],
+            //                       ),
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         );
+            //       },
+            //     );
+            //   }),
+            // ),
 
             Expanded(
               child: Obx(() {
@@ -191,251 +323,6 @@ class SearchResultScreen extends StatelessWidget {
               }),
             ),
 
-            // Job List
-            // Expanded(
-            //   child: Obx(() {
-            //     final jobs = controller.filteredJobs;
-            //
-            //     if (controller.isLoading.value) {
-            //       return const Center(child: CircularProgressIndicator());
-            //     }
-            //
-            //     if (jobs.isEmpty) {
-            //       return const Center(child: Text("No jobs available"));
-            //     }
-            //
-            //     return ListView.builder(
-            //       itemCount: jobs.length,
-            //       itemBuilder: (context, index) {
-            //         final job = jobs[index];
-            //
-            //         if (job is AllJobs.Datum) {
-            //           final jobData = job;
-            //           return Container(
-            //             margin: const EdgeInsets.symmetric(vertical: 10),
-            //             decoration: BoxDecoration(
-            //               color: Colors.white,
-            //               borderRadius: BorderRadius.circular(12),
-            //               border: Border.all(color: const Color(0xffF5F5F5), width: 0.2),
-            //             ),
-            //             child: Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               children: [
-            //                 ListTile(
-            //                   leading: CircleAvatar(
-            //                     backgroundImage: NetworkImage(jobData.job?.company?.logoImage ?? ''),
-            //                   ),
-            //                   title: CustomText(
-            //                     text: jobData.job?.name ?? '',
-            //                     fontSize: 15.sp,
-            //                     fontWeight: FontWeight.w500,
-            //                     color: AppColors.textPrimary,
-            //                   ),
-            //                   subtitle: CustomText(
-            //                     text: jobData.job?.company?.name ?? '',
-            //                     fontSize: 12.sp,
-            //                     fontWeight: FontWeight.w400,
-            //                     color: AppColors.textGray,
-            //                   ),
-            //                   trailing: Obx(() {
-            //                     final jobId = jobData.id.toString();
-            //                     final isFav = favouriteController.isJobFavorite(jobId);
-            //
-            //                     return IconButton(
-            //                       onPressed: () {
-            //                         if (isFav) {
-            //                           favouriteController.removeFavorite(jobId);
-            //                         } else {
-            //                           favouriteController.addFavorite(jobId);
-            //                         }
-            //                       },
-            //                       icon: Icon(
-            //                         isFav ? Icons.favorite : Icons.favorite_border_outlined,
-            //                         color: isFav ? AppColors.primary : AppColors.textPrimary,
-            //                       ),
-            //                     );
-            //                   }),
-            //                 ),
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(left: 16),
-            //                   child: Row(
-            //                     children: [
-            //                       _buildTag(jobData.job?.employmentType ?? ''),
-            //                       SizedBox(width: 8.w),
-            //                       // _buildTag(jobData.location ?? ''),
-            //                       // SizedBox(width: 8.w),
-            //                       // _buildTag(jobData.industryType ?? ''),
-            //                     ],
-            //                   ),
-            //                 ),
-            //                 SizedBox(height: 14.h),
-            //                 Padding(
-            //                   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //                   child: Divider(color: const Color(0xffF5F5F5)),
-            //                 ),
-            //                 SizedBox(height: 14.h),
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-            //                   child: Row(
-            //                     children: [
-            //                       CustomText(
-            //                         text: jobData.job?.location ?? '',
-            //                         fontSize: 12.sp,
-            //                         fontWeight: FontWeight.w500,
-            //                         color: AppColors.textPrimary,
-            //                       ),
-            //                       const Spacer(),
-            //                       GestureDetector(
-            //                         onTap: () {
-            //                           final jobId = jobData.id?.toString() ?? '';
-            //                           if (jobId.isNotEmpty) {
-            //                             Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
-            //                           }
-            //                         },
-            //                         child: Row(
-            //                           children: [
-            //                             CustomText(
-            //                               text: "Apply Now",
-            //                               decoration: TextDecoration.underline,
-            //                               decorationthickness: 2,
-            //                               decorationColor: AppColors.custom_blue,
-            //                               fontSize: 14.sp,
-            //                               fontWeight: FontWeight.w500,
-            //                               color: AppColors.custom_blue,
-            //                             ),
-            //                             SizedBox(width: 4.w),
-            //                             Icon(
-            //                               Icons.arrow_forward,
-            //                               color: AppColors.custom_blue,
-            //                               size: 16,
-            //                             )
-            //                           ],
-            //                         ),
-            //                       )
-            //                     ],
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           );
-            //         }
-            //         else if(job is SearchJobs.Datum){
-            //           final jobData = job;
-            //           return Container(
-            //             margin: const EdgeInsets.symmetric(vertical: 10),
-            //             decoration: BoxDecoration(
-            //               color: Colors.white,
-            //               borderRadius: BorderRadius.circular(12),
-            //               border: Border.all(color: const Color(0xffF5F5F5), width: 0.2),
-            //             ),
-            //             child: Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               children: [
-            //                 ListTile(
-            //                   leading: CircleAvatar(
-            //                     backgroundImage: NetworkImage(jobData.job?.company?.logoImage ?? ''),
-            //                   ),
-            //                   title: CustomText(
-            //                     text: jobData.job?.name ?? '',
-            //                     fontSize: 15.sp,
-            //                     fontWeight: FontWeight.w500,
-            //                     color: AppColors.textPrimary,
-            //                   ),
-            //                   subtitle: CustomText(
-            //                     text: jobData.job?.company?.name ?? '',
-            //                     fontSize: 12.sp,
-            //                     fontWeight: FontWeight.w400,
-            //                     color: AppColors.textGray,
-            //                   ),
-            //                   trailing: Obx(() {
-            //                     final jobId = jobData.id.toString();
-            //                     final isFav = favouriteController.isJobFavorite(jobId);
-            //
-            //                     return IconButton(
-            //                       onPressed: () {
-            //                         if (isFav) {
-            //                           favouriteController.removeFavorite(jobId);
-            //                         } else {
-            //                           favouriteController.addFavorite(jobId);
-            //                         }
-            //                       },
-            //                       icon: Icon(
-            //                         isFav ? Icons.favorite : Icons.favorite_border_outlined,
-            //                         color: isFav ? AppColors.primary : AppColors.textPrimary,
-            //                       ),
-            //                     );
-            //                   }),
-            //                 ),
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(left: 16),
-            //                   child: Row(
-            //                     children: [
-            //                       _buildTag(jobData.job?.employmentType ?? ''),
-            //                       SizedBox(width: 8.w),
-            //                       // _buildTag(jobData.location ?? ''),
-            //                       // SizedBox(width: 8.w),
-            //                       // _buildTag(jobData.industryType ?? ''),
-            //                     ],
-            //                   ),
-            //                 ),
-            //                 SizedBox(height: 14.h),
-            //                 Padding(
-            //                   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //                   child: Divider(color: const Color(0xffF5F5F5)),
-            //                 ),
-            //                 SizedBox(height: 14.h),
-            //                 Padding(
-            //                   padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-            //                   child: Row(
-            //                     children: [
-            //                       CustomText(
-            //                         text: jobData.job?.location ?? '',
-            //                         fontSize: 12.sp,
-            //                         fontWeight: FontWeight.w500,
-            //                         color: AppColors.textPrimary,
-            //                       ),
-            //                       const Spacer(),
-            //                       GestureDetector(
-            //                         onTap: () {
-            //                           final jobId = jobData.id?.toString() ?? '';
-            //                           if (jobId.isNotEmpty) {
-            //                             Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
-            //                           }
-            //                         },
-            //                         child: Row(
-            //                           children: [
-            //                             CustomText(
-            //                               text: "Apply Now",
-            //                               decoration: TextDecoration.underline,
-            //                               decorationthickness: 2,
-            //                               decorationColor: AppColors.custom_blue,
-            //                               fontSize: 14.sp,
-            //                               fontWeight: FontWeight.w500,
-            //                               color: AppColors.custom_blue,
-            //                             ),
-            //                             SizedBox(width: 4.w),
-            //                             Icon(
-            //                               Icons.arrow_forward,
-            //                               color: AppColors.custom_blue,
-            //                               size: 16,
-            //                             )
-            //                           ],
-            //                         ),
-            //                       )
-            //                     ],
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           );
-            //         }
-            //         else {
-            //           return const SizedBox(); // unknown type
-            //         }
-            //       },
-            //     );
-            //   }),
-            // ),
           ],
         ),
       ),

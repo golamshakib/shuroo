@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:get/get.dart';
 import '../../../../core/common/widgets/custom_back_button.dart';
@@ -48,7 +49,7 @@ class ShortListedScreen extends GetView<ShortListedController> {
                           : ImagePath.dummyProfilePicture,
                       title: viewJob.job?.name ?? '',
                       name: viewJob.job?.company?.name ?? '',
-                      date: viewJob.updatedAt.toString(),
+                      date: DateFormat('dd MMMM yy').format(DateTime.parse(viewJob.updatedAt.toString())),
                       salary: "Salary: \$${viewJob.job!.salary.toString()}",
                       onTap: () {
                         Get.toNamed(AppRoute.chatScreen);

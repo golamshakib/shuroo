@@ -56,16 +56,16 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                 },
                 icon: Icon(
                   isFav ? Icons.favorite : Icons.favorite_border_outlined,
-                  color: isFav ? Colors.red : AppColors.textPrimary,
+                  color: isFav ? AppColors.primary : AppColors.textPrimary,
                 ),
               );
             }),
 
 
-            IconButton(
-                onPressed: () {
-
-                }, icon: Icon(Icons.share_outlined)),
+            // IconButton(
+            //     onPressed: () {
+            //
+            //     }, icon: Icon(Icons.share_outlined)),
 
           ],
         ),

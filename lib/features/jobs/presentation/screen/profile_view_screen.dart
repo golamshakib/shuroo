@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/jobs/controller/profile_view_controller.dart';
@@ -51,7 +52,7 @@ class ProfileViewScreen extends GetView<ProfileViewController> {
                           : ImagePath.dummyProfilePicture,
                       title: viewJob.job?.name ?? '',
                       name: viewJob.job?.company?.name ?? '',
-                      date: viewJob.updatedAt.toString(),
+                      date: DateFormat('dd MMMM yy').format(DateTime.parse(viewJob.updatedAt.toString())),
                       salary: "Salary: \$${viewJob.job!.salary.toString()}",
                       onTap: () {
                         Get.toNamed(AppRoute.chatScreen);
