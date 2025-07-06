@@ -127,19 +127,24 @@ class OtherUserProfileScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     ListView.builder(
-                      itemCount: 1,
+                      itemCount: user.post?.length ?? 0,
                       itemBuilder: (context, index) {
+                        final post = user.post![index];
                         return Container(
-                          margin: const EdgeInsets.only(top: 16, left: 16),
+                          margin: const EdgeInsets.only(
+                              top: 16, left: 16, right: 16),
                           child: PostCard(
                             context: context,
                             likedByME: false.obs,
-                            icon: IconPath.icon_1,
-                            organization: AppText.wildWorld,
+                            icon: post.user?.image ?? IconPath.icon_1,
+                            organization: post.user?.name ?? 'Organization',
                             likeCount: '2'.obs,
                             commentCount: '2',
-                            content: AppText.the_annualCareer,
-                            imageAsset: "",
+                            content: post.content ?? 'od',
+                            imageAsset:
+                                (post.image != null && post.image!.isNotEmpty)
+                                    ? post.image!.first
+                                    : ImagePath.dummyExperiencelano,
                           ),
                         );
                       },

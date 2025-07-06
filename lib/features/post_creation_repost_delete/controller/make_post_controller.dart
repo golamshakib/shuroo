@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
+import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 
 class MakePostController extends GetxController {
@@ -62,6 +63,31 @@ class MakePostController extends GetxController {
       hideProgressIndicator();
     }
   }
+
+  //Post Repost ============================
+
+  Future<bool> postRepost(String postId, String content) async {
+  try {
+    final response = await NetworkCaller().postRequest(
+      "${AppUrls.repostPost}/$postId",
+      body: {'content': content},
+      token: "Bearer ${AuthService.token}",
+    );
+
+    if (response.isSuccess) {
+      log("Changed");
+      textController.clear();
+      return true;
+    } else {
+      log(response.statusCode.toString());
+      return false;
+    }
+  } catch (e) {
+    AppSnackBar.showError("Something went wrong!!");
+    return false;
+  }
+}
+
 
   /// Internal helper for sending multipart request with multiple images
   Future<void> _sendPostRequestWithOptionalImages({
