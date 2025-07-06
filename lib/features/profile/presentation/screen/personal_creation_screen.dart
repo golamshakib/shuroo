@@ -211,9 +211,7 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                         element,
                                         controller,
                                         controller.skillList,
-                                        controller.skillEdit
-                                        
-                                        )),
+                                        controller.skillEdit)),
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(

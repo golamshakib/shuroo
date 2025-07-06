@@ -77,6 +77,7 @@ class PersonalCreationController extends GetxController {
   final languageTEController = TextEditingController();
 
   var profilePath = "".obs;
+
   void pickProfile() async {
     final picker = ImagePicker();
     final image = await picker.pickImage(source: ImageSource.gallery);
@@ -134,8 +135,8 @@ class PersonalCreationController extends GetxController {
       "about": aboutTEController.text.trim(),
       "skills": skillList.toList(),
       "tools": toolsList.toList(),
-      "interest": interestList.toList(),
-      "language": languageList.toList(),
+      "interests": interestList.toList(),
+      "languages": languageList.toList(),
     };
 
     try {
@@ -149,7 +150,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess) {
         AppSnackBar.showSuccess('Data updated successfully');
-        getProfile();
+        await getProfile();
       } else {
         AppSnackBar.showError(
             response.errorMessage ?? 'Failed to update profile');
@@ -172,8 +173,10 @@ class PersonalCreationController extends GetxController {
           token: "Bearer ${AuthService.token}");
 
       if (response.isSuccess && response.statusCode == 200) {
-        userProfile.refresh();
-
+        //userProfile.refresh();
+        userProfile.value = GetUser.fromJson(response.responseData);
+        print(
+            "The skill list is: ${userProfile.value.data?.skills?.toString()}");
         skillList.value = userProfile.value.data?.skills?.cast<String>() ?? [];
         toolsList.value = userProfile.value.data?.tools?.cast<String>() ?? [];
         interestList.value =
@@ -181,7 +184,7 @@ class PersonalCreationController extends GetxController {
         languageList.value =
             userProfile.value.data?.languages?.cast<String>() ?? [];
 
-        userProfile.value = GetUser.fromJson(response.responseData);
+        //  profilePath.value = userProfile.value.data?.image ?? '';
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data Not Found');
       }
