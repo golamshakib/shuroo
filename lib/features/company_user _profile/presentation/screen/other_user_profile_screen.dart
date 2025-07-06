@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 import '../../../../core/common/widgets/custom_submit_button.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
-import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../../home/presentation/widget/custom_home_post_card.dart' hide CustomText;
@@ -35,7 +35,12 @@ class OtherUserProfileScreen extends StatelessWidget {
               color: AppColors.primaryTextColor,
             ),
           ),
-          body: const Center(child: CircularProgressIndicator()),
+          body: Center(
+              child: SpinKitFadingCircle(
+                color: AppColors.primary,
+                size: 50.h,
+              )
+          ),
         );
       }
 
@@ -56,19 +61,14 @@ class OtherUserProfileScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 39, left: 16, right: 16),
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(60),
-                      child: Image.network(
-                        user.image ?? '',
+                    ClipOval(
+                      child: user.image != null ?
+                          Image.network(user.image, fit: BoxFit.fill, height: 120.h, width: 120.w,) :
+                      Image.asset(
+                        ImagePath.dummyProfilePicture,
                         height: 120.h,
                         width: 120.w,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Image.asset(
-                          ImagePath.dummyProfilePicture,
-                          height: 120.h,
-                          width: 120.w,
-                        ),
-                      ),
+                      )
                     ),
                     const SizedBox(height: 16),
                     CustomText(text: user.name ?? "User Name", fontSize: 20),

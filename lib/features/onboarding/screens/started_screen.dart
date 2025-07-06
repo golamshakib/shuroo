@@ -79,7 +79,6 @@ class StartedScreen extends StatelessWidget {
                   text: AppText.create_account,
                   onTap: () {
                     Get.toNamed(AppRoute.createAccountScreen);
-
                   },
                   fontSize: 15.sp,
                  color: AppColors.custom_blue,
@@ -95,7 +94,6 @@ class StartedScreen extends StatelessWidget {
                   },
                   fontSize: 15,
                   color: AppColors.textWhite,
-
                   textColor: AppColors.textPrimary
                 ),
 

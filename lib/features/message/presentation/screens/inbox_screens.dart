@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../../../core/common/widgets/custom_text.dart';
+import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/chat_list_controller.dart';
 import '../../controllers/chat_screen_controller.dart';
 import 'chat_details_screen.dart';
@@ -17,122 +19,118 @@ class InboxScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        top: false,
-        child: Obx(() {
-          final chatLists = controller.chatListDetails.value;
+      body: RefreshIndicator(
+        color: AppColors.primary,
+        backgroundColor: Colors.white,
+        onRefresh: () async{
+          await controller.fetchChatListDetails();
+        },
+        child: SafeArea(
+          child: Obx(() {
+            final chatLists = controller.chatListDetails.value;
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// top header
-              //backlessCustomActivityHeader("Message", "13"),
-              const SizedBox(height: 8),
+            // Sort the messages by 'lastMessageDate' in descending order
+            chatLists?.data?.sort((a, b) {
+              // Parse the dates and compare
+              DateTime aDate = DateTime.parse(a.lastMessageDate.toString());
+              DateTime bDate = DateTime.parse(b.lastMessageDate.toString());
+              return bDate.compareTo(aDate);  // descending order
+            });
 
-              Expanded(
-                child: controller.isLoading.value
-                    ? const ShimmerWidgets()
-                    : chatLists?.data == null || chatLists!.data!.isEmpty
-                    ? const Center(child: CustomText(text:"No messages"))
-                    : ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: chatLists.data!.length,
-                  itemBuilder: (context, index) {
-                    final chat = chatLists.data![index];
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// top header
+                const SizedBox(height: 8),
 
-                    return GestureDetector(
-                      onTap: () {
-                        chatController.createChatRoom(user2Id: chat.user?.id ?? '');
-                        Get.to(() => ChatInboxScreen(
-                          receiverId: chat.user?.id ?? '',
-                          userName: chat.user?.name ?? '',
-                          image: chat.user?.image ?? '',
-                        ));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Avatar
-                            CircleAvatar(
-                              radius: 24,
-                              backgroundImage: chat.user?.image != null &&
-                                  chat.user!.image!.isNotEmpty
-                                  ? NetworkImage(chat.user!.image!)
-                                  : null,
-                              backgroundColor: Colors.grey[300],
-                              child: chat.user?.image == null ||
-                                  chat.user!.image!.isEmpty
-                                  ? const Icon(Icons.person, color: Colors.white)
-                                  : null,
-                            ),
-                            const SizedBox(width: 12),
+                Expanded(
+                  child: controller.isLoading.value
+                      ? const ShimmerWidgets()
+                      : chatLists?.data == null || chatLists!.data!.isEmpty
+                      ? const Center(child: CustomText(text: "No messages"))
+                      : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: chatLists.data!.length,
+                    itemBuilder: (context, index) {
+                      final chat = chatLists.data![index];
 
-                            // Texts
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    text: chat.user?.name ?? 'Unknown User',
-                                  ),
-                                  SizedBox(height: 4.h),
-                                  RichText(
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(
-                                      text: chat.lastMessage ?? 'No message',
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      ),
-                                      children: [
-                                        TextSpan(
-                                          text: '  •  ${getTimeAgo(chat.lastMessageDate.toString())}',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey[400], // Grey200
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                      return GestureDetector(
+                        onTap: () {
+                          chatController.createChatRoom(user2Id: chat.user?.id ?? '');
+                          Get.to(() => ChatInboxScreen(
+                            receiverId: chat.user?.id ?? '',
+                            userName: chat.user?.name ?? '',
+                            image: chat.user?.image ?? 'null',
+                          ));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset: const Offset(0, 1),
                               ),
-                            ),
+                            ],
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipOval(
+                                child: chat.user?.image != null && chat.user!.image!.isNotEmpty ?
+                                Image.network(chat.user!.image!, fit: BoxFit.fill, width: 44.w, height: 44.h,) :
+                                Image.asset(ImagePath.dummyProfilePicture, fit: BoxFit.fill, width: 44.w, height: 44.h,),
+                              ),
+                              const SizedBox(width: 12),
 
-
-                            // const SizedBox(width: 8),
-                            //
-                            // // Time
-                            // Text(
-                            //   getTimeAgo(chat.lastMessageDate.toString()),
-                            //   style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-                            // ),
-                          ],
+                              // Texts
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      text: chat.user?.name ?? 'Unknown User',
+                                    ),
+                                    SizedBox(height: 4.h),
+                                    RichText(
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      text: TextSpan(
+                                        text: chat.lastMessage ?? 'No message',
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: '  •  ${getTimeAgo(chat.lastMessageDate.toString())}',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey[400], // Grey200
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          );
-        }),
+              ],
+            );
+          }),
+        ),
       ),
     );
   }
@@ -155,7 +153,6 @@ class InboxScreen extends StatelessWidget {
     }
   }
 }
-
 
 /// shimmer widgets
 class ShimmerWidgets extends StatelessWidget {

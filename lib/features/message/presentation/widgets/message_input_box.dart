@@ -28,7 +28,7 @@ class MessageInputBox extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(vertical: 16.h),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
                 flex: 9,
@@ -79,7 +79,7 @@ class MessageInputBox extends StatelessWidget {
                       // Send message with the uploaded image (if available)
                       chatController.sendMessage(
                         message: chatController.textController.text,
-                        reciverId: receiverId,
+                        receiverId: receiverId,
                         image: imageUrl,
                       );
 
@@ -96,7 +96,7 @@ class MessageInputBox extends StatelessWidget {
                           color: AppColors.primary,
                           border: Border.all(color: AppColors.textSecondary)
                       ),
-                      child: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+                      child: Icon(Icons.send, color: Colors.white,),
                     ),
                   ),
                 ),

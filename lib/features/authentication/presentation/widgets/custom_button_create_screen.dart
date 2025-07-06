@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
 class CustomButtonCreateScreen extends StatelessWidget {
@@ -19,43 +20,42 @@ class CustomButtonCreateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          margin: EdgeInsets.fromLTRB(0, 14.h, 0, 0),
-          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white, // background color
-            borderRadius: BorderRadius.circular(50), // rounded corners
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 5,
-                blurRadius: 7,
-              ),
-            ],
-          ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 6.h),
+            padding: EdgeInsets.symmetric(vertical: 16.h,horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.white, // background color
+              borderRadius: BorderRadius.circular(50), // rounded corners
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                ),
+              ],
+            ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
                   img,
                   height: 25.h,
                   width: 24.w,
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: left,right: right),
-                  child: Text(
-                    text,
-                    style: const TextStyle(color: Colors.black,fontSize:15 ),
-                  ),
-                ),
+                // Container(
+                //   margin: EdgeInsets.only(left: left,right: right),
+                //   child: Text(
+                //     text,
+                //     style: const TextStyle(color: Colors.black,fontSize:15 ),
+                //   ),
+                // ),
+                CustomText(text: text, fontSize: 15.sp, textAlign: TextAlign.center,),
+                Icon(Icons.circle, color: Colors.transparent,)
               ],
             ),
-
-
-
           ),
         ),
       ),

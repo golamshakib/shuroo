@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
@@ -79,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
-                    icon: firstImage ?? ImagePath.dummyProfilePicture,
+                    icon: post.user!.image ?? ImagePath.dummyProfilePicture,
                     content: post.content!,
                     postId: post.id,
                     likedByME: post.like!
