@@ -24,29 +24,39 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrower(),
       appBar: AppBar(
           backgroundColor: AppColors.scaffoldBackgroundColor,
-          title: Obx(() {
-            final user = controller.controllerOne.userProfile.value.data;
-            return GestureDetector(
+          title: Obx(() =>
+            controller.isLoading.value ?
+                SizedBox() :
+            controller.controllerOne.userProfile.value.data == null ? SizedBox():
+            GestureDetector(
               onTap: () {},
               child: Row(
                 children: [
                   ClipOval(
-                      child: Image.network(
-                    user?.image ?? ImagePath.dummyProfilePicture,
-                    height: 40.h,
-                    width: 40.w,
-                    fit: BoxFit.fill,
-                  )),
+                      child: controller.controllerOne.userProfile.value.data!.image != null ?
+                      Image.network(
+                        controller.controllerOne.userProfile.value.data!.image,
+                        height: 40.h,
+                        width: 40.w,
+                        fit: BoxFit.fill,
+                      ) :
+                      Image.asset(
+                        ImagePath.dummyProfilePicture,
+                        height: 40.h,
+                        width: 40.w,
+                        fit: BoxFit.fill,
+                      )
+                  ),
                   SizedBox(width: 10.w),
                   CustomText(
-                    text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}",
+                    text: "Hi, ${controller.controllerOne.userProfile.value.data!.name!.split(" ").first ?? 'User Name'}",
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   )
                 ],
               ),
-            );
-          }),
+            )
+          ),
           actions: [
             IconButton(
                 onPressed: () {
@@ -74,7 +84,6 @@ class HomeScreen extends StatelessWidget {
                 itemCount: controller.postDataList.length,
                 itemBuilder: (context, index) {
                   final post = controller.postDataList[index];
-
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
