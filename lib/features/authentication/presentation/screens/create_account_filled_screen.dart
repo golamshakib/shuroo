@@ -192,7 +192,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 14.sp,
-
                         ),
                         children: <TextSpan>[
                           TextSpan(

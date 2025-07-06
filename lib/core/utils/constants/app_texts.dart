@@ -18,7 +18,7 @@ class AppText {
 
   static const String sign_up_start = 'Sign up and start';
   static const String exploring = 'exploring opportunities';
-  static const String sign_up_phone_email = 'Sign Up with Phone or Email';
+  static const String sign_up_phone_email = 'Sign Up with Your Email';
   static const String sign_up_facebook = 'Sign Up with Facebook';
   static const String sign_up_google = 'Sign Up with Google';
   static const String sign_up_apple = 'Sign Up with Apple';
@@ -121,7 +121,7 @@ class AppText {
   static const String newpossibilities
   = "New possibilities";
   static const String sign_In_start = 'Sign In and start';
-  static const String sign_In_phone_email = 'Sign In with Phone or Email';
+  static const String sign_In_phone_email = 'Sign In with Your Email';
   static const String sign_In_facebook = 'Sign In with Facebook';
   static const String sign_In_google = 'Sign In with Google';
   static const String sign_In_apple = 'Sign In with Apple';

@@ -37,8 +37,6 @@ class CreateAccountScreen extends StatelessWidget {
                       SizedBox(height: 12),
                       CustomText(text: AppText.sign_up_start, fontSize: 24.sp),
                       CustomText(text: AppText.exploring, fontSize: 24),
-                      
-                      
                       ///SizedBox(height: 60),
                       Container(margin:EdgeInsets.only(top: 60),child: Image.asset(ImagePath.group, height: 206.w, width: 217)),
                     ],
@@ -49,7 +47,6 @@ class CreateAccountScreen extends StatelessWidget {
                 // ),
                 CustomButtonCreateScreen(onTap: (){
                   Get.toNamed(AppRoute.createAccountFilledScreen);
-            
                 },
                   text: AppText.sign_up_phone_email,
                   img: IconPath.iconoir_user,
