@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shuroo/features/company_user%20_profile/data/others_user_information_data_model.dart';
 import 'package:shuroo/features/dummy/presentation/screen/dummy2_screen.dart';
@@ -99,7 +100,7 @@ class AppRoute {
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
     // GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
-    GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
+    GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen(postId: Get.arguments['postId'] ?? '')),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
     GetPage(name: otherUserProfileScreen, page:() => OtherUserProfileScreen()),

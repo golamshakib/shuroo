@@ -5,21 +5,21 @@ import '../../../../core/utils/constants/app_colors.dart';
 class CustomRepostScreenCard extends StatelessWidget {
   final String organization;
   final String? timeAgo;
-  final String title;
+  final String? title;
   final String content;
   final String icon;
   final BuildContext context;
   final String? hashtags;
-  final String imageAsset;
+  final String? imageAsset;
 
   const CustomRepostScreenCard({
     super.key,
     required this.organization,
     this.timeAgo,
-    required this.title,
+    this.title,
     required this.content,
     this.hashtags,
-    required this.imageAsset,
+    this.imageAsset,
     required this.icon,
     required this.context,
   });
@@ -59,7 +59,7 @@ class CustomRepostScreenCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            title,
+            title!,
             style: TextStyle(
               color: AppColors.grayText,
               fontFamily: "Inter",
@@ -74,7 +74,7 @@ class CustomRepostScreenCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              imageAsset,
+              imageAsset!,
               fit: BoxFit.cover,
               height: 151.h,
               width: 341.w,

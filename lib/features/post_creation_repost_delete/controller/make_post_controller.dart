@@ -64,32 +64,7 @@ class MakePostController extends GetxController {
     }
   }
 
-
-  
-
   //Post Repost ============================
-
-  Future<bool> postRepost(String postId, String content) async {
-  try {
-    final response = await NetworkCaller().postRequest(
-      "${AppUrls.repostPost}/$postId",
-      body: {'content': content},
-      token: "Bearer ${AuthService.token}",
-    );
-
-    if (response.isSuccess) {
-      log("Changed");
-      textController.clear();
-      return true;
-    } else {
-      log(response.statusCode.toString());
-      return false;
-    }
-  } catch (e) {
-    AppSnackBar.showError("Something went wrong!!");
-    return false;
-  }
-}
 
 
   /// Internal helper for sending multipart request with multiple images
