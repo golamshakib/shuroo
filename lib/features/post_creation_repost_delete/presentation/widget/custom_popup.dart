@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/icon_path.dart';
@@ -32,8 +34,8 @@ void showRepostPopup(BuildContext context) {
               title: AppText.repostwithyour,
               subtitle: AppText.create_a_new_post_with,
               onTap: () {
-                Get.toNamed(AppRoute.repostWithThroughtScreen);
-                // Add your logic here
+              //  Get.to(() => RepostWithThroughtScreen());
+                
               },
             ),
             SizedBox(height: 16),
@@ -43,9 +45,9 @@ void showRepostPopup(BuildContext context) {
               subtitle:
               AppText.instantly_bring_rockfile,
               onTap: () {
-                Get.toNamed(AppRoute.myAllPostScreen);
+              //  Get.toNamed(AppRoute.myAllPostScreen);
 
-                // Add your logic here
+               
               },
             ),
           ],

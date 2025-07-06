@@ -87,18 +87,16 @@ class MyAllPostScreenController extends GetxController {
 
         getUserPost.value = GetSingleUser.fromJson(json);
 
-        AppSnackBar.showSuccess('All posts fetched successfully');
+        //  AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data not found');
       } else {
-        AppSnackBar.showError('Something went wrong');
+        //  AppSnackBar.showError('Something went wrong');
       }
     } catch (e) {
       log('Something went wrong: $e');
-      AppSnackBar.showError('Failed to fetch posts.');
-    } finally {
-     
-    }
+      //  AppSnackBar.showError('Failed to fetch posts.');
+    } finally {}
   }
 
   //! Delete Post ===================================================
@@ -121,7 +119,7 @@ class MyAllPostScreenController extends GetxController {
     } catch (e) {
       log('Something went Wrong $e');
     } finally {
-       // hideProgressIndicator();
+      // hideProgressIndicator();
     }
   }
 

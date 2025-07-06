@@ -11,11 +11,8 @@ import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
-import 'package:shuroo/routes/app_routes.dart';
-
 import '../../../../core/utils/constants/app_colors.dart';
 
-import '../../../post_creation_repost_delete/presentation/widget/custom_popup.dart';
 
 class PostCard extends GetView<HomeController> {
   final String organization;
@@ -23,7 +20,7 @@ class PostCard extends GetView<HomeController> {
   // final String? timeAgo;
   final String content;
   final String icon;
-  final RxBool likedByME;
+  final RxBool? likedByME;
   final BuildContext context;
   final RxString? likeCount;
   final String commentCount;
@@ -39,7 +36,7 @@ class PostCard extends GetView<HomeController> {
       //  this.timeAgo,
       required this.content,
       this.postId,
-      required this.likedByME,
+      this.likedByME,
       //  this.hashtags,
       required this.imageAsset,
       required this.icon,
@@ -136,8 +133,8 @@ class PostCard extends GetView<HomeController> {
                 children: [
                   Obx(() => GestureDetector(
                         onTap: () async {
-                          likedByME.value = !likedByME.value;
-                          if (!likedByME.value) {
+                          likedByME!.value = !likedByME!.value;
+                          if (!likedByME!.value) {
                             likeCount!.value =
                                 (int.parse(likeCount!.value) - 1).toString();
                           } else {
@@ -146,8 +143,8 @@ class PostCard extends GetView<HomeController> {
                           }
                           if (!await controller
                               .changeLikeStatus(postId.toString())) {
-                            likedByME.value = !likedByME.value;
-                            if (!likedByME.value) {
+                            likedByME!.value = !likedByME!.value;
+                            if (!likedByME!.value) {
                               likeCount!.value =
                                   (int.parse(likeCount!.value) - 1).toString();
                             } else {
@@ -156,7 +153,7 @@ class PostCard extends GetView<HomeController> {
                             }
                           }
                         },
-                        child: likedByME.value
+                        child: likedByME!.value
                             ? Icon(
                                 Icons.favorite_rounded,
                                 color: AppColors.primary,

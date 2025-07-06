@@ -43,7 +43,7 @@ class MakePostController extends GetxController {
     }
   }
 
-  /// Main method to create a post
+  /// Create a post
   Future<void> createPost({required String postText}) async {
     final Map<String, dynamic> requestBody = {"content": postText};
     debugPrint("Request Body: $requestBody");
@@ -63,6 +63,9 @@ class MakePostController extends GetxController {
       hideProgressIndicator();
     }
   }
+
+
+  
 
   //Post Repost ============================
 
