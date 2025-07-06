@@ -73,7 +73,8 @@ class HomeController extends GetxController {
       final response = await NetworkCaller()
           .getRequest(AppUrls.getAllPost, token: "Bearer ${AuthService.token}");
 
-      //  log("Raw response: ${response.responseData}");
+    //  log("Raw response: ${response.responseData}");
+
 
       if (response.isSuccess && response.statusCode == 200) {
         final json = response.responseData;

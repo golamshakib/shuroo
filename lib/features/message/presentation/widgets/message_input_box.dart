@@ -79,7 +79,7 @@ class MessageInputBox extends StatelessWidget {
                       // Send message with the uploaded image (if available)
                       chatController.sendMessage(
                         message: chatController.textController.text,
-                        reciverId: receiverId,
+                        receiverId: receiverId,
                         image: imageUrl,
                       );
 
