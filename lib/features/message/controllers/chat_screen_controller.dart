@@ -75,7 +75,7 @@ class ChatController extends GetxController {
 
   Future<void> sendMessage({
     required String message,
-    required String reciverId,
+    required String receiverId,
     String? image,
   }) async {
     log(message);
@@ -89,7 +89,7 @@ class ChatController extends GetxController {
         "type": "sendMessage",
         "chatroomId":roomId.value,
         "senderId": profileInformationController.userProfile.value.data?.id?.toString(),
-        "receiverId": reciverId,
+        "receiverId": receiverId,
         "content": message,
         //"file": (image != null && image.isNotEmpty) ? image : "",
       };
