@@ -42,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if(label != null)
               Container(
                 margin: EdgeInsets.only(left: 4),
                 child: Text(label!,
@@ -49,6 +50,7 @@ class CustomTextFormField extends StatelessWidget {
                       fontSize: 12.sp,
                     )),
               ),
+              if(label != null)
               const SizedBox(height: 6),
               Container(
                 height: 56.h,

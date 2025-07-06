@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import '../../../../../core/common/widgets/custom_text.dart';
-
-import '../../../../core/services/Auth_service.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../controllers/chat_list_controller.dart';
 import '../../controllers/chat_screen_controller.dart';
@@ -82,34 +81,40 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                       Get.back();
                     },
                     child: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: AppColors.primary,
+                      Icons.arrow_back,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                   SizedBox(width: 15.w),
-                  Container(
-                    width: 44.w,
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[300],
-                      image:
-                          widget.image.isNotEmpty
-                              ? DecorationImage(
-                                image: NetworkImage(widget.image),
-                                fit: BoxFit.cover,
-                              )
-                              : null,
-                    ),
-                    child:
-                        widget.image.isEmpty
-                            ? const Icon(
-                              Icons.person,
-                              size: 30,
-                              color: Colors.white,
-                            )
-                            : null,
-                  ),
+                  widget.image != 'null' ?
+                  Image.network(widget.image, fit: BoxFit.fill, width: 44.w, height: 44.h,) :
+                      Image.asset(ImagePath.dummyProfilePicture, fit: BoxFit.fill, width: 44.w, height: 44.h,),
+                  // Container(
+                  //   width: 44.w,
+                  //   height: 48.h,
+                  //   decoration: BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     color: Colors.grey[300],
+                  //     image:
+                  //         widget.image.isNotEmpty
+                  //             ? DecorationImage(
+                  //               image: NetworkImage(widget.image),
+                  //               fit: BoxFit.cover,
+                  //             )
+                  //             : DecorationImage(
+                  //           image: AssetImage(ImagePath.dummyProfilePicture),
+                  //           fit: BoxFit.cover,
+                  //         ),
+                  //   ),
+                  //   child:
+                  //       widget.image.isEmpty
+                  //           ? const Icon(
+                  //             Icons.person,
+                  //             size: 30,
+                  //             color: Colors.white,
+                  //           )
+                  //           : null,
+                  // ),
                   SizedBox(width: 8.w),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,10 +152,10 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                     itemBuilder: (context, index) {
                       final message =
                           chatController.messages.reversed.toList()[index];
-                      final image =
-                          chatController.generatedImageLink.value.isNotEmpty
-                              ? chatController.generatedImageLink.value
-                              : "";
+                      // final image =
+                      //     chatController.generatedImageLink.value.isNotEmpty
+                      //         ? chatController.generatedImageLink.value
+                      //         : "";
                       return message["senderId"] == userId.value
                           ? MessageSentByMe(
                             message: message['content'],
@@ -201,7 +206,7 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                                   top: 2,
                                   child: GestureDetector(
                                     onTap: () {
-                                      chatController.selectedImage.value = "";
+                                     // chatController.selectedImage.value = "";
                                     },
                                     child: const Icon(
                                       Icons.close,
