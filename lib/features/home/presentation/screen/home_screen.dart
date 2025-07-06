@@ -7,7 +7,6 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
-import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../widget/custom_drower.dart';
 import '../widget/custom_home_post_card.dart';
@@ -31,11 +30,13 @@ class HomeScreen extends StatelessWidget {
               onTap: () {},
               child: Row(
                 children: [
-                  Image.asset(
+                  ClipOval(
+                      child: Image.network(
                     user?.image ?? ImagePath.dummyProfilePicture,
                     height: 40.h,
                     width: 40.w,
-                  ),
+                    fit: BoxFit.fill,
+                  )),
                   SizedBox(width: 10.w),
                   CustomText(
                     text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}",
@@ -116,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     repostClick: () {
-                    //  Get.to(() => RepostWithThroughtScreen(post: post));
+                      //  Get.to(() => RepostWithThroughtScreen(post: post));
                     },
                   );
                 },
