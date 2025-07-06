@@ -96,7 +96,7 @@ class MessageInputBox extends StatelessWidget {
                           color: AppColors.primary,
                           border: Border.all(color: AppColors.textSecondary)
                       ),
-                      child: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+                      child: Icon(Icons.send, color: Colors.white,),
                     ),
                   ),
                 ),
