@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../utils/constants/app_colors.dart';
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.focusNode,
     this.onTap,
+    this.inputFormat,
     this.onChange,
     this.onTapOutside,
     this.fontSize = 14,
@@ -33,6 +35,7 @@ class CustomTextField extends StatelessWidget {
   final Function(PointerDownEvent)? onTapOutside;
   final FocusNode? focusNode;
   final String hintText;
+  final List<TextInputFormatter>? inputFormat;
   final Function()? onTap;
   final bool obscureText;
   final dynamic fillColor;
@@ -54,6 +57,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       onChanged: onChange,
       onTap: onTap,
+      inputFormatters: inputFormat,
       style: GoogleFonts.inter(
         color: AppColors.textGray,
         fontWeight: FontWeight.w400,
