@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
@@ -35,7 +36,12 @@ class OtherUserProfileScreen extends StatelessWidget {
               color: AppColors.primaryTextColor,
             ),
           ),
-          body: const Center(child: CircularProgressIndicator()),
+          body: Center(
+              child: SpinKitFadingCircle(
+                color: AppColors.primary,
+                size: 50.h,
+              )
+          ),
         );
       }
 
