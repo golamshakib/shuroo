@@ -86,9 +86,11 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                     ),
                   ),
                   SizedBox(width: 15.w),
-                  widget.image != 'null' ?
-                  Image.network(widget.image, fit: BoxFit.fill, width: 44.w, height: 44.h,) :
-                      Image.asset(ImagePath.dummyProfilePicture, fit: BoxFit.fill, width: 44.w, height: 44.h,),
+                  ClipOval(
+                    child: widget.image != 'null' ?
+                    Image.network(widget.image, fit: BoxFit.fill, width: 44.w, height: 44.h,) :
+                    Image.asset(ImagePath.dummyProfilePicture, fit: BoxFit.fill, width: 44.w, height: 44.h,),
+                  ),
                   // Container(
                   //   width: 44.w,
                   //   height: 48.h,

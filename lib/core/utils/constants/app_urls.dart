@@ -3,7 +3,7 @@ class AppUrls {
 
 
   static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
-  static const String connectSocket = 'ws://10.0.20.64:6042';
+  static const String connectSocket = 'ws://10.0.20.12:6042';
 
   // VPS Server ===========================
   //static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
@@ -76,7 +76,7 @@ class AppUrls {
   static const String removeFavorite = '$_baseUrl/favorite/delete';
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
-  static const String getMyChatLists = '$connectSocket/chat/getMyChat';
+  static const String getMyChatLists = '$_baseUrl/chats/getMyChat';
 
 
   static const String generateImageLink = "$_baseUrl/chats/generateFile";
