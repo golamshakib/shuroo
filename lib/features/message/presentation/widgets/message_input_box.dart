@@ -28,7 +28,7 @@ class MessageInputBox extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(vertical: 16.h),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
                 flex: 9,
