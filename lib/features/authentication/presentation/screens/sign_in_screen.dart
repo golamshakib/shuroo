@@ -120,7 +120,7 @@ class SignInScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
                           child: RichText(
                             text: TextSpan(
-                              text: AppText.already_have_an_account,
+                              text: "Don't have an account? ",
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
@@ -129,14 +129,14 @@ class SignInScreen extends StatelessWidget {
                                 TextSpan(
                                   text: AppText.signUp,
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 14.sp,
                                     color: AppColors.custom_blue,
                                     fontWeight: FontWeight.w400,
                                     decoration: TextDecoration.none,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => Get.toNamed(
-                                         AppRoute.signUpScreen
+                                         AppRoute.createAccountScreen
                                     ),
                                 ),
                               ],
