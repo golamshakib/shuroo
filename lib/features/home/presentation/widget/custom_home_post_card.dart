@@ -19,7 +19,7 @@ class PostCard extends GetView<HomeController> {
   final String? postId;
   // final String? timeAgo;
   final String content;
-  final String icon;
+  final String? icon;
   final RxBool? likedByME;
   final BuildContext context;
   final RxString? likeCount;
@@ -39,7 +39,7 @@ class PostCard extends GetView<HomeController> {
       this.likedByME,
       //  this.hashtags,
       required this.imageAsset,
-      required this.icon,
+       this.icon,
       required this.context,
       this.likeCount,
       required this.commentCount,
@@ -75,7 +75,7 @@ class PostCard extends GetView<HomeController> {
                   children: [
                     ClipOval(
                       child: Image.network(
-                        icon,
+                        icon!,
                         width: 24.w,
                         height: 24.h,
                         fit: BoxFit.cover,

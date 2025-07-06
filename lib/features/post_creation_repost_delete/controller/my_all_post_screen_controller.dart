@@ -6,6 +6,7 @@ import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
 import 'package:shuroo/features/post_creation_repost_delete/data/get_single_user_data_model.dart';
+import 'package:shuroo/features/post_creation_repost_delete/data/single_post_data_model.dart';
 
 import '../../../core/utils/constants/icon_path.dart';
 import '../../profile/controller/profile_information_controller.dart';
@@ -36,12 +37,12 @@ class MyAllPostScreenController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-
     final controllerOne = Get.find<ProfileInformationController>();
     log(controllerOne.userProfile.value.data!.id.toString());
     await getSingleUserPost(
         controllerOne.userProfile.value.data!.id.toString());
   }
+
 
   Future<void> refreshMyPost() async {
     final controllerOne = Get.find<ProfileInformationController>();
@@ -52,9 +53,11 @@ class MyAllPostScreenController extends GetxController {
 
   //! Get Single Post ===================================================
 
+  final singlePost = SinglePostDataModel().obs;
+
   Future<void> getSinglePost(String id) async {
     try {
-      showProgressIndicator();
+      //  showProgressIndicator();
       final response =
           await NetworkCaller().getRequest("${AppUrls.getSinglePost}/$id");
 
@@ -68,7 +71,7 @@ class MyAllPostScreenController extends GetxController {
     } catch (e) {
       log('Something went Wrong $e');
     } finally {
-      hideProgressIndicator();
+      //  hideProgressIndicator();
     }
   }
 
