@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
-                    icon: firstImage ?? IconPath.icon_pro,
+                    icon: firstImage ?? ImagePath.dummyProfilePicture,
                     content: post.content!,
                     postId: post.id,
                     likedByME: post.like!
@@ -91,9 +91,9 @@ class HomeScreen extends StatelessWidget {
                         : "0",
                     context: context,
                     role: post.user?.role?.toString() ?? "USER",
-
                     navigateClick: () {
-                      print("Tapped role: ${post.user?.role} =======================");
+                      print(
+                          "Tapped role: ${post.user?.role} =======================");
                       final userId = post.user?.id?.toString();
                       final role = post.user?.role?.toString();
 
@@ -109,6 +109,9 @@ class HomeScreen extends StatelessWidget {
                         Get.toNamed(AppRoute.companyProfileScreen,
                             arguments: {"userId": userId, "role": role});
                       }
+                    },
+                    repostClick: () {
+                    //  Get.to(() => RepostWithThroughtScreen(post: post));
                     },
                   );
                 },

@@ -1,10 +1,13 @@
 class AppUrls {
   AppUrls._();
 
-  static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+
+  //static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+  static const String connectSocket = 'ws://10.0.20.64:6042';
 
   // VPS Server ===========================
-  //static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+  static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+
 
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
@@ -17,8 +20,12 @@ class AppUrls {
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
   static String likeById(id) => '$_baseUrl/like/$id';
   static String createCommentById(id) => '$_baseUrl/comment/create/$id';
+  static String editCommentById(id) => '$_baseUrl/comment/update/$id';
   static String getCommentById(postId) => '$_baseUrl/comment/post/$postId';
   static String deleteCommentById(commentId) => '$_baseUrl/comment/delete/$commentId';
+  static String createReplyById(commentId) => '$_baseUrl/comment/reply/create/$commentId';
+  static String deleteReplyById(replyId) => '$_baseUrl/comment/reply/delete/$replyId';
+  static String editReplyById(replyId) => '$_baseUrl/comment/reply/update/$replyId';
 
   // Job Added by Shahriar
   static const String getAllJobs = '$_baseUrl/job/all';
@@ -38,7 +45,8 @@ class AppUrls {
   static const String jobApplie = '$_baseUrl/application/create';
   static const String getUserProfile = '$_baseUrl/user/profile';
 
-  static  String othersUserProfile(id) => '$_baseUrl/user/get/$id';
+  static const String othersUserProfile = '$_baseUrl/user/get';
+  static const String repostPost = '$_baseUrl/post/repost';
 
 
 
@@ -46,12 +54,12 @@ class AppUrls {
 
   //experience ---------
   static const String createExperience = '$_baseUrl/experience/create';
-  static String experienceDelete(id) => '$_baseUrl/experience/delete/id';
+  static String experienceDelete = '$_baseUrl/experience/delete';
   static const String experienceUpdate = '$_baseUrl/experience/update/';
   
   //Education ---------
   static const String createEducation = '$_baseUrl/education/create';
-  static  String educationDelete(id) => '$_baseUrl/education/delete/id';
+  static  String educationDelete = '$_baseUrl/education/delete';
   static const String educationUpdate = '$_baseUrl//education/update/';
 
   
@@ -68,5 +76,9 @@ class AppUrls {
   static const String removeFavorite = '$_baseUrl/favorite/delete';
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
+  static const String getMyChatLists = '$_baseUrl/chat/getMyChat';
+
+
+  static const String generateImageLink = "$_baseUrl/chats/generateFile";
 }
 

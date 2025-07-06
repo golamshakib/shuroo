@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
-import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
@@ -26,7 +25,17 @@ class PersonalCreationController extends GetxController {
   RxBool toolsEdit = false.obs;
   RxBool interestEdit = false.obs;
   RxBool languageEdit = false.obs;
-  RxBool isLoading = false.obs;
+
+  /// <--- Added loading boolean
+  var isLoading = false.obs;
+
+  /// Show / Hide loader methods
+  void showProgressIndicator() => isLoading.value = true;
+  void hideProgressIndicator() => isLoading.value = false;
+
+  Future<void> refreshProfile() async {
+    await getProfile();
+  }
 
   RxList<Map<String, dynamic>> educationList = [
     {
@@ -55,70 +64,12 @@ class PersonalCreationController extends GetxController {
       "description":
           "Conducted research on sustainable farming practices and climate change mitigation."
     },
-    // {
-    //   "imagePath": IconPath.educationIcon,
-    //   "position": "Sustainability Intern",
-    //   "companyName": "Green Earth Foundation",
-    //   "start": "2025",
-    //   'end': "Present",
-    //   "description":
-    //       "Conducted research on sustainable farming practices and climate change mitigation."
-    // },
   ].obs;
 
-  RxList<String> skillList = [
-    "Interface Design",
-    "UI Design",
-    "UX Design",
-    "Branding Design",
-    "Graphic Design",
-    "Motion Design",
-  ].obs;
-
-  RxList<String> toolsList = [
-    "Figma",
-    "UI Design",
-    "UX Design",
-    "Branding Design",
-    "Graphic Design",
-    "Motion Design",
-  ].obs;
-
-  RxList<String> interestList = [
-    "Climate Chane Advocacy",
-    "UI Design",
-    "UX Design",
-    "Branding Design",
-    "Graphic Design",
-    "Motion Design",
-  ].obs;
-
-  RxList<String> languageList = [
-    "English",
-    "Arabic",
-    "Bangla",
-    "Franch",
-    "Spanish",
-  ].obs;
-
-  /// Add education
-
-  final instituteNameTEController = TextEditingController();
-  final majorSubjectTEController = TextEditingController();
-  final minorSubjectTEController = TextEditingController();
-  final degreeTEController = TextEditingController();
-  final startTEController = TextEditingController();
-  final endTEController = TextEditingController();
-
-  /// Add experience
-
-  final titleTEController = TextEditingController();
-  final companyNameTEController = TextEditingController();
-  final describeTEController = TextEditingController();
-  final startExperienceTEController = TextEditingController();
-  final endExperienceTEController = TextEditingController();
-
-  /// Add etc
+  RxList<String> skillList = <String>[].obs;
+  RxList<String> toolsList = <String>[].obs;
+  RxList<String> interestList = <String>[].obs;
+  RxList<String> languageList = <String>[].obs;
 
   final skillTEController = TextEditingController();
   final technologyTEController = TextEditingController();
@@ -158,8 +109,12 @@ class PersonalCreationController extends GetxController {
   }
 
   void addSkill() {
-    skillList.add(skillTEController.text);
-    skillTEController.clear();
+    final skill = skillTEController.text.trim();
+    if (skill.isNotEmpty) {
+      skillList.add(skill);
+      skillTEController.clear();
+      skillList.refresh();
+    }
   }
 
   void addTechnology() {
@@ -174,6 +129,38 @@ class PersonalCreationController extends GetxController {
     languageList.add(languageTEController.text);
   }
 
+  Future<void> updateProfile() async {
+    final Map<String, dynamic> requestBody = {
+      "about": aboutTEController.text.trim(),
+      "skills": skillList.toList(),
+      "tools": toolsList.toList(),
+      "interest": interestList.toList(),
+      "language": languageList.toList(),
+    };
+
+    try {
+      showProgressIndicator();
+
+      final response = await NetworkCaller().putRequest(
+        AppUrls.profileUpdate,
+        body: requestBody,
+        token: "Bearer ${AuthService.token}",
+      );
+
+      if (response.isSuccess) {
+        AppSnackBar.showSuccess('Data updated successfully');
+        getProfile();
+      } else {
+        AppSnackBar.showError(
+            response.errorMessage ?? 'Failed to update profile');
+      }
+    } catch (e) {
+      AppSnackBar.showError('An error occurred: $e');
+    } finally {
+      hideProgressIndicator();
+    }
+  }
+
   var userProfile = GetUser().obs;
 
   // Get Profile =====================
@@ -185,10 +172,16 @@ class PersonalCreationController extends GetxController {
           token: "Bearer ${AuthService.token}");
 
       if (response.isSuccess && response.statusCode == 200) {
-        userProfile.value = GetUser.fromJson(response.responseData);
         userProfile.refresh();
 
-        //  AppSnackBar.showSuccess('Data Get Successfully');
+        skillList.value = userProfile.value.data?.skills?.cast<String>() ?? [];
+        toolsList.value = userProfile.value.data?.tools?.cast<String>() ?? [];
+        interestList.value =
+            userProfile.value.data?.interests?.cast<String>() ?? [];
+        languageList.value =
+            userProfile.value.data?.languages?.cast<String>() ?? [];
+
+        userProfile.value = GetUser.fromJson(response.responseData);
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data Not Found');
       }
@@ -200,7 +193,13 @@ class PersonalCreationController extends GetxController {
     }
   }
 
-  // Experience ======================
+  //! Experience Part ======================
+
+  final titleTEController = TextEditingController();
+  final companyNameTEController = TextEditingController();
+  final describeTEController = TextEditingController();
+  final startExperienceTEController = TextEditingController();
+  final endExperienceTEController = TextEditingController();
 
   Future<void> experienceAdd() async {
     final title = titleTEController.text.trim();
@@ -208,6 +207,20 @@ class PersonalCreationController extends GetxController {
     final startDate = startExperienceTEController.text.trim();
     final endDate = endExperienceTEController.text.trim();
     final desc = describeTEController.text.trim();
+
+    if (title.isEmpty ||
+        company.isEmpty ||
+        startDate.isEmpty ||
+        endDate.isEmpty) {
+      AppSnackBar.showError('Please fill all required fields');
+      return;
+    }
+
+    if (startDate.length != 4 || endDate.length != 4) {
+      AppSnackBar.showError('Enter valid year (e.g., 2023)');
+      return;
+    }
+
     final requestBody = {
       'title': title,
       'company': company,
@@ -217,48 +230,63 @@ class PersonalCreationController extends GetxController {
     };
 
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().postRequest(
-          AppUrls.createExperience,
-          body: requestBody,
-          token: "Bearer ${AuthService.token}");
+        AppUrls.createExperience,
+        body: requestBody,
+        token: "Bearer ${AuthService.token}",
+      );
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
+        await getProfile();
         titleTEController.clear();
         companyNameTEController.clear();
         startExperienceTEController.clear();
         endExperienceTEController.clear();
         describeTEController.clear();
       } else {
-        AppSnackBar.showError('Something Went Wrong');
+        AppSnackBar.showError(
+            'Failed to add experience: ${response.statusCode}');
       }
     } catch (e) {
-      print('Somethint went wrong $e');
-      AppSnackBar.showError('Something Went Wrong $e');
+      String errorMsg = e.toString().contains('SocketException')
+          ? 'No internet connection'
+          : 'Something went wrong: $e';
+      AppSnackBar.showError(errorMsg);
+    } finally {
+      hideProgressIndicator();
     }
   }
 
   Future<void> deleteExperience(String id) async {
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().deleteRequest(
-          AppUrls.experienceDelete(id), "Bearer ${AuthService.token}");
+          "${AppUrls.experienceDelete}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess) {
-        AppSnackBar.showError("Removed from favorite!");
-
-        userProfile.value.data?.experience
-            ?.removeWhere((post) => post.id == id);
-        userProfile.refresh();
-        reFresh();
+        AppSnackBar.showSuccess("Experience deleted successfully!");
+        await getProfile();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
     } catch (e) {
-      AppSnackBar.showError(e.toString());
+      AppSnackBar.showError("Error: ${e.toString()}");
+    } finally {
+      hideProgressIndicator();
     }
   }
 
-  // Educaton ================
+  //! Educaton Part ================
+
+  final instituteNameTEController = TextEditingController();
+  final majorSubjectTEController = TextEditingController();
+  final minorSubjectTEController = TextEditingController();
+  final degreeTEController = TextEditingController();
+  final startTEController = TextEditingController();
+  final endTEController = TextEditingController();
+
   Future<void> educationAdd() async {
     final requestBody = {
       'institute': instituteNameTEController.text.trim(),
@@ -270,6 +298,7 @@ class PersonalCreationController extends GetxController {
     };
 
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().postRequest(
           AppUrls.createEducation,
           body: requestBody,
@@ -278,7 +307,7 @@ class PersonalCreationController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 201) {
         AppSnackBar.showSuccess('Create experience successfully');
-
+        await getProfile();
         instituteNameTEController.clear();
         majorSubjectTEController.clear();
         minorSubjectTEController.clear();
@@ -291,29 +320,31 @@ class PersonalCreationController extends GetxController {
     } catch (e) {
       print('Somethint went wrong $e');
       AppSnackBar.showError('Something Went Wrong $e');
+    } finally {
+      hideProgressIndicator();
     }
   }
 
-  Future<void> educationDelete(String id) async {
+  Future<void> deleteEducation(String id) async {
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().deleteRequest(
-          AppUrls.educationDelete(id), "Bearer ${AuthService.token}");
+          "${AppUrls.educationDelete}/$id", "Bearer ${AuthService.token}");
 
       if (response.isSuccess) {
-        AppSnackBar.showError("Removed from favorite!");
-
-        userProfile.value.data?.education?.removeWhere((post) => post.id == id);
-        userProfile.refresh();
-        reFresh();
+        AppSnackBar.showSuccess("Education deleted successfully!");
+        await getProfile();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
       }
     } catch (e) {
-      AppSnackBar.showError(e.toString());
+      AppSnackBar.showError("Error: ${e.toString()}");
+    } finally {
+      hideProgressIndicator();
     }
   }
 
-  void reFresh() {
+  void refresh() {
     update();
   }
 }

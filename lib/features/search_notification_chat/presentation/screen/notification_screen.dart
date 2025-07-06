@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/search_notification_chat/controller/notification_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -8,10 +9,8 @@ import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
 
-class NotificationScreen extends StatelessWidget {
-  NotificationScreen({super.key});
-
-  final NotificationController controller = NotificationController();
+class NotificationScreen extends GetView<NotificationController> {
+  const NotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

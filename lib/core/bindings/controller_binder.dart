@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
+import 'package:shuroo/features/dummy/controller/dummy2_controller.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/jobs/controller/favorite_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
@@ -13,6 +14,7 @@ import '../../features/jobs/controller/job_details_controller.dart';
 import '../../features/jobs/controller/profile_view_controller.dart';
 import '../../features/jobs/controller/short_listed_controller.dart';
 import '../../features/profile/controller/profile_information_controller.dart';
+import '../../features/search_notification_chat/controller/notification_controller.dart';
 
 class ControllerBinder extends Bindings {
   @override
@@ -34,11 +36,7 @@ class ControllerBinder extends Bindings {
           () => PersonalCreationController(),
       fenix: true,
     );
-
-    Get.lazyPut<MakePostController>(
-          () => MakePostController(),
-      fenix: true,
-    );
+    Get.lazyPut<MakePostController>(() => MakePostController(),fenix: true);
     Get.lazyPut<MyAllPostScreenController>(() => MyAllPostScreenController(), fenix: true,);
     Get.lazyPut<ShortListedController>(() => ShortListedController(), fenix: true,);
     Get.lazyPut<ProfileViewController>(() => ProfileViewController(), fenix: true,);
@@ -48,6 +46,8 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
     Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
     Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
+    Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
+    Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
 
 
 

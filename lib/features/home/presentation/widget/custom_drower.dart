@@ -177,8 +177,8 @@ class CustomDrower extends StatelessWidget {
                                         backgroundColor: AppColors.white,
                                         side: BorderSide(
                                             color: AppColors.textSecondary),
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 11.h),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 11.h),
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -197,14 +197,16 @@ class CustomDrower extends StatelessWidget {
                                     child: OutlinedButton(
                                       style: OutlinedButton.styleFrom(
                                         backgroundColor: AppColors.customBlue,
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 11.h),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 11.h),
                                       ),
                                       onPressed: () async {
                                         Get.back(); // close dialog first
-                                        print('============================Logout started');
+                                        print(
+                                            '============================Logout started');
                                         await AuthService.logoutUser();
-                                        print('============================Logout completed');
+                                        print(
+                                            '============================Logout completed');
                                       },
                                       child: CustomText(
                                         text: "Yes",

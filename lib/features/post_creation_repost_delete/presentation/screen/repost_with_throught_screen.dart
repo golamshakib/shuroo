@@ -13,8 +13,7 @@ import '../../controller/repost_with_throught_screen_controller.dart';
 
 class RepostWithThroughtScreen extends StatelessWidget {
   RepostWithThroughtScreen({super.key});
-  RepostWithThroughtScreenController _controller =
-      Get.put(RepostWithThroughtScreenController());
+  final controller = Get.put(RepostWithThroughtScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class RepostWithThroughtScreen extends StatelessWidget {
                   ),
                 ),
                 Image.asset(
-                  IconPath.icon_pro,
+                  ImagePath.dummyProfilePicture,
                   height: 40,
                   width: 40,
                 ),
@@ -82,7 +81,7 @@ class RepostWithThroughtScreen extends StatelessWidget {
                 Container(
                     child: CustomTextField(
                         maxLine: 3,
-                        controller: _controller.textController,
+                        controller: controller.textController,
                         hintText: "Share your thoughts...")),
                 CustomRepostScreenCard(
                   context: context,
