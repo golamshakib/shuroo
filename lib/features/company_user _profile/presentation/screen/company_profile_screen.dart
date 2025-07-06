@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 
@@ -41,7 +42,12 @@ class CompanyProfileScreen extends StatelessWidget {
           final user = controllerOne.othersUserProfile.value.data;
 
           if (user == null) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+                child: SpinKitFadingCircle(
+                  color: AppColors.primary,
+                  size: 50.h,
+                )
+            );
           }
 
           return Column(

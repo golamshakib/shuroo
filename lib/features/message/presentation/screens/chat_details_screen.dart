@@ -216,10 +216,10 @@ class _ChatInboxScreenState extends State<ChatInboxScreen> {
                           : const SizedBox.shrink(),
                 ),
               ),
-              // MessageInputBox(
-              //   chatController: chatController,
-              //   receiverId: widget.receiverId,
-              // ),
+              MessageInputBox(
+                chatController: chatController,
+                receiverId: widget.receiverId,
+              ),
             ],
           ),
         ),
