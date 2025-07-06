@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
@@ -140,25 +142,78 @@ class PersonalCreationController extends GetxController {
     };
 
     try {
-      showProgressIndicator();
+      await _sendPutRequestWithHeadersAndImagesOnly1(AppUrls.profileUpdate,
+          requestBody, profilePath.value, "Bearer ${AuthService.token}");
+      // showProgressIndicator();
 
-      final response = await NetworkCaller().putRequest(
-        AppUrls.profileUpdate,
-        body: requestBody,
-        token: "Bearer ${AuthService.token}",
-      );
+      // final response = await NetworkCaller().putRequest(
+      //   AppUrls.profileUpdate,
+      //   body: requestBody,
+      //   token: "Bearer ${AuthService.token}",
+      // );
 
-      if (response.isSuccess) {
-        AppSnackBar.showSuccess('Data updated successfully');
-        await getProfile();
-      } else {
-        AppSnackBar.showError(
-            response.errorMessage ?? 'Failed to update profile');
-      }
+      // if (response.isSuccess) {
+      //   AppSnackBar.showSuccess('Data updated successfully');
+      //   await getProfile();
+      // } else {
+      //   AppSnackBar.showError(
+      //       response.errorMessage ?? 'Failed to update profile');
+      // }
     } catch (e) {
       AppSnackBar.showError('An error occurred: $e');
     } finally {
       hideProgressIndicator();
+    }
+  }
+
+  Future<void> _sendPutRequestWithHeadersAndImagesOnly1(
+    String url,
+    Map<String, dynamic> body,
+    String? imagePath,
+    String? token,
+  ) async {
+    if (token == null || token.isEmpty) {
+      AppSnackBar.showError('Token is invalid or expired.');
+
+      return;
+    }
+
+    try {
+      var request = http.MultipartRequest('PUT', Uri.parse(url));
+
+      request.headers.addAll({
+        'Authorization': "Bearer ${AuthService.token}",
+      });
+
+      request.fields['bodyData'] = jsonEncode(body);
+
+      if (imagePath != null && imagePath.isNotEmpty) {
+        print('Attaching image: $imagePath');
+        request.files.add(await http.MultipartFile.fromPath(
+          'profileImage',
+          imagePath,
+        ));
+      }
+
+      print('Request Headers: ${request.headers}');
+      print('Request Fields: ${request.fields}');
+
+      var response = await request.send();
+      debugPrint("----------------------------------------------------------");
+
+      debugPrint(response.statusCode.toString());
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await getProfile();
+        AppSnackBar.showSuccess("Profile updated successfully!");
+      } else {
+        var errorResponse = await response.stream.bytesToString();
+        print('Response error: $errorResponse');
+        AppSnackBar.showError(errorResponse);
+      }
+    } catch (e) {
+      print('Request error: $e');
+      AppSnackBar.showError("Failed to update profile. Please try again.");
     }
   }
 

@@ -32,11 +32,12 @@ class HomeScreen extends StatelessWidget {
               onTap: () {},
               child: Row(
                 children: [
-                  Image.asset(
+                  ClipOval(
+                      child: Image.network(
                     user?.image ?? ImagePath.dummyProfilePicture,
                     height: 40.h,
                     width: 40.w,
-                  ),
+                  )),
                   SizedBox(width: 10.w),
                   CustomText(
                     text: "Hi, ${user?.name!.split(" ").first ?? 'User Name'}",
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     repostClick: () {
-                    //  Get.to(() => RepostWithThroughtScreen(post: post));
+                      //  Get.to(() => RepostWithThroughtScreen(post: post));
                     },
                   );
                 },
