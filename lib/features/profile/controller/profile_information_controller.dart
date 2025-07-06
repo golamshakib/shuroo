@@ -16,16 +16,15 @@ class ProfileInformationController extends GetxController {
   late String originalCity;
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    originalName = nameTEController.text;
-    originalEmail = emailTEController.text;
-    originalPhone = phoneTEController.text;
-    originalCountry = countryTEController.text;
-    originalState = stateTEController.text;
-    originalCity = cityTEController.text;
-
-    getUser();
+    // originalName = nameTEController.text;
+    // originalEmail = emailTEController.text;
+    // originalPhone = phoneTEController.text;
+    // originalCountry = countryTEController.text;
+    // originalState = stateTEController.text;
+    // originalCity = cityTEController.text;
+    await getUser();
   }
 
   @override

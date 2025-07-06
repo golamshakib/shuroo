@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   var commentHint = "Add a comment...".obs;
   final FocusNode controllerNode = FocusNode();
 
-  final isLoading = false.obs;
+  final isLoading = true.obs;
 
   RxBool activeNotification = true.obs;
 
@@ -52,9 +52,10 @@ class HomeController extends GetxController {
   late ProfileInformationController controllerOne;
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
     controllerOne = Get.find<ProfileInformationController>();
+    isLoading.value = false;
     getAllPost();
   }
 

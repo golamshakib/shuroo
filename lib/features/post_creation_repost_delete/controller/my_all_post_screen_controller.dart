@@ -59,7 +59,7 @@ class MyAllPostScreenController extends GetxController {
     try {
       //  showProgressIndicator();
       final response =
-          await NetworkCaller().getRequest("${AppUrls.getSinglePost}/$id");
+      await NetworkCaller().getRequest("${AppUrls.getSinglePost}/$id");
 
       if (response.isSuccess && response.statusCode == 200) {
         AppSnackBar.showSuccess('Post Fetch Successfully');
@@ -143,7 +143,7 @@ class MyAllPostScreenController extends GetxController {
         final updatedJson = response.responseData['data']['update'];
 
         final index =
-            getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
+        getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
 
         if (index != null && index >= 0) {
           // Update the local list with new values

@@ -72,9 +72,9 @@ class MyAllPostScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final userPost = posts[index];
                         final String? firstImage =
-                            userPost?.image?.isNotEmpty == true
-                                ? userPost!.image!.first
-                                : null;
+                        userPost?.image?.isNotEmpty == true
+                            ? userPost!.image!.first
+                            : null;
                         return Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -94,25 +94,25 @@ class MyAllPostScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
                                       ClipOval(
                                         child: userPost.user?.image != null &&
-                                                userPost.user!.image!.isNotEmpty
+                                            userPost.user!.image!.isNotEmpty
                                             ? Image.network(
-                                                userPost.user!.image!,
-                                                height: 24.h,
-                                                width: 24.w,
-                                                fit: BoxFit.cover,
-                                              )
+                                          userPost.user!.image!,
+                                          height: 24.h,
+                                          width: 24.w,
+                                          fit: BoxFit.cover,
+                                        )
                                             : Image.asset(
-                                                ImagePath.dummyProfilePicture,
-                                                height: 24.h,
-                                                width: 24.w,
-                                                fit: BoxFit.cover,
-                                              ),
+                                          ImagePath.dummyProfilePicture,
+                                          height: 24.h,
+                                          width: 24.w,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                       SizedBox(width: 5.w),
                                       CustomText(
