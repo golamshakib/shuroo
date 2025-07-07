@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shuroo/core/services/notification_service.dart';
 import 'package:shuroo/firebase_options.dart';
 import 'app.dart';
 import 'core/services/Auth_service.dart';
@@ -15,7 +16,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeFCM();
+  await NotificationService().initialize();
   await AuthService.init();
+
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) {
