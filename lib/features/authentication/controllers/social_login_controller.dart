@@ -56,6 +56,7 @@ class SocialLoginController extends GetxController {
 
 
   Future<void> signInWithGoogle() async {
+
     try {
       isLoading.value = true;
       Get.dialog(
