@@ -62,5 +62,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- Login with apple permission -->
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+	<key>CFBundleTypeRole</key>
+	<string>Editor</string>
+	<key>CFBundleURLSchemes</key>
+	<array>
+		<string>com.example.apple_sign_in_example</string>
+	</array>
+	</dict>
+</array>
 </dict>
 </plist>
