@@ -34,10 +34,12 @@ class MyAllPostScreenController extends GetxController {
     'Grace',
     'Grace'
   ];
+
+  late ProfileInformationController controllerOne;
   @override
   void onInit() async {
     super.onInit();
-    final controllerOne = Get.find<ProfileInformationController>();
+    controllerOne = Get.find<ProfileInformationController>();
     log(controllerOne.userProfile.value.data!.id.toString());
     await getSingleUserPost(
         controllerOne.userProfile.value.data!.id.toString());
