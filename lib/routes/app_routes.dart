@@ -100,7 +100,7 @@ class AppRoute {
     GetPage(name: homeScreen, page:() => HomeScreen()),
     GetPage(name: otpScreen, page:() => OtpScreen()),
     // GetPage(name: makePostHomeScreen, page:() => MakePostHomeScreen()),
-    GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen(postId: Get.arguments['postId'] ?? '')),
+    GetPage(name: repostWithThroughtScreen, page:() => RepostWithThroughtScreen()),
     GetPage(name: myAllPostScreen, page:() => MyAllPostScreen()),
     GetPage(name: companyProfileScreen, page:() => CompanyProfileScreen()),
     GetPage(name: otherUserProfileScreen, page:() => OtherUserProfileScreen()),
