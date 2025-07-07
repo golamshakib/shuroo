@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
            initialRoute: AppRoute.init,
 
-        //  initialRoute: AppRoute.myAllPostScreen,
+        //  initialRoute: AppRoute.editPostScreen,
         //  initialRoute: AppRoute.makePostHomeScreen,
           getPages: AppRoute.routes,
           initialBinding: ControllerBinder(),

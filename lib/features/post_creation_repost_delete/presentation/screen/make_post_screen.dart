@@ -122,15 +122,15 @@ class MakePostScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () => Get.back(),
-                          child: Image.asset(
-                            IconPath.cancle,
-                            height: 40.w,
-                            width: 40.w,
-                          ),
-                        ),
-                        SizedBox(width: 10.w),
+                        // GestureDetector(
+                        //   onTap: () => Get.back(),
+                        //   child: Image.asset(
+                        //     IconPath.cancle,
+                        //     height: 40.w,
+                        //     width: 40.w,
+                        //   ),
+                        // ),
+                        //  SizedBox(width: 10.w),
 
                         // Profile Image
                         if (user?.image != null)
@@ -164,34 +164,35 @@ class MakePostScreen extends StatelessWidget {
                 ));
           }),
           Obx(() {
-  final isEnabled = controller.isPostButtonEnabled.value;
+            final isEnabled = controller.isPostButtonEnabled.value;
 
-  return GestureDetector(
-    onTap: isEnabled
-        ? () {
-            controller.createPost(
-              postText: controller.textController.text,
+            return GestureDetector(
+              onTap: isEnabled
+                  ? () {
+                      controller.createPost(
+                        postText: controller.textController.text,
+                      );
+                      Get.back();
+                    }
+                  : null,
+              child: Container(
+                width: 72.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  color: isEnabled
+                      ? AppColors.custom_blue
+                      : const Color(0xFFE6E6E7),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                alignment: Alignment.center,
+                child: CustomText(
+                  text: AppText.post,
+                  color: isEnabled ? AppColors.white : AppColors.grayText,
+                  fontSize: 14.sp,
+                ),
+              ),
             );
-            Get.back();
-          }
-        : null,
-    child: Container(
-      width: 72.w,
-      height: 40.h,
-      decoration: BoxDecoration(
-        color: isEnabled ? AppColors.custom_blue : const Color(0xFFE6E6E7),
-        borderRadius: BorderRadius.circular(50),
-      ),
-      alignment: Alignment.center,
-      child: CustomText(
-        text: AppText.post,
-        color: isEnabled ? AppColors.white : AppColors.grayText,
-        fontSize: 14.sp,
-      ),
-    ),
-  );
-})
-
+          })
         ],
       ),
     );

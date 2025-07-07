@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import '../../../../core/utils/constants/app_colors.dart';
+import '../../../../core/utils/constants/image_path.dart';
 
 class CustomRepostScreenCard extends StatelessWidget {
   final String organization;
@@ -27,7 +29,19 @@ class CustomRepostScreenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      margin: EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,14 +52,27 @@ class CustomRepostScreenCard extends StatelessWidget {
                 flex: 5,
                 child: Row(
                   children: [
-                    Image.asset(icon),
+                    icon == "null" ?
+                    ClipOval(
+                      child: Image.asset(
+                        ImagePath.dummyProfilePicture,
+                        width: 24.w,
+                        height: 24.h,
+                        fit: BoxFit.fill,
+                      ),
+                    ) :
+                    ClipOval(
+                      child: Image.network(
+                        icon,
+                        width: 24.w,
+                        height: 24.h,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                     SizedBox(
                       width: 5.w,
                     ),
-                    Text(organization,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Cabinet Grotesk")),
+                    CustomText(text: title.toString(), fontSize: 14.sp,),
                   ],
                 ),
               ),
@@ -53,33 +80,24 @@ class CustomRepostScreenCard extends StatelessWidget {
                   flex: 1,
                   child: Container(
                       alignment: Alignment.topCenter,
-                      child: Text(timeAgo ??'',
+                      child: Text('',
                           style: const TextStyle(color: AppColors.grayText)))),
             ],
           ),
           const SizedBox(height: 8),
-          Text(
-            title!,
-            style: TextStyle(
-              color: AppColors.grayText,
-              fontFamily: "Inter",
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 4),
           Text(content),
-          const SizedBox(height: 4),
-          Text(hashtags ?? '', style: const TextStyle(color: Colors.blue)),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              imageAsset!,
-              fit: BoxFit.cover,
-              height: 151.h,
-              width: 341.w,
+          SizedBox(height: 12.h),
+          if (imageAsset != "")
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                imageAsset!,
+                fit: BoxFit.cover,
+                height: 151.h,
+                width: 341.w,
+              ),
             ),
-          ),
+          const SizedBox(height: 8),
         ],
       ),
     );

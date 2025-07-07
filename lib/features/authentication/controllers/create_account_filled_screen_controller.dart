@@ -1,5 +1,9 @@
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
@@ -17,7 +21,40 @@ class FilledScreenController extends GetxController {
   RxBool isCheckd = true.obs;
   RxString checkValue = "".obs;
 
+  var fcmToken = '';
 
+  @override
+  void onInit() {
+    initializeFCM();
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  Future<void> initializeFCM() async {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (Platform.isIOS) {
+      String? apnsToken;
+      int attempts = 0;
+      const int maxAttempts = 10;
+
+      do {
+        apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        await Future.delayed(const Duration(milliseconds: 300));
+        attempts++;
+      } while (apnsToken == null && attempts < maxAttempts);
+
+      log("APNS Token: $apnsToken");
+    }
+
+    String? token = await FirebaseMessaging.instance.getToken();
+    fcmToken = token ?? ""; // Store the token in the variable
+    log("FCM Token: $fcmToken");
+  }
           
   void requestToCreateAccount() {
     if (nameController.text.isNotEmpty &&
@@ -31,6 +68,7 @@ class FilledScreenController extends GetxController {
               "name": nameController.text,
               "email": emailController.text,
               "phone": phoneController.text,
+              'fcmToken': fcmToken,
               "password": passController.text
             };
 
