@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/authentication/controllers/social_login_controller.dart';
+import 'package:shuroo/features/authentication/service/signin_with_apple_service.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
@@ -10,7 +13,7 @@ import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
 
 class SignInAndUnlockScreen extends StatelessWidget {
-   SignInAndUnlockScreen({super.key});
+  SignInAndUnlockScreen({super.key});
   final SocialLoginController controller = Get.find<SocialLoginController>();
 
   @override
@@ -73,8 +76,6 @@ class SignInAndUnlockScreen extends StatelessWidget {
                 CustomButtonCreateScreen(
                   onTap: () {
                     controller.signInWithGoogle();
-
-
                   },
                   text: AppText.sign_In_google,
                   img: IconPath.google_icon,
@@ -83,7 +84,27 @@ class SignInAndUnlockScreen extends StatelessWidget {
                 ),
 
                 CustomButtonCreateScreen(
-                  onTap: () {},
+                  onTap: () async {
+                    try {
+                      log("Apple Sign In button tapped");
+                      final credential =
+                          await SigninWithAppleService.signInWithApple();
+                      if (credential != null) {
+                        log("Apple Sign In successful with user: ${credential.userIdentifier}");
+
+                        await controller.signInWithApple(
+                            identifyToken: credential.identityToken ?? "",
+                            fullName: credential.givenName);
+                      }
+                    } catch (e) {
+                      log("Apple Sign In failed: $e");
+                      Get.snackbar(
+                        'Sign In Failed',
+                        'Apple Sign In failed. Please try again.',
+                        snackPosition: SnackPosition.TOP,
+                      );
+                    }
+                  },
                   text: AppText.sign_In_apple,
                   img: IconPath.apple_icon,
                   left: 65,

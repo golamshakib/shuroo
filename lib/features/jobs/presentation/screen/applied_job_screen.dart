@@ -29,6 +29,8 @@ class AppliedJobScreen extends GetView<AppliedController> {
           padding: EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() {
                   if(controller.isLoading.value){
