@@ -4,6 +4,7 @@ import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/edit_post_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/about_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/change_password_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/help_screen.dart';
@@ -77,6 +78,7 @@ class AppRoute {
   static String chatScreen = "/chatScreen";
   static String dummy2Screen = "/dummy2Screen";
   static String chatInboxScreen = "/chatInboxScreen";
+  static String editPostScreen = "/editPostScreen";
 
   static List<GetPage> routes = [
 
@@ -119,5 +121,6 @@ class AppRoute {
     GetPage(name: chatScreen, page:() => ChatScreen()),
     GetPage(name: jobScreen, page:() => JobScreen()),
     GetPage(name: dummy2Screen, page:() => Dummy2Screen()),
+    GetPage(name: editPostScreen, page:() => EditPostScreen()),
   ];
 }

@@ -124,7 +124,7 @@ class MyAllPostScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      print("Edit post: ${userPost.id}");
+                                      
                                       showPostEditePopup(
                                         context,
                                         userPost.id.toString(),
