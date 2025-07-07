@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569226026728",
+    "project_id": "shuroo-job-post",
+    "storage_bucket": "shuroo-job-post.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569226026728:android:74fda0bd094c6b9bd5335d",
+        "android_client_info": {
+          "package_name": "com.shuroo.shuroo.shuroo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT-5KQID0zHf10MKwOT9Exdnun7Dk6IIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
