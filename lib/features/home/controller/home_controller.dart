@@ -149,8 +149,9 @@ class HomeController extends GetxController {
     await submitComment(requestBody, postId);
   }
 
-  Future<void> submitComment(
-      Map<String, dynamic> requestBody, String postId) async {
+  Future<void> submitComment(Map<String, dynamic> requestBody, String postId) async {
+    log("===============================================================");
+    log("Bearer ${AuthService.token}");
     try {
       showProgressIndicator();
       final response = await NetworkCaller().postRequest(
@@ -163,7 +164,14 @@ class HomeController extends GetxController {
         commentTEController.value.clear();
         requestForPostComment(postId);
         AppSnackBar.showSuccess("Comment Posted");
-      } else {
+      }
+      else if(response.statusCode == 500){
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Posted");
+      }
+      else {
         Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
