@@ -73,20 +73,21 @@ class PostCard extends GetView<HomeController> {
                 flex: 5,
                 child: Row(
                   children: [
+                    icon == null ?
+                    ClipOval(
+                      child: Image.asset(
+                        ImagePath.dummyProfilePicture,
+                        width: 24.w,
+                        height: 24.h,
+                        fit: BoxFit.fill,
+                      ),
+                    ) :
                     ClipOval(
                       child: Image.network(
                         icon!,
                         width: 24.w,
                         height: 24.h,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            ImagePath.dummyProfilePicture,
-                            width: 24.w,
-                            height: 24.h,
-                            fit: BoxFit.cover,
-                          );
-                        },
+                        fit: BoxFit.fill,
                       ),
                     ),
                     SizedBox(

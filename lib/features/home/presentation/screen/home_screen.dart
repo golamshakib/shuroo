@@ -129,9 +129,11 @@ class HomeScreen extends StatelessWidget {
                       }
                     },
                     repostClick: () {
-                      Get.to(() =>
-                          RepostWithThroughtScreen(postId: post.id.toString()));
-                      print("${post.id.toString()}===============================+");
+                      // Get.to(() =>
+                      //     RepostWithThroughtScreen(postId: post.id.toString()));
+                      // print("${post.id.toString()}===============================+");
+
+                      Get.toNamed(AppRoute.repostWithThroughtScreen, arguments: post.id.toString());
                     },
                   );
                 },

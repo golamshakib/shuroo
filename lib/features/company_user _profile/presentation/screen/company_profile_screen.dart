@@ -57,19 +57,36 @@ class CompanyProfileScreen extends StatelessWidget {
                 margin: EdgeInsets.only(top: 39, left: 16, right: 16),
                 child: Column(
                   children: [
-                    Image.network(
-                      user.image ?? ImagePath.dummyProfilePicture,
-                      height: 120.h,
-                      width: 120.w,
-                      errorBuilder: (context, object, stacktrace){
-                        return Image.asset(
-                          ImagePath.dummyProfilePicture,
-                          height: 120.h,
-                          width: 120.w,
-
-                        );
-                      },
+                    user.image == null ?
+                    ClipOval(
+                      child: Image.asset(
+                        ImagePath.dummyProfilePicture,
+                        width: 120.w,
+                        height: 120.h,
+                        fit: BoxFit.fill,
+                      ),
+                    ) :
+                    ClipOval(
+                      child: Image.network(
+                        user.image,
+                        width: 120.w,
+                        height: 120.h,
+                        fit: BoxFit.fill,
+                      ),
                     ),
+                    // Image.network(
+                    //   user.image ?? ImagePath.dummyProfilePicture,
+                    //   height: 120.h,
+                    //   width: 120.w,
+                    //   errorBuilder: (context, object, stacktrace){
+                    //     return Image.asset(
+                    //       ImagePath.dummyProfilePicture,
+                    //       height: 120.h,
+                    //       width: 120.w,
+                    //
+                    //     );
+                    //   },
+                    // ),
                     const SizedBox(height: 16),
                     CustomText(
                       text: user.name ?? 'User Name',

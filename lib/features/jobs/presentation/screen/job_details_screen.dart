@@ -8,6 +8,7 @@ import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/jobs/controller/job_details_controller.dart';
+import '../../../../core/utils/constants/image_path.dart';
 import '../../../favorites/controller/favourite_controller.dart';
 
 
@@ -83,6 +84,23 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                   ),
                   child: Column(
                     children: [
+                      data.company?.logoImage == null ?
+                      ClipOval(
+                        child: Image.asset(
+                          ImagePath.dummyProfilePicture,
+                          width: 24.w,
+                          height: 24.h,
+                          fit: BoxFit.fill,
+                        ),
+                      ) :
+                      ClipOval(
+                        child: Image.network(
+                          data.company?.logoImage ?? "",
+                          width: 24.w,
+                          height: 24.h,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                       Image.network(data.company?.logoImage ?? '', height: 60.h,
                           width: 60.w),
                       CustomText(text: data.name ?? '',
