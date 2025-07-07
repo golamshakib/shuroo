@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,9 +15,9 @@ import '../../../core/utils/constants/icon_path.dart';
 
 class PersonalCreationController extends GetxController {
   @override
-  void onInit() {
-    getProfile();
+  void onInit() async{
     super.onInit();
+    await getProfile();
   }
 
   final aboutTEController = TextEditingController();
@@ -230,6 +231,9 @@ class PersonalCreationController extends GetxController {
       if (response.isSuccess && response.statusCode == 200) {
         //userProfile.refresh();
         userProfile.value = GetUser.fromJson(response.responseData);
+        log("user profile called");
+
+        log(profile.data!.name.toString());
         print(
             "The skill list is: ${userProfile.value.data?.skills?.toString()}");
         skillList.value = userProfile.value.data?.skills?.cast<String>() ?? [];
@@ -405,4 +409,6 @@ class PersonalCreationController extends GetxController {
   void refresh() {
     update();
   }
+
+  GetUser get profile => userProfile.value;
 }

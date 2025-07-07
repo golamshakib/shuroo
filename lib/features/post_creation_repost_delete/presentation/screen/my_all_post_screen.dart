@@ -147,7 +147,7 @@ class MyAllPostScreen extends StatelessWidget {
                                   content: userPost.content ?? "",
                                   imageAsset: firstImage ?? "",
                                   repostClick: (){
-                    Get.to(() => RepostWithThroughtScreen(postId: userPost.id.toString()));
+                    //Get.to(() => RepostWithThroughtScreen(postId: userPost.id.toString()));
 
                                   },
                                 ),
