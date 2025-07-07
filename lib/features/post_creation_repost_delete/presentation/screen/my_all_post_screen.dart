@@ -73,84 +73,6 @@ class MyAllPostScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final userPost = posts[index];
                         final String? firstImage =
-
-                        userPost?.image?.isNotEmpty == true
-                            ? userPost!.image!.first
-                            : null;
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                offset: const Offset(4, 4),
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          margin: const EdgeInsets.only(top: 16),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      ClipOval(
-                                        child: userPost.user?.image != null &&
-                                            userPost.user!.image!.isNotEmpty
-                                            ? Image.network(
-                                          userPost.user!.image!,
-                                          height: 24.h,
-                                          width: 24.w,
-                                          fit: BoxFit.cover,
-                                        )
-                                            : Image.asset(
-                                          ImagePath.dummyProfilePicture,
-                                          height: 24.h,
-                                          width: 24.w,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.w),
-                                      CustomText(
-                                        text: userPost.user?.name ?? "Unknown",
-                                        fontSize: 14,
-                                        color: AppColors.primaryTextColor,
-                                      ),
-                                    ],
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      
-                                      showPostEditePopup(
-                                        context,
-                                        userPost.id.toString(),
-                                      );
-                                    },
-                                    child: Image.asset(IconPath.dod),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                child: PostCard(
-                                  context: context,
-                                  icon: userPost.user?.image ?? IconPath.icon_1,
-                                  likeCount: "2".obs,
-                                  commentCount: "5",
-                                  likedByME: false.obs,
-                                  organization: userPost.user?.name ?? '',
-                                  content: userPost.content ?? "",
-                                  imageAsset: firstImage ?? "",
-                                  repostClick: (){
-                    //Get.to(() => RepostWithThroughtScreen(postId: userPost.id.toString()));
-
                             userPost.image?.isNotEmpty == true
                                 ? userPost.image!.first
                                 : null;
@@ -200,7 +122,6 @@ class MyAllPostScreen extends StatelessWidget {
                                   print("User ID is null");
                                   return;
                                 }
-
 
                                 if (role == 'USER') {
                                   Get.toNamed(AppRoute.otherUserProfileScreen,
