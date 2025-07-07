@@ -30,7 +30,9 @@ class HomeScreen extends StatelessWidget {
                 SizedBox() :
             controller.controllerOne.userProfile.value.data == null ? SizedBox():
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoute.myAllPostScreen);
+              },
               child: Row(
                 children: [
                   ClipOval(

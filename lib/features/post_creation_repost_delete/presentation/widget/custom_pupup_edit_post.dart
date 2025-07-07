@@ -30,14 +30,6 @@ void showPostEditePopup(BuildContext context, id) {
           mainAxisSize: MainAxisSize.min,
           children: [
             _popupOption(
-              icon: IconPath.share,
-              title: AppText.sharevia,
-              onTap: () {
-                showPeopleBottomSheet(context);
-              },
-            ),
-            SizedBox(height: 20),
-            _popupOption(
               icon: IconPath.edit,
               title: AppText.edtPost,
               onTap: () {
