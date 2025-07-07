@@ -80,5 +80,11 @@ class AppUrls {
 
 
   static const String generateImageLink = "$_baseUrl/chats/generateFile";
+
+
+  /// social login by sharif
+
+
+  static const String socialLogin = "$_baseUrl/auth/login/social";
 }
 
