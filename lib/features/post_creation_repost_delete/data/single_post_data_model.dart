@@ -54,6 +54,7 @@ class SinglePostDataModelData {
 
 class DataData {
     String? id;
+    String? type;
     String? userId;
     String? content;
     List<dynamic>? image;
@@ -61,12 +62,13 @@ class DataData {
     DateTime? updatedAt;
     User? user;
     int? totalLike;
-    List<Comment>? like;
-    List<Comment>? comment;
+    List<dynamic>? like;
+    List<dynamic>? comment;
     Count? count;
 
     DataData({
         this.id,
+        this.type,
         this.userId,
         this.content,
         this.image,
@@ -81,6 +83,7 @@ class DataData {
 
     factory DataData.fromJson(Map<String, dynamic> json) => DataData(
         id: json["id"],
+        type: json["type"],
         userId: json["userId"],
         content: json["content"],
         image: json["image"] == null ? [] : List<dynamic>.from(json["image"]!.map((x) => x)),
@@ -88,13 +91,14 @@ class DataData {
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         user: json["user"] == null ? null : User.fromJson(json["user"]),
         totalLike: json["totalLike"],
-        like: json["Like"] == null ? [] : List<Comment>.from(json["Like"]!.map((x) => Comment.fromJson(x))),
-        comment: json["Comment"] == null ? [] : List<Comment>.from(json["Comment"]!.map((x) => Comment.fromJson(x))),
+        like: json["Like"] == null ? [] : List<dynamic>.from(json["Like"]!.map((x) => x)),
+        comment: json["Comment"] == null ? [] : List<dynamic>.from(json["Comment"]!.map((x) => x)),
         count: json["_count"] == null ? null : Count.fromJson(json["_count"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "type": type,
         "userId": userId,
         "content": content,
         "image": image == null ? [] : List<dynamic>.from(image!.map((x) => x)),
@@ -102,25 +106,9 @@ class DataData {
         "updatedAt": updatedAt?.toIso8601String(),
         "user": user?.toJson(),
         "totalLike": totalLike,
-        "Like": like == null ? [] : List<dynamic>.from(like!.map((x) => x.toJson())),
-        "Comment": comment == null ? [] : List<dynamic>.from(comment!.map((x) => x.toJson())),
+        "Like": like == null ? [] : List<dynamic>.from(like!.map((x) => x)),
+        "Comment": comment == null ? [] : List<dynamic>.from(comment!.map((x) => x)),
         "_count": count?.toJson(),
-    };
-}
-
-class Comment {
-    String? userId;
-
-    Comment({
-        this.userId,
-    });
-
-    factory Comment.fromJson(Map<String, dynamic> json) => Comment(
-        userId: json["userId"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "userId": userId,
     };
 }
 
@@ -147,23 +135,27 @@ class Count {
 class User {
     String? id;
     String? name;
-    dynamic image;
+    String? image;
+    String? role;
 
     User({
         this.id,
         this.name,
         this.image,
+        this.role,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
         image: json["image"],
+        role: json["role"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "image": image,
+        "role": role,
     };
 }

@@ -63,7 +63,7 @@ class RepostWithThroughtScreen extends GetView<RepostWithThroughtScreenControlle
                               CustomText(
                                 text: controller.userProfileInfo.value.data!.name ??
                                     'User Name',
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 color: AppColors.textPrimary,
                               )
                             ],
@@ -98,18 +98,17 @@ class RepostWithThroughtScreen extends GetView<RepostWithThroughtScreenControlle
                         hintText: "Share your thoughts...",
                       ),
                       SizedBox(height: 24.h,),
-                      Obx(() {
-                        final post = controller.controllerOne.singlePost.value.data?.data;
-                        if (post == null) return SizedBox();
-                        return CustomRepostScreenCard(
+                      Obx(() =>
+                        controller.singlePost.value.data!.data != null ?
+                        CustomRepostScreenCard(
                           context: context,
-                          icon: post.user?.image ?? ImagePath.dummyProfilePicture,
-                          organization: post.user?.name ?? "Unknown",
-                          content: post.content?.toString() ?? '',
-                          imageAsset:
-                              post.image?.isNotEmpty == true ? post.image!.first : '',
-                        );
-                      })
+                          title: controller.singlePost.value.data!.data!.user!.name.toString(),
+                          icon: controller.singlePost.value.data!.data!.user!.image.toString(),
+                          organization: controller.singlePost.value.data!.data!.user!.name ?? "Unknown",
+                          content: controller.singlePost.value.data!.data!.content!.toString() ?? '',
+                          imageAsset: controller.singlePost.value.data!.data!.image!.isNotEmpty ? controller.singlePost.value.data!.data!.image!.first.toString() : "",
+                        ) : SizedBox()
+                      )
                     ],
                   ),
                 )
