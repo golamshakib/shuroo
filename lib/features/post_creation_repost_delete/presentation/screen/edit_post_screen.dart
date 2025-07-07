@@ -14,8 +14,8 @@ import 'package:shuroo/features/profile/controller/profile_information_controlle
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
-class MakePostScreen extends StatelessWidget {
-  MakePostScreen({super.key});
+class EditPostScreen extends StatelessWidget {
+  EditPostScreen({super.key});
 
   final controller = Get.find<MakePostController>();
   final controllerOne = Get.find<ProfileInformationController>();
@@ -24,7 +24,6 @@ class MakePostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: _buildAppBar(context),
       bottomSheet: _buildBottomSheet(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,6 +31,8 @@ class MakePostScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _buildAppBar(context),
+              SizedBox(height: 20.h),
               CustomTextField(
                 maxLine: 4,
                 controller: controller.textController,

@@ -84,6 +84,13 @@ class ControllerBinder extends Bindings {
       () => Dummy2Controller(),
       fenix: true,
     );
+
+    //
+    //       () => PersonalCreationController(),
+    //   fenix: true,
+    // );
+
+
     Get.lazyPut<MakePostController>(() => MakePostController(),fenix: true);
     Get.lazyPut<PersonalCreationController>(() => PersonalCreationController(),fenix: true);
     Get.lazyPut<MyAllPostScreenController>(() => MyAllPostScreenController(), fenix: true,);

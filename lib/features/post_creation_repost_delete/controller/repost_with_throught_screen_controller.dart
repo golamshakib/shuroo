@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
+import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
@@ -13,9 +14,10 @@ import 'package:shuroo/features/profile/data/user_data_model.dart';
 import '../data/single_post_data_model.dart';
 
 class RepostWithThroughtScreenController extends GetxController {
-  final TextEditingController textController = TextEditingController();
+  final textController = TextEditingController();
 
   var isLoading = false.obs;
+  RxBool isPostButtonEnable = false.obs;
 
   // Expose controllerOne here as a public variable or getter
   // final MyAllPostScreenController controllerOne = Get.find<MyAllPostScreenController>();
@@ -23,18 +25,14 @@ class RepostWithThroughtScreenController extends GetxController {
   var userProfileInfo = GetUser().obs;
   var singlePost = SinglePostDataModel().obs;
   @override
-  void onInit() async{
-    // TODO: implement onInit
+  void onInit() async {
     super.onInit();
-    if(Get.arguments != null){
+    if (Get.arguments != null) {
       log("===========================Here in init=================================");
       log("===========================postId: ${Get.arguments}=================================");
       isLoading.value = true;
       log("===========================Here making true=================================");
-      await  Future.wait([
-        fetchProfile(),
-        getSinglePost(Get.arguments)
-      ]);
+      await Future.wait([fetchProfile(), getSinglePost(Get.arguments)]);
       //await fetchProfile();
 
       log("===========================After fetched Profile=================================");
@@ -42,10 +40,18 @@ class RepostWithThroughtScreenController extends GetxController {
       log("===========================After fetched post=================================");
       isLoading.value = false;
       log("===========================Loader False=================================");
+
+      textController.addListener(validPost);
     }
   }
 
-  Future<void> fetchProfile() async{
+  void validPost() {
+    final textInput = textController.text.toString().trim().isNotEmpty;
+
+    isPostButtonEnable.value = textInput;
+  }
+
+  Future<void> fetchProfile() async {
     final object = Get.find<PersonalCreationController>();
     // await   object.getProfile().then((onValue){
     //   if(object.profile.data != null){
@@ -55,34 +61,32 @@ class RepostWithThroughtScreenController extends GetxController {
     //
     // });
 
-    ever(object.isLoading, (callback){
-      if(object.isLoading.value){
+    ever(object.isLoading, (callback) {
+      if (object.isLoading.value) {
         log("Loading........");
-      }else
-      {
+      } else {
         userProfileInfo.value = object.profile;
       }
-
     });
   }
 
   Future<void> getSinglePost(String id) async {
     try {
-      //  showProgressIndicator();
+      showProgressIndicator();
       final response =
-      await NetworkCaller().getRequest("${AppUrls.getSinglePost}/$id");
+          await NetworkCaller().getRequest("${AppUrls.getSinglePost}/$id");
       if (response.isSuccess && response.statusCode == 200) {
         final data = response.responseData;
         singlePost.value = SinglePostDataModel.fromJson(data);
       } else if (response.statusCode == 404) {
-        AppSnackBar.showError('Data Not Found');
+        //  AppSnackBar.showError('Data Not Found');
       } else {
-        AppSnackBar.showError('Something Went Wrong');
+        //  AppSnackBar.showError('Something Went Wrong');
       }
     } catch (e) {
       log('Something went Wrong $e');
     } finally {
-      //  hideProgressIndicator();
+      hideProgressIndicator();
     }
   }
 
@@ -95,9 +99,11 @@ class RepostWithThroughtScreenController extends GetxController {
       );
 
       if (response.isSuccess) {
+        AppSnackBar.showSuccess('Post Repost Successfully');
         log("Post Updated ========================================+++++++++");
+
+        Get.back();
         textController.clear();
-        return;
       } else {
         log(response.statusCode.toString());
       }

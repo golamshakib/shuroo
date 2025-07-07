@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custpm_popup.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/edit_post_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
 import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
@@ -39,7 +40,7 @@ void showPostEditePopup(BuildContext context, id) {
                   confirmText: "Edit",
                   cancelText: "Cancel",
                   onConfirm: () {
-                    // Get.to(() => RepostWithThroughtScreen(postId: id));
+                     Get.to(() => EditPostScreen());
                   },
                 );
               },
