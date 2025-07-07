@@ -1,5 +1,6 @@
 import 'dart:developer' show log;
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
@@ -34,10 +35,12 @@ class MyAllPostScreenController extends GetxController {
     'Grace',
     'Grace'
   ];
+
+  late ProfileInformationController controllerOne;
   @override
   void onInit() async {
     super.onInit();
-    final controllerOne = Get.find<ProfileInformationController>();
+    controllerOne = Get.find<ProfileInformationController>();
     log(controllerOne.userProfile.value.data!.id.toString());
     await getSingleUserPost(
         controllerOne.userProfile.value.data!.id.toString());
@@ -128,46 +131,13 @@ class MyAllPostScreenController extends GetxController {
 
   //! Edit Post ===================================================
 
-  Future<void> updatePost(String id, Map<String, dynamic> updatedData) async {
-    try {
-      showProgressIndicator();
+  Future<void> updatePost(String postId, Map<String, dynamic> updatedData) async {
 
-      final response = await NetworkCaller().putRequest(
-        "${AppUrls.editPost}/$id",
-        body: updatedData,
-        token: "Bearer ${AuthService.token}",
-      );
+    try{
 
-      if (response.isSuccess &&
-          (response.statusCode == 200 || response.statusCode == 201)) {
-        final updatedJson = response.responseData['data']['update'];
-
-        final index =
-        getUserPost.value.data?.data?.indexWhere((post) => post.id == id);
-
-        if (index != null && index >= 0) {
-          // Update the local list with new values
-          final postList = getUserPost.value.data!.data!;
-          final post = postList[index];
-
-          post.content = updatedJson['content'];
-          post.image = List<String>.from(updatedJson['image'] ?? []);
-          post.updatedAt = DateTime.tryParse(updatedJson['updatedAt'] ?? "");
-
-          getUserPost.refresh();
-        }
-
-        AppSnackBar.showSuccess("Post Edited Successfully");
-      } else if (response.statusCode == 404) {
-        AppSnackBar.showError("Post Not Found");
-      } else {
-        AppSnackBar.showError("Something Went Wrong");
-      }
-    } catch (e) {
-      log('Something went Wrong $e');
-      AppSnackBar.showError("Something went wrong");
-    } finally {
-      hideProgressIndicator();
+      // final request = MultipartRequest("PUT", AppUrls.editReplyById(replyId));
+    }catch(e){
+      AppSnackBar.showError(e.toString());
     }
   }
 }
