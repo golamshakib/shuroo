@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/custom_repost_screen_card.dart';
 import '../../../../core/common/widgets/custom_text.dart';
@@ -78,32 +79,43 @@ class RepostWithThroughtScreen
                               )
                             ],
                           ),
-                          InkWell(
-                            onTap: () {
-                              controller.postRepost(controller
-                                  .singlePost.value.data!.data!.id
-                                  .toString());
-                              print(
-                                  "=========================here is my post id=========================${controller.singlePost.value.data!.data!.id.toString()}");
-                            },
-                            child: Container(
-                              width: 72.0.w,
-                              height: 40.0.h,
-                              padding:
-                                  EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
-                              decoration: BoxDecoration(
-                                color: AppColors.custom_blue,
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              child: Center(
-                                child: CustomText(
-                                  text: "Update",
-                                  color: AppColors.white,
-                                  fontSize: 14.0,
+                          Obx(() {
+                            final isEnable =
+                                controller.isPostButtonEnable.value;
+                            return InkWell(
+                              onTap: isEnable
+                                  ? () {
+                                      controller.postRepost(controller
+                                          .singlePost.value.data!.data!.id
+                                          .toString());
+                                      AppSnackBar.showSuccess(
+                                          'Post Repost Successfully');
+                                      Get.back();
+                                    }
+                                  : null,
+                              child: Container(
+                                width: 72.0.w,
+                                height: 40.0.h,
+                                padding:
+                                    EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
+                                decoration: BoxDecoration(
+                                  color: isEnable
+                                      ? AppColors.custom_blue
+                                      : Color(0xffE6E6E7),
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                child: Center(
+                                  child: CustomText(
+                                    text: "Update",
+                                    color: isEnable
+                                        ? AppColors.white
+                                        : Color(0xff8B8E91),
+                                    fontSize: 14.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          })
                         ],
                       ),
                       SizedBox(

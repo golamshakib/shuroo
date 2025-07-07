@@ -14,9 +14,10 @@ import 'package:shuroo/features/profile/data/user_data_model.dart';
 import '../data/single_post_data_model.dart';
 
 class RepostWithThroughtScreenController extends GetxController {
-  final TextEditingController textController = TextEditingController();
+  final textController = TextEditingController();
 
   var isLoading = false.obs;
+  RxBool isPostButtonEnable = false.obs;
 
   // Expose controllerOne here as a public variable or getter
   // final MyAllPostScreenController controllerOne = Get.find<MyAllPostScreenController>();
@@ -39,7 +40,15 @@ class RepostWithThroughtScreenController extends GetxController {
       log("===========================After fetched post=================================");
       isLoading.value = false;
       log("===========================Loader False=================================");
+
+      textController.addListener(validPost);
     }
+  }
+
+  void validPost() {
+    final textInput = textController.text.toString().trim().isNotEmpty;
+
+    isPostButtonEnable.value = textInput;
   }
 
   Future<void> fetchProfile() async {
@@ -90,12 +99,11 @@ class RepostWithThroughtScreenController extends GetxController {
       );
 
       if (response.isSuccess) {
-        log("Post Updated ========================================+++++++++");
         AppSnackBar.showSuccess('Post Repost Successfully');
+        log("Post Updated ========================================+++++++++");
 
         Get.back();
         textController.clear();
-        
       } else {
         log(response.statusCode.toString());
       }
