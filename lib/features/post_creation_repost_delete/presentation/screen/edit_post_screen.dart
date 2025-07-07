@@ -185,14 +185,10 @@ class EditPostScreen extends GetView<EditPostController> {
             final isEnabled = controller.isPostButtonEnabled.value;
 
             return GestureDetector(
-              onTap: isEnabled
-                  ? () {
-                      // controller.createPost(
-                      //   postText: controller.textController.text,
-                      // );
+              onTap:() {
+                      controller.updatePost();
                       Get.back();
-                    }
-                  : null,
+                    },
               child: Container(
                 width: 72.w,
                 height: 40.h,
