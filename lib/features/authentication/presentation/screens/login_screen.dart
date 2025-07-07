@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
-
+import 'package:shuroo/features/authentication/controllers/social_login_controller.dart';
+import 'package:get/get.dart';
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
+   final SocialLoginController controller = Get.find<SocialLoginController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,6 +147,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                   label: Text("Sign up with Google", style: TextStyle(fontSize: 14.sp)),
                   onPressed: () {
+                    log("tap the button");
+                    controller.signInWithGoogle();
                     // Google Sign-up logic
                   },
                 ),

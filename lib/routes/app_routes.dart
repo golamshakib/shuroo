@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/company_user%20_profile/data/others_user_information_data_model.dart';
 import 'package:shuroo/features/dummy/presentation/screen/dummy2_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
@@ -83,10 +81,10 @@ class AppRoute {
   static List<GetPage> routes = [
 
     // Auth
-    GetPage(name: loginScreen, page: () => const LoginScreen()),
+    GetPage(name: loginScreen, page: () =>  LoginScreen()),
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
-    GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
+    GetPage(name: createAccountScreen, page:() =>  CreateAccountScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
     GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
     GetPage(name: signInAndUnlockScreen, page:() => SignInAndUnlockScreen()),
