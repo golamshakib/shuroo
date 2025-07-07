@@ -100,7 +100,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
     Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
     Get.lazyPut<RepostWithThroughtScreenController>(() => RepostWithThroughtScreenController(), fenix: true,);
-    Get.lazyPut<SocialLoginController>(()=>SocialLoginController());
+    Get.lazyPut<SocialLoginController>(()=>SocialLoginController(), fenix: true);
 
     // Get.lazyPut<JobController>(
     //       () => JobController(),
