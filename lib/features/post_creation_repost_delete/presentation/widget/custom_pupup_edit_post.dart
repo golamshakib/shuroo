@@ -11,6 +11,7 @@ import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
+import '../../../../routes/app_routes.dart';
 
 void showPostEditePopup(BuildContext context, id) {
   final controller = Get.find<MyAllPostScreenController>();
@@ -40,7 +41,8 @@ void showPostEditePopup(BuildContext context, id) {
                   confirmText: "Edit",
                   cancelText: "Cancel",
                   onConfirm: () {
-                     Get.to(() => EditPostScreen());
+                    Get.back();
+                     Get.toNamed(AppRoute.editPostScreen, arguments: id);
                   },
                 );
               },
