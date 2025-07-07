@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shuroo/features/authentication/controllers/social_login_controller.dart';
 import 'package:shuroo/features/company_user%20_profile/controller/other_user_profile_screen_controller.dart';
 import 'package:shuroo/features/dummy/controller/dummy2_controller.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
@@ -20,36 +21,69 @@ class ControllerBinder extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(
-          () => HomeController(),
+      () => HomeController(),
       fenix: true,
     );
 
     Get.lazyPut<ProfileInformationController>(
-          () => ProfileInformationController(),
+      () => ProfileInformationController(),
       fenix: true,
     );
     Get.lazyPut<ChangePasswordController>(
-          () => ChangePasswordController(),
+      () => ChangePasswordController(),
       fenix: true,
     );
     Get.lazyPut<PersonalCreationController>(
-          () => PersonalCreationController(),
+      () => PersonalCreationController(),
       fenix: true,
     );
-    Get.lazyPut<MakePostController>(() => MakePostController(),fenix: true);
-    Get.lazyPut<MyAllPostScreenController>(() => MyAllPostScreenController(), fenix: true,);
-    Get.lazyPut<ShortListedController>(() => ShortListedController(), fenix: true,);
-    Get.lazyPut<ProfileViewController>(() => ProfileViewController(), fenix: true,);
-    Get.lazyPut<InterviewController>(() => InterviewController(), fenix: true,);
-    Get.lazyPut<AppliedController>(() => AppliedController(), fenix: true,);
-    Get.lazyPut<FavoriteController>(() => FavoriteController(), fenix: true,);
-    Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
-    Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
-    Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
-    Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
-    Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
+    Get.lazyPut<MakePostController>(() => MakePostController(), fenix: true);
+    Get.lazyPut<MyAllPostScreenController>(
+      () => MyAllPostScreenController(),
+      fenix: true,
+    );
+    Get.lazyPut<ShortListedController>(
+      () => ShortListedController(),
+      fenix: true,
+    );
+    Get.lazyPut<ProfileViewController>(
+      () => ProfileViewController(),
+      fenix: true,
+    );
+    Get.lazyPut<InterviewController>(
+      () => InterviewController(),
+      fenix: true,
+    );
+    Get.lazyPut<AppliedController>(
+      () => AppliedController(),
+      fenix: true,
+    );
+    Get.lazyPut<FavoriteController>(
+      () => FavoriteController(),
+      fenix: true,
+    );
+    Get.lazyPut<JobDetailsController>(
+      () => JobDetailsController(),
+      fenix: true,
+    );
+    Get.lazyPut<OtherUserProfileScreenControllar>(
+      () => OtherUserProfileScreenControllar(),
+      fenix: true,
+    );
+    Get.lazyPut<FavouriteController>(
+      () => FavouriteController(),
+      fenix: true,
+    );
+    Get.lazyPut<NotificationController>(
+      () => NotificationController(),
+      fenix: true,
+    );
+    Get.lazyPut<Dummy2Controller>(
+      () => Dummy2Controller(),
+      fenix: true,
+    );
 
-
+    Get.lazyPut<SocialLoginController>(()=>SocialLoginController());
 
     // Get.lazyPut<JobController>(
     //       () => JobController(),

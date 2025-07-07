@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/authentication/controllers/social_login_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
@@ -9,7 +10,8 @@ import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
 
 class SignInAndUnlockScreen extends StatelessWidget {
-  const SignInAndUnlockScreen({super.key});
+   SignInAndUnlockScreen({super.key});
+  final SocialLoginController controller = Get.find<SocialLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,11 @@ class SignInAndUnlockScreen extends StatelessWidget {
                 ),
 
                 CustomButtonCreateScreen(
-                  onTap: () {},
+                  onTap: () {
+                    controller.signInWithGoogle();
+
+
+                  },
                   text: AppText.sign_In_google,
                   img: IconPath.google_icon,
                   left: 60.79,

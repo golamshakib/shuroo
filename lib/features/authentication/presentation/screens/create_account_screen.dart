@@ -8,12 +8,14 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
+import 'package:shuroo/features/authentication/controllers/social_login_controller.dart';
 
 import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
-  const CreateAccountScreen({super.key});
+   CreateAccountScreen({super.key});
+  final SocialLoginController controller = Get.find<SocialLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,10 @@ class CreateAccountScreen extends StatelessWidget {
                   right: 8.5,
                 ),
 
-                CustomButtonCreateScreen(onTap: (){},
+                CustomButtonCreateScreen(onTap: (){
+                  controller.signInWithGoogle();
+
+                },
                   text: AppText.sign_up_google,
                   img: IconPath.google_icon,
                   left: 60.79,
