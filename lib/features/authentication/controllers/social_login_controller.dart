@@ -117,5 +117,4 @@ class SocialLoginController extends GetxController {
       isLoading.value = false;
     }
   }
-
 }
