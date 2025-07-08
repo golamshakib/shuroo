@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:shuroo/features/company_user%20_profile/data/others_user_information_data_model.dart';
 import 'package:shuroo/features/dummy/presentation/screen/dummy2_screen.dart';
 import 'package:shuroo/features/home/presentation/screen/reaction_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/applied_job_screen.dart';
 import 'package:shuroo/features/jobs/presentation/screen/job_screen.dart';
 import 'package:shuroo/features/nav_bar/presentation/screens/nav_bar.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/edit_post_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/about_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/change_password_screen.dart';
 import 'package:shuroo/features/profile/presentation/screen/help_screen.dart';
@@ -79,14 +78,15 @@ class AppRoute {
   static String chatScreen = "/chatScreen";
   static String dummy2Screen = "/dummy2Screen";
   static String chatInboxScreen = "/chatInboxScreen";
+  static String editPostScreen = "/editPostScreen";
 
   static List<GetPage> routes = [
 
     // Auth
-    GetPage(name: loginScreen, page: () => const LoginScreen()),
+    GetPage(name: loginScreen, page: () =>  LoginScreen()),
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
-    GetPage(name: createAccountScreen, page:() => const CreateAccountScreen()),
+    GetPage(name: createAccountScreen, page:() =>  CreateAccountScreen()),
     GetPage(name: createAccountFilledScreen, page:() => CreateAccountFilledScreen()),
     GetPage(name: termsAndConditionsScreen, page:() => TermsAndConditionsScreen()),
     GetPage(name: signInAndUnlockScreen, page:() => SignInAndUnlockScreen()),
@@ -121,5 +121,6 @@ class AppRoute {
     GetPage(name: chatScreen, page:() => ChatScreen()),
     GetPage(name: jobScreen, page:() => JobScreen()),
     GetPage(name: dummy2Screen, page:() => Dummy2Screen()),
+    GetPage(name: editPostScreen, page:() => EditPostScreen()),
   ];
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custpm_popup.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/edit_post_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/screen/repost_with_throught_screen.dart';
 import 'package:shuroo/features/post_creation_repost_delete/presentation/widget/share_post_popup.dart';
 import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
@@ -10,6 +11,7 @@ import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/icon_path.dart';
+import '../../../../routes/app_routes.dart';
 
 void showPostEditePopup(BuildContext context, id) {
   final controller = Get.find<MyAllPostScreenController>();
@@ -29,14 +31,6 @@ void showPostEditePopup(BuildContext context, id) {
           mainAxisSize: MainAxisSize.min,
           children: [
             _popupOption(
-              icon: IconPath.share,
-              title: AppText.sharevia,
-              onTap: () {
-                showPeopleBottomSheet(context);
-              },
-            ),
-            SizedBox(height: 20),
-            _popupOption(
               icon: IconPath.edit,
               title: AppText.edtPost,
               onTap: () {
@@ -47,7 +41,8 @@ void showPostEditePopup(BuildContext context, id) {
                   confirmText: "Edit",
                   cancelText: "Cancel",
                   onConfirm: () {
-                    // Get.to(() => RepostWithThroughtScreen(postId: id));
+                    Get.back();
+                     Get.toNamed(AppRoute.editPostScreen, arguments: id);
                   },
                 );
               },

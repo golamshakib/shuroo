@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
@@ -13,6 +17,42 @@ class SignInScreenController extends GetxController {
   String? pass;
   RxBool isChecked = false.obs;
   RxBool isCheckemailAndPassword = true.obs;
+  var fcmToken = "";
+
+  @override
+  void onInit() {
+    initializeFCM();
+    // TODO: implement onInit
+    super.onInit();
+
+  }
+
+  Future<void> initializeFCM() async {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (Platform.isIOS) {
+      String? apnsToken;
+      int attempts = 0;
+      const int maxAttempts = 10;
+
+      do {
+        apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        await Future.delayed(const Duration(milliseconds: 300));
+        attempts++;
+      } while (apnsToken == null && attempts < maxAttempts);
+
+      log("APNS Token: $apnsToken");
+    }
+
+    String? token = await FirebaseMessaging.instance.getToken();
+
+    fcmToken = token ?? "";
+    log("FCM Token: $fcmToken");
+  }
 
   void toggleCheckbox(bool value) {
     isChecked.value = value;
@@ -41,7 +81,8 @@ class SignInScreenController extends GetxController {
     if(emailController.text.isNotEmpty && passController.text.isNotEmpty){
       final requestBody = {
         "email": emailController.text,
-        "password": passController.text
+        "password": passController.text,
+        'fcmToken': fcmToken,
       };
       final object = AuthenticationRepositories();
       object.login(requestBody);

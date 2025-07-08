@@ -12,7 +12,20 @@
           "package_name": "com.shuroo.shuroo.shuroo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "569226026728-d0adnj7570pd4hdd5o9n0vdgep05th3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shuroo.shuroo.shuroo",
+            "certificate_hash": "d8c10c682b65b875f1ef70536a119e219c7c26f1"
+          }
+        },
+        {
+          "client_id": "569226026728-qiqi5m1b1j5rh96uib7jnq75m3nde8tc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAT-5KQID0zHf10MKwOT9Exdnun7Dk6IIk"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569226026728-qiqi5m1b1j5rh96uib7jnq75m3nde8tc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "569226026728-mknqeesht3j2j9iq2t6o7dben1qchu90.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shuroo.shuroo.shuroo"
+              }
+            }
+          ]
         }
       }
     }

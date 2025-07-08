@@ -30,7 +30,9 @@ class HomeScreen extends StatelessWidget {
                 SizedBox() :
             controller.controllerOne.userProfile.value.data == null ? SizedBox():
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoute.myAllPostScreen);
+              },
               child: Row(
                 children: [
                   ClipOval(
@@ -90,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                   final String? firstImage =
                       post.image?.isNotEmpty == true ? post.image!.first : null;
                   return PostCard(
-                    icon: post.user!.image ?? ImagePath.dummyProfilePicture,
+                    icon: post.user!.image,
                     content: post.content!,
                     postId: post.id,
                     likedByME: post.like!

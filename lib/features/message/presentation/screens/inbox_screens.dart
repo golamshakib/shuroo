@@ -17,6 +17,7 @@ class InboxScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchChatListDetails();
     return Scaffold(
       backgroundColor: Colors.white,
       body: RefreshIndicator(
