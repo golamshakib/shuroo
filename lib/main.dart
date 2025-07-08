@@ -15,6 +15,7 @@ void main() async {
     (value) {
       Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
       runApp(const MyApp());
+      runApp(const MyApp());
     },
   );
 }
