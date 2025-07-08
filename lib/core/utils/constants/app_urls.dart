@@ -75,7 +75,7 @@ class AppUrls {
   static const String removeFavorite = '$_baseUrl/favorite/delete';
   static const String changePassword = '$_baseUrl/user/change-password';
   static const String profileUpdate = '$_baseUrl/user/update';
-  static const String getMyChatLists = '$_baseUrl/chats/getMyChat';
+  static const String getMyChatLists = '$_baseUrl/chat/getMyChat';
 
   static const String generateImageLink = "$_baseUrl/chats/generateFile";
 
