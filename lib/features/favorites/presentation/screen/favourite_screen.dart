@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -25,15 +24,16 @@ class FavouriteScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
             color: AppColors.textPrimary),
       ),
-      body: Obx(() => controller.isLoading.value
-          ? Center(
-              child: SpinKitFadingCircle(
-                color: AppColors.primary,
-                size: 50.h,
-              ),
-            )
-          : SafeArea(
-              child: Padding(
+      body: Obx((){
+        if(controller.isLoading.value){
+          return Center(child: CircularProgressIndicator(color: AppColors.primary));
+        }
+        final favorite = controller.favoriteInformation.data ?? [];
+        if(favorite.isEmpty){
+          return Center(child: Text("Your favorite is empty!"));
+        }
+        return SafeArea(
+            child: Padding(
               padding: EdgeInsets.all(16),
               child: RefreshIndicator(
                 onRefresh: controller.favoriteRefresh,
@@ -43,7 +43,7 @@ class FavouriteScreen extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemCount: controller.favoriteInformation.data != null
                       ? controller.favoriteInformation.data!.length
                       : 0,
@@ -106,7 +106,7 @@ class FavouriteScreen extends StatelessWidget {
                                     ),
                                     child: CustomText(
                                       text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      favoritesList.job!.employmentType.toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -122,7 +122,7 @@ class FavouriteScreen extends StatelessWidget {
                                     ),
                                     child: CustomText(
                                       text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      favoritesList.job!.employmentType.toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -138,7 +138,7 @@ class FavouriteScreen extends StatelessWidget {
                                     ),
                                     child: CustomText(
                                       text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      favoritesList.job!.employmentType.toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -179,10 +179,10 @@ class FavouriteScreen extends StatelessWidget {
                                         CustomText(
                                           text: "Apply Now",
                                           decoration:
-                                              TextDecoration.underline,
+                                          TextDecoration.underline,
                                           decorationthickness: 2,
                                           decorationColor:
-                                              AppColors.custom_blue,
+                                          AppColors.custom_blue,
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.custom_blue,
@@ -206,7 +206,8 @@ class FavouriteScreen extends StatelessWidget {
                   },
                 ),
               ),
-            ))),
+            ));
+      })
     );
   }
 }

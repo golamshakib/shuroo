@@ -100,33 +100,36 @@ class CompanyProfileScreen extends StatelessWidget {
                       color: AppColors.secondaryTextColor,
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: CustomSubmitButton(
-                              text: ' Message', onTap: () {}),
-                        ),
-                        const SizedBox(width: 18),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffB0E4FD)),
-                            child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Image.asset(
-                                IconPath.share,
-                                height: 24.h,
-                                width: 24.w,
-                                color: Color(0xff004769),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+
+                    CustomSubmitButton(
+                        text: ' Message', onTap: () {}),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       flex: 6,
+                    //       child: CustomSubmitButton(
+                    //           text: ' Message', onTap: () {}),
+                    //     ),
+                    //     const SizedBox(width: 18),
+                    //     Expanded(
+                    //       flex: 1,
+                    //       child: Container(
+                    //         decoration: BoxDecoration(
+                    //             shape: BoxShape.circle,
+                    //             color: Color(0xffB0E4FD)),
+                    //         child: Padding(
+                    //           padding: EdgeInsets.all(8),
+                    //           child: Image.asset(
+                    //             IconPath.share,
+                    //             height: 24.h,
+                    //             width: 24.w,
+                    //             color: Color(0xff004769),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                     Container(
                       margin: EdgeInsets.only(top: 3),
                       child: TabBar(
