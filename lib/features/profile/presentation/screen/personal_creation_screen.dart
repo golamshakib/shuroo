@@ -17,7 +17,8 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
-      body: SafeArea(
+      body: 
+      SafeArea(
           top: false,
           child: RefreshIndicator(
             onRefresh: controller.refreshProfile,

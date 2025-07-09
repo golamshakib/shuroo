@@ -15,7 +15,7 @@ import '../../../core/utils/constants/icon_path.dart';
 
 class PersonalCreationController extends GetxController {
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     await getProfile();
   }
