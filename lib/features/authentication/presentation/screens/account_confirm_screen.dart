@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,15 +21,15 @@ class AccountConfirmScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-
                 Container(
                   alignment: Alignment.topCenter,
                   child: Column(
                     children: [
                       Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                       SizedBox(height: 12),
-                      CustomText(text: AppText.accountCreate, fontSize: 24.sp),
+                      CustomText(text: "Account Created", fontSize: 24.sp),
                       CustomText(text: AppText.successfully, fontSize: 24),
+                      SizedBox(height: 12.h),
                       CustomText(
                         text: AppText.startExploringJobs,
                         fontSize: 14,
@@ -43,41 +42,43 @@ class AccountConfirmScreen extends StatelessWidget {
                           child: Image.asset(ImagePath.group,
                               height: 206.w, width: 217)),
 
-
                       Container(
-                        margin: EdgeInsets.only(top: 106.99.h,bottom: 12),
+                        margin: EdgeInsets.only(top: 106.99.h, bottom: 12),
                         child: CustomSubmitButton(
-
                           text: AppText.exploreJobs,
                           onTap: () {
-                             Get.offAllNamed(AppRoute.jobScreen);
+                            Get.offAllNamed(AppRoute.jobScreen);
                           },
                           color: AppColors.custom_blue,
                           borderRadius: BorderRadius.circular(50),
                           fontSize: 15.sp,
-
                         ),
                       ),
-                  
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48, // Fixed height
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        side: const BorderSide(
-                          width: 1.5,
-                          color: Colors.blue, // Change to your desired color
-                        ),
-                      ),
-                      onPressed: (){
-                        Get.toNamed(AppRoute.nevBar);
-                      }, child: CustomText(text: AppText.exploreTheAppFirst,fontSize: 15,color: AppColors.custom_blue,),
-                    ),
-                  )
 
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48, // Fixed height
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            side: const BorderSide(
+                              width: 1.5,
+                              color:
+                                  Colors.blue, // Change to your desired color
+                            ),
+                          ),
+                          onPressed: () {
+                            Get.toNamed(AppRoute.nevBar);
+                          },
+                          child: CustomText(
+                            text: AppText.exploreTheAppFirst,
+                            fontSize: 15,
+                            color: AppColors.custom_blue,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
