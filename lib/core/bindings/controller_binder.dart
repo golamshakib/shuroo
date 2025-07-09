@@ -35,7 +35,6 @@ class ControllerBinder extends Bindings {
       fenix: true,
     );
     Get.lazyPut<PersonalCreationController>(
-
       () => PersonalCreationController(),
       fenix: true,
     );
@@ -90,26 +89,58 @@ class ControllerBinder extends Bindings {
     //   fenix: true,
     // );
 
-
-    Get.lazyPut<MakePostController>(() => MakePostController(),fenix: true);
-    Get.lazyPut<PersonalCreationController>(() => PersonalCreationController(),fenix: true);
-    Get.lazyPut<MyAllPostScreenController>(() => MyAllPostScreenController(), fenix: true,);
-    Get.lazyPut<ShortListedController>(() => ShortListedController(), fenix: true,);
-    Get.lazyPut<ProfileViewController>(() => ProfileViewController(), fenix: true,);
-    Get.lazyPut<InterviewController>(() => InterviewController(), fenix: true,);
-    Get.lazyPut<AppliedController>(() => AppliedController(), fenix: true,);
-    Get.lazyPut<FavoriteController>(() => FavoriteController(), fenix: true,);
-    Get.lazyPut<JobDetailsController>(() => JobDetailsController(), fenix: true,);
-    Get.lazyPut<OtherUserProfileScreenControllar>(() => OtherUserProfileScreenControllar(), fenix: true,);
-    Get.lazyPut<FavouriteController>(() => FavouriteController(), fenix: true,);
-    Get.lazyPut<NotificationController>(() => NotificationController(), fenix: true,);
-    Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
-    Get.lazyPut<RepostWithThroughtScreenController>(() => RepostWithThroughtScreenController(), fenix: true,);
-    Get.lazyPut<SocialLoginController>(()=>SocialLoginController());
-
-    // Get.lazyPut<JobController>(
-    //       () => JobController(),
-    //   fenix: true,
-    // );
+    Get.lazyPut<MakePostController>(() => MakePostController(), fenix: true);
+    Get.lazyPut<PersonalCreationController>(() => PersonalCreationController(),
+        fenix: true);
+    Get.lazyPut<MyAllPostScreenController>(
+      () => MyAllPostScreenController(),
+      fenix: true,
+    );
+    Get.lazyPut<ShortListedController>(
+      () => ShortListedController(),
+      fenix: true,
+    );
+    Get.lazyPut<ProfileViewController>(
+      () => ProfileViewController(),
+      fenix: true,
+    );
+    Get.lazyPut<InterviewController>(
+      () => InterviewController(),
+      fenix: true,
+    );
+    Get.lazyPut<AppliedController>(
+      () => AppliedController(),
+      fenix: true,
+    );
+    Get.lazyPut<FavoriteController>(
+      () => FavoriteController(),
+      fenix: true,
+    );
+    Get.lazyPut<JobDetailsController>(
+      () => JobDetailsController(),
+      fenix: true,
+    );
+    Get.lazyPut<OtherUserProfileScreenControllar>(
+      () => OtherUserProfileScreenControllar(),
+      fenix: true,
+    );
+    Get.lazyPut<FavouriteController>(
+      () => FavouriteController(),
+      fenix: true,
+    );
+    Get.lazyPut<NotificationController>(
+      () => NotificationController(),
+      fenix: true,
+    );
+    Get.lazyPut<Dummy2Controller>(
+      () => Dummy2Controller(),
+      fenix: true,
+    );
+    Get.lazyPut<RepostWithThroughtScreenController>(
+      () => RepostWithThroughtScreenController(),
+      fenix: true,
+    );
+    Get.lazyPut<SocialLoginController>(() => SocialLoginController(),
+        fenix: true);
   }
 }

@@ -11,7 +11,7 @@ import '../widgets/custom_button_create_screen.dart';
 
 class SignInAndUnlockScreen extends StatelessWidget {
    SignInAndUnlockScreen({super.key});
-  final SocialLoginController controller = Get.find<SocialLoginController>();
+  final controller = Get.find<SocialLoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,6 @@ class SignInAndUnlockScreen extends StatelessWidget {
                 CustomButtonCreateScreen(
                   onTap: () {
                     controller.signInWithGoogle();
-
 
                   },
                   text: AppText.sign_In_google,

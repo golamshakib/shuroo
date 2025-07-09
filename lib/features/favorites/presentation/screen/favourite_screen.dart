@@ -43,19 +43,20 @@ class FavouriteScreen extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemCount: controller.favoriteInformation.data != null
                       ? controller.favoriteInformation.data!.length
                       : 0,
                   itemBuilder: (context, index) {
-                    final favoritesList = controller.favoriteInformation.data![index];
+                    final favoritesList =
+                        controller.favoriteInformation.data![index];
                     return Container(
                         margin: EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                              color: Color(0xffF5F5F5), width: 0.2),
+                          border:
+                              Border.all(color: Color(0xffF5F5F5), width: 0.2),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,8 +106,8 @@ class FavouriteScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: CustomText(
-                                      text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      text: favoritesList.job!.employmentType
+                                          .toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -121,8 +122,8 @@ class FavouriteScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: CustomText(
-                                      text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      text: favoritesList.job!.employmentType
+                                          .toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -137,8 +138,8 @@ class FavouriteScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: CustomText(
-                                      text:
-                                          favoritesList.job!.employmentType.toString(),
+                                      text: favoritesList.job!.employmentType
+                                          .toString(),
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textGray,
@@ -161,8 +162,8 @@ class FavouriteScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   CustomText(
-                                    text: favoritesList.job!.location
-                                        .toString(),
+                                    text:
+                                        favoritesList.job!.location.toString(),
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.textPrimary,
@@ -170,16 +171,17 @@ class FavouriteScreen extends StatelessWidget {
                                   Spacer(),
                                   GestureDetector(
                                     onTap: () {
-                                      final jobId = favoritesList.job?.id.toString();
-                                      Get.toNamed(AppRoute.jobDetailsScreen, arguments: jobId);
+                                      final jobId =
+                                          favoritesList.job?.id.toString();
+                                      Get.toNamed(AppRoute.jobDetailsScreen,
+                                          arguments: jobId);
                                       print(jobId);
                                     },
                                     child: Row(
                                       children: [
                                         CustomText(
                                           text: "Apply Now",
-                                          decoration:
-                                              TextDecoration.underline,
+                                          decoration: TextDecoration.underline,
                                           decorationthickness: 2,
                                           decorationColor:
                                               AppColors.custom_blue,
