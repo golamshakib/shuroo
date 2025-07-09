@@ -34,6 +34,7 @@ class SignInScreen extends StatelessWidget {
                         Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
                         CustomText(text: AppText.sign_in, fontSize: 24.sp),
+                        SizedBox(height: 32.h),
                         CustomTextFormField(
                           controller: _controller.emailController,
                           label: "Email",

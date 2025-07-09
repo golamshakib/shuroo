@@ -11,13 +11,11 @@ import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/signin_verification_screen_controller.dart';
 
 class SignInVeryficationCodeScreen extends StatelessWidget {
-   SignInVeryficationCodeScreen({super.key});
-
-
+  SignInVeryficationCodeScreen({super.key});
 
   final controller = Get.put(SignInVerificationScreenController());
   final List<TextEditingController> otpFields =
-  List.generate(6, (_) => TextEditingController());
+      List.generate(6, (_) => TextEditingController());
 
   void _handleOtpInput(int index, String value, BuildContext context) {
     if (value.isNotEmpty && index < 5) {
@@ -34,7 +32,7 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-            () => SafeArea(
+        () => SafeArea(
           child: SingleChildScrollView(
             child: Container(
               margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),
@@ -53,41 +51,31 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Column(
                       children: [
-
-
-
-                        Image.asset(
-                            ImagePath.logo, height: 62.w, width: 62.w),
+                        Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
-
-                        CustomText(
-                            text: AppText.enterYourEmail, fontSize: 24),
-
+                        CustomText(text: AppText.enterYourEmail, fontSize: 24),
                         Container(
                           margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
-
                           child: RichText(
                             text: TextSpan(
-                              text: AppText.already_have_an_account,
+                              text: "We have sent a code to",
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: AppText.hint_rochellebackman,
+                                  text: " your email address",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: AppColors.textPrimary,
+                                    color: AppColors.textSecondary,
                                     decoration: TextDecoration.none,
                                   ),
-
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
-
                         Pinput(
                           controller: controller.pinTEController,
                           length: 6,
@@ -98,69 +86,61 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                                 decorationColor: const Color(0xff2972FF),
                                 fontSize: 14.sp,
                                 color: AppColors.textPrimary,
-                                fontWeight: FontWeight.w600
-                            ),
+                                fontWeight: FontWeight.w600),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onCompleted: (v){
+                          onCompleted: (v) {
                             controller.active.value = true;
                           },
-                          onTapOutside: (v){
+                          onTapOutside: (v) {
                             FocusScope.of(context).unfocus();
                           },
                         ),
-
                         Container(
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
                             " ${controller.formattedTime}s",
-                              style: const TextStyle(color: AppColors.textPrimary,fontFamily: "cabin")
-                              ,
+                            style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontFamily: "cabin"),
                           ),
                         ),
-
-
                         Container(
                           margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
-
                           child: RichText(
                             text: TextSpan(
                               text: AppText.didntreceiveacode,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: AppText.resendCode,
                                   style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: AppColors.textPrimary,
-                                  ),
-
+                                      fontSize: 14.sp,
+                                      color: AppColors.textPrimary,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
-
-                        Obx(() =>
-                          controller.active.value ?
-                          CustomSubmitButton(
-                            text: AppText.verify,
-                            onTap: () {
-                              controller.verifyOtp();
-                          },
-                          ) :
-                          CustomSubmitButton(
-                            color: AppColors.custom_blue.withAlpha(100),
-                            text: AppText.verify,
-                            onTap: (){},
-                          )
-                        )
+                        Obx(() => controller.active.value
+                            ? CustomSubmitButton(
+                                text: AppText.verify,
+                                onTap: () {
+                                  controller.verifyOtp();
+                                },
+                              )
+                            : CustomSubmitButton(
+                                color: AppColors.custom_blue.withAlpha(100),
+                                text: AppText.verify,
+                                onTap: () {},
+                              ))
                       ],
                     ),
                   ),
