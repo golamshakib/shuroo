@@ -15,7 +15,7 @@ import '../../../core/utils/constants/icon_path.dart';
 
 class PersonalCreationController extends GetxController {
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     await getProfile();
   }
@@ -243,7 +243,6 @@ class PersonalCreationController extends GetxController {
             userProfile.value.data?.interests?.cast<String>() ?? [];
         languageList.value =
             userProfile.value.data?.languages?.cast<String>() ?? [];
-
         //  profilePath.value = userProfile.value.data?.image ?? '';
       } else if (response.statusCode == 404) {
         AppSnackBar.showError('Data Not Found');

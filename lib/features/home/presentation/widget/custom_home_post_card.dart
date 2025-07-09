@@ -13,7 +13,6 @@ import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/home/presentation/widget/comment_body.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
-
 class PostCard extends GetView<HomeController> {
   final String organization;
   final String? postId;
@@ -39,7 +38,7 @@ class PostCard extends GetView<HomeController> {
       this.likedByME,
       //  this.hashtags,
       required this.imageAsset,
-       this.icon,
+      this.icon,
       required this.context,
       this.likeCount,
       required this.commentCount,
@@ -73,29 +72,28 @@ class PostCard extends GetView<HomeController> {
                 flex: 5,
                 child: Row(
                   children: [
-                    icon == null ?
-                    ClipOval(
-                      child: Image.asset(
-                        ImagePath.dummyProfilePicture,
-                        width: 24.w,
-                        height: 24.h,
-                        fit: BoxFit.fill,
-                      ),
-                    ) :
-                    ClipOval(
-                      child: Image.network(
-                        icon!,
-                        width: 24.w,
-                        height: 24.h,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                    icon == null
+                        ? ClipOval(
+                            child: Image.asset(
+                              ImagePath.dummyProfilePicture,
+                              width: 24.w,
+                              height: 24.h,
+                              fit: BoxFit.fill,
+                            ),
+                          )
+                        : ClipOval(
+                            child: Image.network(
+                              icon!,
+                              width: 24.w,
+                              height: 24.h,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                     SizedBox(
                       width: 5.w,
                     ),
                     GestureDetector(
                         onTap: navigateClick, //?? () {
-                        
                         child: Text(organization,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -531,7 +529,11 @@ class PostCard extends GetView<HomeController> {
                 ),
               ),
 
-              /// Nifat's part end here
+
+
+
+
+              // Nifat's part end here
               InkWell(
                 onTap: repostClick,
                 child: Row(
