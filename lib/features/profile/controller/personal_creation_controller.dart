@@ -223,6 +223,7 @@ class PersonalCreationController extends GetxController {
   // Get Profile =====================
 
   Future<void> getProfile() async {
+    isLoading.value = true;
     try {
       showProgressIndicator();
       final response = await NetworkCaller().getRequest(AppUrls.getUserProfile,
@@ -252,6 +253,7 @@ class PersonalCreationController extends GetxController {
       AppSnackBar.showError('Data Not Found $e');
     } finally {
       hideProgressIndicator();
+      isLoading.value = false;
     }
   }
 

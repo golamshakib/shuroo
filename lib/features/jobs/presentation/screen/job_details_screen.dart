@@ -96,13 +96,12 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
                       ClipOval(
                         child: Image.network(
                           data.company?.logoImage ?? "",
-                          width: 24.w,
+                          width: 24.  w,
                           height: 24.h,
                           fit: BoxFit.fill,
                         ),
                       ),
-                      Image.network(data.company?.logoImage ?? '', height: 60.h,
-                          width: 60.w),
+                      SizedBox(height: 16.h),
                       CustomText(text: data.name ?? '',
                           fontSize: 24.sp,
                           color: AppColors.textPrimary,

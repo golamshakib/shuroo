@@ -58,7 +58,7 @@ void onInit() async{
       }
     } catch (e) {
       print('Something went wrong $e');
-      Future.microtask(() => AppSnackBar.showError('Data Not Found: $e'));
+      AppSnackBar.showError('Data Not Found: $e');
     }
   }
 }

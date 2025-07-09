@@ -94,10 +94,10 @@ class AppliedJobCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 14.h),
-          CustomBlueGrayButton(
-            text: 'Send Message',
-            onTap: onTap,
-          )
+          // CustomBlueGrayButton(
+          //   text: 'Send Message',
+          //   onTap: onTap,
+          // )
         ],
       ),
     );
