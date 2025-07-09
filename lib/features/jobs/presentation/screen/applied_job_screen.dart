@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shuroo/core/common/widgets/custom_back_button.dart';
@@ -34,7 +35,12 @@ class AppliedJobScreen extends GetView<AppliedController> {
               children: [
                 Obx(() {
                   if(controller.isLoading.value){
-                    return Center(child: CircularProgressIndicator(color: AppColors.primary));
+                    return Center(
+                        child: SpinKitFadingCircle(
+                          color: AppColors.primary,
+                          size: 50.h,
+                        )
+                    );
                   }
                   final viewJobList = controller.getAppliedJob.value.data ?? [];
 
@@ -52,6 +58,8 @@ class AppliedJobScreen extends GetView<AppliedController> {
                         imagePath: viewJob.job?.company?.logoImage?.isNotEmpty == true
                             ? viewJob.job!.company!.logoImage!
                             : ImagePath.dummyProfilePicture,
+                        id: viewJob.job!.id!,
+                        status: "Applied",
                         title: viewJob.job?.name ?? '',
                         name: viewJob.job?.company?.name ?? '',
                         date: DateFormat('dd MMMM yy').format(DateTime.parse(viewJob.updatedAt.toString())),

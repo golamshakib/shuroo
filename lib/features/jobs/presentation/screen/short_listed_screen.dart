@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,12 @@ class ShortListedScreen extends GetView<ShortListedController> {
             children: [
               Obx(() {
                 if(controller.isLoading.value){
-                  return Center(child: CircularProgressIndicator(color: AppColors.primary));
+                  return Center(
+                      child: SpinKitFadingCircle(
+                        color: AppColors.primary,
+                        size: 50.h,
+                      )
+                  );
                 }
                 final viewJobList = controller.getShortlistJobModel.value.data ?? [];
 
@@ -48,6 +54,8 @@ class ShortListedScreen extends GetView<ShortListedController> {
                           ? viewJob.job!.company!.logoImage!
                           : ImagePath.dummyProfilePicture,
                       title: viewJob.job?.name ?? '',
+                      status: "Shortlisted",
+                      id: viewJob.job!.id!,
                       name: viewJob.job?.company?.name ?? '',
                       date: DateFormat('dd MMMM yy').format(DateTime.parse(viewJob.updatedAt.toString())),
                       salary: "Salary: \$${viewJob.job!.salary.toString()}",
