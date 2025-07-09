@@ -53,7 +53,8 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                       children: [
                         Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
-                        CustomText(text: AppText.enterYourEmail, fontSize: 24),
+                        CustomText(
+                            text: "Enter Verification Code", fontSize: 24),
                         Container(
                           margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
                           child: RichText(

@@ -139,7 +139,7 @@ class AuthenticationRepositories{
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
         final token = response.responseData['data'];
-        AuthService.saveToken(token);
+      //  AuthService.saveToken(token);
         Get.toNamed(AppRoute.nevBar);
       }
       else if(response.statusCode == 404){

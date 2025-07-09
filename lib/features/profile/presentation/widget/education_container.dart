@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/icon_path.dart';
-import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/profile/controller/personal_creation_controller.dart';
 import '../../../../core/common/widgets/custom_text.dart';
 import '../../../../core/utils/constants/app_colors.dart';
@@ -85,7 +84,6 @@ Widget educationContainer(
                           ],
                         ),
                       )),
-            
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: const Color(0xFFE6F6FE),
@@ -95,119 +93,130 @@ Widget educationContainer(
               onPressed: () {
                 showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     backgroundColor: AppColors.primaryBackground,
                     builder: (context) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 13.w, vertical: 16.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: "Add Education",
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              CustomTextField(
-                                  controller:
-                                      controller.instituteNameTEController,
-                                  hintText: "School/College/University",
-                                  radius: 12),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              CustomTextField(
-                                  controller:
-                                      controller.majorSubjectTEController,
-                                  hintText: "Subject(Major)",
-                                  radius: 12),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              CustomTextField(
-                                  controller:
-                                      controller.minorSubjectTEController,
-                                  hintText: "Subject(Minor)",
-                                  radius: 12),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              CustomTextField(
-                                controller: controller.degreeTEController,
-                                hintText: "Degree Earned(3.0)",
-                                radius: 12,
-                                inputFormat: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                keyboardType: TextInputType.number,
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Row(
+                      return Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 13.w, vertical: 16.h),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: CustomTextField(
-                                      controller: controller.startTEController,
-                                      hintText: "Start Year",
-                                      inputFormat: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      radius: 12,
-                                    ),
+                                  CustomText(
+                                    text: "Add Education",
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                   SizedBox(
-                                    width: 8.w,
+                                    height: 8.h,
                                   ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: CustomTextField(
-                                        controller: controller.endTEController,
-                                        hintText: "End Year",
-                                        inputFormat: [
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
-                                        radius: 12),
+                                  CustomTextField(
+                                      controller:
+                                          controller.instituteNameTEController,
+                                      hintText: "School/College/University",
+                                      radius: 12),
+                                  SizedBox(
+                                    height: 8.h,
                                   ),
+                                  CustomTextField(
+                                      controller:
+                                          controller.majorSubjectTEController,
+                                      hintText: "Subject(Major)",
+                                      radius: 12),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  CustomTextField(
+                                      controller:
+                                          controller.minorSubjectTEController,
+                                      hintText: "Subject(Minor)",
+                                      radius: 12),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  CustomTextField(
+                                    controller: controller.degreeTEController,
+                                    hintText: "Degree Earned(3.0)",
+                                    radius: 12,
+                                    inputFormat: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                        flex: 1,
+                                        child: CustomTextField(
+                                          controller:
+                                              controller.startTEController,
+                                          hintText: "Start Year",
+                                          inputFormat: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
+                                          radius: 12,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8.w,
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        child: CustomTextField(
+                                            controller:
+                                                controller.endTEController,
+                                            hintText: "End Year",
+                                            inputFormat: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
+                                            radius: 12),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: AppColors.customBlue,
+                                      side: BorderSide.none,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 14.h),
+                                    ),
+                                    onPressed: () {
+                                      controller.educationAdd();
+                                      Get.back();
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CustomText(
+                                          text: "Save",
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15.sp,
+                                          color: AppColors.white,
+                                        )
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  backgroundColor: AppColors.customBlue,
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                                ),
-                                onPressed: () {
-                                  controller.educationAdd();
-                                  Get.back();
-                                },
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CustomText(
-                                      text: "Save",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15.sp,
-                                      color: AppColors.white,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                            ),
+                          ));
                     });
               },
               child: Row(
