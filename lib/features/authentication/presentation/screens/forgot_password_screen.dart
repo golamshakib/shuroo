@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
@@ -15,8 +14,8 @@ import '../../controllers/forgot_password_screen_controller.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 
-  final ForgotPasswordController _controller = Get.put(
-      ForgotPasswordController());
+  final ForgotPasswordController _controller =
+      Get.put(ForgotPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,69 +24,63 @@ class ForgotPasswordScreen extends StatelessWidget {
             child: Container(
                 margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),
                 child: SingleChildScrollView(
-                    child: Column(children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: Icon(Icons.arrow_back, size: 24.sp)),
+                    child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Icon(Icons.arrow_back, size: 24.sp)),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      alignment: Alignment.topCenter,
+                      child: Column(
+                        children: [
+                          Image.asset(ImagePath.logo,
+                              height: 62.w, width: 62.w),
+                          SizedBox(height: 12),
+                          CustomText(text: "Forgot Password", fontSize: 24),
 
-                      ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 5),
-
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                                ImagePath.logo, height: 62.w, width: 62.w),
-                            SizedBox(height: 12),
-                            CustomText(
-                                text: AppText.forgotPassword, fontSize: 24),
-
-
-                            Container(
-                              margin: EdgeInsets.only(top: 12),
-                              child: CustomText(
-                                text: AppText.enterYourEmailAccount,
-                                fontSize: 14,
-                                color: AppColors.dark75,)
-                              ,
+                          Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: CustomText(
+                              text: AppText.enterYourEmailAccount,
+                              fontSize: 14,
+                              color: AppColors.dark75,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 40.h),
-                              child: CustomTextFormField(
-                                controller: _controller.emailController,
-                                label: AppText.email,
-                                hintText: AppText.enterYourEmail,
-                                fontFamily: 'Inter',
-                                hintColor: AppColors.grayText,
-                                hintSize: 16,
-                                icon: IconPath.email,
-                              ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 40.h),
+                            child: CustomTextFormField(
+                              controller: _controller.emailController,
+                              label: AppText.email,
+                              hintText: AppText.enterYourEmail,
+                              fontFamily: 'Inter',
+                              hintColor: AppColors.grayText,
+                              hintSize: 16,
+                              icon: IconPath.email,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 396),
-                              child: CustomSubmitButton(
-                                text: AppText.continueB, onTap: () {
-                                  _controller.requestToSendOTP();
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 396),
+                            child: CustomSubmitButton(
+                              text: AppText.continueB,
+                              onTap: () {
+                                _controller.requestToSendOTP();
 
-                               /* Get.toNamed(
+                                /* Get.toNamed(
                                     AppRoute.signInVeryficationCodeScreen);*/
-                              },),
-                            )
-                            // S
-
-                          ],
-                        ),
+                              },
+                            ),
+                          )
+                          // S
+                        ],
                       ),
-
-
-                    ],)
-                )
-            )));
+                    ),
+                  ],
+                )))));
   }
 }
