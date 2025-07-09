@@ -78,31 +78,41 @@ class OtherUserProfileScreen extends StatelessWidget {
                       color: AppColors.secondaryTextColor,
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: CustomSubmitButton(
-                            text: 'Message',
-                            onTap: () {
-                              log(user.id.toString());
-                              log(user.name.toString());
-                              log(user.image.toString());
-                              Get.to(() => ChatInboxScreen(receiverId: user.id!, userName: user.name!, image: user.image.toString(), ));
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 18),
-                        Expanded(
-                          flex: 1,
-                          child: Image.asset(
-                            IconPath.share1,
-                            height: 40,
-                            width: 40,
-                          ),
-                        ),
-                      ],
+
+                    CustomSubmitButton(
+                      text: 'Message',
+                      onTap: () {
+                        log(user.id.toString());
+                        log(user.name.toString());
+                        log(user.image.toString());
+                        Get.to(() => ChatInboxScreen(receiverId: user.id!, userName: user.name!, image: user.image.toString(), ));
+                      },
                     ),
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       flex: 6,
+                    //       child: CustomSubmitButton(
+                    //         text: 'Message',
+                    //         onTap: () {
+                    //           log(user.id.toString());
+                    //           log(user.name.toString());
+                    //           log(user.image.toString());
+                    //           Get.to(() => ChatInboxScreen(receiverId: user.id!, userName: user.name!, image: user.image.toString(), ));
+                    //         },
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 18),
+                    //     Expanded(
+                    //       flex: 1,
+                    //       child: Image.asset(
+                    //         IconPath.share1,
+                    //         height: 40,
+                    //         width: 40,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -120,6 +130,9 @@ class OtherUserProfileScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
+                    user.post == null || user.post!.isEmpty
+                        ? Center(child: CustomText(text: "No posts yet"))
+                        :
                     ListView.builder(
                       itemCount: user.post?.length ?? 0,
                       itemBuilder: (context, index) {

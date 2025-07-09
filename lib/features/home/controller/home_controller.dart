@@ -1,5 +1,7 @@
 import 'dart:developer' show log;
+import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/app_snackbar.dart';
@@ -48,17 +50,46 @@ class HomeController extends GetxController {
     addComment.value = true;
   }
 
+  var fcmToken = "";
+
   RxList<Datum> postDataList = <Datum>[].obs;
   late ProfileInformationController controllerOne;
 
   @override
   void onInit() async{
     super.onInit();
+    initializeFCM();
     controllerOne = Get.find<ProfileInformationController>();
     isLoading.value = false;
     getAllPost();
   }
 
+  Future<void> initializeFCM() async {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    if (Platform.isIOS) {
+      String? apnsToken;
+      int attempts = 0;
+      const int maxAttempts = 10;
+
+      do {
+        apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        await Future.delayed(const Duration(milliseconds: 300));
+        attempts++;
+      } while (apnsToken == null && attempts < maxAttempts);
+
+      log("APNS Token: $apnsToken");
+    }
+
+    String? token = await FirebaseMessaging.instance.getToken();
+
+    fcmToken = token ?? "";
+    log("FCM Token: $fcmToken");
+  }
   // Refresh Controller
 
   // Future<void> refreshPostList() async{
@@ -149,8 +180,9 @@ class HomeController extends GetxController {
     await submitComment(requestBody, postId);
   }
 
-  Future<void> submitComment(
-      Map<String, dynamic> requestBody, String postId) async {
+  Future<void> submitComment(Map<String, dynamic> requestBody, String postId) async {
+    log("===============================================================");
+    log("Bearer ${AuthService.token}");
     try {
       showProgressIndicator();
       final response = await NetworkCaller().postRequest(
@@ -163,7 +195,14 @@ class HomeController extends GetxController {
         commentTEController.value.clear();
         requestForPostComment(postId);
         AppSnackBar.showSuccess("Comment Posted");
-      } else {
+      }
+      else if(response.statusCode == 500){
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Posted");
+      }
+      else {
         Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }
@@ -247,7 +286,14 @@ class HomeController extends GetxController {
         commentTEController.value.clear();
         requestForPostComment(postId);
         AppSnackBar.showSuccess("Reply Posted");
-      } else {
+      }
+      else if(response.statusCode == 500){
+        Get.back();
+        commentTEController.value.clear();
+        requestForPostComment(postId);
+        AppSnackBar.showSuccess("Comment Posted");
+      }
+      else {
         Get.back();
         AppSnackBar.showError(response.statusCode.toString());
       }

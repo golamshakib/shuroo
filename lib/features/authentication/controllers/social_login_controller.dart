@@ -11,10 +11,13 @@ import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_colors.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
+import 'package:shuroo/core/utils/helpers/app_helper.dart';
+import 'package:shuroo/core/utils/logging/logger.dart';
 import 'package:shuroo/routes/app_routes.dart';
 
 class SocialLoginController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isAppleLoading = false.obs;
   final NetworkCaller networkCaller = NetworkCaller();
 
   String fcmToken = "";
@@ -54,9 +57,7 @@ class SocialLoginController extends GetxController {
 
   /// google sign in
 
-
   Future<void> signInWithGoogle() async {
-
     try {
       isLoading.value = true;
       Get.dialog(
@@ -72,49 +73,83 @@ class SocialLoginController extends GetxController {
       final gUser = await GoogleSignInService.signInWithGoogle();
       log("the profile picture is ${gUser!.photoURL.toString()}");
 
-      if (gUser != null) {
-        log("Authentication successful - email: ${gUser.email}, name: ${gUser.displayName}");
+      log("Authentication successful - email: ${gUser.email}, name: ${gUser.displayName}");
 
-        final Map<String, dynamic> requestBody = {
-          "email": gUser.email,
-          "name": gUser.displayName,
-          'fcmToken': fcmToken,
-          "role": "USER",
-        };
+      final Map<String, dynamic> requestBody = {
+        "email": gUser.email,
+        "name": gUser.displayName,
+        'fcmToken': fcmToken,
+        "role": "USER",
+      };
 
-        final response = await networkCaller.postRequest(
-            AppUrls.socialLogin,
-            body: requestBody
-        );
+      final response = await networkCaller.postRequest(AppUrls.socialLogin,
+          body: requestBody);
 
-        if (response.statusCode == 200 && response.isSuccess) {
-          log("API response: ${response.responseData}");
-          final String accessToken = response.responseData['data']['accessToken'] ?? '';
+      if (response.statusCode == 200 && response.isSuccess) {
+        log("API response: ${response.responseData}");
+        final String accessToken =
+            response.responseData['data']['accessToken'] ?? '';
 
-          if (accessToken.isNotEmpty) {
-            await AuthService.saveToken(accessToken);
-            Get.toNamed(AppRoute.nevBar);
-          } else {
-            log("No access token received from API");
-            Get.back(); // Close loading dialog
-            // Show error message to user
-          }
+        if (accessToken.isNotEmpty) {
+          await AuthService.saveToken(accessToken);
+          Get.offAllNamed(AppRoute.nevBar);
         } else {
-          log("API call failed: ${response.statusCode}");
+          log("No access token received from API");
           Get.back(); // Close loading dialog
           // Show error message to user
         }
       } else {
-        log("Google Sign-In returned null user");
-        Get.back();
-
+        log("API call failed: ${response.statusCode}");
+        Get.back(); // Close loading dialog
+        // Show error message to user
       }
     } catch (e) {
       log("Exception in signInWithGoogle: ${e.toString()}");
       Get.back();
-
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> signInWithApple(
+      {String? fullName, required String identifyToken}) async {
+    try {
+      isAppleLoading.value = true;
+      Get.dialog(
+        Center(
+          child: SpinKitCircle(
+            color: AppColors.primary,
+            size: 50.sp,
+          ),
+        ),
+        barrierDismissible: false,
+      );
+      final response = await NetworkCaller().postRequest(AppUrls.appleSignIn,
+          body: {
+            "token": identifyToken,
+            "name": fullName,
+            "fcmToken": fcmToken
+          });
+      isLoading.value = false;
+      Get.back();
+      if (response.isSuccess) {
+        log("API response: ${response.responseData}");
+        final String accessToken =
+            response.responseData['data']['accessToken'] ?? '';
+
+        if (accessToken.isNotEmpty) {
+          await AuthService.saveToken(accessToken);
+          Get.offAllNamed(AppRoute.nevBar);
+        }
+      } else {
+        AppHelperFunctions.showSnackBar(
+          response.errorMessage,
+        );
+      }
+    } catch (error) {
+      Get.back();
+      isLoading.value = false;
+      AppLoggerHelper.error(error.toString());
     }
   }
 }
