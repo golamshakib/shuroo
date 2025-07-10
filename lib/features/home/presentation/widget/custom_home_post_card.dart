@@ -423,8 +423,7 @@ class PostCard extends GetView<HomeController> {
                                                                     .image,
                                                                 height: 40.h,
                                                                 width: 40.w,
-                                                                fit:
-                                                                    BoxFit.fill,
+                                                                fit: BoxFit.fill,
                                                               )),
                                                   ),
                                                   SizedBox(

@@ -5,7 +5,7 @@ class AppUrls {
   static const String connectSocket = 'ws://31.97.145.131:6042';
 
   // VPS Server ===========================
- static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+  static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
 
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
