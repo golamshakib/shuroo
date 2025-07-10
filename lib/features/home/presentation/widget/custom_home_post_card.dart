@@ -189,20 +189,21 @@ class PostCard extends GetView<HomeController> {
                               )
                             : controller.getPostCommentInformation.value.data!
                                     .isEmpty
-                                ? SizedBox(
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 16.w, vertical: 8.h),
-                                      child: Stack(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Center(
+                                ? Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom,
+                                    ),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16.w, vertical: 8.h),
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: Center(
                                                 child: CustomText(
                                                   text: "No Comments Yet!!",
                                                   color:
@@ -210,13 +211,8 @@ class PostCard extends GetView<HomeController> {
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Positioned(
-                                            bottom: 0.h,
-                                            left: 0.w,
-                                            right: 0.w,
-                                            child: Container(
+                                            ),
+                                            Container(
                                               decoration: BoxDecoration(
                                                 color: AppColors.textWhite,
                                               ),
@@ -337,175 +333,186 @@ class PostCard extends GetView<HomeController> {
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          )
-                                        ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
                                 : Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 16.w, vertical: 28.h),
-                                    child: Stack(
-                                      children: [
-                                        SingleChildScrollView(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              ...controller
-                                                  .getPostCommentInformation
-                                                  .value
-                                                  .data!
-                                                  .map((row) => commentBody(
-                                                      controller,
-                                                      row,
-                                                      row.like!
-                                                          .any((element) =>
-                                                              element.userId ==
-                                                              controller
-                                                                  .controllerOne
-                                                                  .userProfile
-                                                                  .value
-                                                                  .data!
-                                                                  .id
-                                                                  .toString())
-                                                          .obs,
-                                                      row.count!.like!.obs,
-                                                      context)),
-                                              SizedBox(
-                                                height: 100.h,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 0.h,
-                                          left: 0.w,
-                                          right: 0.w,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.textWhite,
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 4.h),
-                                            child: Row(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16.w, vertical: 28.h),
+                                      child: Stack(
+                                        children: [
+                                          SingleChildScrollView(
+                                            child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: ClipOval(
-                                                      child: controller
-                                                                  .controllerOne
-                                                                  .userProfile
-                                                                  .value
-                                                                  .data!
-                                                                  .image ==
-                                                              null
-                                                          ? Image.asset(
-                                                              ImagePath
-                                                                  .dummyProfilePicture,
-                                                              height: 40.h,
-                                                              width: 40.w,
-                                                              fit: BoxFit.fill,
-                                                            )
-                                                          : Image.network(
-                                                              controller
-                                                                  .controllerOne
-                                                                  .userProfile
-                                                                  .value
-                                                                  .data!
-                                                                  .image,
-                                                              height: 40.h,
-                                                              width: 40.w,
-                                                              fit: BoxFit.fill,
-                                                            )),
-                                                ),
+                                                ...controller
+                                                    .getPostCommentInformation
+                                                    .value
+                                                    .data!
+                                                    .map((row) => commentBody(
+                                                        controller,
+                                                        row,
+                                                        row.like!
+                                                            .any((element) =>
+                                                                element
+                                                                    .userId ==
+                                                                controller
+                                                                    .controllerOne
+                                                                    .userProfile
+                                                                    .value
+                                                                    .data!
+                                                                    .id
+                                                                    .toString())
+                                                            .obs,
+                                                        row.count!.like!.obs,
+                                                        context)),
                                                 SizedBox(
-                                                  width: 7.w,
-                                                ),
-                                                Flexible(
-                                                  flex: 7,
-                                                  child: Obx(() =>
-                                                      CustomTextField(
-                                                          onTapOutside: (c) {
-                                                            controller
-                                                                .addComment
-                                                                .value = true;
-                                                            controller
-                                                                .commentTEController
-                                                                .value
-                                                                .clear();
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                          },
-                                                          controller: controller
-                                                              .commentTEController
-                                                              .value,
-                                                          hintText: controller
-                                                                  .addComment
-                                                                  .value
-                                                              ? "Add your comment..."
-                                                              : "Add a reply...",
-                                                          focusNode: controller
-                                                              .controllerNode,
-                                                          radius: 50,
-                                                          suffixIcon: Padding(
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          4.w),
-                                                              child:
-                                                                  GestureDetector(
-                                                                onTap: () {
-                                                                  log("Value of add comment: ${controller.addComment.value}");
-                                                                  if (controller
-                                                                      .addComment
-                                                                      .value) {
-                                                                    FocusScope.of(
-                                                                            context)
-                                                                        .unfocus();
-                                                                    controller
-                                                                        .requestToSubmitComment(
-                                                                            postId!);
-                                                                  } else {
-                                                                    FocusScope.of(
-                                                                            context)
-                                                                        .unfocus();
-                                                                    log("==========================================");
-                                                                    log(controller
-                                                                        .commentIDToReply
-                                                                        .value);
-                                                                    controller.requestToSubmitReply(
-                                                                        controller
-                                                                            .commentIDToReply
-                                                                            .value,
-                                                                        postId!);
-                                                                  }
-                                                                  // if (controller.addComment.value) {
-                                                                  //   log("I am here to comment");
-                                                                  //   FocusScope.of(context).unfocus();
-                                                                  // } else {
-                                                                  //   log("I am here to reply");
-                                                                  //   FocusScope.of(context).unfocus();
-                                                                  // }
-                                                                },
-                                                                child:
-                                                                    Image.asset(
-                                                                  IconPath
-                                                                      .sendButton,
-                                                                  height: 24.h,
-                                                                  width: 24.w,
-                                                                ),
-                                                              )))),
+                                                  height: 100.h,
                                                 ),
                                               ],
                                             ),
                                           ),
-                                        )
-                                      ],
+                                          Positioned(
+                                            bottom: 0.h,
+                                            left: 0.w,
+                                            right: 0.w,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.textWhite,
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 4.h),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Flexible(
+                                                    flex: 1,
+                                                    child: ClipOval(
+                                                        child: controller
+                                                                    .controllerOne
+                                                                    .userProfile
+                                                                    .value
+                                                                    .data!
+                                                                    .image ==
+                                                                null
+                                                            ? Image.asset(
+                                                                ImagePath
+                                                                    .dummyProfilePicture,
+                                                                height: 40.h,
+                                                                width: 40.w,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              )
+                                                            : Image.network(
+                                                                controller
+                                                                    .controllerOne
+                                                                    .userProfile
+                                                                    .value
+                                                                    .data!
+                                                                    .image,
+                                                                height: 40.h,
+                                                                width: 40.w,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              )),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 7.w,
+                                                  ),
+                                                  Flexible(
+                                                    flex: 7,
+                                                    child: Obx(() =>
+                                                        CustomTextField(
+                                                            onTapOutside: (c) {
+                                                              controller
+                                                                  .addComment
+                                                                  .value = true;
+                                                              controller
+                                                                  .commentTEController
+                                                                  .value
+                                                                  .clear();
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus();
+                                                            },
+                                                            controller: controller
+                                                                .commentTEController
+                                                                .value,
+                                                            hintText: controller
+                                                                    .addComment
+                                                                    .value
+                                                                ? "Add your comment..."
+                                                                : "Add a reply...",
+                                                            focusNode: controller
+                                                                .controllerNode,
+                                                            radius: 50,
+                                                            suffixIcon: Padding(
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal: 4
+                                                                            .w),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    log("Value of add comment: ${controller.addComment.value}");
+                                                                    if (controller
+                                                                        .addComment
+                                                                        .value) {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      controller
+                                                                          .requestToSubmitComment(
+                                                                              postId!);
+                                                                    } else {
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .unfocus();
+                                                                      log("==========================================");
+                                                                      log(controller
+                                                                          .commentIDToReply
+                                                                          .value);
+                                                                      controller.requestToSubmitReply(
+                                                                          controller
+                                                                              .commentIDToReply
+                                                                              .value,
+                                                                          postId!);
+                                                                    }
+                                                                    // if (controller.addComment.value) {
+                                                                    //   log("I am here to comment");
+                                                                    //   FocusScope.of(context).unfocus();
+                                                                    // } else {
+                                                                    //   log("I am here to reply");
+                                                                    //   FocusScope.of(context).unfocus();
+                                                                    // }
+                                                                  },
+                                                                  child: Image
+                                                                      .asset(
+                                                                    IconPath
+                                                                        .sendButton,
+                                                                    height:
+                                                                        24.h,
+                                                                    width: 24.w,
+                                                                  ),
+                                                                )))),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ));
                       });
@@ -528,10 +535,6 @@ class PostCard extends GetView<HomeController> {
                   ],
                 ),
               ),
-
-
-
-
 
               // Nifat's part end here
               InkWell(
