@@ -9,7 +9,6 @@ import 'package:shuroo/core/common/widgets/progress_indicator.dart';
 import 'package:shuroo/core/services/Auth_service.dart';
 import 'package:shuroo/core/services/network_caller.dart';
 import 'package:shuroo/core/utils/constants/app_urls.dart';
-import 'package:shuroo/core/utils/constants/icon_path.dart';
 import 'package:shuroo/features/home/data/get_post_comment_model.dart';
 import 'package:shuroo/features/post_creation_repost_delete/data/get_post_data_model.dart';
 
@@ -24,7 +23,7 @@ class HomeController extends GetxController {
   var commentHint = "Add a comment...".obs;
   final FocusNode controllerNode = FocusNode();
 
-  final isLoading = true.obs;
+   final isLoading = true.obs;
 
   RxBool activeNotification = true.obs;
 

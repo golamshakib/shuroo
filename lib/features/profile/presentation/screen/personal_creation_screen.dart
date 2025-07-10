@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
@@ -18,7 +17,8 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
-      body: SafeArea(
+      body: 
+      SafeArea(
           top: false,
           child: RefreshIndicator(
             onRefresh: controller.refreshProfile,
@@ -215,78 +215,80 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        context: context,
-                                        backgroundColor:
-                                            AppColors.primaryBackground,
-                                        builder: (context) {
-                                          return SizedBox(
-                                            width: double.infinity,
+                                      context: context,
+                                      backgroundColor:
+                                          AppColors.primaryBackground,
+                                      isScrollControlled: true,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom,
+                                          ),
+                                          child: SingleChildScrollView(
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 13.w,
                                                   vertical: 16.h),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    CustomText(
-                                                      text: "Add Skill",
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  CustomText(
+                                                    text: "Add Skill",
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  SizedBox(height: 8.h),
+                                                  CustomTextField(
+                                                    controller: controller
+                                                        .skillTEController,
+                                                    hintText: "Type here",
+                                                    radius: 12,
+                                                  ),
+                                                  SizedBox(height: 8.h),
+                                                  OutlinedButton(
+                                                    style: OutlinedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          AppColors.customBlue,
+                                                      side: BorderSide.none,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 14.h),
                                                     ),
-                                                    SizedBox(
-                                                      height: 8.h,
+                                                    onPressed: () {
+                                                      controller.addSkill();
+                                                      Get.back();
+                                                    },
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        CustomText(
+                                                          text: "Save",
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15.sp,
+                                                          color:
+                                                              AppColors.white,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    CustomTextField(
-                                                        controller: controller
-                                                            .skillTEController,
-                                                        hintText: "Type here",
-                                                        radius: 12),
-                                                    SizedBox(
-                                                      height: 8.h,
-                                                    ),
-                                                    OutlinedButton(
-                                                      style: OutlinedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            AppColors
-                                                                .customBlue,
-                                                        side: BorderSide.none,
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 14.h),
-                                                      ),
-                                                      onPressed: () {
-                                                        controller.addSkill();
-                                                        Get.back();
-                                                      },
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          CustomText(
-                                                            text: "Save",
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15.sp,
-                                                            color:
-                                                                AppColors.white,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          );
-                                        });
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 75.w,
@@ -364,79 +366,79 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        context: context,
-                                        backgroundColor:
-                                            AppColors.primaryBackground,
-                                        builder: (context) {
-                                          return SizedBox(
-                                            width: double.infinity,
-                                            child: Padding(
+                                      context: context,
+                                      backgroundColor:
+                                          AppColors.primaryBackground,
+                                      isScrollControlled: true,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom,
+                                          ),
+                                          child: SingleChildScrollView(
+                                            child: Container(
+                                              width: double.infinity,
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 13.w,
                                                   vertical: 16.h),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    CustomText(
-                                                      text: "Add Tools",
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  CustomText(
+                                                    text: "Add Tools",
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  SizedBox(height: 8.h),
+                                                  CustomTextField(
+                                                    controller: controller
+                                                        .technologyTEController,
+                                                    hintText: "Type here",
+                                                    radius: 12,
+                                                  ),
+                                                  SizedBox(height: 8.h),
+                                                  OutlinedButton(
+                                                    style: OutlinedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          AppColors.customBlue,
+                                                      side: BorderSide.none,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 14.h),
                                                     ),
-                                                    SizedBox(
-                                                      height: 8.h,
+                                                    onPressed: () {
+                                                      controller
+                                                          .addTechnology();
+                                                      Get.back();
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        CustomText(
+                                                          text: "Save",
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15.sp,
+                                                          color:
+                                                              AppColors.white,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    CustomTextField(
-                                                        controller: controller
-                                                            .technologyTEController,
-                                                        hintText: "Type here",
-                                                        radius: 12),
-                                                    SizedBox(
-                                                      height: 8.h,
-                                                    ),
-                                                    OutlinedButton(
-                                                      style: OutlinedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            AppColors
-                                                                .customBlue,
-                                                        side: BorderSide.none,
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 14.h),
-                                                      ),
-                                                      onPressed: () {
-                                                        controller
-                                                            .addTechnology();
-                                                        Get.back();
-                                                      },
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          CustomText(
-                                                            text: "Save",
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15.sp,
-                                                            color:
-                                                                AppColors.white,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          );
-                                        });
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 75.w,
@@ -514,17 +516,23 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        context: context,
-                                        backgroundColor:
-                                            AppColors.primaryBackground,
-                                        builder: (context) {
-                                          return SizedBox(
-                                            width: double.infinity,
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 13.w,
-                                                  vertical: 16.h),
-                                              child: SingleChildScrollView(
+                                      context: context,
+                                      backgroundColor:
+                                          AppColors.primaryBackground,
+                                      isScrollControlled: true,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom),
+                                          child: SingleChildScrollView(
+                                            child: SizedBox(
+                                              width: double.infinity,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 13.w,
+                                                    vertical: 16.h),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -535,17 +543,14 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                                       fontWeight:
                                                           FontWeight.w400,
                                                     ),
-                                                    SizedBox(
-                                                      height: 8.h,
-                                                    ),
+                                                    SizedBox(height: 8.h),
                                                     CustomTextField(
-                                                        controller: controller
-                                                            .interestTEController,
-                                                        hintText: "Type here",
-                                                        radius: 12),
-                                                    SizedBox(
-                                                      height: 8.h,
+                                                      controller: controller
+                                                          .interestTEController,
+                                                      hintText: "Type here",
+                                                      radius: 12,
                                                     ),
+                                                    SizedBox(height: 8.h),
                                                     OutlinedButton(
                                                       style: OutlinedButton
                                                           .styleFrom(
@@ -577,16 +582,18 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                                             fontSize: 15.sp,
                                                             color:
                                                                 AppColors.white,
-                                                          )
+                                                          ),
                                                         ],
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          );
-                                        });
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 75.w,
@@ -664,17 +671,23 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        context: context,
-                                        backgroundColor:
-                                            AppColors.primaryBackground,
-                                        builder: (context) {
-                                          return SizedBox(
-                                            width: double.infinity,
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 13.w,
-                                                  vertical: 16.h),
-                                              child: SingleChildScrollView(
+                                      context: context,
+                                      backgroundColor:
+                                          AppColors.primaryBackground,
+                                      isScrollControlled: true,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom),
+                                          child: SingleChildScrollView(
+                                            child: SizedBox(
+                                              width: double.infinity,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 13.w,
+                                                    vertical: 16.h),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -685,17 +698,14 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                                       fontWeight:
                                                           FontWeight.w400,
                                                     ),
-                                                    SizedBox(
-                                                      height: 8.h,
-                                                    ),
+                                                    SizedBox(height: 8.h),
                                                     CustomTextField(
-                                                        controller: controller
-                                                            .languageTEController,
-                                                        hintText: "Type here",
-                                                        radius: 12),
-                                                    SizedBox(
-                                                      height: 8.h,
+                                                      controller: controller
+                                                          .languageTEController,
+                                                      hintText: "Type here",
+                                                      radius: 12,
                                                     ),
+                                                    SizedBox(height: 8.h),
                                                     OutlinedButton(
                                                       style: OutlinedButton
                                                           .styleFrom(
@@ -727,16 +737,18 @@ class PersonalCreationScreen extends GetView<PersonalCreationController> {
                                                             fontSize: 15.sp,
                                                             color:
                                                                 AppColors.white,
-                                                          )
+                                                          ),
                                                         ],
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          );
-                                        });
+                                          ),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     width: 75.w,

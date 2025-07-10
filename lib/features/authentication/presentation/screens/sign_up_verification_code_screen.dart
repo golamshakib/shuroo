@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,39 +52,34 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Column(
                       children: [
-
-                        Image.asset(
-                            ImagePath.logo, height: 62.w, width: 62.w),
+                        Image.asset(ImagePath.logo, height: 62.w, width: 62.w),
                         SizedBox(height: 12),
 
                         CustomText(
-                            text: AppText.enterYourEmail, fontSize: 24),
+                            text: "Enter Verification Code", fontSize: 24),
 
                         Container(
                           margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
-
                           child: RichText(
                             text: TextSpan(
                               text: "We have sent a code to ",
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: AppText.hint_rochellebackman,
+                                  text: "Please Check your email",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: AppColors.textPrimary,
+                                    color: AppColors.textSecondary,
                                     decoration: TextDecoration.none,
                                   ),
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
-
-
 
                         Pinput(
                           controller: controller.pinTEController,
@@ -95,17 +91,16 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                                 decorationColor: const Color(0xff2972FF),
                                 fontSize: 14.sp,
                                 color: AppColors.textPrimary,
-                                fontWeight: FontWeight.w600
-                            ),
+                                fontWeight: FontWeight.w600),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onCompleted: (v){
+                          onCompleted: (v) {
                             controller.active.value = true;
                           },
-                          onTapOutside: (v){
+                          onTapOutside: (v) {
                             FocusScope.of(context).unfocus();
                           },
                         ),
@@ -134,49 +129,51 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 34),
                           child: Text(
                             " ${controller.formattedTime}s",
-                            style: const TextStyle(color: AppColors.textPrimary,fontFamily: "cabin"),
+                            style: const TextStyle(
+                                color: AppColors.textPrimary,
+                                fontFamily: "cabin"),
                           ),
                         ),
 
-
                         Container(
                           margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
-
                           child: RichText(
                             text: TextSpan(
                               text: AppText.didntreceiveacode,
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
-
                               ),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: AppText.resendCode,
                                   style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: AppColors.textPrimary,
-                                  ),
-
+                                      fontSize: 14.sp,
+                                      color: AppColors.textPrimary,
+                                      fontWeight: FontWeight.w400),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      controller.resendCode();
+                                    },
                                 ),
                               ],
-                            ),),
+                            ),
+                          ),
                         ),
 
-                        Obx(() =>
-                          controller.active.value ?
-                          CustomSubmitButton(
-                            text: AppText.verify,
-                            onTap: () {
-                              //Get.toNamed(AppRoute.accountConfirmScreen);
-                              controller.matchOTP();
-                          },) :
-                          CustomSubmitButton(
-                            text: AppText.verify,
-                            color: AppColors.custom_blue.withAlpha(50),
-                            onTap: () {},
-                          )
-                        )
+                        Obx(() => controller.active.value
+                            ? CustomSubmitButton(
+                                text: AppText.verify,
+                                onTap: () {
+                                  //Get.toNamed(AppRoute.accountConfirmScreen);
+                                  controller.matchOTP();
+                                },
+                              )
+                            : CustomSubmitButton(
+                                text: AppText.verify,
+                                color: AppColors.custom_blue.withAlpha(50),
+                                onTap: () {},
+                              ))
                       ],
                     ),
                   ),

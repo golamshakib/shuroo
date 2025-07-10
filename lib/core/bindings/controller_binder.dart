@@ -36,7 +36,9 @@ class ControllerBinder extends Bindings {
     );
     Get.lazyPut<PersonalCreationController>(
 
-          () => PersonalCreationController(),
+      () => PersonalCreationController(),
+
+
       fenix: true,
     );
     Get.lazyPut<MakePostController>(() => MakePostController(), fenix: true);
@@ -106,6 +108,7 @@ class ControllerBinder extends Bindings {
     //       () => JobController(),
     //   fenix: true,
     // );
+
   }
 }
  

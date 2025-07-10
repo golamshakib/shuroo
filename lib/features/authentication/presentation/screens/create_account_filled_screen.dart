@@ -17,7 +17,6 @@ import '../../../../core/utils/constants/app_texts.dart';
 import '../../../../core/utils/constants/image_path.dart';
 import '../../controllers/create_account_filled_screen_controller.dart';
 
-
 class CreateAccountFilledScreen extends StatelessWidget {
   CreateAccountFilledScreen({super.key});
 
@@ -70,7 +69,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     child: CustomTextFormField(
                       controller: _controller.emailController,
                       label: "Email",
-                      hintText: AppText.hint_rochellebackman,
+                      hintText: 'Enter your email address',
                       fontFamily: 'Inter',
                       hintSize: 16,
                       icon: IconPath.email,
@@ -83,7 +82,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       controller: _controller.phoneController,
                       label: "Phone",
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      hintText: "+1",
+                      hintText: "Enter your phone number",
                       keyboardType: TextInputType.phone,
                       fontFamily: 'Inter',
                       hintSize: 16,
@@ -99,7 +98,7 @@ class CreateAccountFilledScreen extends StatelessWidget {
                       },
                       controller: _controller.passController,
                       label: AppText.createPassword,
-                      hintText: AppText.hintPassword,
+                      hintText: 'Enter your password',
                       icon: IconPath.eye,
                       fontFamily: 'Inter',
                       hintSize: 16,
@@ -114,7 +113,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             margin: EdgeInsets.zero,
                             child: PasswordStrengthIndicatorPlus(
-
                               textController: _controller.indicatorController,
                               maxLength: 18,
                               minLength: 6,
@@ -149,25 +147,26 @@ class CreateAccountFilledScreen extends StatelessWidget {
                     ),
                   ),
 
-
                   Container(
-                    margin: EdgeInsets.only(top: 68,bottom: 20),
+                    margin: EdgeInsets.only(top: 68, bottom: 20),
                     child: Text.rich(
+                      textAlign: TextAlign.center,
                       TextSpan(
                         text: AppText.byproceeding,
-                        style: const TextStyle(
-                            color: AppColors.textSecondary, fontSize: 14),
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 14,
+                        ),
                         children: [
                           TextSpan(
                             text: AppText.termsConditions,
                             style: TextStyle(
-                                color: AppColors.textPrimary, fontSize: 14),
-
-
-                            recognizer:  TapGestureRecognizer()
-                              ..onTap =
-                                  () =>
-                                  Get.toNamed(AppRoute.termsAndConditionsScreen),
+                                color: AppColors.textPrimary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Get.toNamed(
+                                  AppRoute.termsAndConditionsScreen),
                           ),
                         ],
                       ),
@@ -185,7 +184,6 @@ class CreateAccountFilledScreen extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20.w, bottom: 28.h),
-
                     child: RichText(
                       text: TextSpan(
                         text: AppText.already_have_an_account,
@@ -202,14 +200,13 @@ class CreateAccountFilledScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               decoration: TextDecoration.none,
                             ),
-                            recognizer:
-                            TapGestureRecognizer()
-                              ..onTap =
-                                  () =>
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () =>
                                   Get.toNamed(AppRoute.signInAndUnlockScreen),
                           ),
                         ],
-                      ),),
+                      ),
+                    ),
                   ),
                 ]),
               ))),
