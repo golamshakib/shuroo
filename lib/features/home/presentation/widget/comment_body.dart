@@ -41,43 +41,74 @@ Widget commentBody(HomeController controller, Nifat row, RxBool likedByMe, RxInt
                                 backgroundColor: AppColors.white,
                                 builder: (context){
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Flexible(
-                                          flex: 1,
-                                          child: ClipOval(
-                                            child: Image.asset(ImagePath.dummyProfilePicture, height: 40.h, width: 40.w,),
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                            flex: 1,
+                                            child: ClipOval(
+                                                child: controller
+                                                    .controllerOne
+                                                    .userProfile
+                                                    .value
+                                                    .data!
+                                                    .image ==
+                                                    null
+                                                    ? Image.asset(
+                                                  ImagePath
+                                                      .dummyProfilePicture,
+                                                  height: 40.h,
+                                                  width: 40.w,
+                                                  fit:
+                                                  BoxFit.fill,
+                                                )
+                                                    : Image.network(
+                                                  controller
+                                                      .controllerOne
+                                                      .userProfile
+                                                      .value
+                                                      .data!
+                                                      .image,
+                                                  height: 40.h,
+                                                  width: 40.w,
+                                                  fit: BoxFit.fill,
+                                                )),
                                           ),
-                                        ),
-                                        SizedBox(width: 7.w,),
-                                        Flexible(
-                                          flex: 7,
-                                          child: Obx(() =>
-                                              CustomTextField(
-                                                  onTapOutside: (c){
-                                                    controller.addComment.value = true;
-                                                    controller.commentTEController.value.clear();
-                                                    FocusScope.of(context).unfocus();
-                                                  },
-                                                  controller: controller.commentTEController.value,
-                                                  hintText: "Edit your comment...",
-                                                  focusNode: controller.controllerNode,
-                                                  radius: 50,
-                                                  suffixIcon: Padding(
-                                                      padding: EdgeInsets.symmetric(horizontal: 4.w),
-                                                      child: GestureDetector(
-                                                        onTap: () async{
-                                                          controller.requestToEditComment(row.postId!, row.id!);
-                                                        },
-                                                        child: Image.asset(IconPath.sendButton, height: 24.h, width: 24.w,),
-                                                      )
-                                                  )
-                                              )
+                                          SizedBox(width: 7.w,),
+                                          Flexible(
+                                            flex: 7,
+                                            child: Obx(() =>
+                                                CustomTextField(
+                                                    onTapOutside: (c){
+                                                      controller.addComment.value = true;
+                                                      controller.commentTEController.value.clear();
+                                                      FocusScope.of(context).unfocus();
+                                                    },
+                                                    controller: controller.commentTEController.value,
+                                                    hintText: "Edit your comment...",
+                                                    focusNode: controller.controllerNode,
+                                                    radius: 50,
+                                                    suffixIcon: Padding(
+                                                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                                        child: GestureDetector(
+                                                          onTap: () async{
+                                                            controller.requestToEditComment(row.postId!, row.id!);
+                                                          },
+                                                          child: Image.asset(IconPath.sendButton, height: 24.h, width: 24.w,),
+                                                        )
+                                                    )
+                                                )
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   );
                                 }
