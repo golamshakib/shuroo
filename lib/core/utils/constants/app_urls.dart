@@ -14,6 +14,7 @@ class AppUrls {
   static const String verifyOTP = '$_baseUrl/auth/forget-otp-verify';
   static const String resetPassword = '$_baseUrl/auth/reset-password';
   static const String getFavorite = '$_baseUrl/favorite/get';
+  static const String resendOTP = '$_baseUrl/auth/resend-otp';
 
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
   static String likeById(id) => '$_baseUrl/like/$id';

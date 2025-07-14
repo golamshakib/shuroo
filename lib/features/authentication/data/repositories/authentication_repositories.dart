@@ -23,6 +23,14 @@ class AuthenticationRepositories{
         AppSnackBar.showSuccess(response.responseData['message']);
         Get.toNamed(AppRoute.signUpVeryficationCodeScreen, arguments: requestBody['email']);
       }
+      else if(response.statusCode == 500){
+        Get.back();
+        AppSnackBar.showError("Internet Issue!!");
+      }
+      else if(response.statusCode == 408){
+        Get.back();
+        AppSnackBar.showError("Bad internet connection!!");
+      }
       else{
         Get.back();
         AppSnackBar.showError("Already have an account!");
