@@ -69,10 +69,10 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: "Please Check your email",
+                                  text: controller.email.toString(),
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: AppColors.textSecondary,
+                                    color: AppColors.textPrimary,
                                     decoration: TextDecoration.none,
                                   ),
                                 ),
@@ -135,29 +135,20 @@ class SignUpVeryficationCodeScreen extends StatelessWidget {
                           ),
                         ),
 
-                        Container(
-                          margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
-                          child: RichText(
-                            text: TextSpan(
-                              text: AppText.didntreceiveacode,
-                              style: TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 14.sp,
+                        Padding(
+                          padding: EdgeInsets.only(top: 300.w, bottom: 24.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(text: "Didn't receive a code? ", fontSize: 14.sp, color: AppColors.textSecondary, fontWeight: FontWeight.w400),
+                              GestureDetector(
+                                onTap: () async{
+                                  await controller.resendOTP();
+                                },
+                                child: CustomText(text: "Resend Code", fontSize: 14.sp, color: AppColors.textPrimary, fontWeight: FontWeight.w400,),
                               ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: AppText.resendCode,
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textPrimary,
-                                      fontWeight: FontWeight.w400),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      controller.resendCode();
-                                    },
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
                         ),
 
