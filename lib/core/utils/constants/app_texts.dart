@@ -9,7 +9,7 @@ class AppText {
       "Create your profile, explore opportunities,\n"
       " connect with peers, and take the next step in\n"
       " your career journey.";
-  static const String your_create = 'Your Carear';
+  static const String your_create = 'Your Career';
   static const String your_control = 'Your Control';
   static const String create_account = 'Create Account';
   static const String sign_in = 'Sign In';

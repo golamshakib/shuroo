@@ -59,17 +59,17 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 12.w, bottom: 40.h),
                           child: RichText(
                             text: TextSpan(
-                              text: "We have sent a code to",
+                              text: "We have sent a code to ",
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14.sp,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: " your email address",
+                                  text: controller.email.toString(),
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: AppColors.textSecondary,
+                                    color: AppColors.textPrimary,
                                     decoration: TextDecoration.none,
                                   ),
                                 ),
@@ -109,25 +109,20 @@ class SignInVeryficationCodeScreen extends StatelessWidget {
                                 fontFamily: "cabin"),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 300.w, bottom: 24.h),
-                          child: RichText(
-                            text: TextSpan(
-                              text: AppText.didntreceiveacode,
-                              style: TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 14.sp,
+                        Padding(
+                          padding: EdgeInsets.only(top: 300.w, bottom: 24.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(text: "Didn't receive a code? ", fontSize: 14.sp, color: AppColors.textSecondary, fontWeight: FontWeight.w400),
+                              GestureDetector(
+                                onTap: () async{
+                                  await controller.resendOTP();
+                                },
+                                child: CustomText(text: "Resend Code", fontSize: 14.sp, color: AppColors.textPrimary, fontWeight: FontWeight.w400,),
                               ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: AppText.resendCode,
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textPrimary,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
                         ),
                         Obx(() => controller.active.value
