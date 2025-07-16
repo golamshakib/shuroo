@@ -51,7 +51,7 @@ class AuthenticationRepositories{
         AppSnackBar.showSuccess(response.responseData['message']);
         log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['updateUserInfo']["id"]}");
         AuthService.saveToken(response.responseData['data']['accessToken'], id: response.responseData['data']['updateUserInfo']["id"]);
-        Get.toNamed(AppRoute.accountConfirmScreen);
+        Get.offAllNamed(AppRoute.accountConfirmScreen);
       }
       else{
         Get.back();

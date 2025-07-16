@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shuroo/core/common/widgets/custom_text_field.dart';
@@ -97,7 +98,12 @@ class JobScreen extends StatelessWidget {
                  //  Job List
                   Obx(() {
                     if (controller.isLoading.value) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: SpinKitFadingCircle(
+                          color: AppColors.primary,
+                          size: 50.h,
+                        ),
+                      );
                     }
 
                     final jobs = controller.getAllJobsModel.value.data ?? [];

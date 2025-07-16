@@ -50,8 +50,17 @@ import '../../message/presentation/screens/inbox_screens.dart';
 
 
 class NavBarController extends GetxController {
-  int selectedIndex = 0;
-  int get currentIndex => selectedIndex;
+  var selectedIndex = 0.obs;
+  int get currentIndex => selectedIndex.value;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    if(Get.arguments != null){
+      selectedIndex.value = Get.arguments;
+    }
+  }
 
   List screens = [
     HomeScreen(),
@@ -61,10 +70,10 @@ class NavBarController extends GetxController {
     JobScreen(),
   ];
   void changeIndex(int index) {
-    if (selectedIndex == index) {
+    if (selectedIndex.value == index) {
       return;
     }
-    selectedIndex = index;
+    selectedIndex.value = index;
     update();
   }
   void backToHome() {
