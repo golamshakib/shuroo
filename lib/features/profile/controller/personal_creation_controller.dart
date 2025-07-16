@@ -310,7 +310,7 @@ class PersonalCreationController extends GetxController {
         describeTEController.clear();
       } else {
         AppSnackBar.showError(
-            'Failed to add experience: ${response.statusCode}');
+            'Failed to add experience');
       }
     } catch (e) {
       String errorMsg = e.toString().contains('SocketException')
@@ -332,7 +332,7 @@ class PersonalCreationController extends GetxController {
         AppSnackBar.showSuccess("Experience deleted successfully!");
         await getProfile();
       } else {
-        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
+        AppSnackBar.showError("Failed to delete");
       }
     } catch (e) {
       AppSnackBar.showError("Error: ${e.toString()}");
@@ -398,7 +398,7 @@ class PersonalCreationController extends GetxController {
         AppSnackBar.showSuccess("Education deleted successfully!");
         await getProfile();
       } else {
-        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
+        AppSnackBar.showError("Failed to delete");
       }
     } catch (e) {
       AppSnackBar.showError("Error: ${e.toString()}");

@@ -58,7 +58,7 @@ class FavouriteController extends GetxController{
         favoriteJobIds.clear();
         favoriteJobIds.refresh();
       } else {
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       AppSnackBar.showError(e.toString());
@@ -121,7 +121,7 @@ class FavouriteController extends GetxController{
         favoriteInformation = favoriteInformation;
         AppSnackBar.showSuccess("Favorite removed successfully!");
       }else if(response.statusCode == 500){
-
+        AppSnackBar.showError("Server issue");
       }
       else {
         AppSnackBar.showError("Failed to remove favorite.");
