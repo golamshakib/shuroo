@@ -51,11 +51,14 @@ class HomeScreen extends StatelessWidget {
                       )
                   ),
                   SizedBox(width: 10.w),
-                  CustomText(
-
-                    text: "Hi, ${controller.controllerOne.userProfile.value.data!.name!.split(" ").first ?? 'User Name'}",
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                  SizedBox(
+                    width: 150.w,
+                    child: CustomText(
+                      text: "Hi, ${controller.controllerOne.userProfile.value.data!.name!.split(" ").first ?? 'User Name'}",
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
                   )
                 ],
               ),

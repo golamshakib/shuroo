@@ -72,14 +72,16 @@ class AuthenticationRepositories{
         Get.back();
        // AppSnackBar.showSuccess(response.responseData['message']);
         log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
-        AuthService.saveToken(response.responseData['data']['accessToken']);
-        log('=============================================================================');
-        log("Checking auth has toke!: ${AuthService.hasToken()}");
+        AuthService.saveToken(response.responseData['data']['accessToken'], id: response.responseData['data']['id']);
         Get.offAllNamed(AppRoute.nevBar);
       }
       else if(response.statusCode == 404){
         Get.back();
         AppSnackBar.showError("User Not Found!!");
+      }
+      else if(response.statusCode == 203){
+        Get.back();
+        AppSnackBar.showError("Wrong password!!");
       }
       else{
         Get.back();
@@ -124,7 +126,7 @@ class AuthenticationRepositories{
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
         final token = response.responseData['data'];
-        Get.toNamed(AppRoute.resetPasswordScreen, arguments: token);
+        Get.offNamed(AppRoute.resetPasswordScreen, arguments: token);
       }
       else if(response.statusCode == 404){
         Get.back();

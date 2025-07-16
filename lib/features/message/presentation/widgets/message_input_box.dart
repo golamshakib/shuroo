@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuroo/core/utils/constants/app_sizer.dart';
+import 'package:shuroo/features/message/controllers/chat_list_controller.dart';
 
 
 import '../../../../../core/utils/constants/app_colors.dart';
@@ -82,11 +84,12 @@ class MessageInputBox extends StatelessWidget {
                         receiverId: receiverId,
                         image: imageUrl,
                       );
-
                       // Reset UI state
                       chatController.selectedImage.value = "";
                       chatController.textController.clear();
                       chatController.showAttuchIcon.value = true;
+                      final object = Get.find<ChatListController>();
+                      await object.fetchChatListDetails();
                     },
                     child: Container(
                       height: double.infinity,
