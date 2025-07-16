@@ -47,7 +47,7 @@ class AccountConfirmScreen extends StatelessWidget {
                         child: CustomSubmitButton(
                           text: AppText.exploreJobs,
                           onTap: () {
-                            Get.offAllNamed(AppRoute.jobScreen);
+                            Get.offAllNamed(AppRoute.nevBar, arguments: 4);
                           },
                           color: AppColors.custom_blue,
                           borderRadius: BorderRadius.circular(50),
