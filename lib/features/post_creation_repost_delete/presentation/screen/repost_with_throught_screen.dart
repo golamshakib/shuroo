@@ -27,7 +27,12 @@ class RepostWithThroughtScreen
         child: SingleChildScrollView(
           child: Obx(() => controller.isLoading.value ||
                   controller.userProfileInfo.value.data == null
-              ? CircularProgressIndicator()
+              ? Center(
+            child: SpinKitFadingCircle(
+              color: AppColors.primary,
+              size: 50.h,
+            ),
+          )
               : Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.w,
@@ -70,13 +75,17 @@ class RepostWithThroughtScreen
                                       ),
                                     ),
                               SizedBox(width: 10),
-                              CustomText(
-                                text: controller
-                                        .userProfileInfo.value.data!.name!.split(" ").first ??
-                                    'User Name',
-                                fontSize: 18.sp,
-                                color: AppColors.textPrimary,
-                                textOverflow: TextOverflow.ellipsis,
+                              SizedBox(
+                                width: 150.w,
+                                child: CustomText(
+                                  text: controller
+                                      .userProfileInfo.value.data!.name == null ?
+                                      'User Name' : controller
+                                      .userProfileInfo.value.data!.name!.split(" ").first,
+                                  fontSize: 18.sp,
+                                  color: AppColors.textPrimary,
+                                  textOverflow: TextOverflow.ellipsis,
+                                ),
                               )
                             ],
                           ),

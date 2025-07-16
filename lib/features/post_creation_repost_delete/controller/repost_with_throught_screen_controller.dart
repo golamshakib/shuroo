@@ -92,22 +92,24 @@ class RepostWithThroughtScreenController extends GetxController {
 
   Future<void> postRepost(String postId) async {
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().postRequest(
         "${AppUrls.repostPost}/$postId",
         body: {'content': textController.text.toString().trim()},
         token: "Bearer ${AuthService.token}",
       );
-
       if (response.isSuccess) {
+        Get.back();
+        Get.back();
         AppSnackBar.showSuccess('Post Repost Successfully');
         log("Post Updated ========================================+++++++++");
-
-        Get.back();
         textController.clear();
       } else {
-        log(response.statusCode.toString());
+        Get.back();
+        log(response.errorMessage.toString());
       }
     } catch (e) {
+      Get.back();
       AppSnackBar.showError("Something went wrong!!");
     }
   }
