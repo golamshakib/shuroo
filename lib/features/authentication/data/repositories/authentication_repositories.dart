@@ -55,7 +55,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong!!");
       }
     }catch(e){
       Get.back();
@@ -81,7 +81,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -105,7 +105,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -130,7 +130,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -156,7 +156,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();

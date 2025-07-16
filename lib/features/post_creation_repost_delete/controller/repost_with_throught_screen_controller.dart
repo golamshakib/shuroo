@@ -79,9 +79,9 @@ class RepostWithThroughtScreenController extends GetxController {
         final data = response.responseData;
         singlePost.value = SinglePostDataModel.fromJson(data);
       } else if (response.statusCode == 404) {
-        //  AppSnackBar.showError('Data Not Found');
+        AppSnackBar.showError('Data Not Found');
       } else {
-        //  AppSnackBar.showError('Something Went Wrong');
+        AppSnackBar.showError('Something Went Wrong');
       }
     } catch (e) {
       log('Something went Wrong $e');

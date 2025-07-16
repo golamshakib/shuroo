@@ -116,8 +116,9 @@ class HomeController extends GetxController {
         //log("userInformation $userInformation");
         //AppSnackBar.showSuccess('All posts fetched successfully');
       } else if (response.statusCode == 404) {
+        AppSnackBar.showError('User not found!!');
       } else {
-        // AppSnackBar.showError('Something went wrong');
+        AppSnackBar.showError('Something went wrong please try again!!');
       }
     } catch (e, stackTrace) {
       log('Error fetching posts: $e\nStackTrace: $stackTrace');
@@ -203,7 +204,7 @@ class HomeController extends GetxController {
       }
       else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
@@ -234,7 +235,7 @@ class HomeController extends GetxController {
         AppSnackBar.showSuccess("Comment Edited");
       } else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
@@ -256,7 +257,7 @@ class HomeController extends GetxController {
         AppSnackBar.showSuccess("Comment deleted!");
       } else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
@@ -294,7 +295,7 @@ class HomeController extends GetxController {
       }
       else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
@@ -325,7 +326,7 @@ class HomeController extends GetxController {
         AppSnackBar.showSuccess("Reply Edited");
       } else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
@@ -347,7 +348,7 @@ class HomeController extends GetxController {
         AppSnackBar.showSuccess("Comment deleted!");
       } else {
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       Get.back();
