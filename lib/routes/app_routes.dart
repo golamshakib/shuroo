@@ -82,8 +82,8 @@ class AppRoute {
 
   static List<GetPage> routes = [
 
-    // Auth
-    GetPage(name: loginScreen, page: () =>  LoginScreen()),
+    // // Auth
+    // GetPage(name: loginScreen, page: () =>  LoginScreen()),
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() =>  CreateAccountScreen()),

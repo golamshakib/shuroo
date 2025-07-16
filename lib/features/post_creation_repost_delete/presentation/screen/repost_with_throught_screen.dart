@@ -72,10 +72,11 @@ class RepostWithThroughtScreen
                               SizedBox(width: 10),
                               CustomText(
                                 text: controller
-                                        .userProfileInfo.value.data!.name ??
+                                        .userProfileInfo.value.data!.name!.split(" ").first ??
                                     'User Name',
                                 fontSize: 18.sp,
                                 color: AppColors.textPrimary,
+                                textOverflow: TextOverflow.ellipsis,
                               )
                             ],
                           ),

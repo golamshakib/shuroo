@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-           initialRoute: AppRoute.startedScreen,
+           initialRoute: AppRoute.init,
 
         //  initialRoute: AppRoute.editPostScreen,
         //  initialRoute: AppRoute.makePostHomeScreen,
