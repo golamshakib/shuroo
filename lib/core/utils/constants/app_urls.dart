@@ -1,7 +1,11 @@
 class AppUrls {
   AppUrls._();
 
+
+  static const String _baseUrl = 'http://10.0.20.112:6042/api/v1';
+
   //static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+
   static const String connectSocket = 'ws://31.97.145.131:6042';
 
   // VPS Server ===========================

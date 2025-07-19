@@ -113,6 +113,7 @@ class EditPostController extends GetxController{
   Future<void> requestToEditPost(Map<String, dynamic> requestBody, List<String> photoList) async{
 
     try{
+      isLoading.value = true;
       log("-----------------I am here in post now repo----------------------");
       var request = http.MultipartRequest("PUT", Uri.parse(AppUrls.editPostById(postId)));
 
@@ -128,7 +129,7 @@ class EditPostController extends GetxController{
           final splitMime = mimeType.split('/');
 
           final file = await http.MultipartFile.fromPath(
-            "serviceVideo", // same field name for each image
+            "serviceVideo",
             path,
             contentType: MediaType(splitMime[0], splitMime[1]),
           );
@@ -159,6 +160,10 @@ class EditPostController extends GetxController{
     }catch(e){
       log("-----------------I am here in post now catch----------------------");
       AppSnackBar.showError(e.toString());
+    }
+    finally {
+      isLoading.value = false;
+      hideProgressIndicator();
     }
   }
 }
