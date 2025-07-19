@@ -4,6 +4,7 @@ import 'package:shuroo/features/company_user%20_profile/controller/other_user_pr
 import 'package:shuroo/features/dummy/controller/dummy2_controller.dart';
 import 'package:shuroo/features/home/controller/home_controller.dart';
 import 'package:shuroo/features/jobs/controller/favorite_controller.dart';
+import 'package:shuroo/features/post_creation_repost_delete/controller/edit_post_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/my_all_post_screen_controller.dart';
 import 'package:shuroo/features/profile/controller/change_password_controller.dart';
@@ -103,6 +104,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<Dummy2Controller>(() => Dummy2Controller(), fenix: true,);
     Get.lazyPut<RepostWithThroughtScreenController>(() => RepostWithThroughtScreenController(), fenix: true,);
     Get.lazyPut<SocialLoginController>(()=>SocialLoginController(), fenix: true);
+    Get.lazyPut<EditPostController>(()=>EditPostController(), fenix: true);
 
     // Get.lazyPut<JobController>(
     //       () => JobController(),

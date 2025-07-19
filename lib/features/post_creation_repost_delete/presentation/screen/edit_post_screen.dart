@@ -11,8 +11,6 @@ import 'package:shuroo/core/utils/constants/app_sizer.dart';
 import 'package:shuroo/core/utils/constants/app_texts.dart';
 import 'package:shuroo/core/utils/constants/image_path.dart';
 import 'package:shuroo/features/post_creation_repost_delete/controller/edit_post_controller.dart';
-import 'package:shuroo/features/post_creation_repost_delete/controller/make_post_controller.dart';
-import 'package:shuroo/features/profile/controller/profile_information_controller.dart';
 import 'package:shuroo/routes/app_routes.dart';
 import '../../../../core/utils/constants/icon_path.dart';
 
@@ -29,95 +27,100 @@ class EditPostScreen extends GetView<EditPostController> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(15),
-          child: Obx(() =>
-            controller.isLoading.value ?
-                Center(
-                  child: SpinKitFadingCircle(
-                    color: AppColors.primary,
-                    size: 50.h,
+          child: Obx(() => controller.isLoading.value
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height - 15 * 2,
+                  child: Center(
+                    child: SpinKitFadingCircle(
+                      color: AppColors.primary,
+                      size: 50.h,
+                    ),
                   ),
-                ) :
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildAppBar(context),
-                SizedBox(height: 20.h),
-                CustomTextField(
-                  maxLine: 4,
-                  controller: controller.captionController,
-                  hintText: "Share your thoughts...",
-                  fillColor: AppColors.white,
-                  showBorder: false,
-                ),
-                SizedBox(height: 50.h),
-                Obx(() {
-                  if (controller.picUploads.isEmpty) return SizedBox.shrink();
-                  return Column(
-                    children: List.generate(
-                      controller.picUploads.length,
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildAppBar(context),
+                    SizedBox(height: 20.h),
+                    CustomTextField(
+                      maxLine: 4,
+                      controller: controller.captionController,
+                      hintText: "Share your thoughts...",
+                      fillColor: AppColors.white,
+                      showBorder: false,
+                    ),
+                    SizedBox(height: 50.h),
+                    Obx(() {
+                      if (controller.picUploads.isEmpty) {
+                        return SizedBox.shrink();
+                      }
+                      return Column(
+                        children: List.generate(
+                          controller.picUploads.length,
                           (index) {
-                        final imagePath = controller.picUploads[index];
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 10.h),
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              !imagePath.contains("https://") ?
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  File(imagePath),
-                                  height: 250.h,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ) :
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  imagePath,
-                                  height: 250.h,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: Material(
-                                  color: Colors.transparent,
-                                  shape: CircleBorder(),
-                                  child: InkWell(
-                                    customBorder: CircleBorder(),
-                                    onTap: () {
-                                      controller.picUploads.removeAt(index);
-                                      print("It's Clicked");
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black54,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.close,
-                                        color: Colors.white,
-                                        size: 20,
+                            final imagePath = controller.picUploads[index];
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 10.h),
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  !imagePath.contains("https://")
+                                      ? ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.file(
+                                            File(imagePath),
+                                            height: 250.h,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            imagePath,
+                                            height: 250.h,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                  Positioned(
+                                    top: 10,
+                                    right: 10,
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      shape: CircleBorder(),
+                                      child: InkWell(
+                                        customBorder: CircleBorder(),
+                                        onTap: () {
+                                          controller.picUploads.removeAt(index);
+                                          print("It's Clicked");
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black54,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }),
-              ],
-            )
-          ),
+                            );
+                          },
+                        ),
+                      );
+                    }),
+                  ],
+                )),
         ),
       ),
     );
@@ -185,10 +188,10 @@ class EditPostScreen extends GetView<EditPostController> {
             final isEnabled = controller.isPostButtonEnabled.value;
 
             return GestureDetector(
-              onTap:() {
-                      controller.updatePost();
-                      Get.back();
-                    },
+              onTap: () {
+                controller.updatePost();
+                Get.back();
+              },
               child: Container(
                 width: 72.w,
                 height: 40.h,
