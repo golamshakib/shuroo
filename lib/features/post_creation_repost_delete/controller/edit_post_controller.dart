@@ -154,7 +154,7 @@ class EditPostController extends GetxController{
       }
       else{
         Get.back();
-        AppSnackBar.showError("The status code is: ${response.statusCode}");
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
 
     }catch(e){

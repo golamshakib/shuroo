@@ -21,7 +21,6 @@ import '../features/authentication/presentation/screens/reset_password_screen.da
 import '../features/authentication/presentation/screens/sign_in_verification_code_screen.dart';
 import '../features/authentication/presentation/screens/sign_up_verification_code_screen.dart';
 import '../features/authentication/presentation/screens/forgot_password_screen.dart';
-import '../features/authentication/presentation/screens/login_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_and_unlock_screen.dart';
 import '../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../features/authentication/presentation/screens/terms_and condition_screen.dart';
@@ -82,8 +81,8 @@ class AppRoute {
 
   static List<GetPage> routes = [
 
-    // Auth
-    GetPage(name: loginScreen, page: () =>  LoginScreen()),
+    // // Auth
+    // GetPage(name: loginScreen, page: () =>  LoginScreen()),
     GetPage(name: init, page: () =>  SplashScreen()),
     GetPage(name: startedScreen, page:() => const StartedScreen()),
     GetPage(name: createAccountScreen, page:() =>  CreateAccountScreen()),

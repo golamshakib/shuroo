@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -54,7 +56,10 @@ class InboxScreen extends StatelessWidget {
                     itemCount: chatLists.data!.length,
                     itemBuilder: (context, index) {
                       final chat = chatLists.data![index];
-
+                      log("=========================Chat info=================================");
+                      if(chat.user != null){
+                        log("${chat.user!.name}");
+                      }
                       return GestureDetector(
                         onTap: () {
                           chatController.createChatRoom(user2Id: chat.user?.id ?? '');

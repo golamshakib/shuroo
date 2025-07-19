@@ -79,9 +79,9 @@ class RepostWithThroughtScreenController extends GetxController {
         final data = response.responseData;
         singlePost.value = SinglePostDataModel.fromJson(data);
       } else if (response.statusCode == 404) {
-        //  AppSnackBar.showError('Data Not Found');
+        AppSnackBar.showError('Data Not Found');
       } else {
-        //  AppSnackBar.showError('Something Went Wrong');
+        AppSnackBar.showError('Something Went Wrong');
       }
     } catch (e) {
       log('Something went Wrong $e');
@@ -92,22 +92,24 @@ class RepostWithThroughtScreenController extends GetxController {
 
   Future<void> postRepost(String postId) async {
     try {
+      showProgressIndicator();
       final response = await NetworkCaller().postRequest(
         "${AppUrls.repostPost}/$postId",
         body: {'content': textController.text.toString().trim()},
         token: "Bearer ${AuthService.token}",
       );
-
       if (response.isSuccess) {
+        Get.back();
+        Get.back();
         AppSnackBar.showSuccess('Post Repost Successfully');
         log("Post Updated ========================================+++++++++");
-
-        Get.back();
         textController.clear();
       } else {
-        log(response.statusCode.toString());
+        Get.back();
+        log(response.errorMessage.toString());
       }
     } catch (e) {
+      Get.back();
       AppSnackBar.showError("Something went wrong!!");
     }
   }

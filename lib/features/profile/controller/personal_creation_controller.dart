@@ -14,10 +14,13 @@ import 'package:shuroo/features/profile/data/user_data_model.dart';
 import '../../../core/utils/constants/icon_path.dart';
 
 class PersonalCreationController extends GetxController {
+
   @override
   void onInit() async {
     super.onInit();
+    isLoading.value = true;
     await getProfile();
+    isLoading.value = false;
   }
 
   final aboutTEController = TextEditingController();
@@ -235,9 +238,8 @@ class PersonalCreationController extends GetxController {
         log("user profile called");
 
         log(profile.data!.name.toString());
-        print(
-            "The skill list is: ${userProfile.value.data?.skills?.toString()}");
         skillList.value = userProfile.value.data?.skills?.cast<String>() ?? [];
+        aboutTEController.text = userProfile.value.data?.about ?? "Write here..";
         toolsList.value = userProfile.value.data?.tools?.cast<String>() ?? [];
         interestList.value =
             userProfile.value.data?.interests?.cast<String>() ?? [];
@@ -310,7 +312,7 @@ class PersonalCreationController extends GetxController {
         describeTEController.clear();
       } else {
         AppSnackBar.showError(
-            'Failed to add experience: ${response.statusCode}');
+            'Failed to add experience');
       }
     } catch (e) {
       String errorMsg = e.toString().contains('SocketException')
@@ -332,7 +334,7 @@ class PersonalCreationController extends GetxController {
         AppSnackBar.showSuccess("Experience deleted successfully!");
         await getProfile();
       } else {
-        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
+        AppSnackBar.showError("Failed to delete");
       }
     } catch (e) {
       AppSnackBar.showError("Error: ${e.toString()}");
@@ -398,7 +400,7 @@ class PersonalCreationController extends GetxController {
         AppSnackBar.showSuccess("Education deleted successfully!");
         await getProfile();
       } else {
-        AppSnackBar.showError("Failed to delete: ${response.statusCode}");
+        AppSnackBar.showError("Failed to delete");
       }
     } catch (e) {
       AppSnackBar.showError("Error: ${e.toString()}");

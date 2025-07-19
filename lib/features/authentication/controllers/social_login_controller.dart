@@ -99,7 +99,7 @@ class SocialLoginController extends GetxController {
           // Show error message to user
         }
       } else {
-        log("API call failed: ${response.statusCode}");
+        log("API call failed}");
         Get.back(); // Close loading dialog
         // Show error message to user
       }

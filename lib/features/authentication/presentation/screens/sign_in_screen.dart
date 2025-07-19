@@ -22,6 +22,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFFE6F6FE),
         body: SafeArea(
             child: Container(
                 margin: EdgeInsets.only(left: 16.w, top: 20.h, right: 16.w),

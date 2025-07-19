@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +32,7 @@ class ChatListController extends GetxController{
         if (response.responseData is Map<String, dynamic>) {
           chatListDetails.value = GetChatListModel.fromJson(response.responseData);
           debugPrint(chatListDetails.value.toString());
+          log(chatListDetails.value.toString());
         } else {
           throw Exception('Unexpected response data format');
         }

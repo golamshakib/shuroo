@@ -13,14 +13,13 @@ import '../../../../routes/app_routes.dart';
 import '../widgets/custom_button_create_screen.dart';
 
 class SignInAndUnlockScreen extends StatelessWidget {
-
-   SignInAndUnlockScreen({super.key});
+  SignInAndUnlockScreen({super.key});
   final controller = Get.find<SocialLoginController>();
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFE6F6FE),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.only(left: 16, top: 12, right: 26),
@@ -78,7 +77,6 @@ class SignInAndUnlockScreen extends StatelessWidget {
                 CustomButtonCreateScreen(
                   onTap: () {
                     controller.signInWithGoogle();
-
                   },
                   text: AppText.sign_In_google,
                   img: IconPath.google_icon,

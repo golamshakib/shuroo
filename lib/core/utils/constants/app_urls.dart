@@ -1,11 +1,15 @@
 class AppUrls {
   AppUrls._();
 
+
   static const String _baseUrl = 'http://10.0.20.112:6042/api/v1';
+
+  //static const String _baseUrl = 'http://10.0.20.12:6042/api/v1';
+
   static const String connectSocket = 'ws://31.97.145.131:6042';
 
   // VPS Server ===========================
- // static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
+  static const String _baseUrl = 'http://31.97.145.131:6042/api/v1';
 
   static const String signUp = '$_baseUrl/user/create';
   static const String login = '$_baseUrl/auth/login';
@@ -14,6 +18,7 @@ class AppUrls {
   static const String verifyOTP = '$_baseUrl/auth/forget-otp-verify';
   static const String resetPassword = '$_baseUrl/auth/reset-password';
   static const String getFavorite = '$_baseUrl/favorite/get';
+  static const String resendOTP = '$_baseUrl/auth/resend-otp';
 
   static String removeFavoriteById(id) => '$_baseUrl/favorite/delete/id';
   static String likeById(id) => '$_baseUrl/like/$id';

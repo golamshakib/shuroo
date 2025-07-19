@@ -96,26 +96,36 @@ class CustomDrower extends StatelessWidget {
               ),
 
               // Notification Toggle
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _drawerItem(
-                    icon: IconPath.notifyIcon,
-                    label: "Notification",
-                    onTap: () {},
-                    isClickable: false,
-                  ),
-                  Transform.scale(
-                    scale: 0.7,
-                    child: Obx(() => Switch(
-                          activeTrackColor: const Color(0xFF353A40),
-                          value: homeController.activeNotification.value,
-                          onChanged: (newValue) {
-                            homeController.activeNotification.value = newValue;
-                          },
-                        )),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(IconPath.notifyIcon, height: 16.h, width: 16.w),
+                        SizedBox(width: 6.w),
+                        CustomText(
+                          text: "Notification",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
+                          color: const Color(0xFF353A40),
+                        ),
+                      ],
+                    ),
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Obx(() => Switch(
+                            activeTrackColor: const Color(0xFF353A40),
+                            value: homeController.activeNotification.value,
+                            onChanged: (newValue) {
+                              homeController.activeNotification.value = newValue;
+                            },
+                          )),
+                    ),
+                  ],
+                ),
               ),
 
               // About

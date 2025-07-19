@@ -1,6 +1,7 @@
 
 
 import 'package:get/get.dart';
+import 'package:shuroo/core/common/widgets/app_snackbar.dart';
 import 'package:shuroo/features/company_user%20_profile/data/others_user_information_data_model.dart';
 
 import '../../../core/services/Auth_service.dart';
@@ -34,8 +35,9 @@ class Dummy2Controller extends GetxController{
       if (response.isSuccess && response.statusCode == 200) {
         othersUserProfile.value = OtherUserInformation.fromJson(response.responseData);
       } else if (response.statusCode == 404) {
-
+        AppSnackBar.showError("No data found!");
       } else {
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     } catch (e) {
       print('Something went wrong $e');

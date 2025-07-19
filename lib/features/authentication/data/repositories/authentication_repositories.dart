@@ -23,6 +23,14 @@ class AuthenticationRepositories{
         AppSnackBar.showSuccess(response.responseData['message']);
         Get.toNamed(AppRoute.signUpVeryficationCodeScreen, arguments: requestBody['email']);
       }
+      else if(response.statusCode == 500){
+        Get.back();
+        AppSnackBar.showError("Internet Issue!!");
+      }
+      else if(response.statusCode == 408){
+        Get.back();
+        AppSnackBar.showError("Bad internet connection!!");
+      }
       else{
         Get.back();
         AppSnackBar.showError("Already have an account!");
@@ -43,11 +51,11 @@ class AuthenticationRepositories{
         AppSnackBar.showSuccess(response.responseData['message']);
         log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['updateUserInfo']["id"]}");
         AuthService.saveToken(response.responseData['data']['accessToken'], id: response.responseData['data']['updateUserInfo']["id"]);
-        Get.toNamed(AppRoute.accountConfirmScreen);
+        Get.offAllNamed(AppRoute.accountConfirmScreen);
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong!!");
       }
     }catch(e){
       Get.back();
@@ -64,16 +72,20 @@ class AuthenticationRepositories{
         Get.back();
        // AppSnackBar.showSuccess(response.responseData['message']);
         log("Access Token: ${response.responseData['data']['accessToken']}, ${response.responseData['data']['id']}");
-        AuthService.saveToken(response.responseData['data']['accessToken'], id:  response.responseData['data']['id']);
+        AuthService.saveToken(response.responseData['data']['accessToken'], id: response.responseData['data']['id']);
         Get.offAllNamed(AppRoute.nevBar);
       }
       else if(response.statusCode == 404){
         Get.back();
         AppSnackBar.showError("User Not Found!!");
       }
+      else if(response.statusCode == 203){
+        Get.back();
+        AppSnackBar.showError("Wrong password!!");
+      }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -97,7 +109,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -114,7 +126,7 @@ class AuthenticationRepositories{
         Get.back();
         AppSnackBar.showSuccess(response.responseData['message']);
         final token = response.responseData['data'];
-        Get.toNamed(AppRoute.resetPasswordScreen, arguments: token);
+        Get.offNamed(AppRoute.resetPasswordScreen, arguments: token);
       }
       else if(response.statusCode == 404){
         Get.back();
@@ -122,7 +134,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
@@ -148,7 +160,7 @@ class AuthenticationRepositories{
       }
       else{
         Get.back();
-        AppSnackBar.showError(response.statusCode.toString());
+        AppSnackBar.showError("Something went wrong please try again!!");
       }
     }catch(e){
       Get.back();
